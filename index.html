@@ -1,1 +1,151 @@
-Coucou
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolas | Ingénieur DevOps & Cloud</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Nicolas<span>.infra</span></div>
+        <nav>
+            <ul>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#stack">Stack</a></li>
+                <li><a href="#projects">Projets</a></li>
+                <li><a href="mailto:tonemail@example.com" class="btn btn-primary" style="padding: 0.5rem 1rem;">Me Contacter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <span class="hero-tag">SysAdmin & Automatisation</span>
+            <h1>Construire des infrastructures <br> robustes et <span style="color:var(--accent)">automatisées</span>.</h1>
+            <p style="max-width: 600px; font-size: 1.1rem;">
+                Spécialisé dans le déploiement Ansible, la gestion Linux et l'orchestration Cloud. Je transforme des tâches manuelles complexes en code fiable et maintenable.
+            </p>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">Voir mes projets <i class="fas fa-arrow-right"></i></a>
+                <a href="https://github.com/ton-pseudo" target="_blank" class="btn btn-outline"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2><i class="fas fa-terminal" style="font-size: 0.8em; margin-right: 10px;"></i> whoami</h2>
+            <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
+                <div>
+                    <p>
+                        Passionné par l'Open Source et la méthodologie DevOps, j'aide les entreprises à moderniser leur infrastructure. Mon objectif est d'assurer la <strong>haute disponibilité</strong> et la <strong>sécurité</strong> des applications.
+                    </p>
+                    <p>
+                        J'aime décortiquer les systèmes pour comprendre leur fonctionnement interne et optimiser chaque couche, du noyau Linux au serveur web.
+                    </p>
+                </div>
+                <pre>
+{
+  "profile": {
+    "role": "Ingénieur DevOps",
+    "location": "Paris, FR",
+    "status": "Open to work",
+    "focus": ["Ansible", "Docker", "Security"]
+  }
+}</pre>
+            </div>
+        </section>
+
+        <section id="stack">
+            <h2>Compétences Techniques</h2>
+            <div class="grid">
+                <article class="card">
+                    <i class="fab fa-linux fa-2x" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                    <h3>Système & Réseau</h3>
+                    <p>Administration RHEL/Debian, Scripting Bash, Configuration Services (Apache, Nginx, Samba), Firewalld, SELinux.</p>
+                </article>
+                <article class="card">
+                    <i class="fas fa-cogs fa-2x" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                    <h3>Automatisation</h3>
+                    <p>Ansible (Roles, Vault, Jinja2), Terraform, CI/CD (GitLab CI, GitHub Actions), Python pour l'infra.</p>
+                </article>
+                <article class="card">
+                    <i class="fab fa-docker fa-2x" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                    <h3>Conteneurisation</h3>
+                    <p>Docker, Docker Compose, Notions Kubernetes, Gestion des registres, Optimisation des images.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projets Récents</h2>
+            
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+                    <div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Déploiement Automatisé Laravel</h3>
+                        <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;">Infrastructure as Code (Ansible)</p>
+                    </div>
+                    <a href="https://github.com/TON_NOM_UTILISATEUR/projet_ansible" target="_blank" class="btn btn-outline" style="font-size: 0.9rem;">
+                        <i class="fab fa-github"></i> Voir le dépôt
+                    </a>
+                </div>
+
+                <p>
+                    Orchestration complète d'un environnement de production pour une application Laravel. Le projet utilise Ansible pour provisionner les serveurs Web et Base de données de manière idempotente.
+                </p>
+
+                <ul style="margin-bottom: 1.5rem; list-style: none; color: var(--text-muted);">
+                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Sécurisation des secrets avec <strong>Ansible Vault</strong></li>
+                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Configuration automatique du pare-feu et contextes <strong>SELinux</strong></li>
+                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Templating dynamique des VHosts Apache (Jinja2)</li>
+                </ul>
+
+                <div class="tags">
+                    <span class="tag">Ansible</span>
+                    <span class="tag">Linux RHEL</span>
+                    <span class="tag">MySQL</span>
+                    <span class="tag">Apache</span>
+                    <span class="tag">PHP</span>
+                    <span class="tag">Security</span>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="grid">
+                <article class="card">
+                    <h3>Infra Partage de Fichiers</h3>
+                    <p>Mise en place d'un serveur Samba sécurisé avec gestion fine des ACLs et intégration Active Directory (Lab).</p>
+                    <div class="tags">
+                        <span class="tag">Samba</span>
+                        <span class="tag">Bash</span>
+                        <span class="tag">Ubuntu</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3>Monitoring Stack</h3>
+                    <p>Déploiement d'une stack Prometheus + Grafana via Docker pour la surveillance des métriques serveurs.</p>
+                    <div class="tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">Grafana</span>
+                        <span class="tag">Prometheus</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Nicolas. Tous droits réservés.</p>
+        <div style="margin-top: 10px;">
+            <a href="https://github.com/ton-pseudo" style="color: var(--text-muted); margin: 0 10px;"><i class="fab fa-github fa-lg"></i></a>
+            <a href="https://linkedin.com/in/ton-pseudo" style="color: var(--text-muted); margin: 0 10px;"><i class="fab fa-linkedin fa-lg"></i></a>
+        </div>
+    </footer>
+
+</body>
+</html>
