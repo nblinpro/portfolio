@@ -4,19 +4,68 @@
     <meta charset="UTF-8">
     <title>Parcours | Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Styles spécifiques à la timeline -->
+    <style>
+        .timeline {
+            position: relative;
+            margin: 4rem auto;
+            padding-left: 40px;
+            max-width: 900px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: var(--accent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 1.5rem 2rem;
+            background-color: var(--secondary);
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -31px;
+            top: 20px;
+            width: 14px;
+            height: 14px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        .timeline-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item span {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">Mon Parcours</div>
+    <div class="logo">Parcours</div>
     <nav>
         <ul>
             <li><a href="../index.html">Accueil</a></li>
             <li><a href="#">Parcours</a></li>
             <li><a href="projets.html">Projets</a></li>
-            <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary" style="padding: 0.5rem 1rem;">Me Contacter</a></
+            <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary" style="padding: 0.5rem 1rem;">Me Contacter</a></li>
         </ul>
     </nav>
 </header>
@@ -25,63 +74,43 @@
 
     <section class="hero">
         <h1>Parcours académique</h1>
-        <p>Formation orientée réseaux, systèmes, cloud et télécommunications</p>
+        <p>Évolution de ma formation en réseaux, systèmes et télécommunications</p>
     </section>
 
-    <section>
-        <div class="grid">
+    <section class="timeline">
 
-            <!-- YNOV -->
-            <article class="card">
-                <h3>2025 – 2027</h3>
-                <p><strong>Ynov Campus</strong><br>
-                Paris-Nanterre (92000)</p>
-
-                <p>
-                    Formation orientée :
-                    <ul>
-                        <li>Cloud & Virtualisation</li>
-                        <li>DevOps & Automatisation</li>
-                        <li>Réseaux & Sécurité</li>
-                    </ul>
-                </p>
-            </article>
-
-            <!-- BUT R&T -->
-            <article class="card">
-                <h3>2023 – 2025</h3>
-                <p><strong>Université de Blois</strong><br>
-                Blois (41000)</p>
-
-                <p>
-                    <strong>BUT Réseaux & Télécommunications</strong><br>
-                    Parcours : Internet des Objets et Mobilité (IOM)
-                </p>
-
-                <p>
-                    <strong>Certifications :</strong><br>
-                    CCNA 1 • CCNA 2 • CCNA 3
-                </p>
-            </article>
-
-            <!-- Lycée -->
-            <article class="card">
-                <h3>2019 – 2021</h3>
-                <p><strong>Lycée GSH</strong><br>
-                Étampes (91150)</p>
-
-                <p>
-                    Baccalauréat général<br>
-                    Spécialités :
-                    <ul>
-                        <li>Mathématiques</li>
-                        <li>Physique-Chimie</li>
-                        <li>Sciences de l’Ingénieur</li>
-                    </ul>
-                </p>
-            </article>
-
+        <div class="timeline-item">
+            <h3>2025 – 2027 · Ynov Campus</h3>
+            <span>Paris-Nanterre (92000)</span>
+            <p>
+                Formation orientée Cloud, DevOps et infrastructures réseaux.<br>
+                Approfondissement des architectures, de la virtualisation et de
+                l’automatisation.
+            </p>
         </div>
+
+        <div class="timeline-item">
+            <h3>2023 – 2025 · Université de Blois</h3>
+            <span>BUT Réseaux & Télécommunications</span>
+            <p>
+                Parcours <strong>Internet des Objets et Mobilité (IOM)</strong>.<br>
+                Réseaux, télécoms, systèmes, IoT et cybersécurité.
+            </p>
+            <p>
+                <strong>Certifications :</strong> CCNA 1 • CCNA 2 • CCNA 3
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>2019 – 2021 · Lycée GSH</h3>
+            <span>Étampes (91150)</span>
+            <p>
+                Baccalauréat général<br>
+                Spécialités : Mathématiques, Physique-Chimie,
+                Sciences de l’Ingénieur
+            </p>
+        </div>
+
     </section>
 
 </main>
