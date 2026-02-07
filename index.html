@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,10 +20,12 @@
             transition: all 0.3s ease;
             height: 100%;
         }
+
         .card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
         }
+
         .card h3 {
             display: flex;
             align-items: center;
@@ -30,6 +33,7 @@
             margin-bottom: 1rem;
             color: var(--accent);
         }
+
         .card p {
             font-size: 0.9rem;
             line-height: 1.5;
@@ -44,8 +48,14 @@
             border: 1px solid #334155;
             font-size: 0.85rem;
         }
-        .json-key { color: #f472b6; }
-        .json-string { color: #fbbf24; }
+
+        .json-key {
+            color: #f472b6;
+        }
+
+        .json-string {
+            color: #fbbf24;
+        }
 
         /* Grille adaptative pour les 10 blocs de compétences */
         .skills-grid {
@@ -66,7 +76,8 @@
                 <li><a href="#">Accueil</a></li>
                 <li><a href="pages/parcours.html">Parcours</a></li>
                 <li><a href="pages/projets.html">Projets</a></li>
-                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary" style="padding: 0.5rem 1rem;">Me Contacter</a></li>
+                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary"
+                        style="padding: 0.5rem 1rem;">Me Contacter</a></li>
             </ul>
         </nav>
     </header>
@@ -80,8 +91,10 @@
                 tâches manuelles complexes en code fiable et maintenable.
             </p>
             <div class="btn-group">
-                <a href="pages/projets.html" class="btn btn-primary">Voir mes projets <i class="fas fa-arrow-right"></i></a>
-                <a href="https://github.com/nblinpro" target="_blank" class="btn btn-outline"><i class="fab fa-github"></i> GitHub</a>
+                <a href="pages/projets.html" class="btn btn-primary">Voir mes projets <i
+                        class="fas fa-arrow-right"></i></a>
+                <a href="https://github.com/nblinpro" target="_blank" class="btn btn-outline"><i
+                        class="fab fa-github"></i> GitHub</a>
             </div>
         </section>
 
@@ -89,7 +102,9 @@
             <h2><i class="fas fa-terminal" style="font-size: 0.8em; margin-right: 10px;"></i> whoami</h2>
             <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center; gap: 40px;">
                 <div>
-                    <p>Passionné par l'Open Source et la méthodologie DevOps, j'aide les entreprises à moderniser leur infrastructure. Mon objectif est d'assurer la <strong>haute disponibilité</strong> et la <strong>sécurité</strong>.</p>
+                    <p>Passionné par l'Open Source et la méthodologie DevOps, j'aide les entreprises à moderniser leur
+                        infrastructure. Mon objectif est d'assurer la <strong>haute disponibilité</strong> et la
+                        <strong>sécurité</strong>.</p>
                     <p>J'aime décortiquer les systèmes pour optimiser chaque couche, du noyau Linux au serveur web.</p>
                 </div>
                 <pre>
@@ -109,52 +124,98 @@
 
                 <article class="card">
                     <h3><i class="fas fa-shield-halved"></i> Réseau & Sécurité</h3>
-                    <p>Administration DNS / DHCP<br>Firewalls (pfSense)<br>Proxy & Load Balancing (HAProxy)<br>VPN, RADIUS, SSL/TLS<br>Analyse et diagnostic réseau</p>
+                    <p>
+                        Administration DNS / DHCP<br>
+                        Configuration firewalls (pFsense)<br>
+                        Proxy (HAProxy), VPN, Radius<br>
+                        Gestion des clés et certificats<br>
+                        Analyse et supervision réseau
+                    </p>
                 </article>
 
                 <article class="card">
-                    <h3><i class="fas fa-network-wired"></i> Infra Réseau</h3>
-                    <p>Switchs HP & Cisco<br>Routeurs & Wi-Fi<br>Segmentation VLAN<br>Haute disponibilité</p>
+                    <h3><i class="fas fa-network-wired"></i> Infrastructure</h3>
+                    <p>
+                        Switchs HP & Cisco<br>
+                        Routeurs et points d’accès Wi-Fi<br>
+                        Architecture et segmentation<br>
+                        Répartition de charge
+                    </p>
                 </article>
 
                 <article class="card">
-                    <h3><i class="fas fa-floppy-disk"></i> Sauvegarde</h3>
-                    <p>Serveurs bureautiques<br>Externalisation de données<br>Méthodologies PCA / PRA<br>Sécurisation & Restauration</p>
+                    <h3><i class="fas fa-floppy-disk"></i> Sauvegarde & Ext.</h3>
+                    <p>
+                        Gestion de serveurs bureautiques<br>
+                        Serveurs de sauvegarde<br>
+                        Externalisation des données<br>
+                        Méthodologies PCA / PRA
+                    </p>
                 </article>
 
                 <article class="card">
                     <h3><i class="fas fa-phone"></i> Téléphonie IP</h3>
-                    <p>Solutions ToIP<br>IPBX & Intégration réseau<br>Gestion des flux voix & QoS</p>
+                    <p>
+                        Déploiement et administration<br>
+                        Solutions ToIP<br>
+                        Gestion d'IPBX
+                    </p>
                 </article>
 
                 <article class="card">
                     <h3><i class="fas fa-microchip"></i> Systèmes & Auto</h3>
-                    <p>Windows Server & Linux (Debian, RHEL)<br>Scripting Bash & Python<br>Automatisation des tâches</p>
+                    <p>
+                        Windows Server<br>
+                        Linux (Debian, RHEL)<br>
+                        Scripting Bash & Python<br>
+                        Automatisation des tâches
+                    </p>
                 </article>
 
                 <article class="card">
                     <h3><i class="fas fa-database"></i> Bases de Données</h3>
-                    <p>MySQL / MariaDB<br>PostgreSQL<br>Sauvegarde et optimisation</p>
+                    <p>
+                        MySQL & MariaDB<br>
+                        PostgreSQL<br>
+                        Sauvegarde et optimisation
+                    </p>
                 </article>
 
                 <article class="card">
-                    <h3><i class="fas fa-code"></i> Dev & Web</h3>
-                    <p>Apache, Nginx<br>HTML, CSS, PHP<br>JS, Java, Python</p>
+                    <h3><i class="fas fa-code"></i> Dev & Serveurs Web</h3>
+                    <p>
+                        Apache & Nginx<br>
+                        HTML, CSS, PHP<br>
+                        JavaScript, Java, Python
+                    </p>
                 </article>
 
                 <article class="card">
                     <h3><i class="fas fa-eye"></i> Monitoring</h3>
-                    <p>Centreon, Zabbix, Nagios<br>Prometheus, Grafana<br>Node Exporter</p>
+                    <p>
+                        Centreon, Zabbix, Nagios<br>
+                        Prometheus & Grafana<br>
+                        node_exporter
+                    </p>
                 </article>
 
                 <article class="card">
                     <h3><i class="fas fa-cloud-sun"></i> DevOps & Cloud</h3>
-                    <p>CI/CD : Ansible, GitHub<br>Docker, OpenStack, OVHcloud<br>Proxmox, VMware ESXi</p>
+                    <p>
+                        CI/CD : Ansible, GitHub<br>
+                        Conteneurs : Docker<br>
+                        OpenStack & OVHcloud<br>
+                        Proxmox, VMware, VirtualBox
+                    </p>
                 </article>
 
                 <article class="card">
                     <h3><i class="fas fa-tower-broadcast"></i> Télécoms & IoT</h3>
-                    <p>Accès filaires & mobiles<br>Infras opérateurs<br>Capteurs & Traitement IoT</p>
+                    <p>
+                        Accès filaires & mobiles<br>
+                        Infrastructures opérateurs<br>
+                        Capteurs & Traitement IoT
+                    </p>
                 </article>
 
             </div>
@@ -168,11 +229,14 @@
                         <h3 style="font-size: 1.3rem;">Déploiement Automatisé Laravel</h3>
                         <p style="color: var(--accent); font-weight: bold;">Ansible / IaC</p>
                     </div>
-                    <a href="#" class="btn btn-outline" style="font-size: 0.8rem;"><i class="fab fa-github"></i> Dépôt</a>
+                    <a href="#" class="btn btn-outline" style="font-size: 0.8rem;"><i class="fab fa-github"></i>
+                        Dépôt</a>
                 </div>
-                <p>Orchestration complète d'un environnement de production idempotent. Utilisation de <strong>Ansible Vault</strong>, contextes <strong>SELinux</strong> et templates <strong>Jinja2</strong>.</p>
+                <p>Orchestration complète d'un environnement de production idempotent. Utilisation de <strong>Ansible
+                        Vault</strong>, contextes <strong>SELinux</strong> et templates <strong>Jinja2</strong>.</p>
                 <div class="tags" style="margin-top: 10px;">
-                    <span class="tag">Ansible</span> <span class="tag">RHEL</span> <span class="tag">MySQL</span> <span class="tag">Security</span>
+                    <span class="tag">Ansible</span> <span class="tag">RHEL</span> <span class="tag">MySQL</span> <span
+                        class="tag">Security</span>
                 </div>
             </div>
 
@@ -200,4 +264,5 @@
     </footer>
 
 </body>
+
 </html>
