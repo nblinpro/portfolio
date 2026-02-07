@@ -5,119 +5,171 @@
     <title>Parcours | Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- Styles spécifiques à la timeline -->
     <style>
+        :root {
+            --accent: #3b82f6; /* Bleu pro, à ajuster selon ton style.css */
+            --secondary: #1e293b;
+            --text-muted: #94a3b8;
+        }
+
+        /* Conteneur principal de la Timeline */
         .timeline {
             position: relative;
             margin: 4rem auto;
-            padding-left: 40px;
+            padding-left: 50px;
             max-width: 900px;
         }
 
+        /* La ligne verticale */
         .timeline::before {
             content: "";
             position: absolute;
-            left: 15px;
-            top: 0;
-            bottom: 0;
+            left: 19px;
+            top: 10px;
+            bottom: 10px;
             width: 3px;
-            background-color: var(--accent);
+            background: linear-gradient(to bottom, var(--accent), #334155);
         }
 
+        /* Chaque bloc de la timeline */
         .timeline-item {
             position: relative;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             padding: 1.5rem 2rem;
             background-color: var(--secondary);
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid #334155;
+            transition: all 0.3s ease;
         }
 
+        .timeline-item:hover {
+            transform: translateX(10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Le cercle sur la ligne */
         .timeline-item::before {
             content: "";
             position: absolute;
-            left: -31px;
-            top: 20px;
-            width: 14px;
-            height: 14px;
-            background-color: var(--accent);
+            left: -40px;
+            top: 24px;
+            width: 16px;
+            height: 16px;
+            background-color: #0f172a; /* Couleur de fond de ta page */
+            border: 3px solid var(--accent);
             border-radius: 50%;
+            z-index: 2;
         }
 
         .timeline-item h3 {
-            margin-bottom: 0.5rem;
+            margin: 0;
+            color: #f8fafc;
+            font-size: 1.2rem;
         }
 
-        .timeline-item span {
-            color: #94a3b8;
-            font-size: 0.9rem;
+        .location {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        /* Style pour les certifications (Badges) */
+        .cert-container {
+            margin-top: 1rem;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .cert-badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-badge {
+            float: right;
+            background: #059669;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
         }
     </style>
 </head>
-
 <body>
 
-<header>
-    <div class="logo">Parcours</div>
-    <nav>
-        <ul>
-            <li><a href="../index.html">Accueil</a></li>
-            <li><a href="#">Parcours</a></li>
-            <li><a href="projets.html">Projets</a></li>
-            <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary" style="padding: 0.5rem 1rem;">Me Contacter</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <div class="logo">Parcours</div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="#" class="active">Parcours</a></li>
+                <li><a href="projets.html">Projets</a></li>
+                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary" style="padding: 0.5rem 1rem;">Me Contacter</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
+    <main>
+        <section class="hero" style="text-align: center; padding: 4rem 1rem;">
+            <h1>Parcours académique</h1>
+            <p>Mon évolution vers l'expertise en infrastructures Cloud et Réseaux</p>
+        </section>
 
-    <section class="hero">
-        <h1>Parcours académique</h1>
-        <p>Évolution de ma formation en réseaux, systèmes et télécommunications</p>
-    </section>
+        <section class="timeline">
 
-    <section class="timeline">
+            <div class="timeline-item">
+                <span class="status-badge">En cours</span>
+                <h3>2025 – 2027 · Ynov Campus</h3>
+                <span class="location"><i class="fas fa-map-marker-alt"></i> Paris-Nanterre (92000)</span>
+                <p>Formation Master orientée <strong>Cloud, DevOps</strong> et architectures systèmes complexes.</p>
+                <div class="cert-container">
+                    <span class="cert-badge">Cloud</span>
+                    <span class="cert-badge">DevOps</span>
+                    <span class="cert-badge">Automation</span>
+                </div>
+            </div>
 
-        <div class="timeline-item">
-            <h3>2025 – 2027 · Ynov Campus</h3>
-            <span>Paris-Nanterre (92000)</span>
-            <p>
-                Formation orientée Cloud, DevOps et infrastructures réseaux.<br>
-                Approfondissement des architectures, de la virtualisation et de
-                l’automatisation.
-            </p>
-        </div>
+            <div class="timeline-item">
+                <h3>2023 – 2025 · Université de Blois</h3>
+                <span class="location"><i class="fas fa-university"></i> BUT Réseaux & Télécommunications</span>
+                <p>Spécialité <strong>Internet des Objets (IOM)</strong>. Acquisition de bases solides en administration réseau et cybersécurité.</p>
+                <div class="cert-container">
+                    <span class="cert-badge">CCNA 1</span>
+                    <span class="cert-badge">CCNA 2</span>
+                    <span class="cert-badge">CCNA 3</span>
+                </div>
+            </div>
 
-        <div class="timeline-item">
-            <h3>2023 – 2025 · Université de Blois</h3>
-            <span>BUT Réseaux & Télécommunications</span>
-            <p>
-                Parcours <strong>Internet des Objets et Mobilité (IOM)</strong>.<br>
-                Réseaux, télécoms, systèmes, IoT et cybersécurité.
-            </p>
-            <p>
-                <strong>Certifications :</strong> CCNA 1 • CCNA 2 • CCNA 3
-            </p>
-        </div>
+            <div class="timeline-item">
+                <h3>2019 – 2021 · Lycée GSH</h3>
+                <span class="location"><i class="fas fa-map-marker-alt"></i> Étampes (91150)</span>
+                <p>Baccalauréat général (Maths, Physique-Chimie, SI). Initiation aux fondamentaux de l'ingénierie.</p>
+            </div>
 
-        <div class="timeline-item">
-            <h3>2019 – 2021 · Lycée GSH</h3>
-            <span>Étampes (91150)</span>
-            <p>
-                Baccalauréat général<br>
-                Spécialités : Mathématiques, Physique-Chimie,
-                Sciences de l’Ingénieur
-            </p>
-        </div>
+        </section>
+    </main>
 
-    </section>
-
-</main>
-
-<footer>
-    © 2025 — Portfolio | Parcours académique
-</footer>
+    <footer>
+        <p>© 2025 — Nicolas Blin | Portfolio</p>
+    </footer>
 
 </body>
 </html>
