@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Parcours | Portfolio</title>
@@ -9,7 +10,8 @@
 
     <style>
         :root {
-            --accent: #3b82f6; /* Bleu pro, à ajuster selon ton style.css */
+            --accent: #3b82f6;
+            /* Bleu pro, à ajuster selon ton style.css */
             --secondary: #1e293b;
             --text-muted: #94a3b8;
         }
@@ -47,7 +49,7 @@
         .timeline-item:hover {
             transform: translateX(10px);
             border-color: var(--accent);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* Le cercle sur la ligne */
@@ -58,7 +60,8 @@
             top: 24px;
             width: 16px;
             height: 16px;
-            background-color: #0f172a; /* Couleur de fond de ta page */
+            background-color: #0f172a;
+            /* Couleur de fond de ta page */
             border: 3px solid var(--accent);
             border-radius: 50%;
             z-index: 2;
@@ -97,13 +100,29 @@
             text-transform: uppercase;
         }
 
+        /* Style de base commun aux badges */
         .status-badge {
             float: right;
-            background: #059669;
-            color: white;
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 4px;
             font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        /* Variante : Obtenu (Vert) */
+        .status-badge.obtenu {
+            background: #059669;
+            /* Un vert émeraude */
+            box-shadow: 0 0 10px rgba(5, 150, 105, 0.2);
+        }
+
+        /* Variante : En cours (Orange ou Bleu) */
+        .status-badge.en-cours {
+            background: #f59e0b;
+            /* Un orange ambré pour attirer l'attention */
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
         }
 
         footer {
@@ -113,6 +132,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -122,7 +142,8 @@
                 <li><a href="../index.html">Accueil</a></li>
                 <li><a href="#" class="active">Parcours</a></li>
                 <li><a href="projets.html">Projets</a></li>
-                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary" style="padding: 0.5rem 1rem;">Me Contacter</a></li>
+                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary"
+                        style="padding: 0.5rem 1rem;">Me Contacter</a></li>
             </ul>
         </nav>
     </header>
@@ -136,9 +157,11 @@
         <section class="timeline">
 
             <div class="timeline-item">
-                <span class="status-badge">En cours</span>
-                <h3>2025 – 2027 · Ynov Campus <span class="location"><i class="fas fa-map-marker-alt"></i> Paris-Nanterre (92000)</span></h3>
-                <span class="location"><i class="fas fa-university"></i> Mastère Expert  Cloud, Infrastructure et Sécurité</span>
+                <span class="status-badge en-cours">En cours</span>
+                <h3>2025 – 2027 · Ynov Campus <span class="location"><i class="fas fa-map-marker-alt"></i>
+                        Paris-Nanterre (92000)</span></h3>
+                <span class="location"><i class="fas fa-university"></i> Mastère Expert Cloud, Infrastructure et
+                    Sécurité</span>
                 <p>Formation Mastère orientée <strong>Cloud, DevSecOps</strong> et architectures systèmes complexes.</p>
                 <div class="cert-container">
                     <span class="cert-badge">Cloud</span>
@@ -150,9 +173,12 @@
             </div>
 
             <div class="timeline-item">
-                <h3>2023 – 2025 · Université de Tours <span class="location"><i class="fas fa-map-marker-alt"></i>Antenne de Blois (41000)</span></h3>
+                <span class="status-badge obtenu">Obtenu</span>
+                <h3>2023 – 2025 · Université de Tours <span class="location"><i
+                            class="fas fa-map-marker-alt"></i>Antenne de Blois (41000)</span></h3>
                 <span class="location"><i class="fas fa-university"></i> BUT Réseaux & Télécommunications</span>
-                <p>Spécialité <strong>Internet des Objets (IOM)</strong>. Acquisition de bases solides en administration réseau et télécommunication.</p>
+                <p>Spécialité <strong>Internet des Objets (IOM)</strong>. Acquisition de bases solides en administration
+                    réseau et télécommunication.</p>
                 <div class="cert-container">
                     <span class="cert-badge">CCNA 1 : Introduction au réseau</span>
                     <span class="cert-badge">CCNA 2 : Switching, routage et éléments essentiels du sans fil</span>
@@ -161,7 +187,9 @@
             </div>
 
             <div class="timeline-item">
-                <h3>2019 – 2021 · Lycée GSH <span class="location"><i class="fas fa-map-marker-alt"></i>Étampes (91150))</span></h3>
+                <span class="status-badge obtenu">Obtenu</span>
+                <h3>2019 – 2021 · Lycée GSH <span class="location"><i class="fas fa-map-marker-alt"></i>Étampes
+                        (91150)</span></h3>
                 <span class="location"><i class="fas fa-university"></i> Baccalauréat général</span>
                 <p>Spécialités: Maths, Physique-Chimie, Sciences de l'ingénieur</p>
             </div>
@@ -174,4 +202,5 @@
     </footer>
 
 </body>
+
 </html>
