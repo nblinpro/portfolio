@@ -22,7 +22,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
 
-        /* HEADER (Harmonisé) */
+        /* HEADER UNIFIÉ */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
@@ -70,7 +70,7 @@
         input, textarea {
             background: var(--bg-input); border: 1px solid var(--border);
             border-radius: 8px; padding: 0.8rem 1rem; color: white;
-            font-size: 0.9rem; transition: 0.3s;
+            font-size: 0.9rem; transition: 0.3s; width: 100%;
         }
         input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
         textarea { resize: vertical; min-height: 120px; }
@@ -117,7 +117,7 @@
                 <h3>Email</h3>
                 <p>nicolas.blin.pro1@gmail.com</p>
             </a>
-            <a href="https://linkedin.com/in/ton-profil" target="_blank" class="contact-card">
+            <a href="#" target="_blank" class="contact-card">
                 <i class="fab fa-linkedin-in"></i>
                 <h3>LinkedIn</h3>
                 <p>Mon profil</p>
@@ -130,25 +130,28 @@
         </div>
 
         <div class="form-container">
-            <form action="#">
+            <form action="https://formspree.io/f/maqdbeoe" method="POST">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="name">Nom</label>
-                        <input type="text" id="name" placeholder="Votre nom" required>
+                        <input type="text" name="name" id="name" placeholder="Votre nom" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="votre@email.com" required>
+                        <input type="email" name="email" id="email" placeholder="votre@email.com" required>
                     </div>
                 </div>
                 <div class="form-group" style="margin-bottom: 1.5rem;">
                     <label for="subject">Sujet</label>
-                    <input type="text" id="subject" placeholder="Sujet du message">
+                    <input type="text" name="subject" id="subject" placeholder="Sujet du message">
                 </div>
                 <div class="form-group" style="margin-bottom: 1.5rem;">
                     <label for="message">Message</label>
-                    <textarea id="message" placeholder="Votre message..."></textarea>
+                    <textarea name="message" id="message" placeholder="Votre message..." required></textarea>
                 </div>
+                
+                <input type="text" name="_gotcha" style="display:none">
+
                 <button type="submit" class="btn-submit">
                     Envoyer le message <i class="fas fa-arrow-right"></i>
                 </button>
