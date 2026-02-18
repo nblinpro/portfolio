@@ -101,6 +101,48 @@
         .project-featured { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 2rem; border-radius: var(--radius); }
         .tag { background: rgba(34, 211, 238, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: 600; margin-right: 5px; }
 
+        /* --- LOGO SLIDER ANIMATION --- */
+.logo-slider {
+    width: 100%;
+    height: 100px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background: transparent;
+}
+
+.logo-track {
+    display: flex;
+    width: calc(250px * 12); /* Ajuster selon le nombre de logos */
+    animation: scroll 20s linear infinite;
+}
+
+.slide {
+    width: 250px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide img {
+    height: 50px; /* Taille uniforme des logos */
+    width: auto;
+    filter: grayscale(100%) brightness(1.5); /* Effet sobre */
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+.slide img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-250px * 3)); } /* Nombre de logos uniques avant répétition */
+}
+
         /* --- FOOTER --- */
         footer { padding: 4rem 8% 2rem; background: var(--bg-card); border-top: 1px solid var(--border); margin-top: 5rem; }
         .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; }
@@ -220,6 +262,22 @@
             <button class="btn btn-primary" style="width: 100%; margin-top: 2rem;" onclick="closeSkillModal()">Fermer</button>
         </div>
     </div>
+
+    <section id="partners">
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="font-size: 1.5rem; color: var(--text-muted);">Ils m'ont fait confiance</h2>
+    </div>
+    <div class="logo-slider">
+        <div class="logo-track">
+            <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/fr/b/b5/Logo_DGFIP.png" alt="DGFIP"></div>
+            <div class="slide"><img src="path/to/innosys-logo.png" alt="Innosys"></div>
+            <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Logo_Ynov.png" alt="Ynov"></div>
+            <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/fr/b/b5/Logo_DGFIP.png" alt="DGFIP"></div>
+            <div class="slide"><img src="path/to/innosys-logo.png" alt="Innosys"></div>
+            <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Logo_Ynov.png" alt="Ynov"></div>
+        </div>
+    </div>
+</section>
 
     <footer>
         <div class="footer-top">
