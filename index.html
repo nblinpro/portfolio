@@ -1,269 +1,56 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicolas | Expert Architecture S.I. Cloud </title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .gradient-text {
-            background: linear-gradient(90deg, var(--accent), #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
-        }
-
-        /* Style des cartes pour accueillir plus de texte */
-        .card {
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-
-        .card h3 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: var(--text-muted);
-        }
-
-        /* JSON stlyisé */
-        pre {
-            background: #0f172a !important;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #334155;
-            font-size: 0.85rem;
-        }
-
-        .json-key {
-            color: #f472b6;
-        }
-
-        .json-string {
-            color: #fbbf24;
-        }
-
-        /* Grille adaptative pour les 10 blocs de compétences */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 2rem;
-        }
-    </style>
-</head>
-
-<body>
-
-    <header>
-        <div class="logo">Nicolas<span style="color:var(--accent)">.infra</span></div>
-        <nav>
-            <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="pages/parcours.html">Parcours</a></li>
-                <li><a href="pages/projets.html">Projets</a></li>
-                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary"
-                        style="padding: 0.5rem 1rem;">Me Contacter</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section class="hero">
-            <span class="hero-tag">SysAdmin & Automatisation</span>
-            <h1>Construire des infrastructures <br> robustes et <span class="gradient-text">automatisées</span>.</h1>
-            <p style="max-width: 600px; font-size: 1.1rem;">
-                Spécialisé dans le déploiement Ansible, la gestion Linux et l'orchestration Cloud. Je transforme des
-                tâches manuelles complexes en code fiable et maintenable.
-            </p>
-            <div class="btn-group">
-                <a href="pages/projets.html" class="btn btn-primary">Voir mes projets <i
-                        class="fas fa-arrow-right"></i></a>
-                <a href="https://github.com/nblinpro" target="_blank" class="btn btn-outline"><i
-                        class="fab fa-github"></i> GitHub</a>
-            </div>
-        </section>
-
-        <section id="about">
-            <h2><i class="fas fa-terminal" style="font-size: 0.8em; margin-right: 10px;"></i> whoami</h2>
-            <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center; gap: 40px;">
-                <div>
-                    <p>Passionné par l'Open Source et la méthodologie DevOps, j'aide les entreprises à moderniser leur
-                        infrastructure. Mon objectif est d'assurer la <strong>haute disponibilité</strong> et la
-                        <strong>sécurité</strong>.</p>
-                    <p>J'aime décortiquer les systèmes pour optimiser chaque couche, du noyau Linux au serveur web.</p>
-                </div>
-                <pre>
-{
+<section id="about">
+    <span class="hero-tag">• WHOAMI</span>
+    <div class="grid" style="grid-template-columns: 1.2fr 1fr; gap: 60px;">
+        <div>
+            <h2 style="border:none; padding:0; font-size: 2.5rem;">Passion pour l'<span class="gradient-text">Open Source et DevOps</span></h2>
+            <p>Je suis passionné par l'Open Source et la méthodologie DevOps. J'aide les entreprises à moderniser leur infrastructure en assurant la haute disponibilité et la sécurité.</p>
+            <p>J'aime décortiquer les systèmes pour optimiser chaque couche, du noyau Linux au serveur web.</p>
+            
+            <pre style="margin-top: 2rem;">{
   <span class="json-key">"profile"</span>: {
     <span class="json-key">"role"</span>: <span class="json-string">"Expert Architecture S.I. Cloud"</span>,
     <span class="json-key">"location"</span>: <span class="json-string">"Paris, FR"</span>,
     <span class="json-key">"focus"</span>: [<span class="json-string">"Ansible"</span>, <span class="json-string">"Docker"</span>, <span class="json-string">"Security"</span>]
   }
 }</pre>
-            </div>
-        </section>
-
-        <section id="stack">
-            <h2>Compétences Techniques</h2>
-            <div class="skills-grid">
-
-                <article class="card">
-                    <h3><i class="fas fa-shield-halved"></i> Réseau & Sécurité</h3>
-                    <p>
-                        Administration DNS / DHCP<br>
-                        Configuration firewalls (pFsense)<br>
-                        Proxy (HAProxy), VPN, Radius<br>
-                        Gestion des clés et certificats<br>
-                        Analyse et supervision réseau
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3><i class="fas fa-network-wired"></i> Infrastructure</h3>
-                    <p>
-                        Switchs HP & Cisco<br>
-                        Routeurs et points d’accès Wi-Fi<br>
-                        Architecture et segmentation<br>
-                        Répartition de charge
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3><i class="fas fa-floppy-disk"></i> Sauvegarde & Ext.</h3>
-                    <p>
-                        Gestion de serveurs bureautiques<br>
-                        Serveurs de sauvegarde<br>
-                        Externalisation des données<br>
-                        Méthodologies PCA / PRA
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3><i class="fas fa-phone"></i> Téléphonie IP</h3>
-                    <p>
-                        Déploiement et administration<br>
-                        Solutions ToIP<br>
-                        Gestion d'IPBX<br>
-                        Keyo Phone
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3><i class="fas fa-microchip"></i> Systèmes & Auto</h3>
-                    <p>
-                        Windows Server<br>
-                        Linux (Debian, RHEL)<br>
-                        Scripting Bash & Python<br>
-                        Automatisation des tâches
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3><i class="fas fa-database"></i> Bases de Données</h3>
-                    <p>
-                        MySQL & MariaDB<br>
-                        PostgreSQL<br>
-                        Sauvegarde et optimisation
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3><i class="fas fa-code"></i> Dev & Serveurs Web</h3>
-                    <p>
-                        Apache & Nginx<br>
-                        HTML, CSS, PHP<br>
-                        JavaScript, Java, Python
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3><i class="fas fa-eye"></i> Monitoring</h3>
-                    <p>
-                        Centreon, Zabbix, Nagios<br>
-                        Prometheus & Grafana<br>
-                        node_exporter
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3><i class="fas fa-cloud-sun"></i> DevOps & Cloud</h3>
-                    <p>
-                        CI/CD : Ansible, GitHub<br>
-                        Conteneurs : Docker<br>
-                        OpenStack & OVHcloud<br>
-                        Proxmox, VMware, VirtualBox
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3><i class="fas fa-tower-broadcast"></i> Télécoms & IoT</h3>
-                    <p>
-                        Accès filaires & mobiles<br>
-                        Infrastructures opérateurs<br>
-                        Capteurs & Traitement IoT
-                    </p>
-                </article>
-
-            </div>
-        </section>
-
-        <section id="projects">
-            <h2>Projets Récents</h2>
-            <div class="card" style="border-left: 4px solid var(--accent); margin-bottom: 2rem;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
-                    <div>
-                        <h3 style="font-size: 1.3rem;">Déploiement Automatisé Laravel</h3>
-                        <p style="color: var(--accent); font-weight: bold;">Ansible / IaC</p>
-                    </div>
-                    <a href="#" class="btn btn-outline" style="font-size: 0.8rem;"><i class="fab fa-github"></i>
-                        Dépôt</a>
-                </div>
-                <p>Orchestration complète d'un environnement de production idempotent. Utilisation de <strong>Ansible
-                        Vault</strong>, contextes <strong>SELinux</strong> et templates <strong>Jinja2</strong>.</p>
-                <div class="tags" style="margin-top: 10px;">
-                    <span class="tag">Ansible</span> <span class="tag">RHEL</span> <span class="tag">MySQL</span> <span
-                        class="tag">Security</span>
-                </div>
-            </div>
-
-            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
-                <article class="card">
-                    <h3>Samba Secure</h3>
-                    <p>Serveur de partage sécurisé avec gestion fine des ACLs et intégration AD.</p>
-                    <div class="tags"><span class="tag">Samba</span> <span class="tag">Ubuntu</span></div>
-                </article>
-                <article class="card">
-                    <h3>Monitoring Stack</h3>
-                    <p>Stack Prometheus + Grafana sous Docker pour la surveillance des métriques.</p>
-                    <div class="tags"><span class="tag">Docker</span> <span class="tag">Grafana</span></div>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Nicolas Blin | Tous droits réservés.</p>
-        <div style="margin-top: 15px;">
-            <a href="#" style="color: var(--text-muted); margin: 0 10px;"><i class="fab fa-github fa-lg"></i></a>
-            <a href="#" style="color: var(--text-muted); margin: 0 10px;"><i class="fab fa-linkedin fa-lg"></i></a>
         </div>
-    </footer>
 
-</body>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h4>15+</h4>
+                <p>Ans d'expérience</p>
+            </div>
+            <div class="stat-card">
+                <h4>50+</h4>
+                <p>Projets réalisés</p>
+            </div>
+            <div class="stat-card">
+                <h4>99.9%</h4>
+                <p>Uptime garanti</p>
+            </div>
+            <div class="stat-card">
+                <h4>30+</h4>
+                <p>Technologies maîtrisées</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-</html>
+<section id="stack">
+    <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="border:none; padding:0;">Compétences Techniques</h2>
+        <p>Un ensemble complet de compétences couvrant tous les aspects de l'infrastructure moderne</p>
+    </div>
+    
+    <div class="skills-grid">
+        <article class="card">
+            <h3><i class="fas fa-shield-halved"></i> Réseau & Sécurité</h3>
+            <ul>
+                <li>Administration DNS / DHCP</li>
+                <li>Configuration firewalls (pfSense)</li>
+                <li>Proxy (HAProxy), VPN, Radius</li>
+                <li>Gestion des clés et certificats</li>
+            </ul>
+        </article>
+        </div>
+</section>
