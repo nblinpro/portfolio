@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets & Réalisations | Nicolas</title>
+    <title>Mes Projets & Parcours | Nicolas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- VARIABLES & BASE (Identique à l'accueil pour la cohérence) --- */
         :root {
             --bg-body: #020617;
             --bg-card: #0b1120;
@@ -22,9 +21,9 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- HEADER --- */
+        /* HEADER */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
@@ -36,17 +35,16 @@
         nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
 
-        /* --- HERO PROJETS --- */
+        /* HERO */
         .hero { padding: 4rem 8% 2rem; text-align: center; }
         .hero-tag {
             background: rgba(34, 211, 238, 0.1); color: var(--accent);
             padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
             letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 1rem; display: inline-block;
         }
-        h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; }
 
-        /* --- TIMELINE & GRID --- */
+        /* TIMELINE & GRID */
         main { padding: 2rem 8% 5rem; max-width: 1400px; margin: 0 auto; }
         
         .timeline-year {
@@ -54,46 +52,56 @@
             margin: 4rem 0 2rem; color: var(--accent);
             font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700;
         }
-        .timeline-year::before { content: "\f133"; font-family: "Font Awesome 6 Free"; font-weight: 900; }
         .timeline-year::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
 
-        /* --- CARDS --- */
+        /* CARDS */
         .card {
             background: var(--bg-card); border: 1px solid var(--border);
             padding: 2rem; border-radius: var(--radius); transition: 0.3s;
-            display: flex; flex-direction: column; position: relative;
+            display: flex; flex-direction: column;
         }
         .card:hover { border-color: var(--accent); transform: translateY(-5px); background: var(--bg-card-hover); }
 
         .badge-type {
-            font-size: 0.65rem; font-weight: 800; padding: 4px 10px;
-            border-radius: 6px; margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 6px;
-            width: fit-content; text-transform: uppercase;
+            font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 6px;
+            margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 6px; width: fit-content;
         }
-        .type-company { background: rgba(167, 139, 250, 0.1); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.2); }
-        .type-school { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.2); }
+        .type-company { color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.5); }
+        .type-school { color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.5); }
 
-        .card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-main); }
-        .card .org-name { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem; display: block; }
+        .card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .org-name { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; display: block; }
         
         .card ul { list-style: none; margin-bottom: 2rem; flex-grow: 1; }
-        .card ul li { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px; }
-        .card ul li i { margin-top: 4px; font-size: 0.8rem; }
+        .card ul li { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .card ul li::before { content: "•"; color: var(--accent); }
 
         .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
-        .tag { background: rgba(34, 211, 238, 0.05); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; border: 1px solid var(--border); }
+        .tag { background: rgba(34, 211, 238, 0.05); color: var(--accent); padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid var(--border); }
 
-        /* --- BUTTONS --- */
-        .btn { padding: 0.6rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.8rem; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-outline { border: 1px solid var(--border); color: var(--text-main); background: rgba(2, 6, 23, 0.3); justify-content: center; }
+        /* BUTTONS */
+        .btn { padding: 0.6rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-outline { border: 1px solid var(--border); color: var(--text-main); background: transparent; text-align: center; }
         .btn-outline:hover { background: var(--accent); color: #000; border-color: var(--accent); }
-        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary { background: var(--accent); color: #000; border: none; }
 
-        footer { text-align: center; padding: 4rem 8%; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; margin-top: 4rem; }
+        /* MODALE (LA FENÊTRE DE DÉTAILS) */
+        .modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(8px);
+        }
+        .modal-content {
+            background: var(--bg-card); margin: 5% auto; padding: 2rem;
+            border: 1px solid var(--border); width: 90%; max-width: 600px; border-radius: 15px;
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+        .close-modal { cursor: pointer; font-size: 1.5rem; color: var(--text-muted); }
+        .modal h2 { margin: 10px 0; font-size: 1.8rem; }
+        .modal h3 { color: var(--accent); margin: 1.5rem 0 0.5rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+        footer { text-align: center; padding: 4rem; border-top: 1px solid var(--border); margin-top: 4rem; color: var(--text-muted); font-size: 0.8rem; }
     </style>
 </head>
 
@@ -106,7 +114,7 @@
                 <li><a href="../index.html">Accueil</a></li>
                 <li><a href="parcours.html">Parcours</a></li>
                 <li><a href="#">Projets</a></li>
-                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary" style="padding: 0.4rem 0.8rem;">Contact</a></li>
+                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -115,111 +123,137 @@
         <section class="hero">
             <span class="hero-tag">PORTFOLIO</span>
             <h1>Projets & <span style="color:var(--accent)">Réalisations</span></h1>
-            <p>Vue d'ensemble de mon parcours académique et de mes missions en entreprise spécialisées en infrastructure et Cloud.</p>
         </section>
 
-        <div class="timeline-year">M1 Cloud, Infrastructure et Sécurité</div>
+        <div class="timeline-year"><i class="fas fa-calendar-alt"></i> M1 Cloud, Infrastructure et Sécurité</div>
         <div class="grid">
             <article class="card">
                 <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
                 <h3>Expert Architecture S.I</h3>
                 <span class="org-name">Innosys</span>
                 <ul>
-                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Refonte intranet Assurmix avec migration Cloud</li>
-                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Déploiement d'une architecture sécurisée</li>
-                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Gestion des configurations système (Ansible)</li>
+                    <li>Refonte intranet Assurmix</li>
+                    <li>Déploiement Cloud et gestion système</li>
                 </ul>
-                <div class="tags">
-                    <span class="tag">Ansible</span><span class="tag">Samba</span><span class="tag">Cloud Architecture</span><span class="tag">Terraform</span>
-                </div>
-                <a href="#" class="btn btn-outline">Voir le détail</a>
+                <div class="tags"><span class="tag">Ansible</span><span class="tag">Samba</span></div>
+                <button class="btn btn-outline" onclick="openModal('innosys')">Voir le détail</button>
             </article>
 
             <article class="card">
                 <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                <h3>Expert en Cloud & Sécurité</h3>
+                <h3>Expert en cloud & sécurité</h3>
                 <span class="org-name">Ynov Campus de Paris</span>
                 <ul>
-                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Déploiement OpenStack (Nova, Swift)</li>
-                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Orchestration d'instances scalables</li>
+                    <li>Openstack (Nova, Swift, Flavor)</li>
                 </ul>
-                <div class="tags">
-                    <span class="tag">OpenStack</span><span class="tag">Nova</span><span class="tag">Swift</span><span class="tag">Virtualisation</span>
-                </div>
-                <a href="#" class="btn btn-outline">Voir le détail</a>
+                <div class="tags"><span class="tag">Openstack</span><span class="tag">Cloud</span></div>
+                <button class="btn btn-outline" onclick="openModal('ynov1')">Voir le détail</button>
             </article>
         </div>
 
-        <div class="timeline-year">3ème Année BUT R&T</div>
-        <div class="grid">
-            <article class="card">
-                <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
-                <h3>Assistant de Proximité</h3>
-                <span class="org-name">Direction Générale des Finances Publiques</span>
-                <ul>
-                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Projet de densification réseau national</li>
-                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Transition téléphonie classique vers ToIP</li>
-                </ul>
-                <div class="tags">
-                    <span class="tag">ToIP</span><span class="tag">VoIP</span><span class="tag">Infrastructure Réseau</span>
-                </div>
-                <a href="#" class="btn btn-outline">Voir le détail</a>
-            </article>
-
-            <article class="card">
-                <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                <h3>IoT & Architectures Hybrides</h3>
-                <span class="org-name">Ynov Campus</span>
-                <ul>
-                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Conception d'une maison connectée modulaire</li>
-                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Qualification d'architectures hybrides</li>
-                </ul>
-                <div class="tags">
-                    <span class="tag">IoT</span><span class="tag">Domotique</span><span class="tag">Électronique</span>
-                </div>
-                <a href="#" class="btn btn-outline">Voir le détail</a>
-            </article>
-        </div>
-
-        <div class="timeline-year">2ème Année BUT R&T</div>
+        <div class="timeline-year"><i class="fas fa-calendar-alt"></i> 3ème Année BUT R&T</div>
         <div class="grid">
             <article class="card">
                 <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise</span>
                 <h3>Assistant de Proximité</h3>
-                <span class="org-name">Direction Générale des Finances Publiques</span>
+                <span class="org-name">DGFIP</span>
                 <ul>
-                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Audit et déploiement de l'outil GestSup</li>
-                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Recensement des commutateurs réseaux</li>
+                    <li>Densification réseau et ToIP</li>
                 </ul>
-                <div class="tags">
-                    <span class="tag">GestSup</span><span class="tag">Audit Réseau</span><span class="tag">Support N2</span>
-                </div>
-                <a href="#" class="btn btn-outline">Voir le détail</a>
+                <div class="tags"><span class="tag">VoIP</span><span class="tag">Réseau</span></div>
+                <button class="btn btn-outline" onclick="openModal('dgfip3')">Voir le détail</button>
             </article>
+        </div>
 
+        <div class="timeline-year"><i class="fas fa-calendar-alt"></i> 1ère Année BUT R&T</div>
+        <div class="grid">
             <article class="card">
                 <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                <h3>Transmission & Développement</h3>
-                <span class="org-name">Ynov Campus</span>
+                <h3>Fondamentaux Réseaux</h3>
+                <span class="org-name">BUT R&T</span>
                 <ul>
-                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Approfondissement des couches physiques</li>
-                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Développement d'applications communicantes</li>
+                    <li>Conception réseau PME</li>
+                    <li>Développement Web (HTML/CSS)</li>
                 </ul>
-                <div class="tags">
-                    <span class="tag">Signal Processing</span><span class="tag">Développement</span><span class="tag">Transmission</span>
-                </div>
-                <a href="#" class="btn btn-outline">Voir le détail</a>
+                <div class="tags"><span class="tag">Packet Tracer</span><span class="tag">HTML</span></div>
+                <button class="btn btn-outline" onclick="openModal('but1')">Voir le détail</button>
             </article>
         </div>
-
     </main>
 
-    <footer>
-        <p>&copy; 2025 Nicolas Blin | Tous droits réservés.</p>
-        <div style="margin-top: 15px;">
-            <a href="../index.html" style="color: var(--accent); text-decoration: none; font-weight: 600;">← Retour à l'accueil</a>
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modalBadge" class="badge-type"></span>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <h2 id="modalTitle">Titre du Projet</h2>
+            <p id="modalSub" style="color: var(--accent); font-weight: 600;"></p>
+            
+            <h3>À propos</h3>
+            <p id="modalDesc" style="color: var(--text-muted); font-size: 0.9rem;"></p>
+
+            <h3>Réalisations</h3>
+            <ul id="modalList"></ul>
+
+            <button class="btn btn-outline" style="width: 100%; margin-top: 2rem;" onclick="closeModal()">Fermer</button>
         </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Nicolas | <a href="../index.html" style="color: var(--accent); text-decoration: none;">Retour à l'accueil</a></p>
     </footer>
 
+    <script>
+        const projects = {
+            innosys: {
+                title: "Expert Architecture S.I",
+                badge: "Entreprise (Alternance)",
+                badgeClass: "type-company",
+                sub: "Innosys - Refonte intranet Assurmix",
+                desc: "Modernisation de l'infrastructure pour supporter la croissance des services intranet.",
+                tasks: ["Migration vers le Cloud", "Automatisation avec Ansible", "Sécurisation des accès"]
+            },
+            ynov1: {
+                title: "Expert Cloud & Sécurité",
+                badge: "Projet Académique",
+                badgeClass: "type-school",
+                sub: "Ynov Campus de Paris",
+                desc: "Déploiement d'une infrastructure OpenStack complète.",
+                tasks: ["Configuration Nova", "Gestion du stockage Swift", "Optimisation des Flavors"]
+            },
+            but1: {
+                title: "Fondamentaux Réseaux",
+                badge: "Projet Académique",
+                badgeClass: "type-school",
+                sub: "BUT Réseaux & Télécoms",
+                desc: "Apprentissage des bases de l'adressage et de la commutation.",
+                tasks: ["Architecture LAN PME", "Création de site vitrine", "Mesures de signaux physiques"]
+            }
+        };
+
+        function openModal(id) {
+            const p = projects[id];
+            if(!p) return;
+            document.getElementById('modalTitle').innerText = p.title;
+            document.getElementById('modalBadge').innerText = p.badge;
+            document.getElementById('modalBadge').className = 'badge-type ' + p.badgeClass;
+            document.getElementById('modalSub').innerText = p.sub;
+            document.getElementById('modalDesc').innerText = p.desc;
+            
+            const list = document.getElementById('modalList');
+            list.innerHTML = p.tasks.map(t => `<li style="color: var(--text-muted); font-size:0.85rem; margin-bottom:5px;">${t}</li>`).join('');
+            
+            document.getElementById('projectModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('projectModal')) closeModal();
+        }
+    </script>
 </body>
 </html>
