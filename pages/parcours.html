@@ -3,132 +3,107 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Parcours | Portfolio</title>
+    <title>Parcours Académique | Nicolas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --accent: #3b82f6;
-            /* Bleu pro, à ajuster selon ton style.css */
-            --secondary: #1e293b;
+            --bg-body: #020617;
+            --bg-card: #0b1120;
+            --bg-card-hover: #1e293b;
+            --accent: #22d3ee;
+            --accent-glow: rgba(34, 211, 238, 0.15);
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --border: #1e293b;
+            --radius: 12px;
         }
 
-        /* Conteneur principal de la Timeline */
-        .timeline {
-            position: relative;
-            margin: 4rem auto;
-            padding-left: 50px;
-            max-width: 900px;
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+
+        /* HEADER */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); z-index: 100;
         }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+        nav ul { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+
+        /* HERO */
+        .hero { padding: 4rem 8% 2rem; text-align: center; }
+        .hero-tag {
+            background: rgba(34, 211, 238, 0.1); color: var(--accent);
+            padding: 6px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 1.5rem; display: inline-flex; align-items: center; gap: 8px;
+        }
+        h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 800; }
+        .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        /* TIMELINE SECTION */
+        .timeline-container { max-width: 900px; margin: 4rem auto; padding: 0 2rem; position: relative; }
 
         /* La ligne verticale */
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 19px;
-            top: 10px;
-            bottom: 10px;
-            width: 3px;
-            background: linear-gradient(to bottom, var(--accent), #334155);
+        .timeline-container::before {
+            content: ""; position: absolute; left: 32px; top: 0; bottom: 0;
+            width: 2px; background: linear-gradient(to bottom, var(--accent), var(--border));
         }
 
-        /* Chaque bloc de la timeline */
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2.5rem;
-            padding: 1.5rem 2rem;
-            background-color: var(--secondary);
-            border-radius: 12px;
-            border: 1px solid #334155;
-            transition: all 0.3s ease;
+        .timeline-item { position: relative; margin-bottom: 3rem; padding-left: 60px; }
+
+        /* Le point sur la ligne */
+        .timeline-item::after {
+            content: ""; position: absolute; left: 28px; top: 10px;
+            width: 10px; height: 10px; background: var(--accent);
+            border-radius: 50%; box-shadow: 0 0 10px var(--accent); z-index: 2;
         }
 
-        .timeline-item:hover {
-            transform: translateX(10px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            padding: 2rem; border-radius: var(--radius); transition: 0.3s;
+            position: relative; overflow: hidden;
         }
+        .card:hover { border-color: var(--accent); transform: translateX(10px); background: var(--bg-card-hover); }
 
-        /* Le cercle sur la ligne */
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: -40px;
-            top: 24px;
-            width: 16px;
-            height: 16px;
-            background-color: #0f172a;
-            /* Couleur de fond de ta page */
-            border: 3px solid var(--accent);
-            border-radius: 50%;
-            z-index: 2;
-        }
+        /* Icône de fond discrète */
+        .card-bg-icon { position: absolute; right: 20px; top: 20px; font-size: 2rem; color: rgba(255,255,255,0.03); }
 
-        .timeline-item h3 {
-            margin: 0;
-            color: #f8fafc;
-            font-size: 1.2rem;
-        }
-
-        .location {
-            display: block;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
-
-        /* Style pour les certifications (Badges) */
-        .cert-container {
-            margin-top: 1rem;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .cert-badge {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        /* Style de base commun aux badges */
+        /* BADGES */
+        .status-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
         .status-badge {
-            float: right;
-            padding: 2px 10px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            color: white;
-            text-transform: uppercase;
+            font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; text-transform: uppercase;
         }
+        .en-cours { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+        .obtenu { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .date { color: var(--text-muted); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; }
 
-        /* Variante : Obtenu (Vert) */
-        .status-badge.obtenu {
-            background: #059669;
-            /* Un vert émeraude */
-            box-shadow: 0 0 10px rgba(5, 150, 105, 0.2);
+        .card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-main); }
+        .university { color: var(--accent); font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem; display: block; }
+
+        .card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+        .cert-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .cert-badge {
+            background: rgba(30, 41, 59, 0.5); border: 1px solid var(--border);
+            color: var(--text-muted); padding: 4px 12px; border-radius: 6px;
+            font-size: 0.7rem; font-weight: 600; text-transform: uppercase; transition: 0.3s;
         }
+        .card:hover .cert-badge { border-color: rgba(34, 211, 238, 0.3); color: var(--text-main); }
 
-        /* Variante : En cours (Orange ou Bleu) */
-        .status-badge.en-cours {
-            background: #f59e0b;
-            /* Un orange ambré pour attirer l'attention */
-            box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
-        }
+        footer { text-align: center; padding: 4rem; border-top: 1px solid var(--border); margin-top: 4rem; color: var(--text-muted); font-size: 0.85rem; }
 
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .timeline-container { padding: 0 1rem; }
+            .timeline-container::before { left: 12px; }
+            .timeline-item { padding-left: 35px; }
+            .timeline-item::after { left: 8px; }
         }
     </style>
 </head>
@@ -136,84 +111,83 @@
 <body>
 
     <header>
-        <div class="logo">Parcours</div>
+        <div class="logo">DevOps<span>.</span></div>
         <nav>
             <ul>
                 <li><a href="../index.html">Accueil</a></li>
-                <li><a href="#" class="active">Parcours</a></li>
+                <li><a href="#" style="color: var(--accent)">Parcours</a></li>
                 <li><a href="projets.html">Projets</a></li>
-                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary"
-                        style="padding: 0.5rem 1rem;">Me Contacter</a></li>
+                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn-primary" style="padding: 0.5rem 1rem; border-radius: 8px; background: var(--accent); color: #000; text-decoration: none; font-weight: 600;">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="hero" style="text-align: center; padding: 4rem 1rem;">
-            <h1>Parcours académique</h1>
-            <p>Mon évolution vers l'expertise en infrastructures Cloud et Réseaux</p>
+        <section class="hero">
+            <div class="hero-tag">
+                <i class="fas fa-user-graduate"></i> PARCOURS ACADÉMIQUE
+            </div>
+            <h1>Formation & <span style="color:var(--accent)">Diplômes</span></h1>
+            <p>Mon évolution académique vers l'expertise Cloud et DevOps</p>
         </section>
 
-        <section class="timeline">
+        <div class="timeline-container">
 
             <div class="timeline-item">
-                <span class="status-badge en-cours">En cours</span>
-                <h3>2025 – 2027 · Ynov Campus <span class="location"><i class="fas fa-map-marker-alt"></i>
-                        Paris-Nanterre (92000)</span></h3>
-                <span class="location"><i class="fas fa-university"></i> Mastère Expert Cloud, Infrastructure et
-                    Sécurité</span>
-                <p>Formation Mastère orientée <strong>Cloud, DevSecOps</strong> et architectures systèmes complexes.</p>
-                <div class="cert-container">
-                    <span class="cert-badge">Cloud</span>
-                    <span class="cert-badge">DevSecOps</span>
-                    <span class="cert-badge">Réseaux / Infrastructures</span>
-                    <span class="cert-badge">Virtualisation</span>
-                    <span class="cert-badge">Sécurité</span>
+                <div class="card">
+                    <i class="fas fa-graduation-cap card-bg-icon"></i>
+                    <div class="status-header">
+                        <span class="status-badge en-cours">En cours</span>
+                        <span class="date">2025 – 2027</span>
+                    </div>
+                    <h3>Mastère Expert Cloud, Infrastructure et Sécurité</h3>
+                    <span class="university">Ynov Campus (Paris-Nanterre)</span>
+                    <p>Spécialisation dans la conception d'architectures résilientes, l'automatisation DevSecOps et la sécurisation des environnements Cloud hybrides.</p>
+                    <div class="cert-container">
+                        <span class="cert-badge">Cloud</span>
+                        <span class="cert-badge">DevSecOps</span>
+                        <span class="cert-badge">Virtualisation</span>
+                    </div>
                 </div>
             </div>
 
             <div class="timeline-item">
-                <span class="status-badge obtenu">Obtenu</span>
-                <h3>2023 – 2025 · Université de Tours <span class="location"><i
-                            class="fas fa-map-marker-alt"></i>Antenne de Blois (41000)</span></h3>
-                <span class="location"><i class="fas fa-university"></i> BUT Réseaux & Télécommunications</span>
-                <p>Spécialité :</p>
-                <ul style="list-style: none; padding-left: 0; margin-top: 0.5rem;">
-                    <li style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.3rem;">
-                        <i class="fas fa-check" style="color: var(--accent); font-size: 0.7rem; margin-right: 8px;"></i>
-                        Internet des Objets (IOM)
-                    </li>
-                </ul>
-                <div class="cert-container">
-                    <span class="cert-badge">CCNA 1 : Introduction au réseau</span>
-                    <span class="cert-badge">CCNA 2 : Switching, routage et éléments essentiels du sans fil</span>
-                    <span class="cert-badge">CCNA 3 : Enterprise Networking, Security &Automation</span>
+                <div class="card">
+                    <i class="fas fa-university card-bg-icon"></i>
+                    <div class="status-header">
+                        <span class="status-badge obtenu">Obtenu</span>
+                        <span class="date">2023 – 2025</span>
+                    </div>
+                    <h3>BUT Réseaux & Télécommunications</h3>
+                    <span class="university">Université de Tours</span>
+                    <p>Expertise en administration réseaux, protocoles de communication et Internet des Objets (IoT). Apprentissage intensif du modèle OSI et du déploiement d'infrastructures LAN/WAN.</p>
+                    <div class="cert-container">
+                        <span class="cert-badge">CCNA 1</span>
+                        <span class="cert-badge">CCNA 2</span>
+                        <span class="cert-badge">CCNA 3</span>
+                    </div>
                 </div>
             </div>
 
             <div class="timeline-item">
-                <span class="status-badge obtenu">Obtenu</span>
-                <h3>2019 – 2021 · Lycée GSH <span class="location"><i class="fas fa-map-marker-alt"></i>Étampes
-                        (91150)</span></h3>
-                <span class="location"><i class="fas fa-university"></i> Baccalauréat général</span>
-                <p>Spécialités :</p>
-                <ul style="list-style: none; padding-left: 0; margin-top: 0.5rem;">
-                    <li style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.3rem;">
-                        <i class="fas fa-check" style="color: var(--accent); font-size: 0.7rem; margin-right: 8px;"></i>
-                        Mathématiques
-                    </li>
-                    <li style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.3rem;">
-                        <i class="fas fa-check" style="color: var(--accent); font-size: 0.7rem; margin-right: 8px;"></i>
-                        Physique-Chimie
-                    </li>
-                    <li style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.3rem;">
-                        <i class="fas fa-check" style="color: var(--accent); font-size: 0.7rem; margin-right: 8px;"></i>
-                        Sciences de l'ingénieur
-                    </li>
-                </ul>
+                <div class="card">
+                    <i class="fas fa-book card-bg-icon"></i>
+                    <div class="status-header">
+                        <span class="status-badge obtenu">Obtenu</span>
+                        <span class="date">2019 – 2021</span>
+                    </div>
+                    <h3>Baccalauréat général</h3>
+                    <span class="university">Lycée GSH (Étampes)</span>
+                    <p>Spécialités : Mathématiques, Physique-Chimie et Sciences de l'ingénieur.</p>
+                    <div class="cert-container">
+                        <span class="cert-badge">Mathématiques</span>
+                        <span class="cert-badge">Physique-Chimie</span>
+                        <span class="cert-badge">SI</span>
+                    </div>
+                </div>
             </div>
 
-        </section>
+        </div>
     </main>
 
     <footer>
@@ -221,5 +195,4 @@
     </footer>
 
 </body>
-
 </html>
