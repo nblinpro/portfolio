@@ -3,150 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio DevOps | Expert Infrastructure</title>
+    <title>Nicolas | Expert Architecture S.I. Cloud</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-body: #020617;
-            --bg-card: #0b1120;
-            --bg-card-hover: #1e293b;
-            --accent: #22d3ee;
-            --accent-glow: rgba(34, 211, 238, 0.2);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #1e293b;
-            --radius: 12px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
-
-        /* --- HEADER --- */
-        header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 100;
-        }
-        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
-        .logo span { color: var(--accent); }
-        nav ul { display: flex; list-style: none; gap: 2rem; }
-        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
-        nav a:hover { color: var(--accent); }
-
-        /* --- HERO --- */
-        .hero { 
-            padding: 8rem 8% 5rem; text-align: center; display: flex; flex-direction: column; align-items: center;
-        }
-        .hero-tag {
-            background: rgba(34, 211, 238, 0.1); color: var(--accent);
-            padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
-            letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 2rem;
-        }
-        h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin-bottom: 1.5rem; max-width: 900px; }
-        .gradient-text { 
-            background: linear-gradient(90deg, #22d3ee, #3b82f6); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-        }
-        .hero p { color: var(--text-muted); max-width: 650px; margin-bottom: 2.5rem; font-size: 1.1rem; }
-        
-        .btn-group { display: flex; gap: 1rem; }
-        .btn { 
-            padding: 0.8rem 1.8rem; border-radius: 8px; text-decoration: none; 
-            font-weight: 600; display: flex; align-items: center; gap: 10px; transition: 0.3s;
-        }
-        .btn-primary { background: var(--accent); color: #000; }
-        .btn-primary:hover { box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-2px); }
-        .btn-github { background: #0f172a; color: #fff; border: 1px solid var(--border); }
-        .btn-github:hover { background: #1e293b; }
-
-        /* --- SECTIONS --- */
-        section { padding: 5rem 8%; max-width: 1400px; margin: 0 auto; }
-        h2 { font-size: 2.2rem; margin-bottom: 1rem; }
-        .section-desc { color: var(--text-muted); margin-bottom: 3rem; }
-
-        /* --- WHOAMI (Image 2) --- */
-        .whoami-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .stat-card { 
-            background: var(--bg-card); border: 1px solid var(--border); 
-            padding: 1.5rem; border-radius: var(--radius);
-        }
-        .stat-card h4 { color: var(--accent); font-size: 2rem; margin-bottom: 5px; }
-        .stat-card p { color: var(--text-muted); font-size: 0.85rem; }
-
-        pre { 
-            background: #010409; padding: 20px; border-radius: 10px; border: 1px solid var(--border);
-            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin-top: 2rem;
-        }
-        .json-key { color: #79c0ff; }
-        .json-str { color: #a5d6ff; }
-
-        /* --- SKILLS (Image 3) --- */
-        .skills-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; 
-        }
-        .card { 
-            background: var(--bg-card); border: 1px solid var(--border); padding: 1.8rem; 
-            border-radius: var(--radius); transition: 0.3s;
-        }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .card h3 { 
-            color: var(--text-main); font-size: 1.1rem; margin-bottom: 1.2rem; 
-            display: flex; align-items: center; gap: 12px;
-        }
-        .card h3 i { color: var(--accent); }
-        .card ul { list-style: none; }
-        .card ul li { 
-            color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px; 
-            display: flex; align-items: center; gap: 10px;
-        }
-        .card ul li::before { content: "•"; color: var(--accent); }
-
-        /* --- PROJECTS --- */
-        .project-featured { 
-            background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
-            padding: 2rem; border-radius: var(--radius); margin-bottom: 2rem;
-        }
-        .tags { display: flex; gap: 10px; margin-top: 1.5rem; }
-        .tag { 
-            background: rgba(34, 211, 238, 0.1); color: var(--accent); 
-            padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: 600;
-        }
-
-        /* --- FOOTER (Image 4) --- */
-        footer { 
-            padding: 4rem 8% 2rem; background: var(--bg-card); border-top: 1px solid var(--border); margin-top: 5rem;
-        }
-        .footer-top { 
-            display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem;
-        }
-        .footer-logo { font-weight: 800; margin-bottom: 1rem; font-size: 1.2rem; }
-        .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        .footer-col a:hover { color: var(--accent); }
-        
-        .social-links { display: flex; gap: 1rem; }
-        .social-btn { 
-            width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: center; color: var(--text-muted);
-            text-decoration: none; transition: 0.3s;
-        }
-        .social-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-        .footer-bottom { 
-            padding-top: 2rem; border-top: 1px solid var(--border); 
-            display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);
-        }
-
-        @media (max-width: 768px) {
-            .whoami-grid, .footer-top { grid-template-columns: 1fr; gap: 2rem; }
-            header { padding: 1rem 5%; }
-            nav { display: none; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -155,9 +15,9 @@
         <nav>
             <ul>
                 <li><a href="#">Accueil</a></li>
-                <li><a href="#">Parcours</a></li>
-                <li><a href="#">Projets</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="pages/parcours.html">Parcours</a></li>
+                <li><a href="pages/projets.html">Projets</a></li>
+                <li><a href="mailto:votre-email@gmail.com">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -165,23 +25,24 @@
     <main>
         <section class="hero">
             <span class="hero-tag">• SYSADMIN & AUTOMATISATION</span>
-            <h1>Construire des infrastructures <span class="gradient-text">robustes et automatisées</span></h1>
-            <p>Spécialiste en déploiement Ansible, administration Linux et solutions Cloud. Je transforme des infrastructures complexes en systèmes scalables.</p>
+            <h1>Construire des infrastructures <br> <span class="gradient-text">robustes et automatisées</span></h1>
+            <p>Spécialiste en déploiement Ansible, administration Linux et solutions Cloud. Je transforme des infrastructures complexes en systèmes scalables et automatisés.</p>
             <div class="btn-group">
-                <a href="#" class="btn btn-primary">Voir mes projets <i class="fas fa-arrow-right"></i></a>
-                <a href="#" class="btn btn-github"><i class="fab fa-github"></i> GitHub</a>
+                <a href="pages/projets.html" class="btn btn-primary">Voir mes projets <i class="fas fa-arrow-right"></i></a>
+                <a href="https://github.com/ton-github" target="_blank" class="btn btn-github"><i class="fab fa-github"></i> GitHub</a>
             </div>
         </section>
 
         <section id="about">
             <div class="whoami-grid">
-                <div>
+                <div class="whoami-content">
                     <span class="hero-tag">• WHOAMI</span>
                     <h2>Passion pour l'<span class="gradient-text">Open Source et DevOps</span></h2>
                     <p>Je suis passionné par l'Open Source et la méthodologie DevOps. J'aide les entreprises à moderniser leur infrastructure en assurant la haute disponibilité et la sécurité.</p>
                     <p>J'aime décortiquer les systèmes pour optimiser chaque couche, du noyau Linux au serveur web.</p>
                     
-                    <pre>
+                    <div class="code-window">
+                        <pre>
 {
   <span class="json-key">"profile"</span>: {
     <span class="json-key">"role"</span>: <span class="json-str">"Expert Architecture S.I. Cloud"</span>,
@@ -189,21 +50,36 @@
     <span class="json-key">"focus"</span>: [<span class="json-str">"Ansible"</span>, <span class="json-str">"Docker"</span>, <span class="json-str">"Security"</span>]
   }
 }</pre>
+                    </div>
                 </div>
+
                 <div class="stats-grid">
-                    <div class="stat-card"><h4>15+</h4><p>Ans d'expérience</p></div>
-                    <div class="stat-card"><h4>50+</h4><p>Projets réalisés</p></div>
-                    <div class="stat-card"><h4>99.9%</h4><p>Uptime garanti</p></div>
-                    <div class="stat-card"><h4>30+</h4><p>Technologies maîtrisées</p></div>
+                    <div class="stat-card">
+                        <h4>15+</h4>
+                        <p>Ans d'expérience</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>50+</h4>
+                        <p>Projets réalisés</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>99.9%</h4>
+                        <p>Uptime garanti</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>30+</h4>
+                        <p>Technologies maîtrisées</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="skills">
-            <div style="text-align: center; margin-bottom: 4rem;">
+            <div class="section-header">
                 <h2>Compétences Techniques</h2>
-                <p class="section-desc">Un ensemble complet de compétences couvrant l'infrastructure moderne</p>
+                <p>Un ensemble complet de compétences couvrant tous les aspects de l'infrastructure moderne</p>
             </div>
+            
             <div class="skills-grid">
                 <article class="card">
                     <h3><i class="fas fa-shield-halved"></i> Réseau & Sécurité</h3>
@@ -211,6 +87,7 @@
                         <li>Administration DNS / DHCP</li>
                         <li>Configuration firewalls (pfSense)</li>
                         <li>Proxy (HAProxy), VPN, Radius</li>
+                        <li>Gestion des clés et certificats</li>
                         <li>Analyse et supervision réseau</li>
                     </ul>
                 </article>
@@ -222,6 +99,29 @@
                         <li>Routeurs et points d’accès Wi-Fi</li>
                         <li>Architecture et segmentation</li>
                         <li>Répartition de charge</li>
+                        <li>Gestion de serveurs</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <h3><i class="fas fa-floppy-disk"></i> Sauvegarde & Ext.</h3>
+                    <ul>
+                        <li>Gestion de serveurs bureautiques</li>
+                        <li>Serveurs de sauvegarde</li>
+                        <li>Externalisation des données</li>
+                        <li>Méthodologies PCA / PRA</li>
+                        <li>Stratégies de backup</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <h3><i class="fas fa-phone"></i> Téléphonie IP</h3>
+                    <ul>
+                        <li>Déploiement et administration</li>
+                        <li>Solutions ToIP</li>
+                        <li>Gestion d'IPBX</li>
+                        <li>Keyo Phone</li>
+                        <li>Intégration VoIP</li>
                     </ul>
                 </article>
 
@@ -231,36 +131,74 @@
                         <li>CI/CD : Ansible, GitHub</li>
                         <li>Conteneurs : Docker</li>
                         <li>OpenStack & OVHcloud</li>
+                        <li>Proxmox, VMware, VirtualBox</li>
                         <li>Infrastructure as Code</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <h3><i class="fas fa-microchip"></i> Systèmes & Auto</h3>
+                    <ul>
+                        <li>Windows Server</li>
+                        <li>Linux (Debian, RHEL)</li>
+                        <li>Scripting Bash & Python</li>
+                        <li>Automatisation des tâches</li>
+                        <li>Gestion de configurations</li>
                     </ul>
                 </article>
             </div>
         </section>
 
         <section id="projects">
-            <h2 style="text-align: center;">Projets Récents</h2>
-            <p class="section-desc" style="text-align: center;">Quelques réalisations qui illustrent mon expertise</p>
-            
-            <div class="project-featured">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3>Déploiement Automatisé Laravel</h3>
-                    <a href="#" class="btn-github btn" style="padding: 0.4rem 1rem; font-size: 0.8rem;">GitHub</a>
+            <div class="section-header">
+                <h2>Projets Récents</h2>
+                <p>Quelques réalisations qui illustrent mon expertise technique</p>
+            </div>
+
+            <div class="project-card featured">
+                <div class="project-header">
+                    <div>
+                        <h3>Déploiement Automatisé Laravel</h3>
+                        <span class="project-category">Ansible / IaC</span>
+                    </div>
+                    <a href="#" class="btn-github-small"><i class="fab fa-github"></i> Dépôt</a>
                 </div>
-                <p style="margin-top: 1rem;">Orchestration complète d'un environnement de production idempotent. Utilisation de Ansible Vault et templates Jinja2.</p>
+                <p>Orchestration complète d'un environnement de production idempotent. Utilisation de <strong>Ansible Vault</strong>, contextes <strong>SELinux</strong> et templates <strong>Jinja2</strong>.</p>
                 <div class="tags">
-                    <span class="tag">Ansible</span><span class="tag">RHEL</span><span class="tag">MySQL</span><span class="tag">Security</span>
+                    <span class="tag">Ansible</span>
+                    <span class="tag">RHEL</span>
+                    <span class="tag">MySQL</span>
+                    <span class="tag">Security</span>
+                </div>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Samba Secure</h3>
+                    <p>Serveur de partage sécurisé avec gestion fine des ACLs et intégration Active Directory pour une gestion centralisée des accès.</p>
+                    <div class="tags">
+                        <span class="tag">Samba</span><span class="tag">Ubuntu</span><span class="tag">AD</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Monitoring Stack</h3>
+                    <p>Stack Prometheus + Grafana sous Docker pour la surveillance des métriques et visualisation en temps réel de l'infrastructure.</p>
+                    <div class="tags">
+                        <span class="tag">Docker</span><span class="tag">Prometheus</span><span class="tag">Grafana</span>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="footer-top">
-            <div class="footer-col">
-                <div class="footer-logo">DevOps<span>.</span></div>
-                <p style="font-size: 0.9rem;">Ingénieur Infrastructure & DevOps passionné par l'automatisation et les solutions Cloud.</p>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo">DevOps<span>.</span></div>
+                <p>Ingénieur Infrastructure & DevOps passionné par l'automatisation et les solutions Cloud.</p>
             </div>
-            <div class="footer-col">
+            
+            <div class="footer-nav">
                 <h4>Navigation</h4>
                 <ul>
                     <li><a href="#">Accueil</a></li>
@@ -269,18 +207,19 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
-            <div class="footer-col">
+
+            <div class="footer-contact">
                 <h4>Contact</h4>
-                <div class="social-links">
-                    <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-btn"><i class="far fa-envelope"></i></a>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="far fa-envelope"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
             <p>© 2024 Portfolio DevOps. Tous droits réservés.</p>
-            <p>Fait avec <span style="color: #22d3ee;">💙</span> et React</p>
+            <p>Fait avec <span class="heart">💙</span> et React</p>
         </div>
     </footer>
 
