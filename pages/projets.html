@@ -4,51 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Projets & Parcours | Nicolas</title>
-    <link rel="stylesheet" href="../style.css">
+    <title>Projets & Réalisations | Nicolas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Petits ajustements spécifiques pour la timeline */
-        .timeline-year {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            color: var(--accent);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
-            font-weight: 700;
+        /* --- VARIABLES & BASE (Identique à l'accueil pour la cohérence) --- */
+        :root {
+            --bg-body: #020617;
+            --bg-card: #0b1120;
+            --bg-card-hover: #1e293b;
+            --accent: #22d3ee;
+            --accent-glow: rgba(34, 211, 238, 0.15);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+            --radius: 12px;
         }
 
-        .timeline-year::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: var(--border);
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+
+        /* --- HEADER --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); z-index: 100;
         }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+        nav ul { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+
+        /* --- HERO PROJETS --- */
+        .hero { padding: 4rem 8% 2rem; text-align: center; }
+        .hero-tag {
+            background: rgba(34, 211, 238, 0.1); color: var(--accent);
+            padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 1rem; display: inline-block;
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        /* --- TIMELINE & GRID --- */
+        main { padding: 2rem 8% 5rem; max-width: 1400px; margin: 0 auto; }
+        
+        .timeline-year {
+            display: flex; align-items: center; gap: 1rem;
+            margin: 4rem 0 2rem; color: var(--accent);
+            font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700;
+        }
+        .timeline-year::before { content: "\f133"; font-family: "Font Awesome 6 Free"; font-weight: 900; }
+        .timeline-year::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; }
+
+        /* --- CARDS --- */
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            padding: 2rem; border-radius: var(--radius); transition: 0.3s;
+            display: flex; flex-direction: column; position: relative;
+        }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); background: var(--bg-card-hover); }
 
         .badge-type {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-            font-weight: bold;
+            font-size: 0.65rem; font-weight: 800; padding: 4px 10px;
+            border-radius: 6px; margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 6px;
+            width: fit-content; text-transform: uppercase;
         }
+        .type-company { background: rgba(167, 139, 250, 0.1); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.2); }
+        .type-school { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.2); }
 
-        .type-company {
-            color: #a78bfa;
-            border: 1px solid #a78bfa;
-        }
+        .card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-main); }
+        .card .org-name { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem; display: block; }
+        
+        .card ul { list-style: none; margin-bottom: 2rem; flex-grow: 1; }
+        .card ul li { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px; }
+        .card ul li i { margin-top: 4px; font-size: 0.8rem; }
 
-        /* Jaune pour Entreprise */
-        .type-school {
-            color: #3b82f6;
-            border: 1px solid #3b82f6;
-        }
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
+        .tag { background: rgba(34, 211, 238, 0.05); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; border: 1px solid var(--border); }
 
-        /* Violet pour École */
+        /* --- BUTTONS --- */
+        .btn { padding: 0.6rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.8rem; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-outline { border: 1px solid var(--border); color: var(--text-main); background: rgba(2, 6, 23, 0.3); justify-content: center; }
+        .btn-outline:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+        .btn-primary { background: var(--accent); color: #000; }
+
+        footer { text-align: center; padding: 4rem 8%; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; margin-top: 4rem; }
+
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 
@@ -61,224 +106,120 @@
                 <li><a href="../index.html">Accueil</a></li>
                 <li><a href="parcours.html">Parcours</a></li>
                 <li><a href="#">Projets</a></li>
-                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary"
-                        style="padding: 0.5rem 1rem;">Me Contacter</a></li>
+                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn btn-primary" style="padding: 0.4rem 0.8rem;">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="hero" style="min-height: 30vh; margin-bottom: 2rem;">
-            <span class="hero-tag">Portfolio</span>
+        <section class="hero">
+            <span class="hero-tag">PORTFOLIO</span>
             <h1>Projets & <span style="color:var(--accent)">Réalisations</span></h1>
-            <p>Vue d'ensemble de mon parcours académique et de mes missions en entreprise.</p>
+            <p>Vue d'ensemble de mon parcours académique et de mes missions en entreprise spécialisées en infrastructure et Cloud.</p>
         </section>
 
-        <div class="timeline-year"><i class="fas fa-calendar-alt"></i> M1 Cloud, INfrastructure et Sécurité</div>
-
-        <div class="grid" style="margin-bottom: 4rem;">
-
-            <article class="card" style="border-left: 4px solid #a78bfa;">
+        <div class="timeline-year">M1 Cloud, Infrastructure et Sécurité</div>
+        <div class="grid">
+            <article class="card">
                 <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
                 <h3>Expert Architecture S.I</h3>
-                <p>Innosys</p>
-                <ul style="list-style: none; color: var(--text-muted); margin-bottom: 1.5rem;">
-                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Refonte
-                        intranet Assurmix</li>
-                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Déploiement
-                        Cloud et gestion système</li>
+                <span class="org-name">Innosys</span>
+                <ul>
+                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Refonte intranet Assurmix avec migration Cloud</li>
+                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Déploiement d'une architecture sécurisée</li>
+                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Gestion des configurations système (Ansible)</li>
                 </ul>
                 <div class="tags">
-                    <span class="tag">Ansible</span>
-                    <span class="tag">Samba</span>
+                    <span class="tag">Ansible</span><span class="tag">Samba</span><span class="tag">Cloud Architecture</span><span class="tag">Terraform</span>
                 </div>
-                </br>
-                <a href="https://nblinpro.github.io/M_Cloud_INFRA_SEC/company.html"
-                    class="btn btn-outline"
-                    style="font-size: 0.8rem; padding: 0.3rem 0.8rem; margin-top: 1rem; display: inline-block;">
-                    <i class="fas fa-external-link-alt"></i> Voir le détail
-                </a>
+                <a href="#" class="btn btn-outline">Voir le détail</a>
             </article>
 
-            <article class="card" style="border-left: 4px solid #3b82f6;">
+            <article class="card">
                 <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                <h3>Expert en cloud, sécurité & infrastructure</h3>
-                <p>Ynov Campus de Paris</p>
-                <ul style="list-style: none; color: var(--text-muted); margin-bottom: 1.5rem;">
-                    <li><i class="fas fa-angle-right" style="color: var(--accent); margin-right: 10px;"></i> Openstack
-                    </li>
+                <h3>Expert en Cloud & Sécurité</h3>
+                <span class="org-name">Ynov Campus de Paris</span>
+                <ul>
+                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Déploiement OpenStack (Nova, Swift)</li>
+                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Orchestration d'instances scalables</li>
                 </ul>
                 <div class="tags">
-                    <span class="tag">Openstack</span>
-                    <span class="tag">Flavor</span>
-                    <span class="tag">Nova</span>
-                    <span class="tag">Swift</span>
+                    <span class="tag">OpenStack</span><span class="tag">Nova</span><span class="tag">Swift</span><span class="tag">Virtualisation</span>
                 </div>
-                </br>
-                <a href="https://nblinpro.github.io/M_Cloud_INFRA_SEC/mastere.html" class="btn btn-outline"
-                    style="font-size: 0.8rem; padding: 0.3rem 0.8rem; margin-top: 1rem; display: inline-block;">
-                    <i class="fas fa-external-link-alt"></i> Voir le détail
-                </a>
+                <a href="#" class="btn btn-outline">Voir le détail</a>
             </article>
         </div>
 
-        <div class="timeline-year"><i class="fas fa-calendar-alt"></i> 3ème Année BUT R&T</div>
-
-        <div class="grid" style="margin-bottom: 4rem;">
-
-            <article class="card" style="border-left: 4px solid #facc15;">
+        <div class="timeline-year">3ème Année BUT R&T</div>
+        <div class="grid">
+            <article class="card">
                 <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
                 <h3>Assistant de Proximité</h3>
-                <p>Direction Générale des Finances Publiques</p>
-                <ul style="list-style: none; color: var(--text-muted); margin-bottom: 1.5rem;">
-                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Projet de
-                        densification réseau</li>
-                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Transition
-                        téléphonie classique vers ToIP</li>
-                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Mise en œuvre
-                        système VoIP</li>
+                <span class="org-name">Direction Générale des Finances Publiques</span>
+                <ul>
+                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Projet de densification réseau national</li>
+                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Transition téléphonie classique vers ToIP</li>
                 </ul>
                 <div class="tags">
-                    <span class="tag">ToIP / VoIP</span>
-                    <span class="tag">Infrastructure</span>
-                    <span class="tag">Migration</span>
+                    <span class="tag">ToIP</span><span class="tag">VoIP</span><span class="tag">Infrastructure Réseau</span>
                 </div>
-                </br>
-                <a href="https://nblinpro.github.io/BUT_R-T/BUT3/entreprise/entreprise.html" class="btn btn-outline"
-                    style="font-size: 0.8rem; padding: 0.3rem 0.8rem; margin-top: 1rem; display: inline-block;">
-                    <i class="fas fa-external-link-alt"></i> Voir le détail
-                </a>
+                <a href="#" class="btn btn-outline">Voir le détail</a>
             </article>
 
-            <article class="card" style="border-left: 4px solid #a78bfa;">
+            <article class="card">
                 <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
                 <h3>IoT & Architectures Hybrides</h3>
-                <p>Conception et qualification de solutions pour l'Internet des Objets.</p>
-                <ul style="list-style: none; color: var(--text-muted); margin-bottom: 1.5rem;">
-                    <li><i class="fas fa-angle-right" style="color: var(--accent); margin-right: 10px;"></i>
-                        Qualification d'architectures réseaux hybrides</li>
-                    <li><i class="fas fa-angle-right" style="color: var(--accent); margin-right: 10px;"></i> Fabrication
-                        d'une <strong>maison connectée modulaire</strong></li>
-                    <li><i class="fas fa-angle-right" style="color: var(--accent); margin-right: 10px;"></i> Projet
-                        électronique : <strong>RGB Light</strong></li>
+                <span class="org-name">Ynov Campus</span>
+                <ul>
+                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Conception d'une maison connectée modulaire</li>
+                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Qualification d'architectures hybrides</li>
                 </ul>
                 <div class="tags">
-                    <span class="tag">IoT</span>
-                    <span class="tag">Domotique</span>
-                    <span class="tag">Électronique</span>
+                    <span class="tag">IoT</span><span class="tag">Domotique</span><span class="tag">Électronique</span>
                 </div>
-                </br>
-                <a href="https://nblinpro.github.io/BUT_R-T/BUT3/projets/projets.html" class="btn btn-outline"
-                    style="font-size: 0.8rem; padding: 0.3rem 0.8rem; margin-top: 1rem; display: inline-block;">
-                    <i class="fas fa-external-link-alt"></i> Voir le détail
-                </a>
+                <a href="#" class="btn btn-outline">Voir le détail</a>
             </article>
-
         </div>
 
-        <div class="timeline-year"><i class="fas fa-calendar-alt"></i> 2ème Année BUT R&T</div>
-
-        <div class="grid" style="margin-bottom: 4rem;">
-
-            <article class="card">
-                <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise(Alternance)</span>
-                <h3>Assistant de Proximité</h3>
-                <p>Direction Générale des Finances Publiques</p>
-                <ul style="list-style: none; color: var(--text-muted); margin-bottom: 1.5rem;">
-                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Étude et
-                        déploiement outil GestSup</li>
-                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Audit et
-                        recensement des commutateurs (Non-PoE)</li>
-                    <li><i class="fas fa-check" style="color: var(--code-text); margin-right: 10px;"></i> Intégration
-                        nouveau service : Action Sociale</li>
-                </ul>
-                <div class="tags">
-                    <span class="tag">GestSup</span>
-                    <span class="tag">Audit Réseau</span>
-                    <span class="tag">Support N2</span>
-                </div>
-                </br>
-                <a href="https://nblinpro.github.io/BUT_R-T/BUT2/entreprise/entreprise.html" class="btn btn-outline"
-                    style="font-size: 0.8rem; padding: 0.3rem 0.8rem; margin-top: 1rem; display: inline-block;">
-                    <i class="fas fa-external-link-alt"></i> Voir le détail
-                </a>
-            </article>
-
-            <article class="card">
-                <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                <h3>Transmission & Dév.</h3>
-                <p>Approfondissement des couches physiques et applicatives.</p>
-                <ul style="list-style: none; color: var(--text-muted); margin-bottom: 1.5rem;">
-                    <li><i class="fas fa-angle-right" style="color: var(--accent); margin-right: 10px;"></i> Mise en
-                        œuvre d'un système de transmission</li>
-                    <li><i class="fas fa-angle-right" style="color: var(--accent); margin-right: 10px;"></i>
-                        Développement d'applications communicantes</li>
-                </ul>
-                <div class="tags">
-                    <span class="tag">Signal</span>
-                    <span class="tag">Développement</span>
-                    <span class="tag">Transmission</span>
-                </div>
-                </br>
-                <a href="https://nblinpro.github.io/BUT_R-T/BUT2/projets/projets.html" class="btn btn-outline"
-                    style="font-size: 0.8rem; padding: 0.3rem 0.8rem; margin-top: 1rem; display: inline-block;">
-                    <i class="fas fa-external-link-alt"></i> Voir le détail
-                </a>
-            </article>
-
-        </div>
-
-        <div class="timeline-year"><i class="fas fa-calendar-alt"></i> 1ère Année BUT R&T</div>
-
+        <div class="timeline-year">2ème Année BUT R&T</div>
         <div class="grid">
-
-            <article class="card" style="grid-column: 1 / -1;">
-                <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                <h3>Fondamentaux Réseaux & Télécoms</h3>
-                <p>Acquisition des bases de l'ingénierie réseau et web.</p>
-
-                <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1rem;">
-                    <div>
-                        <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Architecture PME</h4>
-                        <p style="font-size: 0.9rem;">Conception complète du réseau informatique d'une PME (LAN,
-                            Adressage, VLANs).</p>
-                    </div>
-                    <div>
-                        <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Web & Identité Numérique</h4>
-                        <p style="font-size: 0.9rem;">Développement Web et présentation professionnelle sur Internet.
-                        </p>
-                    </div>
-                    <div>
-                        <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Mesures Physiques</h4>
-                        <p style="font-size: 0.9rem;">Mesurer et caractériser un signal ou un système de communication.
-                        </p>
-                    </div>
+            <article class="card">
+                <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise</span>
+                <h3>Assistant de Proximité</h3>
+                <span class="org-name">Direction Générale des Finances Publiques</span>
+                <ul>
+                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Audit et déploiement de l'outil GestSup</li>
+                    <li><i class="fas fa-check" style="color: #4ade80;"></i> Recensement des commutateurs réseaux</li>
+                </ul>
+                <div class="tags">
+                    <span class="tag">GestSup</span><span class="tag">Audit Réseau</span><span class="tag">Support N2</span>
                 </div>
-
-                <div class="tags" style="margin-top: 1.5rem;">
-                    <span class="tag">Cisco Packet Tracer</span>
-                    <span class="tag">HTML/CSS</span>
-                    <span class="tag">Physique</span>
-                </div>
-                </br>
-                <a href="https://nblinpro.github.io/BUT_R-T/BUT1/projets/projets.html" class="btn btn-outline"
-                    style="font-size: 0.8rem; padding: 0.3rem 0.8rem; margin-top: 1rem; display: inline-block;;">
-                    <i class="fas fa-external-link-alt"></i> Voir le détail
-                </a>
+                <a href="#" class="btn btn-outline">Voir le détail</a>
             </article>
 
+            <article class="card">
+                <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
+                <h3>Transmission & Développement</h3>
+                <span class="org-name">Ynov Campus</span>
+                <ul>
+                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Approfondissement des couches physiques</li>
+                    <li><i class="fas fa-angle-right" style="color: var(--accent);"></i> Développement d'applications communicantes</li>
+                </ul>
+                <div class="tags">
+                    <span class="tag">Signal Processing</span><span class="tag">Développement</span><span class="tag">Transmission</span>
+                </div>
+                <a href="#" class="btn btn-outline">Voir le détail</a>
+            </article>
         </div>
 
     </main>
 
     <footer>
-        <p>&copy; 2025 Nicolas. Tous droits réservés.</p>
-        <div style="margin-top: 10px;">
-            <a href="../index.html" style="color: var(--accent); text-decoration: none;">Retour à l'accueil</a>
+        <p>&copy; 2025 Nicolas Blin | Tous droits réservés.</p>
+        <div style="margin-top: 15px;">
+            <a href="../index.html" style="color: var(--accent); text-decoration: none; font-weight: 600;">← Retour à l'accueil</a>
         </div>
     </footer>
 
 </body>
-
 </html>
