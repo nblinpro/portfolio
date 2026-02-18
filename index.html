@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio DevOps | Expert Infrastructure</title>
+    <title>Nicolas Blin | Expert Architecture SI & DevOps</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -20,7 +20,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
         /* --- HEADER --- */
         header {
@@ -30,7 +30,7 @@
         }
         .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
         .logo span { color: var(--accent); }
-        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav ul { display: flex; list-style: none; gap: 2rem; align-items: center; }
         nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
 
@@ -38,7 +38,7 @@
         .hero { padding: 8rem 8% 5rem; text-align: center; display: flex; flex-direction: column; align-items: center; }
         .hero-tag {
             background: rgba(34, 211, 238, 0.1); color: var(--accent);
-            padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+            padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
             letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 2rem;
         }
         h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin-bottom: 1.5rem; max-width: 900px; }
@@ -68,16 +68,16 @@
         .json-str { color: #a5d6ff; }
 
         /* --- SKILLS --- */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
         .card { 
             background: var(--bg-card); border: 1px solid var(--border); padding: 1.8rem; 
-            border-radius: var(--radius); transition: 0.3s; cursor: pointer; text-align: left;
+            border-radius: var(--radius); transition: 0.3s; cursor: pointer;
         }
         .card:hover { border-color: var(--accent); transform: translateY(-5px); background: var(--bg-card-hover); }
         .card h3 { color: var(--text-main); font-size: 1.1rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 12px; }
         .card h3 i { color: var(--accent); }
         .card ul { list-style: none; pointer-events: none; }
-        .card ul li { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .card ul li { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
         .card ul li::before { content: "•"; color: var(--accent); }
 
         /* --- MODALE --- */
@@ -86,20 +86,19 @@
             width: 100%; height: 100%; background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(8px);
         }
         .modal-content {
-            background: var(--bg-card); margin: 10% auto; padding: 2.5rem;
-            border: 1px solid var(--border); width: 90%; max-width: 500px; border-radius: 15px;
+            background: var(--bg-card); margin: 5% auto; padding: 2.5rem;
+            border: 1px solid var(--border); width: 90%; max-width: 550px; border-radius: 15px;
             animation: fadeIn 0.3s ease;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .close-modal { cursor: pointer; font-size: 1.5rem; color: var(--text-muted); transition: 0.3s; }
-        .close-modal:hover { color: var(--accent); }
-        #modalList { list-style: none; margin-top: 1rem; }
-        #modalList li { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 15px; }
+        .close-modal { cursor: pointer; font-size: 1.5rem; color: var(--text-muted); }
+        #modalList { list-style: none; }
+        #modalList li { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 15px; font-size: 0.95rem; }
         #modalList li i { color: var(--accent); width: 20px; text-align: center; }
 
         /* --- PROJECTS --- */
-        .project-featured { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 2rem; border-radius: var(--radius); margin-bottom: 2rem; }
+        .project-featured { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 2rem; border-radius: var(--radius); }
         .tag { background: rgba(34, 211, 238, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: 600; margin-right: 5px; }
 
         /* --- FOOTER --- */
@@ -121,7 +120,7 @@
 <body>
 
     <header>
-        <div class="logo">Nicolas<span>.SI</span></div>
+        <div class="logo">Nicolas<span>.arch</span></div>
         <nav>
             <ul>
                 <li><a href="#" style="color: var(--accent)">Accueil</a></li>
@@ -134,12 +133,12 @@
 
     <main>
         <section class="hero">
-            <span class="hero-tag">• SYSADMIN & AUTOMATISATION</span>
-            <h1>Construire des infrastructures <span class="gradient-text">robustes et automatisées</span></h1>
-            <p>Spécialiste en déploiement Ansible, administration Linux et solutions Cloud. Je transforme des infrastructures complexes en systèmes scalables.</p>
+            <span class="hero-tag">• EXPERT ARCHITECTURE SI</span>
+            <h1>Concevoir des infrastructures <span class="gradient-text">robustes et évolutives</span></h1>
+            <p>Spécialiste en architecture des systèmes d'information, automatisation Cloud et méthodologies DevOps. Je transforme la complexité technique en performance opérationnelle.</p>
             <div class="btn-group">
-                <a href="pages/projets.html" class="btn btn-primary">Voir mes projets <i class="fas fa-arrow-right"></i></a>
-                <a href="#" class="btn btn-github"><i class="fab fa-github"></i> GitHub</a>
+                <a href="pages/projets.html" class="btn btn-primary">Explorer mes travaux <i class="fas fa-arrow-right"></i></a>
+                <a href="https://github.com/nblinpro" target="_blank" class="btn btn-github"><i class="fab fa-github"></i> GitHub</a>
             </div>
         </section>
 
@@ -147,66 +146,67 @@
             <div class="whoami-grid">
                 <div>
                     <span class="hero-tag">• WHOAMI</span>
-                    <h2>Passion pour l'<span class="gradient-text">Open Source et DevOps</span></h2>
-                    <p>Je suis passionné par l'Open Source et la méthodologie DevOps. J'aide les entreprises à moderniser leur infrastructure en assurant la haute disponibilité et la sécurité.</p>
+                    <h2>Vision stratégique & <span class="gradient-text">Maîtrise technique</span></h2>
+                    <p>En tant qu'architecte SI, j'interviens sur l'ensemble du cycle de vie des infrastructures. Passionné par l'Open Source, je privilégie des solutions pérennes basées sur l'automatisation et la sécurité dès la conception.</p>
                     <pre>
 {
   <span class="json-key">"profile"</span>: {
-    <span class="json-key">"role"</span>: <span class="json-str">"Expert Architecture S.I. Cloud"</span>,
-    <span class="json-key">"location"</span>: <span class="json-str">"Paris, FR"</span>,
-    <span class="json-key">"focus"</span>: [<span class="json-str">"Ansible"</span>, <span class="json-str">"Docker"</span>, <span class="json-str">"Security"</span>]
+    <span class="json-key">"role"</span>: <span class="json-str">"Expert Architecture SI"</span>,
+    <span class="json-key">"focus"</span>: [<span class="json-str">"Infrastructure"</span>, <span class="json-str">"Cloud"</span>, <span class="json-str">"Security"</span>],
+    <span class="json-key">"philosophy"</span>: <span class="json-str">"Security by Design"</span>
   }
 }</pre>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card"><h4>3+</h4><p>Ans d'expérience</p></div>
-                    <div class="stat-card"><h4>50+</h4><p>Projets réalisés</p></div>
-                    <div class="stat-card"><h4>20+</h4><p>Technologies maîtrisées</p></div>
+                    <div class="stat-card"><h4>50+</h4><p>Systèmes déployés</p></div>
+                    <div class="stat-card"><h4>100%</h4><p>Infrastructure as Code</p></div>
                 </div>
             </div>
         </section>
 
         <section id="skills">
             <div style="text-align: center; margin-bottom: 4rem;">
-                <h2>Compétences Techniques</h2>
-                <p class="section-desc">Cliquez sur une rubrique pour voir les détails techniques</p>
+                <h2>Expertise Multidimensionnelle</h2>
+                <p class="section-desc">Cliquez sur une catégorie pour découvrir le détail des technologies maîtrisées.</p>
             </div>
             <div class="skills-grid">
                 <article class="card" onclick="openSkillModal('reseau')">
                     <h3><i class="fas fa-shield-halved"></i> Réseau & Sécurité</h3>
-                    <ul>
-                        <li>DNS / DHCP / Firewall</li>
-                        <li>VPN & Proxy</li>
-                    </ul>
+                    <ul><li>DNS/DHCP & Firewalls</li><li>VPN, Radius & PKI</li></ul>
                 </article>
-
                 <article class="card" onclick="openSkillModal('infra')">
                     <h3><i class="fas fa-network-wired"></i> Infrastructure</h3>
-                    <ul>
-                        <li>Switching & Routing</li>
-                        <li>Segmentation Réseau</li>
-                    </ul>
+                    <ul><li>Switching & Routing</li><li>Load Balancing</li></ul>
                 </article>
-
                 <article class="card" onclick="openSkillModal('devops')">
-                    <h3><i class="fas fa-cloud"></i> DevOps & Cloud</h3>
-                    <ul>
-                        <li>CI/CD & Ansible</li>
-                        <li>Docker & OpenStack</li>
-                    </ul>
+                    <h3><i class="fas fa-infinity"></i> DevOps & Cloud</h3>
+                    <ul><li>Ansible & CI/CD</li><li>Docker & OpenStack</li></ul>
+                </article>
+                <article class="card" onclick="openSkillModal('monitoring')">
+                    <h3><i class="fas fa-chart-line"></i> Monitoring</h3>
+                    <ul><li>Prometheus & Grafana</li><li>Zabbix & Centreon</li></ul>
+                </article>
+                <article class="card" onclick="openSkillModal('sysadmin')">
+                    <h3><i class="fas fa-server"></i> Systèmes & BDD</h3>
+                    <ul><li>Linux & Windows Server</li><li>SQL (Postgres, MariaDB)</li></ul>
+                </article>
+                <article class="card" onclick="openSkillModal('sauvegarde')">
+                    <h3><i class="fas fa-database"></i> Sauvegarde & PCA</h3>
+                    <ul><li>Stratégies PRA/PCA</li><li>Backup Externalisé</li></ul>
                 </article>
             </div>
         </section>
 
         <section id="projects">
-            <h2 style="text-align: center;">Projets Récents</h2>
+            <h2 style="text-align: center;">Réalisation Phare</h2>
             <div class="project-featured">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3>Déploiement Automatisé Laravel</h3>
-                    <a href="#" class="btn-github btn" style="padding: 0.4rem 1rem; font-size: 0.8rem;">GitHub</a>
+                    <h3>Orchestration Infrastructure Innosys</h3>
+                    <a href="pages/projets.html" class="btn btn-github" style="padding: 0.4rem 1rem; font-size: 0.8rem;">Détails</a>
                 </div>
-                <p style="margin-top: 1rem;">Orchestration complète d'un environnement de production idempotent. Utilisation de Ansible Vault et templates Jinja2.</p>
-                <div class="tags"><span class="tag">Ansible</span><span class="tag">RHEL</span><span class="tag">MySQL</span></div>
+                <p style="margin-top: 1rem;">Conception d'une architecture hybride automatisée avec Ansible, incluant la gestion des serveurs de fichiers Samba et la sécurisation via Vault.</p>
+                <div class="tags"><span class="tag">Architecture SI</span><span class="tag">Ansible</span><span class="tag">Samba</span></div>
             </div>
         </section>
     </main>
@@ -214,12 +214,10 @@
     <div id="skillModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalTitle" style="font-size: 1.5rem; margin-bottom: 0;">Détails</h2>
+                <h2 id="modalTitle" style="color: var(--accent)">Détails</h2>
                 <span class="close-modal" onclick="closeSkillModal()">&times;</span>
             </div>
-            <div id="modalBody">
-                <ul id="modalList"></ul>
-            </div>
+            <ul id="modalList"></ul>
             <button class="btn btn-primary" style="width: 100%; margin-top: 2rem;" onclick="closeSkillModal()">Fermer</button>
         </div>
     </div>
@@ -227,90 +225,83 @@
     <footer>
         <div class="footer-top">
             <div class="footer-col">
-                <div class="footer-logo">Nicolas<span>.SI</span></div>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Ingénieur Infrastructure & DevOps passionné par l'automatisation.</p>
+                <div class="footer-logo">Nicolas<span>.arch</span></div>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Architecte des SI spécialisé dans la conception d'infrastructures hautement disponibles.</p>
             </div>
             <div class="footer-col">
                 <h4>Navigation</h4>
                 <ul>
                     <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Parcours</a></li>
-                    <li><a href="#">Projets</a></li>
+                    <li><a href="pages/parcours.html">Parcours</a></li>
+                    <li><a href="pages/projets.html">Projets</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Contact</h4>
                 <div class="social-links">
                     <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+                    <a href="https://github.com/nblinpro" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
                     <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 Portfolio DevOps. Tous droits réservés.</p>
-        </div>
+        <div class="footer-bottom"><p>© 2026 Nicolas Blin | Expert Architecture SI</p></div>
     </footer>
 
     <script>
         const skillData = {
-            'reseau': {
-                title: 'Réseau & Sécurité',
-                items: [
-                    { icon: 'fa-server', text: 'Administration DNS (Bind9) / DHCP' },
-                    { icon: 'fa-wall', text: 'Configuration firewalls (pfSense, OPNsense)' },
-                    { icon: 'fa-shield-alt', text: 'Proxy (HAProxy), VPN (OpenVPN, Wireguard)' },
-                    { icon: 'fa-eye', text: 'Analyse de trafic (Wireshark) & Supervision' }
-                ]
-            },
-            'infra': {
-                title: 'Infrastructure',
-                items: [
-                    { icon: 'fa-microchip', text: 'Switchs HP, Cisco & Alcatel' },
-                    { icon: 'fa-wifi', text: 'Bornes Wi-Fi & Contrôleurs' },
-                    { icon: 'fa-layer-group', text: 'Segmentation VLAN (802.1Q)' },
-                    { icon: 'fa-balance-scale', text: 'Répartition de charge (Load Balancing)' }
-                ]
-            },
-            'devops': {
-                title: 'DevOps & Cloud',
-                items: [
-                    { icon: 'fa-code-branch', text: 'CI/CD : Ansible, GitHub Actions' },
-                    { icon: 'fa-box', text: 'Conteneurisation : Docker & Docker Compose' },
-                    { icon: 'fa-cloud', text: 'Cloud : OpenStack & OVHcloud' },
-                    { icon: 'fa-infinity', text: 'Infrastructure as Code (Terraform)' }
-                ]
-            }
+            'reseau': { title: 'Réseau & Sécurité', items: [
+                { icon: 'fa-server', text: 'Administration DNS / DHCP' },
+                { icon: 'fa-user-shield', text: 'Configuration firewalls (pfSense)' },
+                { icon: 'fa-shield-alt', text: 'Proxy (HAProxy), VPN, Radius' },
+                { icon: 'fa-key', text: 'Gestion Clés et certificats (PKI)' },
+                { icon: 'fa-eye', text: 'Analyse et supervision réseau' }
+            ]},
+            'infra': { title: 'Infrastructure', items: [
+                { icon: 'fa-microchip', text: 'Switchs HP & Cisco' },
+                { icon: 'fa-wifi', text: 'Routeurs et points d’accès Wi-Fi' },
+                { icon: 'fa-layer-group', text: 'Architecture et segmentation VLAN' },
+                { icon: 'fa-balance-scale', text: 'Répartition de charge (LB)' }
+            ]},
+            'devops': { title: 'DevOps & Cloud', items: [
+                { icon: 'fa-cog', text: 'Automatisation & CI/CD: Ansible, Github' },
+                { icon: 'fa-box-open', text: 'Conteneurs : Docker' },
+                { icon: 'fa-cloud', text: 'Cloud : OpenStack, OVHcloud' },
+                { icon: 'fa-vial', text: 'Virtualisation : Proxmox, VMware ESXi' }
+            ]},
+            'sysadmin': { title: 'Systèmes & BDD', items: [
+                { icon: 'fa-windows', text: 'Windows Server' },
+                { icon: 'fa-linux', text: 'Administration Linux (RHEL, Ubuntu)' },
+                { icon: 'fa-database', text: 'MySQL, MariaDB, Postgres' }
+            ]},
+            'monitoring': { title: 'Monitoring & Observabilité', items: [
+                { icon: 'fa-desktop', text: 'Centreon, Zabbix, Nagios' },
+                { icon: 'fa-chart-area', text: 'Prometheus, Grafana' },
+                { icon: 'fa-plug', text: 'Collecteurs (node_exporter)' }
+            ]},
+            'sauvegarde': { title: 'Sauvegarde & PCA', items: [
+                { icon: 'fa-hdd', text: 'Serveurs de sauvegarde & externalisation' },
+                { icon: 'fa-shield-virus', text: 'Méthodologies Continuité/Reprise (PCA/PRA)' },
+                { icon: 'fa-folder-open', text: 'Gestion de serveurs bureautiques' }
+            ]}
         };
 
         function openSkillModal(category) {
             const data = skillData[category];
             document.getElementById('modalTitle').innerText = data.title;
             const list = document.getElementById('modalList');
-            list.innerHTML = '';
-            
-            data.items.forEach(item => {
-                const li = document.createElement('li');
-                li.innerHTML = `<i class="fas ${item.icon}"></i> ${item.text}`;
-                list.appendChild(li);
-            });
-
+            list.innerHTML = data.items.map(i => `<li><i class="fas ${i.icon}"></i> ${i.text}</li>`).join('');
             document.getElementById('skillModal').style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Empêche le scroll
+            document.body.style.overflow = 'hidden';
         }
 
         function closeSkillModal() {
             document.getElementById('skillModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Réactive le scroll
+            document.body.style.overflow = 'auto';
         }
 
-        // Fermer la modale si on clique en dehors
-        window.onclick = function(event) {
-            const modal = document.getElementById('skillModal');
-            if (event.target == modal) {
-                closeSkillModal();
-            }
-        }
+        window.onclick = function(event) { if (event.target == document.getElementById('skillModal')) closeSkillModal(); }
     </script>
 </body>
 </html>
