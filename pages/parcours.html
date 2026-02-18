@@ -3,11 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Parcours Académique | Nicolas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcours Académique | Nicolas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --bg-body: #020617;
@@ -24,11 +23,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* HEADER */
+        /* --- HEADER HARMONISÉ --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); z-index: 100;
+            position: sticky; top: 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 100;
         }
         .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
         .logo span { color: var(--accent); }
@@ -54,11 +53,11 @@
             position: relative; 
         }
 
-        /* LIGNE VERTICALE : Axe central à 32px */
+        /* LIGNE VERTICALE */
         .timeline-container::before {
             content: ""; 
             position: absolute; 
-            left: 32px; /* Position précise de la ligne */
+            left: 32px; 
             top: 0; 
             bottom: 0;
             width: 2px; 
@@ -69,20 +68,19 @@
         .timeline-item { 
             position: relative; 
             margin-bottom: 3rem; 
-            padding-left: 70px; /* Espace suffisant pour l'alignement */
+            padding-left: 70px; 
         }
 
-        /* POINT SUR LA LIGNE : Centré sur l'axe de 32px */
+        /* POINT SUR LA LIGNE */
         .timeline-item::after {
             content: ""; 
             position: absolute; 
-            /* Calcul : barre à 32px + 1px (moitié barre) - 6px (moitié point) = 27px */
             left: 27px; 
             top: 25px; 
             width: 12px; 
             height: 12px; 
             background: var(--accent);
-            border: 3px solid var(--bg-body); /* Découpe visuelle de la ligne derrière le point */
+            border: 3px solid var(--bg-body); 
             border-radius: 50%; 
             box-shadow: 0 0 10px var(--accent); 
             z-index: 2;
@@ -117,6 +115,8 @@
         footer { text-align: center; padding: 4rem; border-top: 1px solid var(--border); margin-top: 4rem; color: var(--text-muted); font-size: 0.85rem; }
 
         @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            nav { display: none; }
             .timeline-container::before { left: 17px; }
             .timeline-item { padding-left: 45px; }
             .timeline-item::after { left: 12px; }
@@ -131,9 +131,9 @@
         <nav>
             <ul>
                 <li><a href="../index.html">Accueil</a></li>
-                <li><a href="#" style="color: var(--accent)">Parcours</a></li>
+                <li><a href="parcours.html" style="color: var(--accent)">Parcours</a></li>
                 <li><a href="projets.html">Projets</a></li>
-                <li><a href="mailto:nicolas.blin.pro1@gmail.com" style="background: var(--accent); color: #000; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact</a></li>
+                <li><a href="mailto:nicolas.blin.pro1@gmail.com">Contact</a></li>
             </ul>
         </nav>
     </header>
