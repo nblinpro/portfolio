@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Nicolas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #020617;
+            --bg-card: #0b1120;
+            --bg-input: #1e293b;
+            --accent: #22d3ee;
+            --accent-glow: rgba(34, 211, 238, 0.3);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+
+        /* HEADER (Harmonisé) */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 100;
+        }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--accent); }
+
+        main { padding: 4rem 8%; max-width: 1000px; margin: 0 auto; text-align: center; }
+
+        .hero-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(34, 211, 238, 0.1); color: var(--accent);
+            padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 1.5rem;
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .subtitle { color: var(--text-muted); margin-bottom: 3rem; max-width: 600px; margin-inline: auto; }
+
+        /* CONTACT CARDS */
+        .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+        .contact-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            padding: 1.5rem; border-radius: var(--radius); transition: 0.3s;
+            text-decoration: none; color: inherit;
+        }
+        .contact-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .contact-card i { font-size: 1.5rem; color: var(--accent); margin-bottom: 1rem; }
+        .contact-card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+        .contact-card p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* FORM */
+        .form-container {
+            background: var(--bg-card); border: 1px solid var(--border);
+            padding: 2.5rem; border-radius: var(--radius); text-align: left;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        label { font-size: 0.9rem; font-weight: 600; }
+        
+        input, textarea {
+            background: var(--bg-input); border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.8rem 1rem; color: white;
+            font-size: 0.9rem; transition: 0.3s;
+        }
+        input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+        textarea { resize: vertical; min-height: 120px; }
+
+        .btn-submit {
+            width: 100%; background: var(--accent); color: #020617;
+            padding: 1rem; border: none; border-radius: 8px; font-weight: 700;
+            cursor: pointer; transition: 0.3s; display: flex; align-items: center;
+            justify-content: center; gap: 10px; margin-top: 1rem;
+        }
+        .btn-submit:hover { box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-2px); }
+
+        .footer-note { margin-top: 2rem; color: var(--text-muted); font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .contact-grid, .form-row { grid-template-columns: 1fr; }
+            header { padding: 1rem 5%; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">DevOps<span>.</span></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="parcours.html">Parcours</a></li>
+                <li><a href="projets.html">Projets</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero-tag"><i class="far fa-envelope"></i> PRENONS CONTACT</div>
+        <h1>Travaillons ensemble</h1>
+        <p class="subtitle">Vous avez un projet, une question ou vous souhaitez discuter d'une opportunité ? N'hésitez pas à me contacter.</p>
+
+        <div class="contact-grid">
+            <a href="mailto:nicolas.blin.pro1@gmail.com" class="contact-card">
+                <i class="far fa-envelope"></i>
+                <h3>Email</h3>
+                <p>nicolas.blin.pro1@gmail.com</p>
+            </a>
+            <a href="https://linkedin.com/in/ton-profil" target="_blank" class="contact-card">
+                <i class="fab fa-linkedin-in"></i>
+                <h3>LinkedIn</h3>
+                <p>Mon profil</p>
+            </a>
+            <a href="https://github.com/nblinpro" target="_blank" class="contact-card">
+                <i class="fab fa-github"></i>
+                <h3>GitHub</h3>
+                <p>Mes projets</p>
+            </a>
+        </div>
+
+        <div class="form-container">
+            <form action="#">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="votre@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" placeholder="Sujet du message">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Votre message..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">
+                    Envoyer le message <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
+        <p class="footer-note">Réponse rapide garantie. Je vous répondrai dans les 24h.</p>
+    </main>
+
+</body>
+</html>
