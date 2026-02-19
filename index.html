@@ -83,6 +83,8 @@
         }
         .skill-card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .skill-card i { color: var(--accent); font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .skill-card h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+        .skill-card ul { list-style: none; color: var(--text-muted); font-size: 0.85rem; pointer-events: none; }
 
         /* --- PARTNERS --- */
         .partners-row { display: flex; justify-content: center; gap: 6rem; opacity: 0.5; filter: grayscale(1); transition: 0.5s; align-items: center; }
@@ -168,18 +170,51 @@
             <div class="skills-grid">
                 <div class="skill-card" onclick="openSkillModal('reseau')">
                     <i class="fas fa-shield-halved"></i>
-                    <h3>Sécurité & Réseau</h3>
-                    <p style="color:var(--text-muted); font-size:0.85rem;">DNS/DHCP, Firewalls pfSense, VPN, Radius & PKI.</p>
+                    <h3>Réseau & Sécurité</h3>
+                    <ul>
+                        <li>• DNS/DHCP & Firewalls</li>
+                        <li>• VPN, Radius & PKI</li>
+                    </ul>
+                </div>
+                <div class="skill-card" onclick="openSkillModal('infra')">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Infrastructure</h3>
+                    <ul>
+                        <li>• Switching & Routing</li>
+                        <li>• Load Balancing</li>
+                    </ul>
                 </div>
                 <div class="skill-card" onclick="openSkillModal('devops')">
                     <i class="fas fa-infinity"></i>
-                    <h3>Cloud & DevOps</h3>
-                    <p style="color:var(--text-muted); font-size:0.85rem;">Ansible, Docker, OpenStack & CI/CD.</p>
+                    <h3>DevOps & Cloud</h3>
+                    <ul>
+                        <li>• Ansible & CI/CD</li>
+                        <li>• Docker & OpenStack</li>
+                    </ul>
+                </div>
+                <div class="skill-card" onclick="openSkillModal('monitoring')">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Monitoring</h3>
+                    <ul>
+                        <li>• Prometheus & Grafana</li>
+                        <li>• Zabbix & Centreon</li>
+                    </ul>
                 </div>
                 <div class="skill-card" onclick="openSkillModal('sysadmin')">
                     <i class="fas fa-server"></i>
                     <h3>Systèmes & BDD</h3>
-                    <p style="color:var(--text-muted); font-size:0.85rem;">Linux (Ubuntu/RHEL), Windows Server & SQL.</p>
+                    <ul>
+                        <li>• Linux & Windows Server</li>
+                        <li>• SQL (Postgres, MariaDB)</li>
+                    </ul>
+                </div>
+                <div class="skill-card" onclick="openSkillModal('sauvegarde')">
+                    <i class="fas fa-database"></i>
+                    <h3>Sauvegarde & PCA</h3>
+                    <ul>
+                        <li>• Stratégies PRA/PCA</li>
+                        <li>• Backup Externalisé</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -204,15 +239,18 @@
         <p>© 2026 Nicolas Blin | Expert Architecture SI</p>
         <div style="display: flex; gap: 20px;">
             <a href="#" style="color: inherit;"><i class="fab fa-linkedin"></i></a>
-            <a href="#" style="color: inherit;"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/nblinpro" style="color: inherit;"><i class="fab fa-github"></i></a>
         </div>
     </footer>
 
     <script>
         const skillData = {
-            'reseau': { title: 'Sécurité & Réseau', items: ['Administration DNS / DHCP', 'Firewalls pfSense', 'VPN, Radius & PKI', 'Segmentation VLAN'] },
-            'devops': { title: 'Cloud & DevOps', items: ['Ansible Automation', 'Docker & OpenStack', 'Pipelines CI/CD', 'Virtualisation Proxmox'] },
-            'sysadmin': { title: 'Systèmes & BDD', items: ['Admin Linux & Windows Server', 'Active Directory', 'MySQL & Postgres', 'Supervision Zabbix/Grafana'] }
+            'reseau': { title: 'Réseau & Sécurité', items: ['Administration DNS / DHCP', 'Configuration firewalls (pfSense)', 'Proxy (HAProxy), VPN, Radius', 'Gestion Clés et certificats (PKI)'] },
+            'infra': { title: 'Infrastructure', items: ['Switchs HP & Cisco', 'Routeurs et points d’accès Wi-Fi', 'Architecture et segmentation VLAN', 'Répartition de charge (LB)'] },
+            'devops': { title: 'Cloud & DevOps', items: ['Ansible & CI/CD Pipelines', 'Conteneurs Docker', 'Cloud OpenStack & OVHcloud', 'Virtualisation Proxmox/VMware'] },
+            'monitoring': { title: 'Monitoring & Observabilité', items: ['Prometheus & Grafana', 'Zabbix & Centreon', 'Collecteurs node_exporter'] },
+            'sysadmin': { title: 'Systèmes & BDD', items: ['Windows Server & Active Directory', 'Linux (Ubuntu, Debian, RHEL)', 'PostgreSQL, MySQL, MariaDB'] },
+            'sauvegarde': { title: 'Sauvegarde & PCA', items: ['Stratégies PRA/PCA', 'Backup Externalisé', 'Gestion de serveurs bureautiques'] }
         };
 
         function openSkillModal(cat) {
