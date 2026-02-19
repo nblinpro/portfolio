@@ -79,7 +79,7 @@
         .accordion-content { max-height: 2500px; overflow: hidden; transition: max-height 0.6s ease, opacity 0.4s ease; opacity: 1; }
         .accordion-content.collapsed { max-height: 0; opacity: 0; pointer-events: none; }
 
-        /* --- GRID --- */
+        /* --- GRID & CARDS --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1.5rem; padding: 1rem 0; }
         .card { background: var(--bg-card); border: 1px solid var(--border); padding: 2.5rem; border-radius: var(--radius); transition: 0.3s; display: flex; flex-direction: column; backdrop-filter: blur(10px); }
         .card:hover { border-color: var(--accent); transform: translateY(-5px); background: var(--bg-card-hover); }
@@ -136,10 +136,10 @@
         <section class="hero">
             <span class="hero-tag">root@nblin:~$ ls ./projets</span>
             <h1>Réalisations & <span style="color:var(--accent)">Ingénierie</span></h1>
-            <p style="color: var(--text-muted);">Exploration chronologique de mes travaux en entreprise et projets académiques.</p>
+            <p style="color: var(--text-muted);">Exploration exhaustive de mon parcours technique et de mes missions.</p>
         </section>
 
-        <div class="timeline-year" onclick="toggleAccordion(this)">
+        <div class="timeline-year active" onclick="toggleAccordion(this)">
             <i class="fas fa-terminal"></i> M1 Cloud, Infrastructure et Sécurité
             <i class="fas fa-chevron-down"></i>
         </div>
@@ -147,26 +147,26 @@
             <div class="grid">
                 <article class="card">
                     <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
-                    <h3>Architecte Systèmes Junior</h3>
+                    <h3>Expert Architecture S.I</h3>
                     <span class="org-name">Innosys</span>
                     <ul>
-                        <li>Refonte Intranet & Monitoring</li>
-                        <li>Automatisation Ansible</li>
+                        <li>Refonte intranet Assurmix</li>
+                        <li>Automatisation Ansible & Docker</li>
                     </ul>
-                    <div class="tags"><span class="tag">Ansible</span><span class="tag">Docker</span><span class="tag">Prometheus</span></div>
-                    <button class="btn btn-outline" onclick="openModal('innosys')">Voir les détails</button>
+                    <div class="tags"><span class="tag">Ansible</span><span class="tag">Samba</span><span class="tag">Monitoring</span></div>
+                    <button class="btn btn-outline" onclick="openModal('innosys')">Voir le détail</button>
                 </article>
 
                 <article class="card">
                     <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                    <h3>Infrastructure OpenStack</h3>
-                    <span class="org-name">Ynov Campus</span>
+                    <h3>Expert en cloud & sécurité</h3>
+                    <span class="org-name">Ynov Campus de Paris</span>
                     <ul>
-                        <li>Déploiement Cloud Privé</li>
-                        <li>Gestion Compute & Storage</li>
+                        <li>Infrastructure OpenStack complète</li>
+                        <li>Gestion Compute & Storage (Swift)</li>
                     </ul>
-                    <div class="tags"><span class="tag">OpenStack</span><span class="tag">Linux</span><span class="tag">Cloud</span></div>
-                    <button class="btn btn-outline" onclick="openModal('ynov1')">Voir les détails</button>
+                    <div class="tags"><span class="tag">Openstack</span><span class="tag">Cloud</span><span class="tag">Linux</span></div>
+                    <button class="btn btn-outline" onclick="openModal('ynov1')">Voir le détail</button>
                 </article>
             </div>
         </div>
@@ -179,26 +179,26 @@
             <div class="grid">
                 <article class="card">
                     <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
-                    <h3>Assistant de Proximité N2</h3>
+                    <h3>Assistant de Proximité</h3>
                     <span class="org-name">DGFIP</span>
                     <ul>
-                        <li>Densification réseau & ToIP</li>
-                        <li>Support infrastructure critique</li>
+                        <li>Densification réseau et ToIP</li>
+                        <li>Transition téléphonie sur IP</li>
                     </ul>
-                    <div class="tags"><span class="tag">VLAN</span><span class="tag">VoIP</span><span class="tag">Switching</span></div>
-                    <button class="btn btn-outline" onclick="openModal('dgfip3')">Voir les détails</button>
+                    <div class="tags"><span class="tag">ToIP</span><span class="tag">Réseau</span><span class="tag">DIRCOFI</span></div>
+                    <button class="btn btn-outline" onclick="openModal('dgfip3')">Voir le détail</button>
                 </article>
 
                 <article class="card">
                     <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                    <h3>IoT & Hybride Cloud</h3>
-                    <span class="org-name">BUT R&T</span>
+                    <h3>IoT & Architectures Hybrides</h3>
+                    <span class="org-name">Ynov Campus</span>
                     <ul>
-                        <li>Qualification réseaux IOT</li>
-                        <li>Maison connectée modulaire</li>
+                        <li>Qualification architectures IOT</li>
+                        <li>Maison connectée & RGB Light</li>
                     </ul>
-                    <div class="tags"><span class="tag">LoRaWAN</span><span class="tag">Python</span><span class="tag">IoT</span></div>
-                    <button class="btn btn-outline" onclick="openModal('but3')">Voir les détails</button>
+                    <div class="tags"><span class="tag">IoT</span><span class="tag">Réseau</span><span class="tag">MQTT</span></div>
+                    <button class="btn btn-outline" onclick="openModal('but3')">Voir le détail</button>
                 </article>
             </div>
         </div>
@@ -211,26 +211,26 @@
             <div class="grid">
                 <article class="card">
                     <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
-                    <h3>Assistant de Proximité N1</h3>
+                    <h3>Assistant de Proximité</h3>
                     <span class="org-name">DGFIP</span>
                     <ul>
                         <li>Déploiement solution GestSup</li>
-                        <li>Audit et recensement réseau</li>
+                        <li>Audit switchs réseaux</li>
                     </ul>
-                    <div class="tags"><span class="tag">Helpdesk</span><span class="tag">PHP</span><span class="tag">Inventaire</span></div>
-                    <button class="btn btn-outline" onclick="openModal('dgfip2')">Voir les détails</button>
+                    <div class="tags"><span class="tag">GestSup</span><span class="tag">Support</span><span class="tag">Audit</span></div>
+                    <button class="btn btn-outline" onclick="openModal('dgfip2')">Voir le détail</button>
                 </article>
 
                 <article class="card">
                     <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                    <h3>Transmission & Dév</h3>
-                    <span class="org-name">BUT R&T</span>
+                    <h3>Transmission & Dév.</h3>
+                    <span class="org-name">Ynov Campus</span>
                     <ul>
-                        <li>Systèmes de transmission data</li>
+                        <li>Systèmes de transmission</li>
                         <li>Applications communicantes</li>
                     </ul>
-                    <div class="tags"><span class="tag">Signal</span><span class="tag">C++</span><span class="tag">UDP/TCP</span></div>
-                    <button class="btn btn-outline" onclick="openModal('but2')">Voir les détails</button>
+                    <div class="tags"><span class="tag">Signal</span><span class="tag">Dév</span><span class="tag">TCP/UDP</span></div>
+                    <button class="btn btn-outline" onclick="openModal('but2')">Voir le détail</button>
                 </article>
             </div>
         </div>
@@ -243,14 +243,14 @@
             <div class="grid">
                 <article class="card">
                     <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                    <h3>Fondamentaux Réseau</h3>
-                    <span class="org-name">IUT / BUT R&T</span>
+                    <h3>Fondamentaux Réseaux</h3>
+                    <span class="org-name">BUT Réseaux & Télécoms</span>
                     <ul>
-                        <li>Conception LAN pour PME</li>
-                        <li>Développement Web statique</li>
+                        <li>Conception réseau PME</li>
+                        <li>Développement HTML/CSS</li>
                     </ul>
-                    <div class="tags"><span class="tag">IPv4</span><span class="tag">HTML/CSS</span><span class="tag">Cisco</span></div>
-                    <button class="btn btn-outline" onclick="openModal('but1')">Voir les détails</button>
+                    <div class="tags"><span class="tag">Packet Tracer</span><span class="tag">HTML</span><span class="tag">LAN</span></div>
+                    <button class="btn btn-outline" onclick="openModal('but1')">Voir le détail</button>
                 </article>
             </div>
         </div>
@@ -258,14 +258,14 @@
 
     <div id="projectModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header" style="display:flex; justify-content:space-between; margin-bottom:1.5rem;">
+            <div class="modal-header" style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem;">
                 <span id="modalBadge" class="badge-type"></span>
-                <span style="cursor:pointer; font-size:1.5rem;" onclick="closeModal()">&times;</span>
+                <span style="cursor:pointer; font-size:1.5rem; color:var(--text-muted);" onclick="closeModal()">&times;</span>
             </div>
             <h2 id="modalTitle" style="margin-bottom:0.5rem;"></h2>
             <p id="modalSub" style="color:var(--accent); font-weight:700; margin-bottom:1.5rem;"></p>
             <p id="modalDesc" style="color:var(--text-muted); font-size:0.9rem; margin-bottom:2rem;"></p>
-            <h3 style="font-size:1rem; margin-bottom:1rem;">Missions principales :</h3>
+            <h3 style="font-size:1rem; margin-bottom:1rem;">Réalisations :</h3>
             <ul id="modalList"></ul>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:2.5rem;">
                 <a id="modalLink" href="#" class="btn btn-primary">Consulter la doc</a>
@@ -277,25 +277,25 @@
     <footer>
         <p>© 2026 Nicolas Blin | Expert SI</p>
         <div style="display:flex; gap:1.5rem;">
-            <a href="#" style="color:inherit; text-decoration:none;"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/nicolas-blin-pro" style="color:inherit; text-decoration:none;"><i class="fab fa-linkedin"></i></a>
             <a href="https://github.com/nblinpro" style="color:inherit; text-decoration:none;"><i class="fab fa-github"></i></a>
         </div>
     </footer>
 
     <script>
         const projects = {
-            innosys: { title: "Expert Architecture S.I", badge: "Entreprise (M1)", badgeClass: "type-company", sub: "Innosys - Alternance", desc: "Modernisation de l'infrastructure critique et mise en place d'une stack d'observabilité complète.", tasks: ["Refonte intranet Assurmix", "Automatisation des déploiements Ansible", "Mise en place Prometheus/Grafana"], link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/company.html" },
-            ynov1: { title: "Expert Cloud & Sécurité", badge: "Projet Académique", badgeClass: "type-school", sub: "Mastere 1", desc: "Déploiement et administration d'un environnement Cloud Privé OpenStack.", tasks: ["Configuration Nova & Swift", "Gestion des réseaux virtuels", "Sécurisation des instances"], link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/mastere.html" },
-            dgfip3: { title: "Assistant de Proximité N2", badge: "Entreprise (BUT3)", badgeClass: "type-company", sub: "DGFIP - Alternance", desc: "Évolution de l'architecture réseau départementale et migration vers la téléphonie sur IP.", tasks: ["Densification réseau (DIRCOFI)", "Mise en œuvre ToIP", "Brassage et configuration Switchs L3"], link: "#" },
-            but3: { title: "IoT & Architectures Hybrides", badge: "Projet Académique", badgeClass: "type-school", sub: "BUT 3", desc: "Recherche et développement sur les communications IOT et l'interopérabilité Cloud.", tasks: ["Passerelle LoRaWAN", "Maison connectée (ESP32/MQTT)", "Projet RGB Light"], link: "#" },
-            dgfip2: { title: "Assistant de Proximité N1", badge: "Entreprise (BUT2)", badgeClass: "type-company", sub: "DGFIP - Alternance", desc: "Amélioration du support utilisateur et audit du parc matériel réseau.", tasks: ["Déploiement GestSup", "Audit switchs non-PoE", "Gestion des incidents N1"], link: "#" },
-            but2: { title: "Transmission & Dév", badge: "Projet Académique", badgeClass: "type-school", sub: "BUT 2", desc: "Étude des protocoles de transport et développement d'outils réseaux.", tasks: ["Client/Serveur TCP-UDP", "Analyse de trames Wireshark", "Modulation de signaux"], link: "#" },
-            but1: { title: "Fondamentaux Réseau", badge: "Projet Académique", badgeClass: "type-school", sub: "BUT 1", desc: "Acquisition des bases de l'administration réseau et du développement web.", tasks: ["Topologies LAN PME", "Adressage VLSM", "Site web statique (HTML/CSS)"], link: "#" }
+            innosys: { title: "Expert Architecture S.I", badge: "Entreprise (Alternance)", badgeClass: "type-company", sub: "Innosys", desc: "Modernisation de l'infrastructure pour supporter la croissance des services intranet.", tasks: ["Refonte intranet Assurmix", "Automatisation avec Ansible", "Déploiement Docker & Monitoring"], link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/company.html" },
+            ynov1: { title: "Expert en cloud & sécurité", badge: "Projet Académique", badgeClass: "type-school", sub: "Ynov Campus de Paris", desc: "Déploiement d'une infrastructure OpenStack complète.", tasks: ["Configuration Nova", "Gestion du stockage Swift", "Optimisation des Flavors"], link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/mastere.html" },
+            dgfip3: { title: "Assistant de Proximité", badge: "Entreprise (Alternance)", badgeClass: "type-company", sub: "DGFIP", desc: "Amélioration de l'infrastructure réseau et passage à la ToIP.", tasks: ["Projet de densification (DIRCOFI)", "Transition vers la téléphonie sur IP", "Mise en œuvre ToIP"], link: "#" },
+            but3: { title: "IoT & Architectures Hybrides", badge: "Projet Académique", badgeClass: "type-school", sub: "Ynov Campus", desc: "Étude des réseaux IoT et des architectures hybrides.", tasks: ["Qualification architectures réseaux", "Fabrication maison connectée", "Projet: RGB Light"], link: "#" },
+            dgfip2: { title: "Assistant de Proximité", badge: "Entreprise (Alternance)", badgeClass: "type-company", sub: "DGFIP", desc: "Support technique et déploiement d'outils de gestion.", tasks: ["Déploiement GestSup", "Audit switchs non-PoE", "Intégration nouveaux services"], link: "#" },
+            but2: { title: "Transmission & Dév.", badge: "Projet Académique", badgeClass: "type-school", sub: "Ynov Campus", desc: "Apprentissage des couches physiques et applicatives.", tasks: ["Système de transmission", "Applications communicantes", "Protocoles TCP/UDP"], link: "#" },
+            but1: { title: "Fondamentaux Réseaux", badge: "Projet Académique", badgeClass: "type-school", sub: "BUT Réseaux & Télécoms", desc: "Apprentissage des bases de l'adressage et de la commutation.", tasks: ["Architecture LAN PME", "Développement site vitrine", "Mesures signaux physiques"], link: "#" }
         };
 
         function toggleAccordion(header) {
-            const content = header.nextElementSibling;
             header.classList.toggle('active');
+            const content = header.nextElementSibling;
             content.classList.toggle('collapsed');
         }
 
