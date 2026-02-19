@@ -9,13 +9,13 @@
     <style>
         :root {
             --bg-body: #020617;
-            --bg-card: #0b1120;
-            --bg-card-hover: #1e293b;
+            --bg-card: rgba(11, 17, 32, 0.8);
+            --bg-card-hover: rgba(30, 41, 59, 0.9);
             --accent: #22d3ee;
             --accent-glow: rgba(34, 211, 238, 0.2);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border: #1e293b;
+            --border: rgba(30, 41, 59, 0.7);
             --radius: 12px;
         }
 
@@ -23,21 +23,39 @@
         
         body { 
             background-color: var(--bg-body); 
-            /* --- FOND QUADRILLÉ TYPE ARCHITECTE --- */
-            background-image: 
-                linear-gradient(rgba(30, 41, 59, 0.5) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(30, 41, 59, 0.5) 1px, transparent 1px);
-            background-size: 50px 50px;
             color: var(--text-main); 
             line-height: 1.6; 
             overflow-x: hidden; 
+            position: relative;
+        }
+
+        /* --- NOUVEAU FOND DYNAMIQUE (MESH GRADIENT) --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(34, 211, 238, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        /* Effet de grain subtil pour texture premium */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
         }
 
         /* --- HEADER --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(10px); z-index: 100;
+            position: sticky; top: 0; background: rgba(2, 6, 23, 0.7); backdrop-filter: blur(15px); z-index: 100;
         }
         .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
         .logo span { color: var(--accent); }
@@ -46,41 +64,36 @@
         nav a:hover { color: var(--accent); }
 
         /* --- HERO --- */
-        .hero { padding: 8rem 8% 5rem; text-align: center; display: flex; flex-direction: column; align-items: center; position: relative; }
-        .hero::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at center, rgba(2, 6, 23, 0) 0%, var(--bg-body) 100%);
-            z-index: -1;
-        }
+        .hero { padding: 10rem 8% 6rem; text-align: center; display: flex; flex-direction: column; align-items: center; }
         .hero-tag {
             background: rgba(34, 211, 238, 0.1); color: var(--accent);
             padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
             letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 2rem;
         }
-        h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin-bottom: 1.5rem; max-width: 900px; }
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin-bottom: 1.5rem; max-width: 900px; font-weight: 700; }
         .gradient-text { background: linear-gradient(90deg, #22d3ee, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero p { color: var(--text-muted); max-width: 650px; margin-bottom: 2.5rem; font-size: 1.1rem; }
         
         .btn { padding: 0.8rem 1.8rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; cursor: pointer; border: none; }
         .btn-primary { background: var(--accent); color: #000; }
-        .btn-primary:hover { box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-2px); }
+        .btn-primary:hover { box-shadow: 0 0 25px var(--accent-glow); transform: translateY(-2px); }
 
         /* --- SECTIONS --- */
-        section { padding: 5rem 8%; max-width: 1400px; margin: 0 auto; }
-        h2 { font-size: 2.2rem; margin-bottom: 1rem; }
+        section { padding: 6rem 8%; max-width: 1400px; margin: 0 auto; }
+        h2 { font-size: 2.2rem; margin-bottom: 1rem; font-weight: 700; }
 
-        /* --- WHOAMI & STATS --- */
+        /* --- WHOAMI --- */
         .whoami-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .stat-card { background: var(--bg-card); border: 1px solid var(--border); padding: 1.5rem; border-radius: var(--radius); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border); padding: 1.5rem; border-radius: var(--radius); backdrop-filter: blur(5px); }
         .stat-card h4 { color: var(--accent); font-size: 2rem; margin-bottom: 5px; }
-        pre { background: #010409; padding: 20px; border-radius: 10px; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin-top: 2rem; }
+        pre { background: rgba(1, 4, 9, 0.8); padding: 20px; border-radius: 10px; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin-top: 2rem; }
         .json-key { color: #79c0ff; }
         .json-str { color: #a5d6ff; }
 
-        /* --- SKILLS GRID --- */
+        /* --- SKILLS --- */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .card { background: var(--bg-card); border: 1px solid var(--border); padding: 1.8rem; border-radius: var(--radius); transition: 0.3s; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .card { background: var(--bg-card); border: 1px solid var(--border); padding: 1.8rem; border-radius: var(--radius); transition: 0.3s; cursor: pointer; backdrop-filter: blur(5px); }
         .card:hover { border-color: var(--accent); transform: translateY(-5px); background: var(--bg-card-hover); }
         .card h3 { color: var(--text-main); font-size: 1.1rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 12px; }
         .card h3 i { color: var(--accent); }
@@ -88,22 +101,38 @@
         .card ul li { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
         .card ul li::before { content: "•"; color: var(--accent); }
 
-        /* --- PARTNERS (STATIC VERSION) --- */
-        .partners-static { display: flex; justify-content: center; align-items: center; gap: 5rem; padding: 2rem 0; }
-        .partner-item { display: flex; flex-direction: column; align-items: center; gap: 1rem; transition: 0.3s; }
-        .partner-item:hover { transform: translateY(-5px); }
-        .partner-item img { height: 80px; width: auto; filter: none; opacity: 1; object-fit: contain; }
-        .partner-item span { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); font-weight: 700; letter-spacing: 2px; }
+        /* --- FEATURED PROJECT (ASSURMIX) --- */
+        .project-featured { 
+            background: linear-gradient(135deg, rgba(11, 17, 32, 0.9), rgba(30, 41, 59, 0.4)); 
+            border: 1px solid var(--border); 
+            padding: 3rem; 
+            border-radius: var(--radius); 
+            position: relative;
+            overflow: hidden;
+        }
+        .project-featured::after {
+            content: "FEATURED"; position: absolute; top: 20px; right: -30px; 
+            background: var(--accent); color: #000; font-size: 0.6rem; font-weight: 800;
+            padding: 5px 40px; transform: rotate(45deg);
+        }
+        .tag { background: rgba(34, 211, 238, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: 600; margin-right: 8px; }
+
+        /* --- PARTNERS --- */
+        .partners-static { display: flex; justify-content: center; align-items: center; gap: 6rem; padding: 2rem 0; }
+        .partner-item { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .partner-item img { height: 60px; width: auto; filter: brightness(1.2); transition: 0.3s; }
+        .partner-item span { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); letter-spacing: 2px; }
 
         /* --- FOOTER --- */
-        footer { padding: 4rem 8% 2rem; background: rgba(11, 17, 32, 0.95); border-top: 1px solid var(--border); margin-top: 5rem; backdrop-filter: blur(5px); }
+        footer { padding: 4rem 8% 2rem; background: rgba(2, 6, 23, 0.9); border-top: 1px solid var(--border); }
         .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; }
+        .footer-logo { font-weight: 800; font-size: 1.2rem; }
         .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; }
         .footer-col ul { list-style: none; }
         .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
         .footer-col a:hover { color: var(--accent); }
         .social-links { display: flex; gap: 1rem; }
-        .social-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .social-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: 0.3s; text-decoration: none; }
         .social-btn:hover { border-color: var(--accent); color: var(--accent); }
         .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-top: 2rem; }
 
@@ -114,13 +143,13 @@
         #modalList li { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 15px; font-size: 0.95rem; }
         #modalList li i { color: var(--accent); width: 20px; text-align: center; }
 
-        @media (max-width: 768px) { .whoami-grid, .footer-top, .partners-static { grid-template-columns: 1fr; flex-direction: column; gap: 2rem; } header { padding: 1rem 5%; } nav { display: none; } }
+        @media (max-width: 768px) { .whoami-grid, .footer-top, .partners-static { grid-template-columns: 1fr; flex-direction: column; gap: 3rem; } header { padding: 1rem 5%; } nav { display: none; } }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">Nicolas<span>.SI</span></div>
+        <div class="logo">Nicolas<span>.arch</span></div>
         <nav>
             <ul>
                 <li><a href="#" style="color: var(--accent)">Accueil</a></li>
@@ -134,10 +163,24 @@
     <main>
         <section class="hero">
             <span class="hero-tag">• EXPERT ARCHITECTURE SI</span>
-            <h1>Concevoir des infrastructures <span class="gradient-text">robustes et automatisées</span></h1>
-            <p>Spécialiste en architecture des Systèmes d'Information (SI), automatisation Cloud et méthodologies DevOps.</p>
+            <h1>L'architecture SI au service de la <span class="gradient-text">performance</span></h1>
+            <p>Conception d'infrastructures robustes, automatisation Cloud et méthodologies DevOps pour des environnements scalables et sécurisés.</p>
             <div class="btn-group">
-                <a href="pages/projets.html" class="btn btn-primary">Voir mes projets <i class="fas fa-arrow-right"></i></a>
+                <a href="pages/projets.html" class="btn btn-primary">Explorer mes travaux <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <section id="featured">
+            <div class="project-featured">
+                <span class="hero-tag">REFONTE MAJEURE</span>
+                <h2 style="margin-top: 1rem;">Intranet Assurmix</h2>
+                <p style="color: var(--text-muted); max-width: 700px; margin-bottom: 2rem;">Refonte complète de l'architecture intranet pour le groupe Assurmix. Migration vers une infrastructure haute disponibilité, isolation des services et automatisation du déploiement via Ansible.</p>
+                <div style="margin-bottom: 2rem;">
+                    <span class="tag">Réseau Isolé</span>
+                    <span class="tag">Ansible Automation</span>
+                    <span class="tag">High Availability</span>
+                </div>
+                <a href="pages/projets.html" class="btn btn-primary" style="background: transparent; border: 1px solid var(--accent); color: var(--accent);">Détails de la mission</a>
             </div>
         </section>
 
@@ -145,59 +188,59 @@
             <div class="whoami-grid">
                 <div>
                     <span class="hero-tag">• WHOAMI</span>
-                    <h2>Vision stratégique & <span class="gradient-text">Maîtrise technique</span></h2>
-                    <p>En tant qu'architecte SI, j'interviens sur l'ensemble du cycle de vie des infrastructures complexes.</p>
+                    <h2>Expertise hybride & <span class="gradient-text">Vision SI</span></h2>
+                    <p>En tant qu'architecte, je construis des ponts entre les besoins applicatifs et la stabilité des couches basses. Mon approche repose sur le "Security by Design".</p>
                     <pre>{
   <span class="json-key">"profile"</span>: {
-    <span class="json-key">"role"</span>: <span class="json-str">"Expert Architecture SI"</span>,
-    <span class="json-key">"philosophy"</span>: <span class="json-str">"Security by Design"</span>
+    <span class="json-key">"role"</span>: <span class="json-str">"Architecte Cloud & DevOps"</span>,
+    <span class="json-key">"status"</span>: <span class="json-str">"En activité"</span>
   }
 }</pre>
                 </div>
                 <div class="stats-grid">
-                    <div class="stat-card"><h4>5+</h4><p>Ans d'expérience</p></div>
-                    <div class="stat-card"><h4>50+</h4><p>Systèmes déployés</p></div>
-                    <div class="stat-card"><h4>100%</h4><p>Infrastructure as Code</p></div>
+                    <div class="stat-card"><h4>5+</h4><p>Années d'expérience</p></div>
+                    <div class="stat-card"><h4>50+</h4><p>Noeuds administrés</p></div>
+                    <div class="stat-card"><h4>100%</h4><p>Automatisation</p></div>
                 </div>
             </div>
         </section>
 
         <section id="skills">
             <div style="text-align: center; margin-bottom: 4rem;">
-                <h2>Expertise Technique</h2>
-                <p style="color: var(--text-muted);">Cliquez sur une catégorie pour découvrir le détail.</p>
+                <h2>Stack Technique</h2>
+                <p style="color: var(--text-muted);">Cliquer sur une catégorie pour les détails granulaires.</p>
             </div>
             <div class="skills-grid">
                 <article class="card" onclick="openSkillModal('reseau')">
                     <h3><i class="fas fa-shield-halved"></i> Réseau & Sécurité</h3>
-                    <ul><li>DNS/DHCP & Firewalls</li><li>VPN, Radius & PKI</li></ul>
+                    <ul><li>Architecture VLAN & VPN</li><li>Firewalling (pfSense)</li></ul>
                 </article>
                 <article class="card" onclick="openSkillModal('infra')">
                     <h3><i class="fas fa-network-wired"></i> Infrastructure</h3>
-                    <ul><li>Switching & Routing</li><li>Load Balancing</li></ul>
+                    <ul><li>Routing & Switching</li><li>Load Balancing (HAProxy)</li></ul>
                 </article>
                 <article class="card" onclick="openSkillModal('devops')">
                     <h3><i class="fas fa-infinity"></i> DevOps & Cloud</h3>
-                    <ul><li>Ansible & CI/CD</li><li>Docker & OpenStack</li></ul>
+                    <ul><li>CI/CD & Ansible</li><li>OpenStack & Docker</li></ul>
                 </article>
                 <article class="card" onclick="openSkillModal('monitoring')">
                     <h3><i class="fas fa-chart-line"></i> Monitoring</h3>
-                    <ul><li>Prometheus & Grafana</li><li>Zabbix & Centreon</li></ul>
+                    <ul><li>Grafana & Prometheus</li><li>Zabbix & Centreon</li></ul>
                 </article>
                 <article class="card" onclick="openSkillModal('sysadmin')">
-                    <h3><i class="fas fa-server"></i> Systèmes & BDD</h3>
-                    <ul><li>Linux & Windows Server</li><li>SQL (Postgres, MariaDB)</li></ul>
+                    <h3><i class="fas fa-server"></i> Systèmes</h3>
+                    <ul><li>Linux (Ubuntu/RHEL)</li><li>Active Directory</li></ul>
                 </article>
                 <article class="card" onclick="openSkillModal('sauvegarde')">
-                    <h3><i class="fas fa-database"></i> Sauvegarde & PCA</h3>
-                    <ul><li>Stratégies PRA/PCA</li><li>Backup Externalisé</li></ul>
+                    <h3><i class="fas fa-database"></i> Sauvegarde</h3>
+                    <ul><li>Stratégies PRA/PCA</li><li>Veeam & Borg</li></ul>
                 </article>
             </div>
         </section>
 
         <section id="partners">
             <div style="text-align: center; margin-bottom: 3rem;">
-                <h2 style="font-size: 1.5rem; color: var(--text-muted);">Ils m'ont fait confiance</h2>
+                <h2 style="font-size: 1.5rem; color: var(--text-muted);">Collaborations & Expériences</h2>
             </div>
             <div class="partners-static">
                 <div class="partner-item">
@@ -226,7 +269,7 @@
     <footer>
         <div class="footer-top">
             <div class="footer-col">
-                <div class="footer-logo">Nicolas<span>.SI</span></div>
+                <div class="footer-logo">Nicolas<span>.arch</span></div>
                 <p style="font-size: 0.9rem; color: var(--text-muted);">Architecte des SI spécialisé dans la conception d'infrastructures hautement disponibles.</p>
             </div>
             <div class="footer-col">
@@ -235,7 +278,6 @@
                     <li><a href="#">Accueil</a></li>
                     <li><a href="pages/parcours.html">Parcours</a></li>
                     <li><a href="pages/projets.html">Projets</a></li>
-                    <li><a href="pages/contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -249,37 +291,36 @@
         <div class="footer-bottom"><p>© 2026 Nicolas Blin | Expert Architecture SI</p></div>
     </footer>
 
-
     <script>
         const skillData = {
             'reseau': { title: 'Réseau & Sécurité', items: [
-                { icon: 'fa-server', text: 'Administration DNS / DHCP' },
-                { icon: 'fa-user-shield', text: 'Configuration firewalls (pfSense)' },
-                { icon: 'fa-shield-alt', text: 'Proxy (HAProxy), VPN, Radius' },
-                { icon: 'fa-key', text: 'Gestion Clés et certificats (PKI)' }
+                { icon: 'fa-server', text: 'Administration DNS / DHCP Bind/ISC' },
+                { icon: 'fa-user-shield', text: 'Hardening serveurs & Firewalls' },
+                { icon: 'fa-shield-alt', text: 'VPN (OpenVPN, Wireguard)' },
+                { icon: 'fa-key', text: 'Gestion Certificats SSL/TLS' }
             ]},
             'infra': { title: 'Infrastructure', items: [
-                { icon: 'fa-microchip', text: 'Switchs HP & Cisco' },
-                { icon: 'fa-wifi', text: 'Routeurs et points d’accès Wi-Fi' },
-                { icon: 'fa-layer-group', text: 'Architecture VLAN' }
+                { icon: 'fa-microchip', text: 'Architecture Switching L2/L3' },
+                { icon: 'fa-wifi', text: 'Déploiement Bornes Wi-Fi Pro' },
+                { icon: 'fa-layer-group', text: 'Segmentation VLAN & Routage' }
             ]},
             'devops': { title: 'DevOps & Cloud', items: [
-                { icon: 'fa-cog', text: 'Ansible & CI/CD' },
-                { icon: 'fa-box-open', text: 'Docker' },
-                { icon: 'fa-cloud', text: 'OpenStack' }
+                { icon: 'fa-cog', text: 'Ansible (Playbooks & Roles)' },
+                { icon: 'fa-box-open', text: 'Docker & Docker Compose' },
+                { icon: 'fa-cloud', text: 'Gestion OpenStack (Nova, Swift)' }
             ]},
-            'sysadmin': { title: 'Systèmes & BDD', items: [
-                { icon: 'fa-windows', text: 'Windows Server' },
-                { icon: 'fa-linux', text: 'Linux (RHEL, Ubuntu)' },
-                { icon: 'fa-database', text: 'MySQL & Postgres' }
+            'sysadmin': { title: 'Systèmes', items: [
+                { icon: 'fa-windows', text: 'Windows Server & GPO' },
+                { icon: 'fa-linux', text: 'Debian, Ubuntu, AlmaLinux' },
+                { icon: 'fa-database', text: 'PostgreSQL & MariaDB' }
             ]},
             'monitoring': { title: 'Monitoring', items: [
-                { icon: 'fa-chart-area', text: 'Zabbix & Grafana' },
-                { icon: 'fa-desktop', text: 'Centreon' }
+                { icon: 'fa-chart-area', text: 'Dashboards Grafana' },
+                { icon: 'fa-desktop', text: 'Zabbix & Prometheus' }
             ]},
             'sauvegarde': { title: 'Sauvegarde & PCA', items: [
-                { icon: 'fa-hdd', text: 'Backup externalisé' },
-                { icon: 'fa-shield-virus', text: 'Stratégies PRA/PCA' }
+                { icon: 'fa-hdd', text: 'Stratégies 3-2-1' },
+                { icon: 'fa-shield-virus', text: 'Plans de Reprise d\'Activité' }
             ]}
         };
 
