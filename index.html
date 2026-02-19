@@ -19,7 +19,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- DESIGN DE FOND (Glows Ambiants) --- */
+        /* --- BACKGROUND DESIGN --- */
         .ambient-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: 
@@ -47,6 +47,7 @@
             font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent);
             border: 1px solid rgba(34, 211, 238, 0.3); padding: 4px 12px; border-radius: 100px;
             text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem; display: inline-block;
+            background: rgba(34, 211, 238, 0.05);
         }
         h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 1.5rem; }
         .gradient-text { background: linear-gradient(90deg, #22d3ee, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -56,11 +57,11 @@
         .btn-primary { background: var(--text-main); color: var(--bg); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 
-        /* --- CONTENU --- */
+        /* --- SECTIONS --- */
         section { padding: 60px 10%; max-width: 1400px; margin: 0 auto; }
         h2 { font-size: 2rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 2.5rem; }
 
-        /* --- WHOAMI --- */
+        /* --- WHOAMI & JSON --- */
         .whoami-container { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
         .json-block {
             background: #010409; border: 1px solid var(--border); padding: 25px; border-radius: 12px;
@@ -80,7 +81,7 @@
         }
         .tag { font-size: 0.7rem; background: rgba(255,255,255,0.03); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); margin-right: 8px; }
 
-        /* --- EXPERTISES (GRILLE) --- */
+        /* --- SKILLS GRID --- */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .skill-card {
             background: var(--card-bg); border: 1px solid var(--border); padding: 2.5rem; border-radius: 16px;
@@ -92,23 +93,24 @@
         .skill-card ul { list-style: none; color: var(--text-muted); font-size: 0.85rem; pointer-events: none; }
         .skill-card ul li { margin-bottom: 5px; }
 
-        /* --- PARTNERS --- */
-        .partners-row { display: flex; justify-content: center; gap: 6rem; opacity: 0.5; filter: grayscale(1); transition: 0.5s; align-items: center; padding: 40px 0;}
-        .partners-row:hover { opacity: 1; filter: grayscale(0); }
-        .partners-row img { height: 45px; width: auto; }
+        /* --- PARTNERS STATIC --- */
+        .partners-static { display: flex; justify-content: center; align-items: center; gap: 5rem; padding: 2rem 0; }
+        .partner-item { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; transition: 0.3s; }
+        .partner-item:hover { transform: translateY(-5px); }
+        .partner-item img { height: 70px; width: auto; filter: none; opacity: 1; object-fit: contain; border-radius: 8px; }
+        .partner-item span { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
 
         /* --- FOOTER --- */
         footer { padding: 4rem 10% 2rem; border-top: 1px solid var(--border); margin-top: 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); }
 
-        /* --- MODAL --- */
+        /* MODAL */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 2000; }
         .modal-content { background: #0d1117; border: 1px solid var(--border); width: 95%; max-width: 500px; margin: 10% auto; padding: 3rem; border-radius: 24px; }
         #modalList li { padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; list-style: none; color: var(--text-muted); font-size: 0.95rem; }
 
         @media (max-width: 900px) {
-            .whoami-container, .featured-box { grid-template-columns: 1fr; }
+            .whoami-container, .featured-box, .partners-static { grid-template-columns: 1fr; flex-direction: column; gap: 3rem; }
             header { padding: 1rem 5%; } nav { display: none; }
-            .partners-row { gap: 3rem; flex-direction: column; }
         }
     </style>
 </head>
@@ -117,7 +119,7 @@
     <div class="ambient-bg"></div>
 
     <header>
-        <div class="logo">Nicolas<span>.arch</span></div>
+        <div class="logo">Nicolas<span>.SI</span></div>
         <nav>
             <ul>
                 <li><a href="#" style="color: var(--accent)">Accueil</a></li>
@@ -130,7 +132,7 @@
 
     <main>
         <section class="hero">
-            <span class="hero-tag">root@nblin:~$ whoami</span>
+            <span class="hero-tag">EXPERT ARCHITECTURE SI</span>
             <h1>Portfolio : Ingénierie & <br><span class="gradient-text">Architecture Cloud</span></h1>
             <p>Hub technique regroupant mes réalisations en administration système, automatisation IaC et déploiement d'infrastructures critiques.</p>
             <a href="pages/projets.html" class="btn btn-primary">Parcourir mes travaux <i class="fas fa-terminal"></i></a>
@@ -144,7 +146,7 @@
                     <div class="json-block">
                         {<br>
                         &nbsp;&nbsp;<span class="j-key">"role"</span>: <span class="j-val">"System Architect"</span>,<br>
-                        &nbsp;&nbsp;<span class="j-key">"specialties"</span>: [<span class="j-val">"Infrastructure"</span>, <span class="j-val">"Cloud"</span>, <span class="j-val">"Security"</span>],<br>
+                        &nbsp;&nbsp;<span class="j-key">"specialties"</span>: [<span class="j-val">"Cloud"</span>, <span class="j-val">"DevOps"</span>, <span class="j-val">"Security"</span>],<br>
                         &nbsp;&nbsp;<span class="j-key">"philosophy"</span>: <span class="j-val">"Infrastructure as Code"</span><br>
                         }
                     </div>
@@ -162,9 +164,9 @@
             <div class="featured-box">
                 <div>
                     <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Refonte Intranet Assurmix</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Orchestration complète d'une infrastructure métier. Migration vers un environnement automatisé via Ansible pour garantir haute disponibilité et sécurité.</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Modernisation complète de l'architecture intranet. Migration vers un environnement orchestré par Ansible et sécurisation des flux de données critiques.</p>
                     <div style="margin-bottom: 1.5rem;">
-                        <span class="tag">Ansible</span><span class="tag">Debian</span><span class="tag">Hardening</span>
+                        <span class="tag">Ansible</span><span class="tag">Samba</span><span class="tag">Debian</span>
                     </div>
                     <a href="pages/projets.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">DÉCOUVRIR LE PROJET →</a>
                 </div>
@@ -210,10 +212,19 @@
             </div>
         </section>
 
-        <section>
-            <div class="partners-row">
-                <img src="image/dgfip.jfif" alt="DGFIP">
-                <img src="image/innosys.jfif" alt="Innosys">
+        <section id="partners">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 1.5rem; color: var(--text-muted);">Ils m'ont fait confiance</h2>
+            </div>
+            <div class="partners-static">
+                <div class="partner-item">
+                    <img src="image/dgfip.jfif" alt="DGFIP">
+                    <span>DGFIP</span>
+                </div>
+                <div class="partner-item">
+                    <img src="image/innosys.jfif" alt="Innosys">
+                    <span>INNOSYS</span>
+                </div>
             </div>
         </section>
     </main>
@@ -226,12 +237,31 @@
         </div>
     </div>
 
+    
     <footer>
-        <p>© 2026 Nicolas Blin | Expert Architecture SI</p>
-        <div style="display: flex; gap: 20px;">
-            <a href="https://www.linkedin.com/in/nicolas-blin-pro" style="color: inherit;"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/nblinpro" style="color: inherit;"><i class="fab fa-github"></i></a>
+        <div class="footer-top">
+            <div class="footer-col">
+                <div class="footer-logo">Nicolas<span>.SI</span></div>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Architecte des SI spécialisé dans la conception d'infrastructures hautement disponibles.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="pages/parcours.html">Parcours</a></li>
+                    <li><a href="pages/projets.html">Projets</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
+                </div>
+            </div>
         </div>
+        <div class="footer-bottom"><p>© 2026 Nicolas Blin | Expert Architecture SI</p></div>
     </footer>
 
     <script>
