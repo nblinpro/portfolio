@@ -19,16 +19,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- AMBIENT BACKGROUND --- */
+        /* --- BACKGROUND DESIGN --- */
         .ambient-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
+                radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
             z-index: -1;
         }
 
-        /* --- HEADER --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 1.2rem 10%; position: sticky; top: 0; 
@@ -41,7 +40,6 @@
         nav a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
 
-        /* --- HERO --- */
         .hero { padding: 100px 10% 60px; text-align: center; }
         .hero-tag {
             font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent);
@@ -49,46 +47,35 @@
             text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem; display: inline-block;
         }
         h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 1.5rem; }
-        .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2.5rem; }
 
         .btn { padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; }
         .btn-primary { background: var(--text-main); color: var(--bg); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 
-        /* --- SECTIONS --- */
-        section { padding: 80px 10%; max-width: 1400px; margin: 0 auto; }
-        h2 { font-size: 2rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 2rem; }
+        section { padding: 60px 10%; max-width: 1400px; margin: 0 auto; }
+        h2 { font-size: 2rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 2.5rem; }
 
-        /* --- WHOAMI & STATS --- */
+        /* --- WHOAMI BLOCK --- */
         .whoami-container { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .stat-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; text-align: center; }
-        .stat-card h4 { color: var(--accent); font-size: 2.2rem; font-weight: 800; }
-        .stat-card p { color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Bloc JSON stylisé */
         .json-block {
             background: #010409; border: 1px solid var(--border); padding: 25px; border-radius: 12px;
             font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.7;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
         }
         .j-key { color: #79c0ff; }
         .j-val { color: #a5d6ff; }
-        .j-bool { color: #ff7b72; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .stat-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; text-align: center; }
+        .stat-card h4 { color: var(--accent); font-size: 2.2rem; font-weight: 800; }
+        .stat-card p { color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; }
 
         /* --- FEATURED PROJECT --- */
         .featured-box {
             background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 3rem;
-            display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: center;
-            position: relative; overflow: hidden;
-        }
-        .featured-box::before {
-            content: "PROJET PHARE"; position: absolute; top: 15px; left: 15px;
-            font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--accent); opacity: 0.6;
+            display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: center; position: relative;
         }
         .tag { font-size: 0.7rem; background: rgba(255,255,255,0.03); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); margin-right: 8px; }
 
-        /* --- SKILLS --- */
+        /* --- SKILLS GRID --- */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .skill-card {
             background: var(--card-bg); border: 1px solid var(--border); padding: 2.5rem; border-radius: 16px;
@@ -98,22 +85,19 @@
         .skill-card i { color: var(--accent); font-size: 1.5rem; margin-bottom: 1.5rem; }
 
         /* --- PARTNERS --- */
-        .partners-row { display: flex; justify-content: center; gap: 5rem; opacity: 0.4; filter: grayscale(1); transition: 0.5s; }
+        .partners-row { display: flex; justify-content: center; gap: 6rem; opacity: 0.5; filter: grayscale(1); transition: 0.5s; align-items: center; }
         .partners-row:hover { opacity: 1; filter: grayscale(0); }
-        .partners-row img { height: 40px; width: auto; }
+        .partners-row img { height: 45px; width: auto; }
 
-        /* --- FOOTER --- */
-        footer { padding: 4rem 10% 2rem; border-top: 1px solid var(--border); margin-top: 4rem; }
-        .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); }
+        footer { padding: 4rem 10% 2rem; border-top: 1px solid var(--border); margin-top: 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); }
 
-        /* MODAL */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 2000; }
-        .modal-content { background: #0d1117; border: 1px solid var(--border); width: 90%; max-width: 500px; margin: 10% auto; padding: 3rem; border-radius: 24px; }
+        .modal-content { background: #0d1117; border: 1px solid var(--border); width: 95%; max-width: 500px; margin: 10% auto; padding: 3rem; border-radius: 24px; }
         #modalList li { padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; list-style: none; }
 
         @media (max-width: 900px) {
             .whoami-container, .featured-box { grid-template-columns: 1fr; }
-            nav { display: none; }
+            header { padding: 1rem 5%; } nav { display: none; }
         }
     </style>
 </head>
@@ -136,8 +120,8 @@
     <main>
         <section class="hero">
             <span class="hero-tag">Infrastructure Architect</span>
-            <h1>L'ingénierie Cloud <br>nouvelle génération.</h1>
-            <p>Conception de systèmes résilients et automatisation de bout en bout pour infrastructures critiques.</p>
+            <h1>L'ingénierie Cloud <br>sans compromis.</h1>
+            <p>Spécialiste en architecture SI et méthodologies DevOps. Je conçois des systèmes résilients et automatisés.</p>
             <a href="pages/projets.html" class="btn btn-primary">Voir les réalisations <i class="fas fa-chevron-right"></i></a>
         </section>
 
@@ -145,14 +129,12 @@
             <div class="whoami-container">
                 <div>
                     <h2>Profil & <span style="color: var(--accent)">Philosophie</span></h2>
-                    <p style="color: var(--text-muted); margin-bottom: 2rem;">Architecte passionné par l'Open Source, je transforme les contraintes techniques en solutions scalables. Mon code et mes designs d'infrastructure visent la simplicité et la robustesse.</p>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">Passionné par l'Open Source, je transforme les contraintes techniques en solutions scalables. Mon approche repose sur le "Security by Design".</p>
                     <div class="json-block">
-                        <span style="color: #8b949e;">// Identity script</span><br>
                         {<br>
-                        &nbsp;&nbsp;<span class="j-key">"name"</span>: <span class="j-val">"Nicolas Blin"</span>,<br>
                         &nbsp;&nbsp;<span class="j-key">"role"</span>: <span class="j-val">"System Architect"</span>,<br>
                         &nbsp;&nbsp;<span class="j-key">"specialties"</span>: [<span class="j-val">"Cloud"</span>, <span class="j-val">"DevOps"</span>, <span class="j-val">"Security"</span>],<br>
-                        &nbsp;&nbsp;<span class="j-key">"available_for_hire"</span>: <span class="j-bool">true</span><br>
+                        &nbsp;&nbsp;<span class="j-key">"philosophy"</span>: <span class="j-val">"Infrastructure as Code"</span><br>
                         }
                     </div>
                 </div>
@@ -169,11 +151,11 @@
             <div class="featured-box">
                 <div>
                     <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Refonte Intranet Assurmix</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Migration d'un environnement legacy vers une architecture conteneurisée et orchestrée par Ansible sous Debian sécurisé.</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Modernisation complète de l'architecture intranet. Migration vers un environnement orchestré par Ansible et sécurisation des flux de données critiques.</p>
                     <div style="margin-bottom: 1.5rem;">
-                        <span class="tag">Ansible</span><span class="tag">Docker</span><span class="tag">Hardening</span>
+                        <span class="tag">Ansible</span><span class="tag">Samba</span><span class="tag">Debian</span>
                     </div>
-                    <a href="pages/projets.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none; letter-spacing: 1px;">DÉCOUVRIR LE PROJET →</a>
+                    <a href="pages/projets.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">DÉCOUVRIR LE PROJET →</a>
                 </div>
                 <div style="background: rgba(34, 211, 238, 0.02); border: 1px solid var(--border); padding: 3rem; border-radius: 12px; text-align: center;">
                     <i class="fas fa-network-wired" style="font-size: 3.5rem; color: var(--accent); opacity: 0.4;"></i>
@@ -187,31 +169,22 @@
                 <div class="skill-card" onclick="openSkillModal('reseau')">
                     <i class="fas fa-shield-halved"></i>
                     <h3>Sécurité & Réseau</h3>
-                    <ul style="pointer-events: none;">
-                        <li>• Architecture VLAN & Routage</li>
-                        <li>• Firewalling & ACL</li>
-                    </ul>
+                    <p style="color:var(--text-muted); font-size:0.85rem;">DNS/DHCP, Firewalls pfSense, VPN, Radius & PKI.</p>
                 </div>
                 <div class="skill-card" onclick="openSkillModal('devops')">
                     <i class="fas fa-infinity"></i>
                     <h3>Cloud & DevOps</h3>
-                    <ul style="pointer-events: none;">
-                        <li>• Automatisation Ansible</li>
-                        <li>• Orchestration OpenStack</li>
-                    </ul>
+                    <p style="color:var(--text-muted); font-size:0.85rem;">Ansible, Docker, OpenStack & CI/CD.</p>
                 </div>
                 <div class="skill-card" onclick="openSkillModal('sysadmin')">
                     <i class="fas fa-server"></i>
                     <h3>Systèmes & BDD</h3>
-                    <ul style="pointer-events: none;">
-                        <li>• Administration Linux/Unix</li>
-                        <li>• Clusters de Données</li>
-                    </ul>
+                    <p style="color:var(--text-muted); font-size:0.85rem;">Linux (Ubuntu/RHEL), Windows Server & SQL.</p>
                 </div>
             </div>
         </section>
 
-        <section style="padding-top: 40px;">
+        <section>
             <div class="partners-row">
                 <img src="image/dgfip.jfif" alt="DGFIP">
                 <img src="image/innosys.jfif" alt="Innosys">
@@ -228,20 +201,18 @@
     </div>
 
     <footer>
-        <div class="footer-bottom">
-            <p>© 2026 Nicolas Blin | Architecture & Cloud</p>
-            <div style="display: flex; gap: 20px;">
-                <a href="#" style="color: inherit;"><i class="fab fa-linkedin"></i></a>
-                <a href="#" style="color: inherit;"><i class="fab fa-github"></i></a>
-            </div>
+        <p>© 2026 Nicolas Blin | Expert Architecture SI</p>
+        <div style="display: flex; gap: 20px;">
+            <a href="#" style="color: inherit;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color: inherit;"><i class="fab fa-github"></i></a>
         </div>
     </footer>
 
     <script>
         const skillData = {
-            'reseau': { title: 'Sécurité & Réseau', items: ['DNS/DHCP ISC Bind', 'Hardening OS (CIS)', 'VPN & PKI OpenSSL', 'Segmentation VLAN L2/L3'] },
-            'devops': { title: 'Cloud & DevOps', items: ['Playbooks & Roles Ansible', 'Docker Compose', 'OpenStack Nova/Swift', 'CI/CD Pipelines'] },
-            'sysadmin': { title: 'Systèmes & BDD', items: ['Debian/RHEL/AlmaLinux', 'Windows Server & GPO', 'PostgreSQL High Availability', 'Supervision Zabbix'] }
+            'reseau': { title: 'Sécurité & Réseau', items: ['Administration DNS / DHCP', 'Firewalls pfSense', 'VPN, Radius & PKI', 'Segmentation VLAN'] },
+            'devops': { title: 'Cloud & DevOps', items: ['Ansible Automation', 'Docker & OpenStack', 'Pipelines CI/CD', 'Virtualisation Proxmox'] },
+            'sysadmin': { title: 'Systèmes & BDD', items: ['Admin Linux & Windows Server', 'Active Directory', 'MySQL & Postgres', 'Supervision Zabbix/Grafana'] }
         };
 
         function openSkillModal(cat) {
