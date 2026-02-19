@@ -17,112 +17,102 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        body { 
-            background-color: var(--bg);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- FOND DESIGN PROFESSIONNEL --- */
+        /* --- AMBIENT BACKGROUND --- */
         .ambient-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 10% 10%, rgba(34, 211, 238, 0.03) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 40%);
+                radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
             z-index: -1;
         }
 
-        /* --- HEADER BLUR --- */
+        /* --- HEADER --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1.2rem 10%;
-            position: sticky; top: 0; 
-            background: rgba(3, 7, 18, 0.6);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
+            padding: 1.2rem 10%; position: sticky; top: 0; 
+            background: rgba(3, 7, 18, 0.6); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); z-index: 1000;
         }
         .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; }
         .logo span { color: var(--accent); }
         nav ul { display: flex; list-style: none; gap: 2.5rem; }
-        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; transition: 0.3s; }
+        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
 
         /* --- HERO --- */
-        .hero { 
-            padding: 120px 10% 80px; 
-            text-align: center; 
-            background: radial-gradient(circle at center, rgba(34, 211, 238, 0.05) 0%, transparent 70%);
-        }
+        .hero { padding: 100px 10% 60px; text-align: center; }
         .hero-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem; color: var(--accent);
-            border: 1px solid rgba(34, 211, 238, 0.3);
-            padding: 4px 12px; border-radius: 100px;
-            text-transform: uppercase; letter-spacing: 2px;
-            margin-bottom: 2rem; display: inline-block;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent);
+            border: 1px solid rgba(34, 211, 238, 0.3); padding: 4px 12px; border-radius: 100px;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem; display: inline-block;
         }
-        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 1.5rem; }
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 1.5rem; }
         .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2.5rem; }
-        
-        .btn { 
-            padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; 
-            font-size: 0.9rem; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px;
-        }
+
+        .btn { padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; }
         .btn-primary { background: var(--text-main); color: var(--bg); }
-        .btn-primary:hover { transform: scale(1.02); opacity: 0.9; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 
         /* --- SECTIONS --- */
         section { padding: 80px 10%; max-width: 1400px; margin: 0 auto; }
-        h2 { font-size: 2rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 2.5rem; }
+        h2 { font-size: 2rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 2rem; }
 
-        /* --- FEATURED CARD (ASSURMIX) --- */
-        .featured-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 3rem;
-            display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem;
-            align-items: center;
+        /* --- WHOAMI & STATS --- */
+        .whoami-container { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .stat-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; text-align: center; }
+        .stat-card h4 { color: var(--accent); font-size: 2.2rem; font-weight: 800; }
+        .stat-card p { color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Bloc JSON stylisé */
+        .json-block {
+            background: #010409; border: 1px solid var(--border); padding: 25px; border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.7;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
         }
-        .tag-row { display: flex; gap: 8px; margin: 1.5rem 0; }
-        .tag { font-size: 0.7rem; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); }
+        .j-key { color: #79c0ff; }
+        .j-val { color: #a5d6ff; }
+        .j-bool { color: #ff7b72; }
 
-        /* --- SKILLS GRID --- */
+        /* --- FEATURED PROJECT --- */
+        .featured-box {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 3rem;
+            display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        .featured-box::before {
+            content: "PROJET PHARE"; position: absolute; top: 15px; left: 15px;
+            font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--accent); opacity: 0.6;
+        }
+        .tag { font-size: 0.7rem; background: rgba(255,255,255,0.03); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); margin-right: 8px; }
+
+        /* --- SKILLS --- */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .skill-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 2rem; border-radius: 12px;
+            background: var(--card-bg); border: 1px solid var(--border); padding: 2.5rem; border-radius: 16px;
             transition: 0.3s; cursor: pointer;
         }
-        .skill-card:hover { border-color: rgba(34, 211, 238, 0.4); background: rgba(17, 24, 39, 0.6); }
-        .skill-card i { color: var(--accent); font-size: 1.2rem; margin-bottom: 1.2rem; }
-        .skill-card h3 { font-size: 1.1rem; margin-bottom: 1rem; }
-        .skill-card ul { list-style: none; color: var(--text-muted); font-size: 0.85rem; }
-        .skill-card li { margin-bottom: 6px; }
+        .skill-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .skill-card i { color: var(--accent); font-size: 1.5rem; margin-bottom: 1.5rem; }
 
         /* --- PARTNERS --- */
-        .partners-row { display: flex; justify-content: center; gap: 6rem; filter: grayscale(1); opacity: 0.5; transition: 0.5s; }
-        .partners-row:hover { filter: grayscale(0); opacity: 1; }
-        .partners-row img { height: 45px; width: auto; }
+        .partners-row { display: flex; justify-content: center; gap: 5rem; opacity: 0.4; filter: grayscale(1); transition: 0.5s; }
+        .partners-row:hover { opacity: 1; filter: grayscale(0); }
+        .partners-row img { height: 40px; width: auto; }
 
         /* --- FOOTER --- */
         footer { padding: 4rem 10% 2rem; border-top: 1px solid var(--border); margin-top: 4rem; }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
-        .footer-bottom { border-top: 1px solid var(--border); padding-top: 2rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); }
+        .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); }
 
         /* MODAL */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 2000; }
-        .modal-content { background: #111827; border: 1px solid var(--border); width: 90%; max-width: 500px; margin: 10% auto; padding: 3rem; border-radius: 20px; }
-        #modalList { margin: 1.5rem 0; }
-        #modalList li { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; list-style: none; display: flex; gap: 10px; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 2000; }
+        .modal-content { background: #0d1117; border: 1px solid var(--border); width: 90%; max-width: 500px; margin: 10% auto; padding: 3rem; border-radius: 24px; }
+        #modalList li { padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; list-style: none; }
 
         @media (max-width: 900px) {
-            .featured-box { grid-template-columns: 1fr; padding: 2rem; }
-            .footer-grid { grid-template-columns: 1fr; }
+            .whoami-container, .featured-box { grid-template-columns: 1fr; }
             nav { display: none; }
         }
     </style>
@@ -145,29 +135,48 @@
 
     <main>
         <section class="hero">
-            <span class="hero-tag">System Architect & DevOps</span>
-            <h1>L'ingénierie Cloud <br>sans compromis.</h1>
-            <p>Conception d'infrastructures hautement disponibles et automatisation avancée des processus de déploiement.</p>
-            <div class="btn-group">
-                <a href="pages/projets.html" class="btn btn-primary">Consulter le portfolio <i class="fas fa-chevron-right"></i></a>
+            <span class="hero-tag">Infrastructure Architect</span>
+            <h1>L'ingénierie Cloud <br>nouvelle génération.</h1>
+            <p>Conception de systèmes résilients et automatisation de bout en bout pour infrastructures critiques.</p>
+            <a href="pages/projets.html" class="btn btn-primary">Voir les réalisations <i class="fas fa-chevron-right"></i></a>
+        </section>
+
+        <section id="whoami">
+            <div class="whoami-container">
+                <div>
+                    <h2>Profil & <span style="color: var(--accent)">Philosophie</span></h2>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">Architecte passionné par l'Open Source, je transforme les contraintes techniques en solutions scalables. Mon code et mes designs d'infrastructure visent la simplicité et la robustesse.</p>
+                    <div class="json-block">
+                        <span style="color: #8b949e;">// Identity script</span><br>
+                        {<br>
+                        &nbsp;&nbsp;<span class="j-key">"name"</span>: <span class="j-val">"Nicolas Blin"</span>,<br>
+                        &nbsp;&nbsp;<span class="j-key">"role"</span>: <span class="j-val">"System Architect"</span>,<br>
+                        &nbsp;&nbsp;<span class="j-key">"specialties"</span>: [<span class="j-val">"Cloud"</span>, <span class="j-val">"DevOps"</span>, <span class="j-val">"Security"</span>],<br>
+                        &nbsp;&nbsp;<span class="j-key">"available_for_hire"</span>: <span class="j-bool">true</span><br>
+                        }
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card"><h4>5+</h4><p>Années d'Exp</p></div>
+                    <div class="stat-card"><h4>50+</h4><p>Deployments</p></div>
+                    <div class="stat-card"><h4>100%</h4><p>Automated</p></div>
+                    <div class="stat-card"><h4>M1</h4><p>Expert SI</p></div>
+                </div>
             </div>
         </section>
 
         <section>
-            <h2>Projet Phare</h2>
             <div class="featured-box">
                 <div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Refonte Intranet Assurmix</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Optimisation d'une infrastructure métier critique. Passage d'une gestion manuelle à une orchestration totale via Ansible sous environnement Debian sécurisé.</p>
-                    <div class="tag-row">
-                        <span class="tag">Ansible</span>
-                        <span class="tag">Security Hardening</span>
-                        <span class="tag">Infrastructure as Code</span>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Refonte Intranet Assurmix</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Migration d'un environnement legacy vers une architecture conteneurisée et orchestrée par Ansible sous Debian sécurisé.</p>
+                    <div style="margin-bottom: 1.5rem;">
+                        <span class="tag">Ansible</span><span class="tag">Docker</span><span class="tag">Hardening</span>
                     </div>
-                    <a href="pages/projets.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">VOIR L'ÉTUDE DE CAS →</a>
+                    <a href="pages/projets.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none; letter-spacing: 1px;">DÉCOUVRIR LE PROJET →</a>
                 </div>
-                <div style="background: rgba(34, 211, 238, 0.03); border: 1px solid var(--border); padding: 2rem; border-radius: 12px; text-align: center;">
-                    <i class="fas fa-network-wired" style="font-size: 4rem; color: var(--accent); opacity: 0.5;"></i>
+                <div style="background: rgba(34, 211, 238, 0.02); border: 1px solid var(--border); padding: 3rem; border-radius: 12px; text-align: center;">
+                    <i class="fas fa-network-wired" style="font-size: 3.5rem; color: var(--accent); opacity: 0.4;"></i>
                 </div>
             </div>
         </section>
@@ -178,31 +187,31 @@
                 <div class="skill-card" onclick="openSkillModal('reseau')">
                     <i class="fas fa-shield-halved"></i>
                     <h3>Sécurité & Réseau</h3>
-                    <ul>
-                        <li>Architecture VLAN / Routage</li>
-                        <li>Firewalling pfSense & ACL</li>
+                    <ul style="pointer-events: none;">
+                        <li>• Architecture VLAN & Routage</li>
+                        <li>• Firewalling & ACL</li>
                     </ul>
                 </div>
                 <div class="skill-card" onclick="openSkillModal('devops')">
                     <i class="fas fa-infinity"></i>
                     <h3>Cloud & DevOps</h3>
-                    <ul>
-                        <li>Automatisation Ansible</li>
-                        <li>Conteneurisation Docker</li>
+                    <ul style="pointer-events: none;">
+                        <li>• Automatisation Ansible</li>
+                        <li>• Orchestration OpenStack</li>
                     </ul>
                 </div>
                 <div class="skill-card" onclick="openSkillModal('sysadmin')">
                     <i class="fas fa-server"></i>
                     <h3>Systèmes & BDD</h3>
-                    <ul>
-                        <li>Admin Linux (Ubuntu/Alma)</li>
-                        <li>PostgreSQL & MariaDB</li>
+                    <ul style="pointer-events: none;">
+                        <li>• Administration Linux/Unix</li>
+                        <li>• Clusters de Données</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section>
+        <section style="padding-top: 40px;">
             <div class="partners-row">
                 <img src="image/dgfip.jfif" alt="DGFIP">
                 <img src="image/innosys.jfif" alt="Innosys">
@@ -212,44 +221,27 @@
 
     <div id="skillModal" class="modal">
         <div class="modal-content">
-            <h2 id="modalTitle" style="margin-bottom: 0.5rem;"></h2>
+            <h2 id="modalTitle"></h2>
             <ul id="modalList"></ul>
             <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; cursor:pointer;" onclick="closeSkillModal()">Fermer</button>
         </div>
     </div>
 
     <footer>
-        <div class="footer-grid">
-            <div>
-                <div class="logo" style="margin-bottom: 1.5rem;">Nicolas<span>.arch</span></div>
-                <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 300px;">Architecte SI spécialisé dans la résilience et l'automatisation des infrastructures.</p>
-            </div>
-            <div>
-                <h4 style="margin-bottom: 1.5rem;">Exploration</h4>
-                <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);">
-                    <li style="margin-bottom: 10px;"><a href="pages/parcours.html" style="color: inherit; text-decoration: none;">Parcours</a></li>
-                    <li style="margin-bottom: 10px;"><a href="pages/projets.html" style="color: inherit; text-decoration: none;">Projets</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 style="margin-bottom: 1.5rem;">Contact</h4>
-                <div style="display: flex; gap: 15px;">
-                    <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
-                </div>
-            </div>
-        </div>
         <div class="footer-bottom">
-            <p>© 2026 Nicolas Blin | Expert SI</p>
-            <p>Design & Code par l'auteur</p>
+            <p>© 2026 Nicolas Blin | Architecture & Cloud</p>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: inherit;"><i class="fab fa-linkedin"></i></a>
+                <a href="#" style="color: inherit;"><i class="fab fa-github"></i></a>
+            </div>
         </div>
     </footer>
 
     <script>
         const skillData = {
-            'reseau': { title: 'Sécurité & Réseau', items: ['Administration DNS/DHCP', 'Hardening OS (CIS)', 'VPN & PKI', 'Segmentation VLAN'] },
-            'devops': { title: 'Cloud & DevOps', items: ['Playbooks Ansible', 'Docker Compose', 'OpenStack Nova/Swift', 'CI/CD GitHub Actions'] },
-            'sysadmin': { title: 'Systèmes & BDD', items: ['Debian/RHEL Administration', 'Windows Server & GPO', 'PostgreSQL clusters', 'Monitoring Zabbix'] }
+            'reseau': { title: 'Sécurité & Réseau', items: ['DNS/DHCP ISC Bind', 'Hardening OS (CIS)', 'VPN & PKI OpenSSL', 'Segmentation VLAN L2/L3'] },
+            'devops': { title: 'Cloud & DevOps', items: ['Playbooks & Roles Ansible', 'Docker Compose', 'OpenStack Nova/Swift', 'CI/CD Pipelines'] },
+            'sysadmin': { title: 'Systèmes & BDD', items: ['Debian/RHEL/AlmaLinux', 'Windows Server & GPO', 'PostgreSQL High Availability', 'Supervision Zabbix'] }
         };
 
         function openSkillModal(cat) {
