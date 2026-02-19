@@ -101,7 +101,16 @@
         .partner-item span { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
 
         /* --- FOOTER --- */
-        footer { padding: 4rem 10% 2rem; border-top: 1px solid var(--border); margin-top: 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); }
+        footer { padding: 4rem 8% 2rem; background: rgba(11, 17, 32, 0.95); border-top: 1px solid var(--border); margin-top: 5rem; backdrop-filter: blur(5px); }
+        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; }
+        .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-top: 2rem; }
 
         /* MODAL */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 2000; }
