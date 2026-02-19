@@ -46,6 +46,13 @@
         h1 { font-size: 3rem; margin-bottom: 1rem; }
         .subtitle { color: var(--text-muted); margin-bottom: 3rem; max-width: 600px; margin-inline: auto; }
 
+        /* --- BREADCRUMB --- */
+        .breadcrumb { display: flex; align-items: center; gap: 10px; padding: 1.5rem 8% 0; font-size: 0.85rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .breadcrumb a:hover { color: var(--accent); }
+        .breadcrumb i { font-size: 0.7rem; opacity: 0.5; }
+        .breadcrumb span { color: var(--accent); font-weight: 600; }
+
         /* CONTACT CARDS */
         .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
         .contact-card {
@@ -130,6 +137,12 @@
             </ul>
         </nav>
     </header>
+
+    <nav class="breadcrumb">
+        <a href="https://nblinpro.github.io/portfolio/index.html">Accueil</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Projets</span>
+    </nav>
 
     <main>
         <div class="hero-tag"><i class="far fa-envelope"></i> PRENONS CONTACT</div>
