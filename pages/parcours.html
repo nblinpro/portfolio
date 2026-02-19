@@ -35,6 +35,13 @@
         nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
 
+        /* --- BREADCRUMB --- */
+        .breadcrumb { display: flex; align-items: center; gap: 10px; padding: 1.5rem 8% 0; font-size: 0.85rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .breadcrumb a:hover { color: var(--accent); }
+        .breadcrumb i { font-size: 0.7rem; opacity: 0.5; }
+        .breadcrumb span { color: var(--accent); font-weight: 600; }
+        
         /* HERO */
         .hero { padding: 4rem 8% 2rem; text-align: center; }
         .hero-tag {
@@ -163,6 +170,12 @@
             </ul>
         </nav>
     </header>
+    
+    <nav class="breadcrumb">
+        <a href="https://nblinpro.github.io/portfolio/index.html">Accueil</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Parcours</span>
+    </nav>
 
     <main>
         <section class="hero">
