@@ -130,7 +130,7 @@
 
 <body>
 
-    <header>
+  <header>
         <div class="logo">Nicolas<span>.SI</span></div>
         <nav>
             <ul>
@@ -140,37 +140,48 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-    </header>
+  </header>
 
-    <nav class="breadcrumb">
+  <nav class="breadcrumb">
         <a href="../index.html">Accueil</a>
         <i class="fas fa-chevron-right"></i>
         <span>Projets</span>
-    </nav>
+  </nav>
 
-    <main>
-        <section class="hero">
-            <span class="hero-tag">PORTFOLIO</span>
-            <h1>Projets & <span style="color:var(--accent)">Réalisations</span></h1>
-            <p style="color: var(--text-muted); margin-top: 10px;">Cliquez sur une période pour explorer les missions associées.</p>
-        </section>
-
-        <div class="timeline-year" onclick="toggleAccordion(this)">
-            <i class="fas fa-calendar-alt"></i> M1 Cloud, Infrastructure et Sécurité
-            <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
-        </div>
-        <div class="accordion-content collapsed">
-            <div class="grid">
-                <article class="card">
-                    <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
-                    <h3>Expert Architecture S.I</h3>
-                    <span class="org-name">Innosys</span>
-                    <ul>
-                        <li>Refonte intranet Assurmix</li>
-                        <li>Déploiement d'une application métier via Ansible/Ansistrano</li>
-                        <li>Mise en place de systèmes de monitoring</li>
-                    </ul>
-                    <div class="tags"><span class="tag">Ansible</span><span class="tag">Samba</span></div>
+  <main>
+    <section class="hero">
+      <span class="hero-tag">PORTFOLIO</span>
+      <h1>Projets & <span style="color:var(--accent)">Réalisations</span></h1>
+      <p style="color: var(--text-muted); margin-top: 10px;">Cliquez sur une période pour explorer les missions associées.</p>
+    </section>
+    <div class="timeline-year" onclick="toggleAccordion(this)">
+      <i class="fas fa-calendar-alt"></i> M1 Cloud, Infrastructure et Sécurité
+      <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
+    </div>
+    <div class="accordion-content collapsed">
+      <div class="grid">
+          <article class="card">
+            <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
+            <h3>Expert Architecture S.I</h3>
+            <span class="org-name">Innosys</span>
+            <ul>
+              <li>Refonte intranet Assurmix</li>
+              <li>Déploiement d'une application métier via Ansible/Ansistrano</li>
+              <li>Mise en place de systèmes de monitoring</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Ansible</span>
+              <span class="tag">Samba</span>
+              <span class="tag">Ansistrano</span>
+              <span class="tag">Apache</span>
+              <span class="tag">Github</span>
+              <span class="tag">Centreon</span>
+              <span class="tag">Prometheus</span>
+              <span class="tag">Grafana</span>
+              <span class="tag">Nagios</span>
+              <span class="tag">Ovh Cloud</span>
+              <span class="tag">Nordnet</span>
+      </div>
                     <button class="btn btn-outline" onclick="openModal('innosys')">Voir le détail</button>
                 </article>
 
@@ -197,7 +208,7 @@
                 <article class="card">
                     <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
                     <h3>Assistant de Proximité</h3>
-                    <span class="org-name">DGFIP</span>
+                    <span class="org-name">Direction Générale des Finances Publiques</span>
                     <ul>
                         <li>Projet de densification de la Direction des Contrôles Fiscaux (DIRCOFI)</li>
                         <li>Transition vers la téléphonie sur IP: mise en œuvre sur système ToIP</li>
@@ -339,6 +350,8 @@
                 ], 
                 link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/company.html" 
             },
+            
+
             ynov1: { 
                 title: "Expert Cloud & Sécurité", 
                 badge: "Projet Académique", 
