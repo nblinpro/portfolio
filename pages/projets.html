@@ -325,13 +325,104 @@
 
     <script>
         const projects = {
-            innosys: { title: "Expert Architecture S.I", badge: "Entreprise (Alternance)", badgeClass: "type-company", sub: "Innosys - Refonte intranet Assurmix", desc: "Modernisation de l'infrastructure pour supporter la croissance des services intranet.", tasks: ["Migration vers le Cloud", "Automatisation avec Ansible", "Sécurisation des accès"], link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/company.html" },
-            ynov1: { title: "Expert Cloud & Sécurité", badge: "Projet Académique", badgeClass: "type-school", sub: "Ynov Campus de Paris", desc: "Déploiement d'une infrastructure OpenStack complète.", tasks: ["Configuration Nova", "Gestion du stockage Swift", "Optimisation des Flavors"], link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/mastere.html" },
-            dgfip3: { title: "Assistant de Proximité", badge: "Entreprise (Alternance)", badgeClass: "type-company", sub: "DGFIP - Densification Réseau", desc: "Amélioration de l'infrastructure réseau et passage à la ToIP.", tasks: ["Migration ToIP", "Densification des switchs", "Support utilisateur"], link: "#" },
-            but3: { title: "IoT & Architectures Hybrides", badge: "Projet Académique", badgeClass: "type-school", sub: "Ynov Campus", desc: "Étude des réseaux IoT et des architectures hybrides.", tasks: ["Conception maison connectée", "Qualification réseaux"], link: "#" },
-            dgfip2: { title: "Assistant de Proximité", badge: "Entreprise (Alternance)", badgeClass: "type-company", sub: "DGFIP - Déploiement GestSup", desc: "Recensement et audit des commutateurs réseaux.", tasks: ["Déploiement GestSup", "Audit switchs non-PoE", "Intégration nouveaux services"], link: "#" },
-            but2: { title: "Transmission & Dév.", badge: "Projet Académique", badgeClass: "type-school", sub: "Ynov Campus", desc: "Apprentissage des couches physiques et applicatives.", tasks: ["Système de transmission", "Applications communicantes"], link: "#" },
-            but1: { title: "Fondamentaux Réseaux", badge: "Projet Académique", badgeClass: "type-school", sub: "BUT Réseaux & Télécoms", desc: "Apprentissage des bases de l'adressage et de la commutation.", tasks: ["Architecture LAN PME", "Création de site vitrine", "Mesures de signaux physiques"], link: "#" }
+            innosys: { 
+                title: "Expert Architecture S.I", 
+                badge: "Entreprise (Alternance)", 
+                badgeClass: "type-company", 
+                sub: "Entreprise : Innosys - Missions SI & DevOps", 
+                desc: "Intervention sur l'infrastructure critique d'Innosys. Ma mission principale consiste à moderniser, automatiser et superviser les environnements serveurs.", 
+                tasks: [
+                    "Refonte de l'Intranet Assurmix (Migration et sécurisation)",
+                    "Automatisation du déploiement via Ansible (Infrastructure as Code)",
+                    "Mise en place d'une stack de Monitoring complète (Prometheus, Grafana, cAdvisor)",
+                    "Conteneurisation des services métiers avec Docker & Docker Compose"
+                ], 
+                link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/company.html" 
+            },
+            ynov1: { 
+                title: "Expert Cloud & Sécurité", 
+                badge: "Projet Académique", 
+                badgeClass: "type-school", 
+                sub: "Ynov Campus de Paris - Mastère 1", 
+                desc: "Conception et administration d'une infrastructure Cloud privée basée sur la solution OpenStack.", 
+                tasks: [
+                    "Déploiement des services Compute (Nova) et Networking (Neutron)",
+                    "Configuration du stockage objet avec OpenStack Swift",
+                    "Gestion des images serveurs et optimisation des Flavors (gabarits de ressources)",
+                    "Sécurisation des accès instances et gestion des Keypairs"
+                ], 
+                link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/mastere.html" 
+            },
+            dgfip3: { 
+                title: "Assistant de Proximité", 
+                badge: "Entreprise (Alternance)", 
+                badgeClass: "type-company", 
+                sub: "DGFIP - Densification Réseau & ToIP", 
+                desc: "Support et évolution de l'infrastructure réseau pour la Direction des Contrôles Fiscaux (DIRCOFI).", 
+                tasks: [
+                    "Projet de densification réseau (brassage, installation de switchs L3)",
+                    "Migration de la téléphonie classique vers une solution ToIP (Voix sur IP)",
+                    "Gestion des incidents réseaux de niveau 2 sur le parc départemental",
+                    "Configuration d'équipements actifs (VLANs, Trunks)"
+                ], 
+                link: "#" 
+            },
+            but3: { 
+                title: "IoT & Architectures Hybrides", 
+                badge: "Projet Académique", 
+                badgeClass: "type-school", 
+                sub: "IUT de Blois - 3ème année BUT R&T", 
+                desc: "Étude et mise en œuvre d'objets connectés intégrés à des architectures réseaux hybrides.", 
+                tasks: [
+                    "Fabrication d'une maison connectée modulaire (maquette)",
+                    "Mise en place d'une infrastructure MQTT pour la communication des capteurs",
+                    "Projet RGB Light : Pilotage distant de luminaires via interface web",
+                    "Qualification de la portée et de la sécurité des réseaux LoRaWAN"
+                ], 
+                link: "#" 
+            },
+            dgfip2: { 
+                title: "Assistant de Proximité", 
+                badge: "Entreprise (Alternance)", 
+                badgeClass: "type-company", 
+                sub: "DGFIP - Déploiement GestSup", 
+                desc: "Audit du parc réseau et mise en place d'outils de gestion de parc et de support utilisateur.", 
+                tasks: [
+                    "Étude et déploiement de l'outil de ticketing Open Source GestSup",
+                    "Inventaire complet et audit des commutateurs (Switchs) non-PoE",
+                    "Intégration du nouveau service 'Action Sociale' dans l'architecture réseau",
+                    "Support informatique de proximité aux agents de la DGFIP"
+                ], 
+                link: "#" 
+            },
+            but2: { 
+                title: "Transmission & Dév.", 
+                badge: "Projet Académique", 
+                badgeClass: "type-school", 
+                sub: "IUT de Blois - 2ème année BUT R&T", 
+                desc: "Apprentissage des fondamentaux de la programmation réseau et de la transmission de données.", 
+                tasks: [
+                    "Développement d'applications communicantes en Python/C",
+                    "Mise en œuvre d'un système de transmission point à point",
+                    "Analyse de trames et protocoles via Wireshark",
+                    "Étude de la modulation et caractérisation des signaux physiques"
+                ], 
+                link: "#" 
+            },
+            but1: { 
+                title: "Fondamentaux Réseaux", 
+                badge: "Projet Académique", 
+                badgeClass: "type-school", 
+                sub: "BUT Réseaux & Télécoms - 1ère année", 
+                desc: "Introduction à l'architecture des réseaux informatiques et au développement web.", 
+                tasks: [
+                    "Conception et adressage du réseau local (LAN) d'une PME",
+                    "Simulation réseau via l'outil Cisco Packet Tracer",
+                    "Création d'un site web vitrine (HTML/CSS)",
+                    "Bases de l'administration système Linux"
+                ], 
+                link: "#" 
+            }
         };
 
         function toggleAccordion(header) {
