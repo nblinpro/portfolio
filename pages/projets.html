@@ -19,10 +19,8 @@
             --border: #1e293b;
             --radius: 12px;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
-
         /* --- HEADER --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
@@ -34,21 +32,17 @@
         nav ul { display: flex; list-style: none; gap: 2rem; }
         nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
-
         /* --- BREADCRUMB --- */
         .breadcrumb { display: flex; align-items: center; gap: 10px; padding: 1.5rem 8% 0; font-size: 0.85rem; color: var(--text-muted); }
         .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
         .breadcrumb a:hover { color: var(--accent); }
         .breadcrumb i { font-size: 0.7rem; opacity: 0.5; }
         .breadcrumb span { color: var(--accent); font-weight: 600; }
-
         /* --- HERO --- */
         .hero { padding: 4rem 8% 2rem; text-align: center; }
         .hero-tag { background: rgba(34, 211, 238, 0.1); color: var(--accent); padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 1rem; display: inline-block; }
         h1 { font-size: 2.8rem; margin-bottom: 1rem; }
-
         main { padding: 2rem 8% 5rem; max-width: 1400px; margin: 0 auto; }
-
         /* --- ACCORDION SYSTEM --- */
         .timeline-year {
             display: flex; align-items: center; gap: 1rem;
@@ -62,7 +56,6 @@
         .timeline-year::after { content: ''; flex: 1; height: 1px; background: var(--border); }
         .timeline-year i.fa-chevron-down { font-size: 0.9rem; transition: transform 0.4s ease; color: var(--text-muted); }
         .timeline-year.active i.fa-chevron-down { transform: rotate(180deg); color: var(--accent); }
-
         .accordion-content {
             max-height: 2000px; 
             overflow: hidden;
@@ -70,35 +63,28 @@
             opacity: 1;
         }
         .accordion-content.collapsed { max-height: 0; opacity: 0; pointer-events: none; }
-
         /* --- GRID & CARDS --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; padding: 1rem 0; }
         .card { background: var(--bg-card); border: 1px solid var(--border); padding: 2rem; border-radius: var(--radius); transition: 0.3s; display: flex; flex-direction: column; }
         .card:hover { border-color: var(--accent); transform: translateY(-5px); background: var(--bg-card-hover); }
-
         .badge-type { font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 6px; text-transform: uppercase; border: 1px solid currentColor; }
         .type-company { color: #a78bfa; }
         .type-school { color: #3b82f6; }
-
         .org-name { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; display: block; }
         .card ul { list-style: none; margin-bottom: 2rem; flex-grow: 1; }
         .card ul li { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
         .card ul li::before { content: "•"; color: var(--accent); }
-
         .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
         .tag { background: rgba(34, 211, 238, 0.05); color: var(--accent); padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid var(--border); }
-
         .btn { padding: 0.6rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 600; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-outline { border: 1px solid var(--border); color: var(--text-main); background: transparent; }
         .btn-outline:hover { background: var(--accent); color: #000; border-color: var(--accent); }
         .btn-primary { background: var(--accent); color: #000; border: none; }
-
         /* MODALE */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(8px); }
         .modal-content { background: var(--bg-card); margin: 5% auto; padding: 2.5rem; border: 1px solid var(--border); width: 90%; max-width: 600px; border-radius: 15px; }
         .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
         .close-modal { cursor: pointer; font-size: 1.5rem; color: var(--text-muted); }
-
         footer { 
             padding: 4rem 8% 2rem; background: var(--bg-card); border-top: 1px solid var(--border); margin-top: 5rem;
         }
@@ -119,7 +105,6 @@
             text-decoration: none; transition: 0.3s;
         }
         .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(34, 211, 238, 0.05); }
-
         .footer-bottom { 
             padding-top: 2rem; border-top: 1px solid var(--border); 
             display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);
@@ -181,25 +166,38 @@
               <span class="tag">Nagios</span>
               <span class="tag">Ovh Cloud</span>
               <span class="tag">Nordnet</span>
-      </div>
-                    <button class="btn btn-outline" onclick="openModal('innosys')">Voir le détail</button>
-                </article>
-
-                <article class="card">
-                    <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                    <h3>Expert en cloud & sécurité</h3>
-                    <span class="org-name">Ynov Campus de Paris</span>
-                    <ul>
-                        <li>Openstack (Nova, Swift, Flavor)</li>
-                        <li>A venir ...</li>
-                    </ul>
-                    <div class="tags"><span class="tag">Openstack</span><span class="tag">Cloud</span></div>
-                    <button class="btn btn-outline" onclick="openModal('ynov1')">Voir le détail</button>
-                </article>
             </div>
-        </div>
-
-        <div class="timeline-year" onclick="toggleAccordion(this)">
+            <button class="btn btn-outline" onclick="openModal('innosys')">Voir le détail</button>
+          </article>
+          <article class="card">
+            <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
+            <h3>Expert en cloud & sécurité</h3>
+            <span class="org-name">Ynov Campus de Paris</span>
+            <ul>
+              <li>Openstack (Nova, Swift, Flavor)</li>
+              <li>A venir ...</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Openstack</span>
+              <span class="tag">Cloud</span>
+              <span class="tag">kolla-ansible</span>
+              <span class="tag">Nova</span>
+              <span class="tag">Neutron</span>
+              <span class="tag">Horizon</span>
+              <span class="tag">Cinder</span>
+              <span class="tag">Octavia</span>
+              <span class="tag">Swift</span>
+              <span class="tag">Glance</span>
+              <span class="tag">Keystone</span>
+              <span class="tag">Ubuntu 24.04</span>
+              <span class="tag">Debian 13</span>
+              <span class="tag">Cirros</span>
+            </div>
+            <button class="btn btn-outline" onclick="openModal('ynov1')">Voir le détail</button>
+          </article>
+      </div>
+    </div>
+    <div class="timeline-year" onclick="toggleAccordion(this)">
             <i class="fas fa-calendar-alt"></i> 3ème Année BUT R&T
             <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
         </div>
@@ -216,7 +214,6 @@
                     <div class="tags"><span class="tag">ToIP</span><span class="tag">Réseau</span></div>
                     <button class="btn btn-outline" onclick="openModal('dgfip3')">Voir le détail</button>
                 </article>
-
                 <article class="card">
                     <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
                     <h3>IoT & Architectures Hybrides</h3>
@@ -231,7 +228,6 @@
                 </article>
             </div>
         </div>
-
         <div class="timeline-year" onclick="toggleAccordion(this)">
             <i class="fas fa-calendar-alt"></i> 2ème Année BUT R&T
             <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
@@ -250,7 +246,6 @@
                     <div class="tags"><span class="tag">GestSup</span><span class="tag">Support</span></div>
                     <button class="btn btn-outline" onclick="openModal('dgfip2')">Voir le détail</button>
                 </article>
-
                 <article class="card">
                     <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
                     <h3>Transmission & Dév.</h3>
@@ -264,7 +259,6 @@
                 </article>
             </div>
         </div>
-
         <div class="timeline-year" onclick="toggleAccordion(this)">
             <i class="fas fa-calendar-alt"></i> 1ère Année BUT R&T
             <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
@@ -286,7 +280,6 @@
             </div>
         </div>
     </main>
-
     <div id="projectModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -305,7 +298,6 @@
             </div>
         </div>
     </div>
-
     <footer>
         <div class="footer-top">
             <div class="footer-col">
@@ -333,7 +325,6 @@
             <p>© 2026 Nicolas Blin | Expert Architecture SI</p>
         </div>
     </footer>
-
     <script>
         const projects = {
             innosys: { 
@@ -350,8 +341,6 @@
                 ], 
                 link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/company.html" 
             },
-            
-
             ynov1: { 
                 title: "Expert Cloud & Sécurité", 
                 badge: "Projet Académique", 
@@ -437,13 +426,11 @@
                 link: "#" 
             }
         };
-
         function toggleAccordion(header) {
             header.classList.toggle('active');
             const content = header.nextElementSibling;
             content.classList.toggle('collapsed');
         }
-
         function openModal(id) {
             const p = projects[id];
             if (!p) return;
@@ -457,7 +444,6 @@
             list.innerHTML = p.tasks.map(t => `<li style="color: var(--text-muted); font-size:0.85rem; margin-bottom:8px; display:flex; align-items:center; gap:10px;"><span style="color:var(--accent)">•</span> ${t}</li>`).join('');
             document.getElementById('projectModal').style.display = 'block';
         }
-
         function closeModal() { document.getElementById('projectModal').style.display = 'none'; }
         window.onclick = function (event) { if (event.target == document.getElementById('projectModal')) closeModal(); }
     </script>
