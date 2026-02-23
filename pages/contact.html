@@ -28,7 +28,13 @@
             padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
             position: sticky; top: 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 100;
         }
-        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .logo { 
+    font-weight: 800; 
+    font-size: 1.2rem; 
+    letter-spacing: -0.5px; 
+    text-decoration: none; /* Supprime le soulignement bleu par défaut */
+    color: var(--text-main); /* Garde la couleur blanche du texte */
+}
         .logo span { color: var(--accent); }
         nav ul { display: flex; list-style: none; gap: 2rem; }
         nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
@@ -127,7 +133,7 @@
 <body>
 
     <header>
-        <div href="../index.html" class="logo">Nicolas<span>.SI</span></div>
+        <div><a href="index.html" class="logo">Nicolas<span>.SI</span></a></div>
         <nav>
             <ul>
                 <li><a href="../index.html">Accueil</a></li>
