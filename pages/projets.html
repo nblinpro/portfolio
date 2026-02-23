@@ -1,503 +1,139 @@
-< !DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Nicolas Blin | Portfolio Architecture SI & Cloud</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"><style> :root {
-    --bg: #030712;
-    --card-bg: rgba(17, 24, 39, 0.4);
-    --border: rgba(255, 255, 255, 0.08);
-    --accent: #22d3ee;
-    --text-main: #f3f4f6;
-    --text-muted: #9ca3af;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-body {
-    background-color: var(--bg);
-    color: var(--text-main);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-/* --- BACKGROUND DESIGN --- */
-.ambient-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
-    z-index: -1;
-}
-
-
-/* --- HEADER --- */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 8%;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: rgba(2, 6, 23, 0.8);
-    backdrop-filter: blur(10px);
-    z-index: 100;
-}
-
-.logo {
-    font-weight: 800;
-    font-size: 1.4rem;
-    letter-spacing: -1px;
-}
-
-.logo span {
-    color: var(--accent);
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: var(--accent);
-}
-
-/* --- HERO --- */
-.hero {
-    padding: 100px 10% 60px;
-    text-align: center;
-}
-
-.hero-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
-    border: 1px solid rgba(34, 211, 238, 0.3);
-    padding: 4px 12px;
-    border-radius: 100px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 2rem;
-    display: inline-block;
-    background: rgba(34, 211, 238, 0.05);
-}
-
-h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-}
-
-.gradient-text {
-    background: linear-gradient(90deg, #22d3ee, #3b82f6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto 2.5rem;
-}
-
-.btn {
-    padding: 0.8rem 2rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.btn-primary {
-    background: var(--text-main);
-    color: var(--bg);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* --- SECTIONS --- */
-section {
-    padding: 60px 10%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: -1px;
-    margin-bottom: 2.5rem;
-}
-
-/* --- WHOAMI & JSON --- */
-.whoami-container {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 4rem;
-    align-items: center;
-}
-
-.json-block {
-    background: #010409;
-    border: 1px solid var(--border);
-    padding: 25px;
-    border-radius: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    line-height: 1.7;
-}
-
-.j-key {
-    color: #79c0ff;
-}
-
-.j-val {
-    color: #a5d6ff;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-}
-
-.stat-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    padding: 1.5rem;
-    border-radius: 12px;
-    text-align: center;
-}
-
-.stat-card h4 {
-    color: var(--accent);
-    font-size: 2.2rem;
-    font-weight: 800;
-}
-
-.stat-card p {
-    color: var(--text-muted);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-}
-
-/* --- PROJET PHARE --- */
-.featured-box {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 3rem;
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 3rem;
-    align-items: center;
-    position: relative;
-}
-
-.tag {
-    font-size: 0.7rem;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 4px 10px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    margin-right: 8px;
-}
-
-/* --- SKILLS GRID --- */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-.skill-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    padding: 2.5rem;
-    border-radius: 16px;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.skill-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-5px);
-    background: rgba(17, 24, 39, 0.6);
-}
-
-.skill-card i {
-    color: var(--accent);
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.skill-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-}
-
-.skill-card ul {
-    list-style: none;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    pointer-events: none;
-}
-
-.skill-card ul li {
-    margin-bottom: 5px;
-}
-
-/* --- PARTNERS STATIC --- */
-.partners-static {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5rem;
-    padding: 2rem 0;
-}
-
-.partner-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-    transition: 0.3s;
-}
-
-.partner-item:hover {
-    transform: translateY(-5px);
-}
-
-.partner-item img {
-    height: 70px;
-    width: auto;
-    filter: none;
-    opacity: 1;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
-.partner-item span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-/* --- FOOTER --- */
-footer {
-    padding: 4rem 8% 2rem;
-    background: rgba(11, 17, 32, 0.95);
-    border-top: 1px solid var(--border);
-    margin-top: 5rem;
-    backdrop-filter: blur(5px);
-}
-
-.footer-top {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 4rem;
-}
-
-.footer-col h4 {
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
-}
-
-.footer-col ul {
-    list-style: none;
-}
-
-.footer-col a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: 0.3s;
-}
-
-.footer-col a:hover {
-    color: var(--accent);
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.social-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-.footer-bottom {
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-top: 2rem;
-}
-
-/* MODAL */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(15px);
-    z-index: 2000;
-}
-
-.modal-content {
-    background: #0d1117;
-    border: 1px solid var(--border);
-    width: 95%;
-    max-width: 500px;
-    margin: 10% auto;
-    padding: 3rem;
-    border-radius: 24px;
-}
-
-#modalList li {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    gap: 12px;
-    list-style: none;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-}
-
-@media (max-width: 900px) {
-
-    .whoami-container,
-    .featured-box,
-    .partners-static {
-        grid-template-columns: 1fr;
-        flex-direction: column;
-        gap: 3rem;
-    }
-
-    header {
-        padding: 1rem 5%;
-    }
-
-    nav {
-        display: none;
-    }
-}
-
-</style></head><body><div class="ambient-bg"></div><header><div class="logo">Nicolas<span>.SI</span></div><nav><ul><li><a href="#" style="color: var(--accent)">Accueil</a></li><li><a href="pages/parcours.html">Parcours</a></li><li><a href="pages/projets.html">Projets</a></li><li><a href="pages/contact.html">Contact</a></li></ul></nav></header><main><section class="hero"><span class="hero-tag">EXPERT ARCHITECTURE SI</span><h1>Portfolio : Expertise en <br><span class="gradient-text">Architecture & Infrastructures Cloud</span></h1><p>Hub technique regroupant mes réalisations en administration système,
-automatisation IaC et déploiement d'infrastructures critiques.</p>
- <a href="pages/projets.html" class="btn btn-primary">Parcourir mes travaux <i class="fas fa-terminal"></i></a></section><section id="whoami"><div class="whoami-container"><div><h2>Profil & <span style="color: var(--accent)">Philosophie</span></h2><p style="color: var(--text-muted); margin-bottom: 2rem;">Architecte de solutions passionné par l'Open Source, je transforme les contraintes techniques en systèmes scalables et sécurisés par design.</p>
- <div class="json-block"> {
-    <br>&nbsp;
-    &nbsp;
-    <span class="j-key">"role" </span>: <span class="j-val" >"Expert Architecture SI" </span>, <br> &nbsp;
-    &nbsp;
-    <span class="j-key">"specialties" </span>: [<span class="j-val" >"Cloud" </span>, <span class="j-val" >"DevOps" </span>, <span class="j-val" >"Security" </span>], <br> &nbsp;
-    &nbsp;
-    <span class="j-key">"philosophy" </span>: <span class="j-val" >"Infrastructure as Code" </span><br>
-}
-
-</div></div><div class="stats-grid"><div class="stat-card"><h4>5+</h4><p>Années d'Exp</p></div>
- <div class="stat-card"><h4>20+</h4><p>Deployments</p></div><div class="stat-card"><h4>100%</h4><p>Code Driven</p></div><div class="stat-card"><h4>M1</h4><p>Expert SI</p></div></div></div></section><section><div class="featured-box"><div><h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Refonte Intranet Assurmix</h3><p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Modernisation complète de l'architecture intranet. Migration vers un environnement orchestré par Ansible et sécurisation des flux de données critiques.</p>
- <div style="margin-bottom: 1.5rem;"><span class="tag">Ansible</span><span class="tag">Samba</span><span class="tag">Debian</span></div><a href="pages/projets.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">DÉCOUVRIR LE PROJET →</a></div><div style="background: rgba(34, 211, 238, 0.02); border: 1px solid var(--border); padding: 3rem; border-radius: 12px; text-align: center;"><i class="fas fa-network-wired" style="font-size: 3.5rem; color: var(--accent); opacity: 0.4;"></i></div></div></section><section><h2>Expertises Métier</h2><div class="skills-grid"><div class="skill-card" onclick="openSkillModal('reseau')"><i class="fas fa-shield-halved"></i><h3>Réseau & Sécurité</h3><ul><li>• DNS/DHCP & Firewalls</li><li>• VPN,
-Radius & PKI</li></ul></div><div class="skill-card" onclick="openSkillModal('infra')"><i class="fas fa-network-wired"></i><h3>Infrastructure</h3><ul><li>• Switching & Routing</li><li>• Load Balancing</li></ul></div><div class="skill-card" onclick="openSkillModal('devops')"><i class="fas fa-infinity"></i><h3>DevOps & Cloud</h3><ul><li>• Ansible & CI/CD</li><li>• Docker & OpenStack</li></ul></div><div class="skill-card" onclick="openSkillModal('monitoring')"><i class="fas fa-chart-line"></i><h3>Monitoring</h3><ul><li>• Prometheus & Grafana</li><li>• Zabbix & Centreon</li></ul></div><div class="skill-card" onclick="openSkillModal('sysadmin')"><i class="fas fa-server"></i><h3>Systèmes & BDD</h3><ul><li>• Linux & Windows Server</li><li>• PostgreSQL & MariaDB</li></ul></div><div class="skill-card" onclick="openSkillModal('sauvegarde')"><i class="fas fa-database"></i><h3>Sauvegarde & PCA</h3><ul><li>• Stratégies PRA/PCA</li><li>• Backup Externalisé</li></ul></div></div></section><section id="partners"><div style="text-align: center; margin-bottom: 3rem;"><h2 style="font-size: 1.5rem; color: var(--text-muted);">Ils m'ont fait confiance</h2>
- </div><div class="partners-static"><div class="partner-item"><img src="image/dgfip.jfif" alt="DGFIP"><span>DGFIP</span></div><div class="partner-item"><img src="image/innosys.jfif" alt="Innosys"><span>INNOSYS</span></div></div></section></main><div id="skillModal" class="modal"><div class="modal-content"><h2 id="modalTitle" style="margin-bottom: 1rem; color: var(--accent);"></h2><ul id="modalList"></ul><button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; cursor:pointer;" onclick="closeSkillModal()">Fermer</button></div></div><footer><div class="footer-top"><div class="footer-col"><div class="footer-logo">Nicolas<span>.SI</span></div><p style="font-size: 0.9rem; color: var(--text-muted);">Architecte des SI spécialisé dans la conception d'infrastructures hautement disponibles.</p>
- </div><div class="footer-col"><h4>Navigation</h4><ul><li><a href="#">Accueil</a></li><li><a href="pages/parcours.html">Parcours</a></li><li><a href="pages/projets.html">Projets</a></li><li><a href="pages/contact.html">Contact</a></li></ul></div><div class="footer-col"><h4>Contact</h4><div class="social-links"><a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn"><i class="fab fa-linkedin-in"></i></a><a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a></div></div></div><div class="footer-bottom"><p>© 2026 Nicolas Blin | Expert Architecture SI</p></div></footer><script>const skillData= {
-    'reseau': {
-        title: 'Réseau & Sécurité', items: ['Administration DNS / DHCP Bind/ISC', 'Configuration firewalls pfSense & ACL', 'Proxy HAProxy, VPN Radius', 'Gestion Certificats SSL (PKI)']
-    }
-
-    ,
-    'infra': {
-        title: 'Infrastructure', items: ['Switchs HP & Cisco (VLAN/Trunk)', 'WiFi Pro & Routeurs', 'Segmentation L2/L3', 'Redondance réseau']
-    }
-
-    ,
-    'devops': {
-        title: 'Cloud & DevOps', items: ['Ansible (Playbooks & Roles)', 'Conteneurs Docker', 'Cloud OpenStack (Nova, Swift)', 'Pipelines CI/CD GitHub Actions']
-    }
-
-    ,
-    'monitoring': {
-        title: 'Monitoring & Observabilité', items: ['Dashboards Prometheus & Grafana', 'Surveillance Zabbix & Centreon', 'Logs centralisés ELK', 'Alerting & Rapports']
-    }
-
-    ,
-    'sysadmin': {
-        title: 'Systèmes & BDD', items: ['Windows Server & Active Directory', 'Linux (Ubuntu, Debian, RHEL)', 'PostgreSQL, MySQL, MariaDB', 'Scripting Bash & Python']
-    }
-
-    ,
-    'sauvegarde': {
-        title: 'Sauvegarde & PCA', items: ['Stratégies Backup 3-2-1', 'Plans de Reprise d’Activité (PRA)', 'Plans de Continuité (PCA)', 'Externalisation Cloud']
-    }
-}
-
-;
-
-function openSkillModal(cat) {
-    const data=skillData[cat];
-    document.getElementById('modalTitle').innerText=data.title;
-
-    document.getElementById('modalList').innerHTML=data.items.map(i=> `<li><i class="fas fa-check" style="color:var(--accent)" ></i> $ {
-            i
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Réseaux IoT | Nicolas Blin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(17, 24, 39, 0.4);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #22d3ee;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        
+        .ambient-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.05) 0%, transparent 50%);
+            z-index: -1;
         }
 
-        </li>`).join('');
-    document.getElementById('skillModal').style.display='block';
-    document.body.style.overflow='hidden';
-}
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 100;
+        }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+        nav ul { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
 
-function closeSkillModal() {
-    document.getElementById('skillModal').style.display='none';
-    document.body.style.overflow='auto';
-}
+        main { max-width: 1200px; margin: 0 auto; padding: 40px 8% 80px; }
 
-window.onclick=e=> {
-    if(e.target.className==='modal') closeSkillModal();
-}
+        .breadcrumb {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 2rem; font-size: 0.85rem; color: var(--text-muted);
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .breadcrumb a:hover { color: var(--accent); }
 
-</script></body></html>
+        .hero-project { text-align: center; margin-bottom: 60px; }
+        .hero-project h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; line-height: 1.2; }
+        .hero-tag { font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--accent); background: rgba(34, 211, 238, 0.1); padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(34, 211, 238, 0.3); margin-bottom: 1.5rem; display: inline-block; }
+
+        .section-title { font-size: 1.6rem; font-weight: 700; margin: 60px 0 30px; display: flex; align-items: center; gap: 15px; }
+        .section-title i { color: var(--accent); }
+
+        .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .step-card {
+            background: var(--card-bg); border: 1px solid var(--border);
+            padding: 2rem; border-radius: 16px; position: relative; transition: 0.3s; overflow: hidden;
+        }
+        .step-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .step-number { font-family: 'JetBrains Mono'; color: var(--accent); font-size: 4rem; font-weight: 800; opacity: 0.1; position: absolute; top: 10px; right: 20px; z-index: 0; }
+        .step-card h3, .step-card ul { position: relative; z-index: 1; }
+        .step-card h3 { font-size: 1.2rem; margin-bottom: 1rem; color: var(--accent); }
+        .step-card ul { list-style: none; font-size: 0.9rem; color: var(--text-muted); }
+        .step-card ul li { margin-bottom: 10px; display: flex; gap: 10px; }
+        .step-card ul li::before { content: "→"; color: var(--accent); }
+
+        .problem-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); padding: 30px; border-radius: 16px; margin: 40px 0; }
+        .problem-box h2 { color: #f87171; font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .skill-box { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; }
+        .skill-box h4 { font-size: 0.9rem; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+        .skill-box ul { list-style: none; font-size: 0.85rem; color: var(--text-muted); }
+
+        .download-zone { display: flex; gap: 1.5rem; margin-top: 40px; flex-wrap: wrap; background: rgba(34, 211, 238, 0.05); padding: 30px; border-radius: 16px; border: 1px solid var(--border); justify-content: center; }
+        .btn-download { background: var(--text-main); color: var(--bg); padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+        .btn-download:hover { background: var(--accent); transform: scale(1.05); }
+
+        footer { padding: 4rem 8% 2rem; border-top: 1px solid var(--border); margin-top: 5rem; text-align: center; font-size: 0.8rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <div class="ambient-bg"></div>
+    <header>
+        <div class="logo">Nicolas<span>.SI</span></div>
+        <nav>
+            <ul>
+                <li><a href="https://nblinpro.github.io/portfolio/index.html">Accueil</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/parcours.html">Parcours</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <nav class="breadcrumb">
+            <a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a> 
+            <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
+            <span>Architecture Réseaux IoT</span>
+        </nav>
+
+        <section class="hero-project">
+            <span class="hero-tag">Architecture IoT</span>
+            <h1>Qualification d'Architectures <br><span style="color: var(--accent)">Réseaux Hybrides IoT</span></h1>
+            <p>Conception et analyse comparative de solutions de communication sans fil (Bluetooth, BLE, LoRa) via ESP32.</p>
+        </section>
+
+        <h2 class="section-title"><i class="fas fa-microchip"></i> Mes Réalisations Techniques</h2>
+        <div class="step-grid">
+            <div class="step-card"><span class="step-number">01</span><h3>Étude des Composants</h3><ul><li>Capteur KY-013 (-55°C à +125°C)</li><li>ESP32 (Wi-Fi, BT, LoRa)</li><li>Écrans OLED</li></ul></div>
+            <div class="step-card"><span class="step-number">02</span><h3>Montage & Logique</h3><ul><li>Interfaçage capteurs/actionneurs</li><li>Alerte buzzer KY-012</li><li>Affichage temps réel</li></ul></div>
+            <div class="step-card"><span class="step-number">03</span><h3>Communications</h3><ul><li>Protocoles Bluetooth Classic & BLE</li><li>Liaisons LoRa longue portée</li><li>Relais Cloud ThingSpeak</li></ul></div>
+            <div class="step-card"><span class="step-number">04</span><h3>Tests Performance</h3><ul><li>Mesures RSSI ville vs champs</li><li>Stabilité selon la distance</li><li>Benchmarking débits</li></ul></div>
+            <div class="step-card"><span class="step-number">05</span><h3>Analyse Énergie</h3><ul><li>Mesures à l'oscilloscope</li><li>Impact Spreading Factor (SF)</li><li>Empreinte par protocole</li></ul></div>
+            <div class="step-card"><span class="step-number">06</span><h3>Autonomie</h3><ul><li>Optimisation Deep Sleep</li><li>Calculs de longévité réels</li><li>Compromis Portée / Énergie</li></ul></div>
+        </div>
+
+        <section class="problem-box">
+            <h2><i class="fas fa-bug"></i> Problème rencontré : Lecture "NAN"</h2>
+            <p>Affichage « NAN » sur Heltec avec le KY-013. Résolu par l'utilisation de la valeur absolue de la résistance avant le calcul logarithmique et l'ajustement de la formule de conversion.</p>
+        </section>
+
+        <h2 class="section-title"><i class="fas fa-tasks"></i> Compétences Mobilisées</h2>
+        <div class="skills-container">
+            <div class="skill-box"><h4>IoT & Embarqué</h4><ul><li>• C/C++ (Arduino IDE)</li><li>• LoRa / BLE / BT</li></ul></div>
+            <div class="skill-box"><h4>Mesures</h4><ul><li>• Diagnostic Oscilloscope</li><li>• Analyse RSSI</li></ul></div>
+            <div class="skill-box"><h4>Gestion Projet</h4><ul><li>• Diagrammes de Gantt</li><li>• Documentation Technique</li></ul></div>
+        </div>
+
+        <div class="download-zone">
+            <a href="#" class="btn-download"><i class="fas fa-file-pdf"></i> Rapport Technique</a>
+            <a href="#" class="btn-download"><i class="fas fa-desktop"></i> Diaporama Final</a>
+        </div>
+    </main>
+
+    <footer><p>© 2026 Nicolas Blin | Expert Architecture SI</p></footer>
+</body>
+</html>
