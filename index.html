@@ -35,7 +35,13 @@
             background: rgba(3, 7, 18, 0.6); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border); z-index: 1000;
         }
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; }
+        .logo { 
+    font-weight: 800; 
+    font-size: 1.2rem; 
+    letter-spacing: -0.5px; 
+    text-decoration: none; /* Supprime le soulignement bleu par défaut */
+    color: var(--text-main); /* Garde la couleur blanche du texte */
+}
         .logo span { color: var(--accent); }
         nav ul { display: flex; list-style: none; gap: 2.5rem; }
         nav a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; transition: 0.3s; }
