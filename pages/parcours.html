@@ -54,11 +54,11 @@
             position: relative; 
         }
 
-        /* La ligne verticale liée aux points */
+        /* LIGNE VERTICALE : Axe central à 32px */
         .timeline-container::before {
             content: ""; 
             position: absolute; 
-            left: 32px; /* Position de la barre */
+            left: 32px; /* Position précise de la ligne */
             top: 0; 
             bottom: 0;
             width: 2px; 
@@ -69,59 +69,43 @@
         .timeline-item { 
             position: relative; 
             margin-bottom: 3rem; 
-            padding-left: 60px; 
+            padding-left: 70px; /* Espace suffisant pour l'alignement */
         }
 
-        /* Le point sur la ligne (Centré sur la barre de 32px) */
+        /* POINT SUR LA LIGNE : Centré sur l'axe de 32px */
         .timeline-item::after {
             content: ""; 
             position: absolute; 
-            left: 27px; /* (32px barre + 1px milieu) - (12px point / 2) = 27px */
+            /* Calcul : barre à 32px + 1px (moitié barre) - 6px (moitié point) = 27px */
+            left: 27px; 
             top: 25px; 
             width: 12px; 
             height: 12px; 
             background: var(--accent);
-            border: 3px solid var(--bg-body); /* Détoure le point pour couper la ligne proprement */
+            border: 3px solid var(--bg-body); /* Découpe visuelle de la ligne derrière le point */
             border-radius: 50%; 
-            box-shadow: 0 0 10px var(--accent-glow); 
+            box-shadow: 0 0 10px var(--accent); 
             z-index: 2;
         }
 
         /* CARDS */
         .card {
-            background: var(--bg-card); 
-            border: 1px solid var(--border);
-            padding: 2rem; 
-            border-radius: var(--radius); 
-            transition: 0.3s;
-            position: relative; 
-            overflow: hidden;
+            background: var(--bg-card); border: 1px solid var(--border);
+            padding: 2rem; border-radius: var(--radius); transition: 0.3s;
+            position: relative; overflow: hidden;
         }
-        .card:hover { 
-            border-color: var(--accent); 
-            transform: translateX(10px); 
-            background: var(--bg-card-hover); 
-        }
+        .card:hover { border-color: var(--accent); transform: translateX(10px); background: var(--bg-card-hover); }
 
-        .card-bg-icon { 
-            position: absolute; 
-            right: 20px; 
-            top: 20px; 
-            font-size: 2rem; 
-            color: rgba(255,255,255,0.03); 
-        }
-
-        /* BADGES */
+        /* BADGES & TEXT */
         .status-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
-        .status-badge {
-            font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; text-transform: uppercase;
-        }
+        .status-badge { font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; }
         .en-cours { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
         .obtenu { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
         .date { color: var(--text-muted); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; }
 
         .card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-main); }
         .university { color: var(--accent); font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem; display: block; }
+        .card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
 
         .cert-container { display: flex; flex-wrap: wrap; gap: 8px; }
         .cert-badge {
@@ -132,19 +116,10 @@
 
         footer { text-align: center; padding: 4rem; border-top: 1px solid var(--border); margin-top: 4rem; color: var(--text-muted); font-size: 0.85rem; }
 
-        .btn-primary { 
-            background: var(--accent); 
-            color: #000; 
-            padding: 0.5rem 1rem; 
-            border-radius: 8px; 
-            text-decoration: none; 
-            font-weight: 600; 
-        }
-
         @media (max-width: 768px) {
-            .timeline-container::before { left: 12px; }
-            .timeline-item { padding-left: 35px; }
-            .timeline-item::after { left: 7px; }
+            .timeline-container::before { left: 17px; }
+            .timeline-item { padding-left: 45px; }
+            .timeline-item::after { left: 12px; }
         }
     </style>
 </head>
@@ -158,43 +133,36 @@
                 <li><a href="../index.html">Accueil</a></li>
                 <li><a href="#" style="color: var(--accent)">Parcours</a></li>
                 <li><a href="projets.html">Projets</a></li>
-                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn-primary">Contact</a></li>
+                <li><a href="mailto:nicolas.blin.pro1@gmail.com" style="background: var(--accent); color: #000; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <div class="hero-tag">
-                <i class="fas fa-user-graduate"></i> PARCOURS ACADÉMIQUE
-            </div>
+            <div class="hero-tag"><i class="fas fa-user-graduate"></i> PARCOURS ACADÉMIQUE</div>
             <h1>Formation & <span style="color:var(--accent)">Diplômes</span></h1>
             <p>Mon évolution académique vers l'expertise Cloud et DevOps</p>
         </section>
 
         <div class="timeline-container">
-
             <div class="timeline-item">
                 <div class="card">
-                    <i class="fas fa-graduation-cap card-bg-icon"></i>
                     <div class="status-header">
                         <span class="status-badge en-cours">En cours</span>
                         <span class="date">2025 – 2027</span>
                     </div>
                     <h3>Mastère Expert Cloud, Infrastructure et Sécurité</h3>
                     <span class="university">Ynov Campus (Paris-Nanterre)</span>
-                    <p>Formation orientée Cloud, DevSecOps et architectures complexes.</p>
+                    <p>Mon évolution académique vers l'expertise Cloud et DevOps.</p>
                     <div class="cert-container">
-                        <span class="cert-badge">Cloud</span>
-                        <span class="cert-badge">DevSecOps</span>
-                        <span class="cert-badge">Virtualisation</span>
+                        <span class="cert-badge">Cloud</span><span class="cert-badge">DevSecOps</span><span class="cert-badge">Virtualisation</span>
                     </div>
                 </div>
             </div>
 
             <div class="timeline-item">
                 <div class="card">
-                    <i class="fas fa-university card-bg-icon"></i>
                     <div class="status-header">
                         <span class="status-badge obtenu">Obtenu</span>
                         <span class="date">2023 – 2025</span>
@@ -203,16 +171,13 @@
                     <span class="university">Université de Tours</span>
                     <p>Spécialité : Internet des Objets (IoT).</p>
                     <div class="cert-container">
-                        <span class="cert-badge">CCNA 1</span>
-                        <span class="cert-badge">CCNA 2</span>
-                        <span class="cert-badge">CCNA 3</span>
+                        <span class="cert-badge">CCNA 1</span><span class="cert-badge">CCNA 2</span><span class="cert-badge">CCNA 3</span>
                     </div>
                 </div>
             </div>
 
             <div class="timeline-item">
                 <div class="card">
-                    <i class="fas fa-book card-bg-icon"></i>
                     <div class="status-header">
                         <span class="status-badge obtenu">Obtenu</span>
                         <span class="date">2019 – 2021</span>
@@ -221,13 +186,10 @@
                     <span class="university">Lycée GSH (Étampes)</span>
                     <p>Spécialités : Mathématiques, Physique-Chimie, Sciences de l'ingénieur.</p>
                     <div class="cert-container">
-                        <span class="cert-badge">Mathématiques</span>
-                        <span class="cert-badge">Physique</span>
-                        <span class="cert-badge">SI</span>
+                        <span class="cert-badge">Mathématiques</span><span class="cert-badge">Physique-Chimie</span><span class="cert-badge">SI</span>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 
