@@ -105,43 +105,23 @@
         .skill-card h3 { font-size: 1.1rem; margin-bottom: 1rem; }
         .skill-card ul { list-style: none; color: var(--text-muted); font-size: 0.85rem; pointer-events: none; }
 
+        /* --- TOOLS SLIDER (NEW) --- */
+        .tools-slider { padding: 60px 0; overflow: hidden; background: rgba(34, 211, 238, 0.02); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .slider-track { display: flex; gap: 4rem; width: max-content; animation: scroll 25s linear infinite; }
+        .tool-item { display: flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--text-muted); white-space: nowrap; transition: 0.3s; }
+        .tool-item i { font-size: 1.5rem; color: var(--accent); }
+        .tool-item:hover { color: var(--text-main); transform: scale(1.1); }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .tools-slider:hover .slider-track { animation-play-state: paused; }
+
         /* --- PARTNERS --- */
-.partners-static { display: flex; justify-content: center; align-items: center; gap: 5rem; padding: 2rem 0; flex-wrap: wrap; }
-.partner-item { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; transition: 0.3s; }
+        .partners-static { display: flex; justify-content: center; align-items: center; gap: 5rem; padding: 2rem 0; flex-wrap: wrap; }
+        .partner-item { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; transition: 0.3s; }
+        .partner-item img { height: 60px; width: auto; border-radius: 8px; filter: none; opacity: 1; transition: 0.3s; }
+        .partner-item:hover img { transform: scale(1.1); }
+        .partner-item span { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+        .partner-item span::before { content: ">"; color: var(--text-muted); opacity: 0.5; }
 
-/* Suppression du filtre noir et blanc et de l'opacité réduite */
-.partner-item img { 
-    height: 60px; 
-    width: auto; 
-    border-radius: 8px; 
-    filter: none; /* Retire le grayscale */
-    opacity: 1;    /* Remet l'opacité à 100% */
-    transition: 0.3s; 
-}
-
-/* Optionnel : un léger effet au survol pour garder de l'interactivité */
-.partner-item:hover img { 
-    transform: scale(1.1); 
-}
-        .partner-item span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* Ajoute un petit chevron avant le nom */
-.partner-item span::before {
-    content: ">";
-    color: var(--text-muted);
-    opacity: 0.5;
-}
-        
         /* --- FOOTER --- */
         footer { padding: 4rem 10% 2rem; background: rgba(11, 17, 32, 0.95); border-top: 1px solid var(--border); margin-top: 5rem; backdrop-filter: blur(5px); }
         .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; }
@@ -250,6 +230,27 @@
                     <h3>Observabilité</h3>
                     <ul><li>• Prometheus & Grafana</li><li>• Logs ELK</li><li>• Alerting avancé</li></ul>
                 </div>
+            </div>
+        </section>
+
+        <section class="tools-slider">
+            <div class="slider-track">
+                <div class="tool-item"><i class="fab fa-docker"></i> Docker</div>
+                <div class="tool-item"><i class="fas fa-server"></i> Ansible</div>
+                <div class="tool-item"><i class="fas fa-cloud"></i> OpenStack</div>
+                <div class="tool-item"><i class="fab fa-linux"></i> Debian</div>
+                <div class="tool-item"><i class="fas fa-network-wired"></i> Cisco</div>
+                <div class="tool-item"><i class="fas fa-shield-alt"></i> PfSense</div>
+                <div class="tool-item"><i class="fas fa-chart-area"></i> Grafana</div>
+                <div class="tool-item"><i class="fas fa-database"></i> PostgreSQL</div>
+                <div class="tool-item"><i class="fab fa-docker"></i> Docker</div>
+                <div class="tool-item"><i class="fas fa-server"></i> Ansible</div>
+                <div class="tool-item"><i class="fas fa-cloud"></i> OpenStack</div>
+                <div class="tool-item"><i class="fab fa-linux"></i> Debian</div>
+                <div class="tool-item"><i class="fas fa-network-wired"></i> Cisco</div>
+                <div class="tool-item"><i class="fas fa-shield-alt"></i> PfSense</div>
+                <div class="tool-item"><i class="fas fa-chart-area"></i> Grafana</div>
+                <div class="tool-item"><i class="fas fa-database"></i> PostgreSQL</div>
             </div>
         </section>
 
