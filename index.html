@@ -123,6 +123,25 @@
 .partner-item:hover img { 
     transform: scale(1.1); 
 }
+        .partner-item span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Ajoute un petit chevron avant le nom */
+.partner-item span::before {
+    content: ">";
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+        
         /* --- FOOTER --- */
         footer { padding: 4rem 10% 2rem; background: rgba(11, 17, 32, 0.95); border-top: 1px solid var(--border); margin-top: 5rem; backdrop-filter: blur(5px); }
         .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; }
