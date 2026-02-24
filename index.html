@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nicolas Blin | Portfolio Architecture SI & Cloud</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg: #030712;
@@ -16,13 +19,28 @@
             --text-muted: #9ca3af;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
         /* --- BACKGROUND DESIGN --- */
         .ambient-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
                 radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.04) 0%, transparent 40%),
                 radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
             z-index: -1;
@@ -30,122 +48,519 @@
 
         /* --- HEADER --- */
         header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.2rem 10%; position: sticky; top: 0; 
-            background: rgba(3, 7, 18, 0.6); backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border); z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 10%;
+            position: sticky;
+            top: 0;
+            background: rgba(3, 7, 18, 0.6);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
         }
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; text-decoration: none; color: var(--text-main); }
-        .logo span { color: var(--accent); }
-        nav ul { display: flex; list-style: none; gap: 2.5rem; }
-        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; transition: 0.3s; position: relative; }
-        nav a:hover, nav a.active { color: var(--accent); }
-        nav a.active::after { content: ""; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--accent);
+        }
+
+        nav a.active::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
 
         /* --- HERO --- */
-        .hero { padding: 120px 10% 80px; text-align: center; }
+        .hero {
+            padding: 120px 10% 80px;
+            text-align: center;
+        }
+
         .hero-tag {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent);
-            border: 1px solid rgba(34, 211, 238, 0.3); padding: 4px 12px; border-radius: 100px;
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem; display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            padding: 4px 12px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            display: inline-block;
             background: rgba(34, 211, 238, 0.05);
         }
-        h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 1.5rem; }
-        .gradient-text { 
-            background: linear-gradient(90deg, #22d3ee, #3b82f6, #22d3ee); 
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #22d3ee, #3b82f6, #22d3ee);
             background-size: 200% auto;
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             animation: shine 4s linear infinite;
         }
-        @keyframes shine { to { background-position: 200% center; } }
-        .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto 2.5rem; }
 
-        .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .btn { padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; }
-        .btn-primary { background: var(--text-main); color: var(--bg); border: none; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(34, 211, 238, 0.15); }
-        .btn-outline { border: 1px solid var(--border); color: var(--text-main); background: transparent; }
-        .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); color: var(--accent); }
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--text-main);
+            color: var(--bg);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(34, 211, 238, 0.15);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
 
         /* --- SECTIONS --- */
-        section { padding: 80px 10%; max-width: 1400px; margin: 0 auto; }
-        h2 { font-size: 2rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 2.5rem; }
+        section {
+            padding: 80px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 2.5rem;
+        }
 
         /* --- WHOAMI & STATS --- */
-        .whoami-container { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
-        .json-block {
-            background: #010409; border: 1px solid var(--border); padding: 25px; border-radius: 12px;
-            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.7;
+        .whoami-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
         }
-        .j-key { color: #79c0ff; }
-        .j-val { color: #a5d6ff; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .stat-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; text-align: center; }
-        .stat-card h4 { color: var(--accent); font-size: 2.2rem; font-weight: 800; }
-        .stat-card p { color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; }
+
+        .json-block {
+            background: #010409;
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .j-key {
+            color: #79c0ff;
+        }
+
+        .j-val {
+            color: #a5d6ff;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-card h4 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+
+        .stat-card p {
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
 
         /* --- FEATURED PROJECT --- */
         .featured-box {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px; padding: 3.5rem;
-            display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: center; position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3.5rem;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
             overflow: hidden;
         }
-        .featured-box::before { content: "TOP PROJECT"; position: absolute; top: 20px; right: -30px; background: var(--accent); color: var(--bg); font-size: 0.6rem; font-weight: 900; padding: 5px 40px; transform: rotate(45deg); }
-        .tag { font-size: 0.7rem; background: rgba(255,255,255,0.03); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); margin-right: 8px; }
+
+        .featured-box::before {
+            content: "TOP PROJECT";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--bg);
+            font-size: 0.6rem;
+            font-weight: 900;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            margin-right: 8px;
+        }
 
         /* --- SKILLS GRID --- */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        .skill-card {
-            background: var(--card-bg); border: 1px solid var(--border); padding: 2.5rem; border-radius: 16px;
-            transition: 0.3s; cursor: pointer;
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
-        .skill-card:hover { border-color: var(--accent); transform: translateY(-5px); background: rgba(17, 24, 39, 0.6); }
-        .skill-card i { color: var(--accent); font-size: 1.5rem; margin-bottom: 1.5rem; }
-        .skill-card h3 { font-size: 1.1rem; margin-bottom: 1rem; }
-        .skill-card ul { list-style: none; color: var(--text-muted); font-size: 0.85rem; pointer-events: none; }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            background: rgba(17, 24, 39, 0.6);
+        }
+
+        .skill-card i {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            pointer-events: none;
+        }
 
         /* --- TOOLS SLIDER (NEW) --- */
-        .tools-slider { padding: 60px 0; overflow: hidden; background: rgba(34, 211, 238, 0.02); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-        .slider-track { display: flex; gap: 4rem; width: max-content; animation: scroll 25s linear infinite; }
-        .tool-item { display: flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--text-muted); white-space: nowrap; transition: 0.3s; }
-        .tool-item i { font-size: 1.5rem; color: var(--accent); }
-        .tool-item:hover { color: var(--text-main); transform: scale(1.1); }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .tools-slider:hover .slider-track { animation-play-state: paused; }
+        .tools-slider {
+            padding: 60px 0;
+            overflow: hidden;
+            background: rgba(34, 211, 238, 0.02);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 4rem;
+            width: max-content;
+            animation: scroll 25s linear infinite;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .tool-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .tool-item:hover {
+            color: var(--text-main);
+            transform: scale(1.1);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .tools-slider:hover .slider-track {
+            animation-play-state: paused;
+        }
 
         /* --- PARTNERS --- */
-        .partners-static { display: flex; justify-content: center; align-items: center; gap: 5rem; padding: 2rem 0; flex-wrap: wrap; }
-        .partner-item { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; transition: 0.3s; }
-        .partner-item img { height: 60px; width: auto; border-radius: 8px; filter: none; opacity: 1; transition: 0.3s; }
-        .partner-item:hover img { transform: scale(1.1); }
-        .partner-item span { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
-        .partner-item span::before { content: ">"; color: var(--text-muted); opacity: 0.5; }
+        .partners-static {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5rem;
+            padding: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .partner-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .partner-item img {
+            height: 60px;
+            width: auto;
+            border-radius: 8px;
+            filter: none;
+            opacity: 1;
+            transition: 0.3s;
+        }
+
+        .partner-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .partner-item span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .partner-item span::before {
+            content: ">";
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
 
         /* --- FOOTER --- */
-        footer { padding: 4rem 10% 2rem; background: rgba(11, 17, 32, 0.95); border-top: 1px solid var(--border); margin-top: 5rem; backdrop-filter: blur(5px); }
-        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; }
-        .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-main); }
-        .footer-col ul { list-style: none; }
-        .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        .footer-col a:hover { color: var(--accent); }
-        .social-links { display: flex; gap: 1rem; }
-        .social-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
-        .social-btn:hover { border-color: var(--accent); color: var(--accent); }
-        .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-top: 2rem; }
+        footer {
+            padding: 4rem 10% 2rem;
+            background: rgba(11, 17, 32, 0.95);
+            border-top: 1px solid var(--border);
+            margin-top: 5rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2rem;
+        }
 
         /* MODAL */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 2000; }
-        .modal-content { background: #0d1117; border: 1px solid var(--border); width: 95%; max-width: 500px; margin: 10% auto; padding: 3rem; border-radius: 24px; }
-        #modalList li { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; list-style: none; color: var(--text-muted); font-size: 0.9rem; }
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: #0d1117;
+            border: 1px solid var(--border);
+            width: 95%;
+            max-width: 500px;
+            margin: 10% auto;
+            padding: 3rem;
+            border-radius: 24px;
+        }
+
+        #modalList li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+            list-style: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
 
         @media (max-width: 900px) {
-            .whoami-container, .featured-box, .partners-static, .footer-top { grid-template-columns: 1fr; gap: 3rem; }
-            header { padding: 1rem 5%; } nav { display: none; }
-            h1 { font-size: 2.5rem; }
+
+            .whoami-container,
+            .featured-box,
+            .partners-static,
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            header {
+                padding: 1rem 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="ambient-bg"></div>
@@ -166,9 +581,11 @@
         <section class="hero">
             <span class="hero-tag">DISPONIBLE POUR NOUVEAUX DÉFIS</span>
             <h1>Bonjour, je suis <span class="gradient-text">Nicolas Blin</span></h1>
-            <p>Expert en Architecture SI & Cloud. Je conçois et déploie des infrastructures critiques automatisées, hautement disponibles et sécurisées.</p>
+            <p>Expert en Architecture SI & Cloud. Je conçois et déploie des infrastructures critiques automatisées,
+                hautement disponibles et sécurisées.</p>
             <div class="hero-cta">
-                <a href="pages/projets.html" class="btn btn-primary">Explorer mes travaux <i class="fas fa-terminal"></i></a>
+                <a href="pages/projets.html" class="btn btn-primary">Explorer mes travaux <i
+                        class="fas fa-terminal"></i></a>
                 <a href="pages/contact.html" class="btn btn-outline">Me contacter</a>
             </div>
         </section>
@@ -177,20 +594,37 @@
             <div class="whoami-container">
                 <div>
                     <h2>Profil & <span style="color: var(--accent)">Philosophie</span></h2>
-                    <p style="color: var(--text-muted); margin-bottom: 2rem;">Architecte de solutions passionné par l'Open Source et le DevOps, je transforme les contraintes techniques en systèmes agiles et scalables.</p>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">Architecte de solutions passionné par
+                        l'Open Source et le DevOps, je transforme les contraintes techniques en systèmes agiles et
+                        scalables.</p>
                     <div class="json-block">
                         {<br>
-                        &nbsp;&nbsp;<span class="j-key">"role"</span>: <span class="j-val">"Expert Architecture SI"</span>,<br>
-                        &nbsp;&nbsp;<span class="j-key">"focus"</span>: [<span class="j-val">"Automation"</span>, <span class="j-val">"Cloud"</span>, <span class="j-val">"Security"</span>],<br>
-                        &nbsp;&nbsp;<span class="j-key">"philosophy"</span>: <span class="j-val">"Infrastructure as Code"</span><br>
+                        &nbsp;&nbsp;<span class="j-key">"role"</span>: <span class="j-val">"Expert Architecture
+                            SI"</span>,<br>
+                        &nbsp;&nbsp;<span class="j-key">"focus"</span>: [<span class="j-val">"Automation"</span>, <span
+                            class="j-val">"Cloud"</span>, <span class="j-val">"Security"</span>],<br>
+                        &nbsp;&nbsp;<span class="j-key">"philosophy"</span>: <span class="j-val">"Infrastructure as
+                            Code"</span><br>
                         }
                     </div>
                 </div>
                 <div class="stats-grid">
-                    <div class="stat-card"><h4>5+</h4><p>Années d'Exp</p></div>
-                    <div class="stat-card"><h4>20+</h4><p>Projets terminés</p></div>
-                    <div class="stat-card"><h4>100%</h4><p>Automatisation</p></div>
-                    <div class="stat-card"><h4>M1</h4><p>Expertise SI</p></div>
+                    <div class="stat-card">
+                        <h4>5+</h4>
+                        <p>Années d'Exp</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>20+</h4>
+                        <p>Projets terminés</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>100%</h4>
+                        <p>Automatisation</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>M1</h4>
+                        <p>Expertise SI</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -200,35 +634,97 @@
             <div class="featured-box">
                 <div>
                     <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Refonte SI : Assurmix</h3>
-                    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem;">Modernisation complète d'une infrastructure métier. Passage d'un système legacy à un environnement orchestré par Ansible avec monitoring temps réel.</p>
+                    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem;">Modernisation complète
+                        d'une infrastructure métier. Passage d'un système legacy à un environnement orchestré par
+                        Ansible avec monitoring temps réel.</p>
                     <div style="margin-bottom: 2rem;">
-                        <span class="tag">Ansible</span><span class="tag">Docker</span><span class="tag">Debian</span><span class="tag">Monitoring</span>
+                        <span class="tag">Ansible</span><span class="tag">Docker</span><span
+                            class="tag">Debian</span><span class="tag">Monitoring</span>
                     </div>
-                    <a href="pages/projets.html" style="color: var(--accent); font-size: 0.85rem; font-weight: 700; text-decoration: none; letter-spacing: 1px;">VOIR LE DÉTAIL DU PROJET →</a>
+                    <a href="pages/projets.html"
+                        style="color: var(--accent); font-size: 0.85rem; font-weight: 700; text-decoration: none; letter-spacing: 1px;">VOIR
+                        LE DÉTAIL DU PROJET →</a>
                 </div>
-                <div style="background: rgba(34, 211, 238, 0.02); border: 1px solid var(--border); padding: 3rem; border-radius: 12px; text-align: center;">
+                <div
+                    style="background: rgba(34, 211, 238, 0.02); border: 1px solid var(--border); padding: 3rem; border-radius: 12px; text-align: center;">
                     <i class="fas fa-server" style="font-size: 4rem; color: var(--accent); opacity: 0.5;"></i>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2>Piliers d'<span style="color: var(--accent)">Expertise</span></h2>
+        <section id="expertises">
+            <h2>Expertises <span style="color: var(--accent)">Métier</span></h2>
             <div class="skills-grid">
-                <div class="skill-card" onclick="openSkillModal('devops')">
-                    <i class="fas fa-infinity"></i>
-                    <h3>DevOps & Cloud</h3>
-                    <ul><li>• CI/CD Pipelines</li><li>• IaC (Ansible)</li><li>• OpenStack & Docker</li></ul>
-                </div>
                 <div class="skill-card" onclick="openSkillModal('reseau')">
                     <i class="fas fa-shield-halved"></i>
                     <h3>Réseau & Sécurité</h3>
-                    <ul><li>• Segmentation L2/L3</li><li>• VPN & PKI</li><li>• Firewalls & IDS</li></ul>
+                    <ul>
+                        <li>• DNS/DHCP & Firewalls</li>
+                        <li>• VPN, Radius & Certificats</li>
+                    </ul>
                 </div>
+
+                <div class="skill-card" onclick="openSkillModal('infra')">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Infrastructure</h3>
+                    <ul>
+                        <li>• Switchs HP & Cisco</li>
+                        <li>• Wi-Fi Pro & Segmentation</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card" onclick="openSkillModal('backup')">
+                    <i class="fas fa-database"></i>
+                    <h3>Sauvegarde & PCA</h3>
+                    <ul>
+                        <li>• Externalisation</li>
+                        <li>• Stratégies PCA/PRA</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card" onclick="openSkillModal('toip')">
+                    <i class="fas fa-phone-volume"></i>
+                    <h3>Téléphonie IP</h3>
+                    <ul>
+                        <li>• Déploiement ToIP</li>
+                        <li>• Administration IPBX</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card" onclick="openSkillModal('sysadmin')">
+                    <i class="fas fa-server"></i>
+                    <h3>Systèmes & BDD</h3>
+                    <ul>
+                        <li>• Windows & Linux</li>
+                        <li>• MySQL, MariaDB, Postgres</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card" onclick="openSkillModal('webdev')">
+                    <i class="fas fa-code"></i>
+                    <h3>Web & Développement</h3>
+                    <ul>
+                        <li>• Apache & Nginx</li>
+                        <li>• PHP, JS, Python, Java</li>
+                    </ul>
+                </div>
+
                 <div class="skill-card" onclick="openSkillModal('monitoring')">
                     <i class="fas fa-chart-line"></i>
-                    <h3>Observabilité</h3>
-                    <ul><li>• Prometheus & Grafana</li><li>• Logs ELK</li><li>• Alerting avancé</li></ul>
+                    <h3>Monitoring</h3>
+                    <ul>
+                        <li>• Zabbix & Centreon</li>
+                        <li>• Prometheus & Grafana</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card" onclick="openSkillModal('devops')">
+                    <i class="fas fa-infinity"></i>
+                    <h3>DevOps & Cloud</h3>
+                    <ul>
+                        <li>• Ansible & Docker</li>
+                        <li>• OpenStack & Proxmox</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -270,10 +766,13 @@
             </div>
         </section>
 
-        <section style="text-align: center; background: rgba(34, 211, 238, 0.02); padding: 60px; border-radius: 24px; border: 1px solid var(--border);">
+        <section
+            style="text-align: center; background: rgba(34, 211, 238, 0.02); padding: 60px; border-radius: 24px; border: 1px solid var(--border);">
             <h2>Prêt à sécuriser votre infrastructure ?</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2.5rem;">Je suis à l'écoute de nouveaux défis techniques en architecture Cloud et SI.</p>
-            <a href="pages/contact.html" class="btn btn-primary">Démarrer une conversation <i class="fas fa-paper-plane"></i></a>
+            <p style="color: var(--text-muted); margin-bottom: 2.5rem;">Je suis à l'écoute de nouveaux défis techniques
+                en architecture Cloud et SI.</p>
+            <a href="pages/contact.html" class="btn btn-primary">Démarrer une conversation <i
+                    class="fas fa-paper-plane"></i></a>
         </section>
     </main>
 
@@ -281,7 +780,8 @@
         <div class="modal-content">
             <h2 id="modalTitle" style="margin-bottom: 1rem; color: var(--accent);"></h2>
             <ul id="modalList"></ul>
-            <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" onclick="closeSkillModal()">Fermer</button>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;"
+                onclick="closeSkillModal()">Fermer</button>
         </div>
     </div>
 
@@ -289,7 +789,8 @@
         <div class="footer-top">
             <div class="footer-col">
                 <div class="footer-logo">Nicolas<span>.SI</span></div>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Architecte des SI spécialisé dans la conception d'infrastructures hautement disponibles.</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Architecte des SI spécialisé dans la conception
+                    d'infrastructures hautement disponibles.</p>
             </div>
             <div class="footer-col">
                 <h4>Navigation</h4>
@@ -303,35 +804,69 @@
             <div class="footer-col">
                 <h4>Contact</h4>
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank"><i
+                            class="fab fa-linkedin-in"></i></a>
                     <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom"><p>© 2026 Nicolas Blin | Expert Architecture SI</p></div>
+        <div class="footer-bottom">
+            <p>© 2026 Nicolas Blin | Expert Architecture SI</p>
+        </div>
     </footer>
 
     <script>
-        const skillData = {
-            'reseau': { title: 'Réseau & Sécurité', items: ['Administration DNS / DHCP Bind/ISC', 'Configuration firewalls pfSense & ACL', 'Proxy HAProxy, VPN Radius', 'Gestion Certificats SSL (PKI)'] },
-            'devops': { title: 'Cloud & DevOps', items: ['Ansible (Playbooks & Roles)', 'Conteneurs Docker', 'Cloud OpenStack (Nova, Swift)', 'Pipelines CI/CD GitHub Actions'] },
-            'monitoring': { title: 'Monitoring & Observabilité', items: ['Dashboards Prometheus & Grafana', 'Surveillance Zabbix & Centreon', 'Logs centralisés ELK', 'Alerting & Rapports'] }
-        };
-
-        function openSkillModal(cat) {
-            const data = skillData[cat];
-            document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalList').innerHTML = data.items.map(i => `<li><i class="fas fa-check" style="color:var(--accent)"></i> ${i}</li>`).join('');
-            document.getElementById('skillModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
+    const skillData = {
+        'reseau': { 
+            title: 'Réseau & Sécurité', 
+            items: ['Administration DNS / DHCP', 'Configuration firewalls (pFsense)', 'Proxy (HAProxy), VPN, Radius', 'Clés et certificats (PKI)', 'Analyse et supervision réseau'] 
+        },
+        'infra': { 
+            title: 'Infrastructure', 
+            items: ['Switchs HP & Cisco', 'Routeurs et points d’accès Wi-Fi', 'Architecture et segmentation L2/L3', 'Répartition de charge (Load Balancing)'] 
+        },
+        'backup': { 
+            title: 'Sauvegarde & Externalisation', 
+            items: ['Gestion de serveurs bureautiques', 'Serveurs de sauvegarde et d’externalisation', 'Méthodologies PCA (Continuité)', 'Méthodologies PRA (Reprise)'] 
+        },
+        'toip': { 
+            title: 'Téléphonie IP', 
+            items: ['Déploiement de solutions ToIP', 'Administration de systèmes IPBX'] 
+        },
+        'sysadmin': { 
+            title: 'Systèmes d’Exploitation & BDD', 
+            items: ['Windows Server & Linux', 'Bases de données : MySQL & MariaDB', 'Bases de données : PostgreSQL'] 
+        },
+        'webdev': { 
+            title: 'Développement & Serveurs Web', 
+            items: ['Serveurs Web : Apache & Nginx', 'Langages : HTML, CSS, PHP', 'Scripting : JS, Java, Python'] 
+        },
+        'monitoring': { 
+            title: 'Monitoring & Observabilité', 
+            items: ['Centreon, Zabbix, Nagios', 'Prometheus & Grafana', 'Collecte via node_exporter'] 
+        },
+        'devops': { 
+            title: 'DevOps & Cloud', 
+            items: ['Automatisation & CI/CD : Ansible, Github', 'Conteneurs : Docker', 'Cloud : OpenStack, OVHcloud', 'Virtualisation : Proxmox, VMware ESXi'] 
         }
+    };
 
-        function closeSkillModal() {
-            document.getElementById('skillModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+    function openSkillModal(cat) {
+        const data = skillData[cat];
+        if(!data) return;
+        document.getElementById('modalTitle').innerText = data.title;
+        document.getElementById('modalList').innerHTML = data.items.map(i => `<li><i class="fas fa-check" style="color:var(--accent)"></i> ${i}</li>`).join('');
+        document.getElementById('skillModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
 
-        window.onclick = e => { if(e.target.className === 'modal') closeSkillModal(); }
-    </script>
+    function closeSkillModal() {
+        document.getElementById('skillModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    window.onclick = e => { if(e.target.className === 'modal') closeSkillModal(); }
+</script>
 </body>
+
 </html>
