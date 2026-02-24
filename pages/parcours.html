@@ -3,353 +3,196 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>Parcours Académique | Nicolas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets & Réalisations | Nicolas Blin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-body: #030712;
-            --bg-card: rgba(17, 24, 39, 0.4);
-            --bg-card-hover: rgba(30, 41, 59, 0.6);
+            --bg-body: #020617;
+            --bg-card: #0b1120;
+            --bg-card-hover: #1e293b;
             --accent: #22d3ee;
             --accent-glow: rgba(34, 211, 238, 0.15);
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
             --radius: 12px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        body { 
-            background-color: var(--bg-body); 
-            color: var(--text-main); 
-            line-height: 1.6; 
-            overflow-x: hidden; 
-            position: relative;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- BACKGROUND DESIGN (GLOWS) --- */
-        body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.04) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
-            z-index: -1;
-        }
-
-        /* --- HEADER --- */
+        /* HEADER */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1.2rem 8%; border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; background: rgba(3, 7, 18, 0.6); backdrop-filter: blur(12px); z-index: 1000;
+            padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); z-index: 100;
         }
-        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; text-decoration: none; color: white; }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
         .logo span { color: var(--accent); }
-        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav ul { display: flex; list-style: none; gap: 2rem; align-items: center; }
         nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
 
-        /* --- BREADCRUMB --- */
-        .breadcrumb { display: flex; align-items: center; gap: 10px; padding: 1.5rem 8% 0; font-size: 0.8rem; color: var(--text-muted); }
-        .breadcrumb a { color: inherit; text-decoration: none; transition: 0.3s; }
-        .breadcrumb a:hover { color: var(--accent); }
-
-        /* --- HERO --- */
+        /* HERO */
         .hero { padding: 4rem 8% 2rem; text-align: center; }
-        .hero-tag { background: rgba(34, 211, 238, 0.1); color: var(--accent); padding: 5px 15px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 1.5rem; display: inline-block; }
-        h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; font-weight: 800; letter-spacing: -1px; }
-
-        main { padding: 2rem 8% 5rem; max-width: 1400px; margin: 0 auto; }
-
-        /* --- ACCORDION --- */
-        .timeline-year {
-            display: flex; align-items: center; gap: 1rem;
-            margin: 2rem 0 1rem; color: var(--accent);
-            font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700;
-            cursor: pointer; padding: 15px; border-radius: 8px; transition: 0.3s;
-            background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border);
+        .hero-tag {
+            background: rgba(34, 211, 238, 0.1); color: var(--accent);
+            padding: 6px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 1.5rem; display: inline-flex; align-items: center; gap: 8px;
         }
-        .timeline-year:hover { border-color: var(--accent); }
-        .timeline-year i.fa-chevron-down { font-size: 0.9rem; transition: transform 0.4s ease; margin-left: auto; }
-        .timeline-year.active i.fa-chevron-down { transform: rotate(180deg); }
+        h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 800; }
+        .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
-        .accordion-content { max-height: 2500px; overflow: hidden; transition: max-height 0.6s ease, opacity 0.4s ease; opacity: 1; }
-        .accordion-content.collapsed { max-height: 0; opacity: 0; pointer-events: none; }
+        /* TIMELINE SECTION */
+        .timeline-container { max-width: 900px; margin: 4rem auto; padding: 0 2rem; position: relative; }
 
-        /* --- GRID & CARDS --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1.5rem; padding: 1rem 0; }
-        .card { background: var(--bg-card); border: 1px solid var(--border); padding: 2.5rem; border-radius: var(--radius); transition: 0.3s; display: flex; flex-direction: column; backdrop-filter: blur(10px); }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); background: var(--bg-card-hover); }
+        /* La ligne verticale */
+        .timeline-container::before {
+            content: ""; position: absolute; left: 32px; top: 0; bottom: 0;
+            width: 2px; background: linear-gradient(to bottom, var(--accent), var(--border));
+        }
 
-        .badge-type { font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 6px; text-transform: uppercase; border: 1px solid currentColor; }
-        .type-company { color: #a78bfa; }
-        .type-school { color: #3b82f6; }
+        .timeline-item { position: relative; margin-bottom: 3rem; padding-left: 60px; }
 
-        .org-name { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; display: block; }
-        .card ul { list-style: none; margin-bottom: 2rem; flex-grow: 1; }
-        .card ul li { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .card ul li::before { content: "•"; color: var(--accent); }
+        /* Le point sur la ligne */
+        .timeline-item::after {
+            content: ""; position: absolute; left: 28px; top: 10px;
+            width: 10px; height: 10px; background: var(--accent);
+            border-radius: 50%; box-shadow: 0 0 10px var(--accent); z-index: 2;
+        }
 
-        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
-        .tag { background: rgba(255, 255, 255, 0.03); color: var(--accent); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; border: 1px solid var(--border); }
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            padding: 2rem; border-radius: var(--radius); transition: 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .card:hover { border-color: var(--accent); transform: translateX(10px); background: var(--bg-card-hover); }
 
-        .btn { padding: 0.6rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 600; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-outline { border: 1px solid var(--border); color: var(--text-main); background: transparent; }
-        .btn-outline:hover { background: var(--accent); color: #000; border-color: var(--accent); }
-        .btn-primary { background: var(--text-main); color: var(--bg-body); border: none; }
+        /* Icône de fond discrète */
+        .card-bg-icon { position: absolute; right: 20px; top: 20px; font-size: 2rem; color: rgba(255,255,255,0.03); }
 
-        /* MODALE */
-        .modal { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); }
-        .modal-content { background: #0d1117; border: 1px solid var(--border); width: 95%; max-width: 600px; margin: 8% auto; padding: 3rem; border-radius: 20px; }
-        
-        /* --- FOOTER --- */
-        footer { padding: 4rem 8% 2rem; background: rgba(11, 17, 32, 0.95); border-top: 1px solid var(--border); margin-top: 5rem; backdrop-filter: blur(5px); }
-        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; }
-        .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; }
-        .footer-col ul { list-style: none; }
-        .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        .footer-col a:hover { color: var(--accent); }
-        .social-links { display: flex; gap: 1rem; }
-        .social-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
-        .social-btn:hover { border-color: var(--accent); color: var(--accent); }
-        .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-top: 2rem; }
+        /* BADGES */
+        .status-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+        .status-badge {
+            font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; text-transform: uppercase;
+        }
+        .en-cours { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+        .obtenu { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .date { color: var(--text-muted); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; }
 
-        @media (max-width: 768px) { header { padding: 1rem 5%; } nav { display: none; } .grid { grid-template-columns: 1fr; } footer { flex-direction: column; gap: 2rem; text-align: center; } }
+        .card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-main); }
+        .university { color: var(--accent); font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem; display: block; }
+
+        .card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+        .cert-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .cert-badge {
+            background: rgba(30, 41, 59, 0.5); border: 1px solid var(--border);
+            color: var(--text-muted); padding: 4px 12px; border-radius: 6px;
+            font-size: 0.7rem; font-weight: 600; text-transform: uppercase; transition: 0.3s;
+        }
+        .card:hover .cert-badge { border-color: rgba(34, 211, 238, 0.3); color: var(--text-main); }
+
+        footer { text-align: center; padding: 4rem; border-top: 1px solid var(--border); margin-top: 4rem; color: var(--text-muted); font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .timeline-container { padding: 0 1rem; }
+            .timeline-container::before { left: 12px; }
+            .timeline-item { padding-left: 35px; }
+            .timeline-item::after { left: 8px; }
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="ambient-bg"></div>
-
     <header>
-        <a href="../index.html" class="logo">Nicolas<span>.SI</span></a>
+        <div class="logo">DevOps<span>.</span></div>
         <nav>
             <ul>
                 <li><a href="../index.html">Accueil</a></li>
-                <li><a href="parcours.html">Parcours</a></li>
-                <li><a href="#" style="color: var(--accent)">Projets</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" style="color: var(--accent)">Parcours</a></li>
+                <li><a href="projets.html">Projets</a></li>
+                <li><a href="mailto:nicolas.blin.pro1@gmail.com" class="btn-primary" style="padding: 0.5rem 1rem; border-radius: 8px; background: var(--accent); color: #000; text-decoration: none; font-weight: 600;">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <nav class="breadcrumb">
-        <a href="../index.html">Accueil</a> <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
-        <span style="color:var(--accent)"></span>>Projets</span>
-    </nav>
-
     <main>
         <section class="hero">
-            <span class="hero-tag">Projets</span>
-            <h1>Réalisations & <span style="color:var(--accent)">Ingénierie</span></h1>
-            <p style="color: var(--text-muted);">Exploration exhaustive de mon parcours technique et de mes missions.</p>
+            <div class="hero-tag">
+                <i class="fas fa-user-graduate"></i> PARCOURS ACADÉMIQUE
+            </div>
+            <h1>Formation & <span style="color:var(--accent)">Diplômes</span></h1>
+            <p>Mon évolution académique vers l'expertise Cloud et DevOps</p>
         </section>
 
-        <div class="timeline-year" onclick="toggleAccordion(this)">
-            <i class="fas fa-terminal"></i> M1 Cloud, Infrastructure et Sécurité
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="accordion-content">
-            <div class="grid">
-                <article class="card">
-                    <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
-                    <h3>Expert Architecture S.I</h3>
-                    <span class="org-name">Innosys</span>
-                    <ul>
-                        <li>Refonte intranet Assurmix</li>
-                        <li>Automatisation Ansible & Docker</li>
-                    </ul>
-                    <div class="tags"><span class="tag">Ansible</span><span class="tag">Samba</span><span class="tag">Monitoring</span></div>
-                    <button class="btn btn-outline" onclick="openModal('innosys')">Voir le détail</button>
-                </article>
+        <div class="timeline-container">
 
-                <article class="card">
-                    <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                    <h3>Expert en cloud & sécurité</h3>
-                    <span class="org-name">Ynov Campus de Paris</span>
-                    <ul>
-                        <li>Infrastructure OpenStack complète</li>
-                        <li>Gestion Compute & Storage (Swift)</li>
-                    </ul>
-                    <div class="tags"><span class="tag">Openstack</span><span class="tag">Cloud</span><span class="tag">Linux</span></div>
-                    <button class="btn btn-outline" onclick="openModal('ynov1')">Voir le détail</button>
-                </article>
+            <div class="timeline-item">
+                <div class="card">
+                    <i class="fas fa-graduation-cap card-bg-icon"></i>
+                    <div class="status-header">
+                        <span class="status-badge en-cours">En cours</span>
+                        <span class="date">2025 – 2027</span>
+                    </div>
+                    <h3>Mastère Expert Cloud, Infrastructure et Sécurité</h3>
+                    <span class="university">Ynov Campus (Paris-Nanterre)</span>
+                    <p>Spécialisation dans la conception d'architectures résilientes, l'automatisation DevSecOps et la sécurisation des environnements Cloud hybrides.</p>
+                    <div class="cert-container">
+                        <span class="cert-badge">Cloud</span>
+                        <span class="cert-badge">DevSecOps</span>
+                        <span class="cert-badge">Virtualisation</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="timeline-year" onclick="toggleAccordion(this)">
-            <i class="fas fa-terminal"></i> 3ème Année BUT R&T
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="accordion-content collapsed">
-            <div class="grid">
-                <article class="card">
-                    <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
-                    <h3>Assistant de Proximité</h3>
-                    <span class="org-name">DGFIP</span>
-                    <ul>
-                        <li>Densification réseau et ToIP</li>
-                        <li>Transition téléphonie sur IP</li>
-                    </ul>
-                    <div class="tags"><span class="tag">ToIP</span><span class="tag">Réseau</span><span class="tag">DIRCOFI</span></div>
-                    <button class="btn btn-outline" onclick="openModal('dgfip3')">Voir le détail</button>
-                </article>
-
-                <article class="card">
-                    <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                    <h3>IoT & Architectures Hybrides</h3>
-                    <span class="org-name">Ynov Campus</span>
-                    <ul>
-                        <li>Qualification architectures IOT</li>
-                        <li>Maison connectée & RGB Light</li>
-                    </ul>
-                    <div class="tags"><span class="tag">IoT</span><span class="tag">Réseau</span><span class="tag">MQTT</span></div>
-                    <button class="btn btn-outline" onclick="openModal('but3')">Voir le détail</button>
-                </article>
+            <div class="timeline-item">
+                <div class="card">
+                    <i class="fas fa-university card-bg-icon"></i>
+                    <div class="status-header">
+                        <span class="status-badge obtenu">Obtenu</span>
+                        <span class="date">2023 – 2025</span>
+                    </div>
+                    <h3>BUT Réseaux & Télécommunications</h3>
+                    <span class="university">Université de Tours</span>
+                    <p>Expertise en administration réseaux, protocoles de communication et Internet des Objets (IoT). Apprentissage intensif du modèle OSI et du déploiement d'infrastructures LAN/WAN.</p>
+                    <div class="cert-container">
+                        <span class="cert-badge">CCNA 1</span>
+                        <span class="cert-badge">CCNA 2</span>
+                        <span class="cert-badge">CCNA 3</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="timeline-year" onclick="toggleAccordion(this)">
-            <i class="fas fa-terminal"></i> 2ème Année BUT R&T
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="accordion-content collapsed">
-            <div class="grid">
-                <article class="card">
-                    <span class="badge-type type-company"><i class="fas fa-briefcase"></i> Entreprise (Alternance)</span>
-                    <h3>Assistant de Proximité</h3>
-                    <span class="org-name">DGFIP</span>
-                    <ul>
-                        <li>Déploiement solution GestSup</li>
-                        <li>Audit switchs réseaux</li>
-                    </ul>
-                    <div class="tags"><span class="tag">GestSup</span><span class="tag">Support</span><span class="tag">Audit</span></div>
-                    <button class="btn btn-outline" onclick="openModal('dgfip2')">Voir le détail</button>
-                </article>
-
-                <article class="card">
-                    <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                    <h3>Transmission & Dév.</h3>
-                    <span class="org-name">Ynov Campus</span>
-                    <ul>
-                        <li>Systèmes de transmission</li>
-                        <li>Applications communicantes</li>
-                    </ul>
-                    <div class="tags"><span class="tag">Signal</span><span class="tag">Dév</span><span class="tag">TCP/UDP</span></div>
-                    <button class="btn btn-outline" onclick="openModal('but2')">Voir le détail</button>
-                </article>
+            <div class="timeline-item">
+                <div class="card">
+                    <i class="fas fa-book card-bg-icon"></i>
+                    <div class="status-header">
+                        <span class="status-badge obtenu">Obtenu</span>
+                        <span class="date">2019 – 2021</span>
+                    </div>
+                    <h3>Baccalauréat général</h3>
+                    <span class="university">Lycée GSH (Étampes)</span>
+                    <p>Spécialités : Mathématiques, Physique-Chimie et Sciences de l'ingénieur.</p>
+                    <div class="cert-container">
+                        <span class="cert-badge">Mathématiques</span>
+                        <span class="cert-badge">Physique-Chimie</span>
+                        <span class="cert-badge">SI</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="timeline-year" onclick="toggleAccordion(this)">
-            <i class="fas fa-terminal"></i> 1ère Année BUT R&T
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="accordion-content collapsed">
-            <div class="grid">
-                <article class="card">
-                    <span class="badge-type type-school"><i class="fas fa-graduation-cap"></i> Projet Académique</span>
-                    <h3>Fondamentaux Réseaux</h3>
-                    <span class="org-name">BUT Réseaux & Télécoms</span>
-                    <ul>
-                        <li>Conception réseau PME</li>
-                        <li>Développement HTML/CSS</li>
-                    </ul>
-                    <div class="tags"><span class="tag">Packet Tracer</span><span class="tag">HTML</span><span class="tag">LAN</span></div>
-                    <button class="btn btn-outline" onclick="openModal('but1')">Voir le détail</button>
-                </article>
-            </div>
         </div>
     </main>
 
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header" style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem;">
-                <span id="modalBadge" class="badge-type"></span>
-                <span style="cursor:pointer; font-size:1.5rem; color:var(--text-muted);" onclick="closeModal()">&times;</span>
-            </div>
-            <h2 id="modalTitle" style="margin-bottom:0.5rem;"></h2>
-            <p id="modalSub" style="color:var(--accent); font-weight:700; margin-bottom:1.5rem;"></p>
-            <p id="modalDesc" style="color:var(--text-muted); font-size:0.9rem; margin-bottom:2rem;"></p>
-            <h3 style="font-size:1rem; margin-bottom:1rem;">Réalisations :</h3>
-            <ul id="modalList"></ul>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:2.5rem;">
-                <a id="modalLink" href="#" class="btn btn-primary">Consulter la doc</a>
-                <button class="btn btn-outline" onclick="closeModal()">Fermer</button>
-            </div>
-        </div>
-    </div>
-
     <footer>
-        <div class="footer-top">
-            <div class="footer-col">
-                <div class="footer-logo">Nicolas<span>.SI</span></div>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Architecte des SI spécialisé dans la conception d'infrastructures hautement disponibles.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="parcours.html">Parcours</a></li>
-                    <li><a href="projets.html">Projets</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 Nicolas Blin | Expert Architecture SI</p>
-        </div>
+        <p>© 2025 — Nicolas Blin | Portfolio</p>
     </footer>
 
-    <script>
-        const projects = {
-            innosys: { title: "Expert Architecture S.I", badge: "Entreprise (Alternance)", badgeClass: "type-company", sub: "Innosys", desc: "Modernisation de l'infrastructure pour supporter la croissance des services intranet.", tasks: ["Refonte intranet Assurmix", "Automatisation avec Ansible", "Déploiement Docker & Monitoring"], link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/company.html" },
-            ynov1: { title: "Expert en cloud & sécurité", badge: "Projet Académique", badgeClass: "type-school", sub: "Ynov Campus de Paris", desc: "Déploiement d'une infrastructure OpenStack complète.", tasks: ["Configuration Nova", "Gestion du stockage Swift", "Optimisation des Flavors"], link: "https://nblinpro.github.io/M_Cloud_INFRA_SEC/mastere.html" },
-            dgfip3: { title: "Assistant de Proximité", badge: "Entreprise (Alternance)", badgeClass: "type-company", sub: "DGFIP", desc: "Amélioration de l'infrastructure réseau et passage à la ToIP.", tasks: ["Projet de densification (DIRCOFI)", "Transition vers la téléphonie sur IP", "Mise en œuvre ToIP"], link: "#" },
-            but3: { title: "IoT & Architectures Hybrides", badge: "Projet Académique", badgeClass: "type-school", sub: "Ynov Campus", desc: "Étude des réseaux IoT et des architectures hybrides.", tasks: ["Qualification architectures réseaux", "Fabrication maison connectée", "Projet: RGB Light"], link: "#" },
-            dgfip2: { title: "Assistant de Proximité", badge: "Entreprise (Alternance)", badgeClass: "type-company", sub: "DGFIP", desc: "Support technique et déploiement d'outils de gestion.", tasks: ["Déploiement GestSup", "Audit switchs non-PoE", "Intégration nouveaux services"], link: "#" },
-            but2: { title: "Transmission & Dév.", badge: "Projet Académique", badgeClass: "type-school", sub: "Ynov Campus", desc: "Apprentissage des couches physiques et applicatives.", tasks: ["Système de transmission", "Applications communicantes", "Protocoles TCP/UDP"], link: "#" },
-            but1: { title: "Fondamentaux Réseaux", badge: "Projet Académique", badgeClass: "type-school", sub: "BUT Réseaux & Télécoms", desc: "Apprentissage des bases de l'adressage et de la commutation.", tasks: ["Architecture LAN PME", "Développement site vitrine", "Mesures signaux physiques"], link: "#" }
-        };
-
-        function toggleAccordion(header) {
-            header.classList.toggle('active');
-            const content = header.nextElementSibling;
-            content.classList.toggle('collapsed');
-        }
-
-        function openModal(id) {
-            const p = projects[id];
-            if (!p) return;
-            document.getElementById('modalTitle').innerText = p.title;
-            document.getElementById('modalBadge').innerText = p.badge;
-            document.getElementById('modalBadge').className = 'badge-type ' + p.badgeClass;
-            document.getElementById('modalSub').innerText = p.sub;
-            document.getElementById('modalDesc').innerText = p.desc;
-            document.getElementById('modalLink').href = p.link;
-            document.getElementById('modalList').innerHTML = p.tasks.map(t => `<li style="color:var(--text-muted); font-size:0.85rem; margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent); font-size:0.7rem;"></i> ${t}</li>`).join('');
-            document.getElementById('projectModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('projectModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        window.onclick = e => { if (e.target.className === 'modal') closeModal(); }
-    </script>
 </body>
-
 </html>
