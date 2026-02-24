@@ -24,17 +24,23 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* HEADER */
+        /* --- HEADER --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); z-index: 100;
+            padding: 1.2rem 8%; border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; background: rgba(3, 7, 18, 0.6);
+            backdrop-filter: blur(12px); z-index: 1000;
         }
-        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; text-decoration: none; color: white; }
         .logo span { color: var(--accent); }
-        nav ul { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
         nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
+
+        /* --- BREADCRUMB --- */
+        .breadcrumb { display: flex; align-items: center; gap: 10px; padding: 1.5rem 8% 0; font-size: 0.8rem; color: var(--text-muted); }
+        .breadcrumb a { color: inherit; text-decoration: none; transition: 0.3s; }
+        .breadcrumb a:hover { color: var(--accent); }
 
         /* HERO */
         .hero { padding: 4rem 8% 2rem; text-align: center; }
@@ -114,7 +120,18 @@
             font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
         }
 
-        footer { text-align: center; padding: 4rem; border-top: 1px solid var(--border); margin-top: 4rem; color: var(--text-muted); font-size: 0.85rem; }
+        /* --- FOOTER --- */
+        footer { padding: 4rem 8% 2rem; background: rgba(11, 17, 32, 0.95); border-top: 1px solid var(--border); margin-top: 5rem; backdrop-filter: blur(5px); }
+        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+        .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-main); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(34, 211, 238, 0.05); }
+        .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
 
         @media (max-width: 768px) {
             .timeline-container::before { left: 17px; }
@@ -137,6 +154,11 @@
             </ul>
         </nav>
     </header>
+
+    <nav class="breadcrumb">
+        <a href="../index.html">Accueil</a> <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
+        <span style="color: var(--accent)">Parcours</span>
+    </nav>
 
     <main>
         <section class="hero">
@@ -194,7 +216,32 @@
     </main>
 
     <footer>
-        <p>© 2025 — Nicolas Blin | Portfolio</p>
+        <div class="footer-top">
+            <div class="footer-col">
+                <div class="footer-logo" style="font-weight:800; font-size:1.2rem; margin-bottom:1rem;">Nicolas<span>.SI</span></div>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Expert Architecture SI spécialisé dans la conception d'infrastructures Cloud et la sécurité.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul style="list-style:none;">
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li><a href="parcours.html">Parcours</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/nblinpro" class="social-btn" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Nicolas Blin | Expert Architecture SI</p>
+        </div>
     </footer>
 
 </body>
