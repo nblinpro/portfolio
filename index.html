@@ -259,7 +259,33 @@
             font-size: 0.7rem;
             text-transform: uppercase;
         }
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
 
+.profile-photo-container {
+    flex-shrink: 0;
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px; /* Coins arrondis modernes */
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+}
+
+/* Ajustement pour mobile */
+@media (max-width: 600px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
         /* --- FEATURED PROJECT --- */
         .featured-box {
             background: var(--card-bg);
@@ -591,42 +617,38 @@
         </section>
 
         <section id="whoami">
+            
             <div class="whoami-container">
-                <div>
-                    <h2>Profil & <span style="color: var(--accent)">Philosophie</span></h2>
-                    <p style="color: var(--text-muted); margin-bottom: 2rem;">Architecte de solutions passionné par
-                        l'Open Source et le DevOps, je transforme les contraintes techniques en systèmes agiles et
-                        scalables.</p>
-                    <div class="json-block">
-                        {<br>
-                        &nbsp;&nbsp;<span class="j-key">"role"</span>: <span class="j-val">"Expert Architecture
-                            SI"</span>,<br>
-                        &nbsp;&nbsp;<span class="j-key">"focus"</span>: [<span class="j-val">"Automation"</span>, <span
-                            class="j-val">"Cloud"</span>, <span class="j-val">"Security"</span>],<br>
-                        &nbsp;&nbsp;<span class="j-key">"philosophy"</span>: <span class="j-val">"Infrastructure as
-                            Code"</span><br>
-                        }
-                    </div>
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h4>5+</h4>
-                        <p>Années d'Exp</p>
-                    </div>
-                    <div class="stat-card">
-                        <h4>20+</h4>
-                        <p>Projets terminés</p>
-                    </div>
-                    <div class="stat-card">
-                        <h4>100%</h4>
-                        <p>Automatisation</p>
-                    </div>
-                    <div class="stat-card">
-                        <h4>M1</h4>
-                        <p>Expertise SI</p>
-                    </div>
-                </div>
+    <div class="profile-main">
+        <div class="profile-header">
+            <div class="profile-photo-container">
+                <img src="./images/photo_identite" alt="Nicolas Blin" class="profile-photo">
             </div>
+            <div class="profile-text">
+                <h2>Profil & <span style="color: var(--accent)">Philosophie</span></h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Architecte de solutions passionné par l'Open Source et le DevOps, 
+                    je transforme les contraintes techniques en systèmes agiles et scalables.
+                </p>
+            </div>
+        </div>
+        
+        <div class="json-block">
+            {<br>
+            &nbsp;&nbsp;<span class="j-key">"role"</span>: <span class="j-val">"Expert Architecture SI"</span>,<br>
+            &nbsp;&nbsp;<span class="j-key">"focus"</span>: [<span class="j-val">"Automation"</span>, <span class="j-val">"Cloud"</span>, <span class="j-val">"Security"</span>],<br>
+            &nbsp;&nbsp;<span class="j-key">"philosophy"</span>: <span class="j-val">"Infrastructure as Code"</span><br>
+            }
+        </div>
+    </div>
+    
+    <div class="stats-grid">
+        <div class="stat-card"><h4>5+</h4><p>Années d'Exp</p></div>
+        <div class="stat-card"><h4>20+</h4><p>Projets terminés</p></div>
+        <div class="stat-card"><h4>100%</h4><p>Automatisation</p></div>
+        <div class="stat-card"><h4>M1</h4><p>Expertise SI</p></div>
+    </div>
+</div>
         </section>
 
         <section>
