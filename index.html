@@ -652,25 +652,43 @@
         </section>
 
         <section>
-            <h2>Projet <span style="color: var(--accent)">Phare</span></h2>
-            <div class="featured-box">
-                <div>
-                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Refonte SI : Assurmix</h3>
-                    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem;">Modernisation complète
-                        d'une infrastructure métier. Passage d'un système legacy à un environnement orchestré par
-                        Ansible avec monitoring temps réel.</p>
-                    <div style="margin-bottom: 2rem;">
-                        <span class="tag">Ansible</span><span class="tag">Docker</span><span
-                            class="tag">Debian</span><span class="tag">Monitoring</span>
+            <h2>Projets <span style="color: var(--accent)">Phares</span></h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+                
+                <div class="featured-box" style="padding: 2.5rem; grid-template-columns: 1fr;">
+                    <div style="position: relative;">
+                        <span class="hero-tag" style="margin-bottom: 1rem;">Lab Innovation</span>
+                        <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">GridBook : Architecture Souveraine</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                            Plateforme de pari full-stack auto-hébergée sur <b>Proxmox</b>. Sécurisation via <b>Cloudflare Tunnel</b> et gestion de flux temps réel avec FastAPI.
+                        </p>
+                        <div style="margin-bottom: 2rem;">
+                            <span class="tag">Proxmox</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">Cloudflare</span>
+                        </div>
+                        <a href="https://gridbook.visioninfo.fr/login" target="_blank"
+                            style="color: var(--accent); font-size: 0.85rem; font-weight: 700; text-decoration: none; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 8px;">
+                            VOIR LE PROJET LIVE <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
-                    <a href="pages/projets.html"
-                        style="color: var(--accent); font-size: 0.85rem; font-weight: 700; text-decoration: none; letter-spacing: 1px;">VOIR
-                        LE DÉTAIL DU PROJET →</a>
                 </div>
-                <div
-                    style="background: rgba(34, 211, 238, 0.02); border: 1px solid var(--border); padding: 3rem; border-radius: 12px; text-align: center;">
-                    <i class="fas fa-server" style="font-size: 4rem; color: var(--accent); opacity: 0.5;"></i>
+
+                <div class="featured-box" style="padding: 2.5rem; grid-template-columns: 1fr;">
+                    <div style="position: relative;">
+                        <span class="hero-tag" style="margin-bottom: 1rem;">Expertise Cloud</span>
+                        <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Conteneurisation Innosys</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                            Migration et industrialisation des sites clients vers une infrastructure <b>Docker</b>. Optimisation de la densité serveur et isolation applicative.
+                        </p>
+                        <div style="margin-bottom: 2rem;">
+                            <span class="tag">Docker</span><span class="tag">Nginx</span><span class="tag">CI/CD</span><span class="tag">Linux</span>
+                        </div>
+                        <a href="pages/projets.html"
+                            style="color: var(--accent); font-size: 0.85rem; font-weight: 700; text-decoration: none; letter-spacing: 1px;">
+                            DÉTAILS TECHNIQUES →
+                        </a>
+                    </div>
                 </div>
+
             </div>
         </section>
 
