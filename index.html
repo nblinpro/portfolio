@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nicolas Blin | Portfolio Architecture SI & Cloud</title>
+    <meta name="description" content="Portfolio de Nicolas Blin, Expert Architecture SI & Cloud. Conception d'infrastructures Cloud, automatisation Ansible/Docker, DevSecOps, monitoring, réseau Cisco.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
@@ -300,19 +301,6 @@
             overflow: hidden;
         }
 
-        .featured-box::before {
-            content: "TOP PROJECT";
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            background: var(--accent);
-            color: var(--bg);
-            font-size: 0.6rem;
-            font-weight: 900;
-            padding: 5px 40px;
-            transform: rotate(45deg);
-        }
-
         .tag {
             font-size: 0.7rem;
             background: rgba(255, 255, 255, 0.03);
@@ -562,6 +550,13 @@
             font-size: 0.9rem;
         }
 
+        /* HAMBURGER MENU */
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 1001; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-main); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
         @media (max-width: 900px) {
 
             .whoami-container,
@@ -580,6 +575,16 @@
                 display: none;
             }
 
+            .hamburger { display: flex; }
+
+            nav.open {
+                display: flex; position: fixed; inset: 0;
+                background: rgba(3, 7, 18, 0.98); backdrop-filter: blur(20px);
+                z-index: 1000; flex-direction: column; align-items: center; justify-content: center;
+            }
+            nav.open ul { flex-direction: column; align-items: center; gap: 2.5rem; }
+            nav.open a { font-size: 1.3rem; }
+
             h1 {
                 font-size: 2.5rem;
             }
@@ -593,6 +598,9 @@
 
     <header>
         <a href="index.html" class="logo">Nicolas<span>.SI</span></a>
+        <button class="hamburger" aria-label="Menu navigation" onclick="this.classList.toggle('active'); document.querySelector('header nav').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
         <nav>
             <ul>
                 <li><a href="#" class="active">Accueil</a></li>
@@ -643,10 +651,10 @@
     </div>
     
     <div class="stats-grid">
-        <div class="stat-card"><h4>5+</h4><p>Années d'Exp</p></div>
-        <div class="stat-card"><h4>20+</h4><p>Projets terminés</p></div>
-        <div class="stat-card"><h4>100%</h4><p>Automatisation</p></div>
-        <div class="stat-card"><h4>M1</h4><p>Expertise SI</p></div>
+        <div class="stat-card"><h4>3+</h4><p>Ans d'alternance</p></div>
+        <div class="stat-card"><h4>20+</h4><p>Projets réalisés</p></div>
+        <div class="stat-card"><h4>CCNA</h4><p>1 · 2 · 3</p></div>
+        <div class="stat-card"><h4>M1</h4><p>Expert Cloud & SI</p></div>
     </div>
 </div>
         </section>
@@ -818,17 +826,20 @@
 </section>
 
         <section id="partners">
-            <div style="text-align: center; margin-bottom: 4rem;">
-                <h2 style="font-size: 1.5rem; color: var(--text-muted);">Ils m'ont fait confiance</h2>
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <span class="hero-tag" style="margin-bottom: 1rem;">Expériences</span>
+                <h2>Ils m'ont fait <span style="color: var(--accent)">confiance</span></h2>
             </div>
             <div class="partners-static">
                 <div class="partner-item">
-                    <img src="image/dgfip.jfif" alt="DGFIP">
-                    <span>DGFIP</span>
-                </div>
-                <div class="partner-item">
                     <img src="image/innosys.jfif" alt="Innosys">
                     <span>INNOSYS</span>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-top: 0.3rem;">Expert Architecture SI · 2025–Présent</p>
+                </div>
+                <div class="partner-item">
+                    <img src="image/dgfip.jfif" alt="DGFIP">
+                    <span>DGFIP</span>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-top: 0.3rem;">Assistant de Proximité · 2023–2025</p>
                 </div>
             </div>
         </section>

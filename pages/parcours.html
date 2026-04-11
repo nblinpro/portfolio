@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Parcours Académique | Nicolas</title>
+    <title>Parcours Académique | Nicolas Blin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Parcours académique de Nicolas Blin : Mastère Expert Cloud, Infrastructure et Sécurité (Ynov Campus), BUT Réseaux & Télécommunications (IUT de Blois), certifications CCNA.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
@@ -130,10 +131,31 @@
         .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(34, 211, 238, 0.05); }
         .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
 
+        /* AMBIENT BACKGROUND */
+        .ambient-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.04) 0%, transparent 40%), radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.04) 0%, transparent 40%); z-index: -1; pointer-events: none; }
+
+        /* HAMBURGER MENU */
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 1001; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-main); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
         @media (max-width: 768px) {
             .timeline-container::before { left: 17px; }
             .timeline-item { padding-left: 45px; }
             .timeline-item::after { left: 12px; }
+            header { padding: 1rem 5%; }
+            .hamburger { display: flex; }
+            nav { display: none; }
+            nav.open {
+                display: flex; position: fixed; inset: 0;
+                background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px);
+                z-index: 1000; flex-direction: column; align-items: center; justify-content: center;
+            }
+            nav.open ul { flex-direction: column; align-items: center; gap: 2.5rem; }
+            nav.open a { font-size: 1.3rem; }
+            .footer-top { grid-template-columns: 1fr; gap: 2rem; }
         }
     </style>
 </head>
@@ -144,6 +166,9 @@
 
     <header>
         <a href="../index.html" class="logo">Nicolas<span>.SI</span></a>
+        <button class="hamburger" aria-label="Menu navigation" onclick="this.classList.toggle('active'); document.querySelector('header nav').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
         <nav>
             <ul>
                 <li><a href="../index.html">Accueil</a></li>
@@ -175,7 +200,7 @@
                     </div>
                     <h3>Mastère Expert Cloud, Infrastructure et Sécurité</h3>
                     <span class="university">Ynov Campus (Paris-Nanterre)</span>
-                    <p>Mon évolution académique vers l'expertise Cloud et DevOps.</p>
+                    <p>Formation en alternance axée sur la conception d'architectures Cloud privées/hybrides, la sécurisation des SI et les pratiques DevSecOps.</p>
                     <div class="cert-container">
                         <span class="cert-badge">Cloud</span><span class="cert-badge">DevSecOps</span><span class="cert-badge">Virtualisation</span>
                     </div>

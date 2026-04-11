@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Nicolas</title>
+    <title>Contact | Nicolas Blin</title>
+    <meta name="description" content="Contactez Nicolas Blin, Expert Architecture SI & Cloud. Disponible pour alternance, missions et opportunités en infrastructure Cloud, DevOps et sécurité.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -123,17 +124,45 @@
             display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);
         }
 
+        /* HAMBURGER MENU */
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 1001; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-main); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* DISPONIBILITÉ */
+        .availability-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(16, 185, 129, 0.08); color: #10b981;
+            padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 1px; border: 1px solid rgba(16, 185, 129, 0.25); margin-bottom: 1.5rem;
+        }
+        .availability-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: #10b981; animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
         @media (max-width: 768px) {
             .contact-grid, .form-row, .footer-top { grid-template-columns: 1fr; }
             header { padding: 1rem 5%; }
             nav { display: none; }
+            .hamburger { display: flex; }
+            nav.open {
+                display: flex; position: fixed; inset: 0;
+                background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px);
+                z-index: 1000; flex-direction: column; align-items: center; justify-content: center;
+            }
+            nav.open ul { flex-direction: column; align-items: center; gap: 2.5rem; }
+            nav.open a { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div><a href="../index.html" class="logo">Nicolas<span>.SI</span></a></div>
+        <a href="../index.html" class="logo">Nicolas<span>.SI</span></a>
+        <button class="hamburger" aria-label="Menu navigation" onclick="this.classList.toggle('active'); document.querySelector('header nav').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
         <nav>
             <ul>
                 <li><a href="../index.html">Accueil</a></li>
@@ -145,15 +174,18 @@
     </header>
 
     <nav class="breadcrumb">
-        <a href="https://nblinpro.github.io/portfolio/index.html">Accueil</a>
+        <a href="../index.html">Accueil</a>
         <i class="fas fa-chevron-right"></i>
-        <span>Projets</span>
+        <span>Contact</span>
     </nav>
 
     <main>
         <div class="hero-tag"><i class="far fa-envelope"></i> PRENONS CONTACT</div>
         <h1>Travaillons ensemble</h1>
-        <p class="subtitle">Vous avez un projet, une question ou vous souhaitez discuter d'une opportunité ? N'hésitez pas à me contacter.</p>
+        <div style="display:flex; justify-content:center; margin-bottom:1rem;">
+            <div class="availability-badge"><div class="dot"></div> Actuellement en alternance · M1 Cloud & Sécurité</div>
+        </div>
+        <p class="subtitle">Vous avez un projet, une question ou souhaitez discuter d'une opportunité ? N'hésitez pas à me contacter.</p>
 
         <div class="contact-grid">
             <a href="mailto:nicolas.blin.pro1@gmail.com" class="contact-card">
@@ -164,12 +196,12 @@
             <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" target="_blank" class="contact-card">
                 <i class="fab fa-linkedin-in"></i>
                 <h3>LinkedIn</h3>
-                <p>Mon profil</p>
+                <p>Mon profil professionnel</p>
             </a>
-            <a href="https://nblinpro.github.io/portfolio/pages/projets.html" target="_blank" class="contact-card">
+            <a href="https://github.com/nblinpro" target="_blank" class="contact-card">
                 <i class="fab fa-github"></i>
                 <h3>GitHub</h3>
-                <p>Mes projets</p>
+                <p>Mes dépôts et projets</p>
             </a>
         </div>
 
