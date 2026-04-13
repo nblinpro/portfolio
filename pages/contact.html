@@ -6,36 +6,40 @@
     <title>Contact | Nicolas Blin</title>
     <meta name="description" content="Contactez Nicolas Blin, Expert Architecture SI & Cloud. Disponible pour alternance, missions et opportunités en infrastructure Cloud, DevOps et sécurité.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-body: #020617;
-            --bg-card: #0b1120;
-            --bg-input: #1e293b;
-            --accent: #22d3ee;
-            --accent-glow: rgba(34, 211, 238, 0.3);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #1e293b;
-            --radius: 12px;
+            --bg-body:        #020617;
+            --bg-card:        #0b1120;
+            --bg-card-hover:  #111827;
+            --bg-input:       #1e293b;
+            --accent:         #22d3ee;
+            --accent-glow:    rgba(34, 211, 238, 0.2);
+            --accent-but:     #818cf8;
+            --text-main:      #f8fafc;
+            --text-muted:     #94a3b8;
+            --border:         rgba(255, 255, 255, 0.08);
+            --border-subtle:  #1e293b;
+            --radius:         12px;
+            --transition:     0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
         /* --- HEADER UNIFIÉ --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 100;
+            padding: 1.2rem 8%; border-bottom: 1px solid var(--border);
+            position: sticky; top: 0;
+            background: rgba(2, 6, 23, 0.88);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
         }
-        .logo { 
-    font-weight: 800; 
-    font-size: 1.2rem; 
-    letter-spacing: -0.5px; 
-    text-decoration: none; /* Supprime le soulignement bleu par défaut */
-    color: var(--text-main); /* Garde la couleur blanche du texte */
-}
+        .logo {
+            font-weight: 800; font-size: 1.3rem; letter-spacing: -1px;
+            text-decoration: none; color: var(--text-main);
+        }
         .logo span { color: var(--accent); }
         nav ul { display: flex; list-style: none; gap: 2rem; }
         nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
@@ -98,13 +102,16 @@
         .btn-submit:hover { box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-2px); }
 
         /* --- FOOTER UNIFIÉ --- */
-        footer { 
-            padding: 4rem 8% 2rem; background: var(--bg-card); border-top: 1px solid var(--border); margin-top: 5rem;
+        footer {
+            padding: 3.5rem 8% 2rem;
+            background: rgba(11, 17, 32, 0.97);
+            border-top: 1px solid var(--border);
+            margin-top: 5rem; backdrop-filter: blur(8px);
         }
-        .footer-top { 
-            display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; text-align: left;
+        .footer-top {
+            display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 2.5rem; text-align: left;
         }
-        .footer-logo { font-weight: 800; margin-bottom: 1rem; font-size: 1.2rem; }
+        .footer-logo { font-weight: 800; margin-bottom: 0.75rem; font-size: 1.2rem; }
         .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-main); }
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 10px; }
@@ -253,13 +260,15 @@
             <div class="footer-col">
                 <h4>Contact</h4>
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Nicolas Blin | Expert Architecture SI</p>
+            <p>© 2026 Nicolas Blin — Expert Architecture SI</p>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem;">M1 Cloud · BUT R&T</span>
         </div>
     </footer>
 
