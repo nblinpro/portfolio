@@ -77,10 +77,16 @@ ul { list-style: none; }
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 8%;
   height: 64px;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header::before {
+  content: '';
+  position: absolute; inset: 0;
   background: rgba(2, 6, 23, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
+  z-index: -1;
 }
 
 .logo {
@@ -136,7 +142,8 @@ ul { list-style: none; }
 /* ── HAMBURGER ── */
 .hamburger {
   display: none; flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: pointer; padding: 6px; z-index: 901;
+  background: none; border: none; cursor: pointer; padding: 6px;
+  position: relative; z-index: 901;
 }
 .hamburger span {
   display: block; width: 22px; height: 2px;
@@ -1016,11 +1023,20 @@ h4 { font-size: 0.95rem; font-weight: 700; }
 }
 .featured-card .card-link:hover { gap: 10px; }
 
+/* ── CERT LAYOUT (2-col, collapses on mobile) ── */
+.cert-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .profile-grid,
   .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -1037,15 +1053,19 @@ h4 { font-size: 0.95rem; font-weight: 700; }
   }
   .site-nav.open ul { flex-direction: column; gap: 2rem; align-items: center; }
   .site-nav.open a { font-size: 1.2rem; }
-  .nav-cta { display: none; }
+  .site-nav:not(.open) .nav-cta { display: none; }
+  .site-nav.open .nav-cta { display: inline-flex; }
 
   .hero { padding: 60px 5% 50px; }
   .page-hero { padding: 40px 5% 32px; }
   .page-wrapper { padding: 0 5%; }
   .section { padding: 56px 0; }
 
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  /* Grids */
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .form-row { grid-template-columns: 1fr; }
+  .cert-layout { grid-template-columns: 1fr; gap: 1.25rem; }
 
   .breadcrumb { padding: 12px 5%; }
 
@@ -1053,10 +1073,39 @@ h4 { font-size: 0.95rem; font-weight: 700; }
   .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
 
   .cta-block { padding: 40px 20px; }
-  .partners-grid { gap: 3rem; }
+  .partners-grid { gap: 2rem; }
 
   .profile-meta { flex-direction: column; text-align: center; }
   .profile-photo { width: 90px; height: 90px; }
 
   .site-footer { padding: 3rem 5% 1.5rem; }
+
+  /* Timeline */
+  .timeline::before { left: 16px; }
+  .timeline-item { padding-left: 48px; }
+  .timeline-item::before { left: 10px; top: 22px; }
+
+  /* Modal */
+  .modal-overlay { padding: 0.75rem; }
+  .modal-box { padding: 1.5rem; }
+
+  /* Program banner */
+  .program-banner { padding: 1.1rem 1.25rem; gap: 0.875rem; }
+  .program-banner .banner-icon { width: 40px; height: 40px; font-size: 1.1rem; }
+
+  /* Cards */
+  .project-card { padding: 1.5rem; }
+  .card { padding: 1.5rem; }
+  .featured-card { padding: 1.75rem; }
+  .featured-card h3 { font-size: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+  h1 { letter-spacing: -1px; }
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .section-header h2 { font-size: 1.5rem; }
+  .tabs { flex-wrap: wrap; }
+  .tab-btn { flex: 1; text-align: center; font-size: 0.75rem; padding: 8px 10px; }
 }
