@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Déploiement Samba — Ansible | Nicolas Blin</title>
+  <meta name="description" content="Déploiement automatisé d'un serveur de fichiers Samba via Ansible — gestion des utilisateurs, groupes, permissions SetGID et Ansible Vault. Mastère M1 Innosys.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.75; }
+
+    .step-title {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 700; color: var(--text);
+      margin: 0 0 1.5rem; padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-title i { color: var(--cyan); }
+
+    .sublabel {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--text-muted); margin: 1.5rem 0 0.75rem;
+    }
+
+    .terminal-window {
+      background: #010409; border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin-bottom: 1.5rem;
+    }
+    .terminal-header {
+      background: #161b22; padding: 10px 15px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tdot { width: 10px; height: 10px; border-radius: 50%; }
+    .tdot-red    { background: #ff5f56; }
+    .tdot-yellow { background: #ffbd2e; }
+    .tdot-green  { background: #27c93f; }
+    .terminal-title { color: var(--text-muted); font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; margin-left: 10px; }
+    .terminal-window pre {
+      padding: 1.5rem; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; color: #e6edf3; overflow-x: auto;
+      white-space: pre; line-height: 1.65; margin: 0;
+    }
+    .comment { color: #8b949e; font-style: italic; }
+    .k { color: #7ee787; }
+    .v { color: #a5d6ff; }
+
+    .check-list { list-style: none; }
+    .check-list li { display: flex; align-items: center; gap: 10px; padding: 5px 0; color: var(--text-muted); font-size: 0.875rem; }
+    .check-list li i { color: var(--cyan); font-size: 0.75rem; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+<div class="ambient-bg"></div>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="../parcours.html">Parcours</a></li>
+      <li><a href="../projets.html">Projets</a></li>
+      <li><a href="../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="index.html">Mastère</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>Déploiement Samba — Ansible</span>
+</nav>
+
+<div class="page-hero">
+  <div style="display:flex;align-items:center;justify-content:center;gap:2rem;margin-bottom:1.25rem;">
+    <img src="https://cdn.simpleicons.org/ansible/EE0000" alt="Ansible" style="height:60px;opacity:0.9;filter:drop-shadow(0 0 14px rgba(238,0,0,0.35));">
+    <div style="width:60px;height:60px;background:var(--cyan-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.8rem;filter:drop-shadow(0 0 14px rgba(34,211,238,0.3));">
+      <i class="fas fa-share-alt"></i>
+    </div>
+  </div>
+  <span class="hero-tag"><i class="fas fa-robot"></i> Mastère M1 · Alternance Innosys · IaC</span>
+  <h1>Déploiement Automatisé <span class="gradient-text">Samba via Ansible</span></h1>
+  <p>Automatisation d'un serveur de fichiers collaboratif sécurisé — gestion des utilisateurs, groupes, permissions SetGID et secrets via Ansible Vault.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- OVERVIEW -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-info-circle"></i> Contexte</div>
+      <h2 style="color:var(--text);">Architecture <span style="color:var(--cyan);">du Projet</span></h2>
+    </div>
+    <div class="grid-2">
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1rem;display:flex;align-items:center;gap:8px;"><i class="fas fa-cubes" style="color:var(--cyan);"></i> Stack Technique</h3>
+        <ul class="check-list">
+          <li><i class="fas fa-share-alt"></i> Samba (CIFS/SMB) — partage réseau</li>
+          <li><i class="fas fa-users"></i> Gestion des groupes Linux (partageurs)</li>
+          <li><i class="fas fa-user-shield"></i> Utilisateurs sans login shell</li>
+          <li><i class="fas fa-folder-open"></i> Permissions SetGID (2770) sur le partage</li>
+          <li><i class="fas fa-file-code"></i> Configuration smb.conf via blockinfile</li>
+          <li><i class="fas fa-sync-alt"></i> Handler de redémarrage du service</li>
+        </ul>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1rem;display:flex;align-items:center;gap:8px;"><i class="fas fa-lock" style="color:var(--cyan);"></i> Sécurité & Secrets</h3>
+        <ul class="check-list">
+          <li><i class="fas fa-key"></i> Ansible Vault pour les mots de passe Samba</li>
+          <li><i class="fas fa-folder-lock"></i> Permissions 700/600 sur group_vars/samba</li>
+          <li><i class="fas fa-user-times"></i> Utilisateur test sans accès shell</li>
+          <li><i class="fas fa-shield-alt"></i> Accès restreint aux membres du groupe</li>
+          <li><i class="fas fa-eye-slash"></i> no_log: true sur les tâches de mot de passe</li>
+        </ul>
+        <div class="tags" style="margin-top:1rem;">
+          <span class="tag tag-cyan">Ansible</span>
+          <span class="tag tag-cyan">Samba</span>
+          <span class="tag tag-cyan">Vault</span>
+          <span class="tag tag-cyan">Ubuntu</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 1. ARBORESCENCE -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-folder-tree"></i> 1. Arborescence du Projet</h3>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Structure — mon_projet_ansible/</span>
+      </div>
+      <pre>mon_projet_ansible/
+├── group_vars/
+│   └── samba/
+│       └── vault.yml            <span class="comment"># Secrets chiffrés</span>
+├── hosts.ini                    <span class="comment"># Inventaire</span>
+├── roles/
+│   └── samba/
+│       ├── defaults/main.yml    <span class="comment"># Variables par défaut</span>
+│       ├── handlers/main.yml    <span class="comment"># Restart service</span>
+│       └── tasks/main.yml       <span class="comment"># Tâches principales</span>
+└── samba.yml                    <span class="comment"># Playbook principal</span></pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 2. CONFIGURATION RACINE -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-cog"></i> 2. Configuration Racine</h3>
+
+    <p class="sublabel">Fichier d'inventaire — hosts.ini</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">hosts.ini</span>
+      </div>
+      <pre>[samba]
+srv_samba ansible_host=@IP_Machine ansible_user=user</pre>
+    </div>
+
+    <p class="sublabel">Playbook Principal — samba.yml</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">samba.yml</span>
+      </div>
+      <pre>---
+- <span class="k">name:</span> Configuration du Serveur de Fichiers (Samba)
+  <span class="k">hosts:</span> samba
+  <span class="k">become:</span> yes
+  <span class="k">vars_files:</span>
+    - group_vars/samba/vault.yml
+  <span class="k">roles:</span>
+    - samba</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 3. VARIABLES & VAULT -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-lock"></i> 3. Variables &amp; Sécurité (Vault)</h3>
+
+    <p class="sublabel">Création du coffre-fort Ansible Vault</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Bash</span>
+      </div>
+      <pre>ansible-vault create group_vars/samba/vault.yml</pre>
+    </div>
+
+    <p class="sublabel">Contenu du vault — group_vars/samba/vault.yml</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">vault.yml</span>
+      </div>
+      <pre>vault_samba_pass_test: <span class="v">"test"</span>
+vault_samba_pass_admin: <span class="v">"user"</span></pre>
+    </div>
+
+    <p class="sublabel">Sécurisation des permissions</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Bash</span>
+      </div>
+      <pre>sudo chown -R nicolas:nicolas group_vars
+
+sudo chmod 700 group_vars/samba
+sudo chmod 600 group_vars/samba/vault.yml</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 4. ROLE SAMBA -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-share-alt"></i> 4. Role : Samba</h3>
+
+    <div class="grid-2">
+      <div>
+        <p class="sublabel">roles/samba/defaults/main.yml</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">defaults/main.yml</span>
+          </div>
+          <pre>---
+samba_share_path: <span class="v">"/srv/partage_commun"</span>
+samba_group_name: <span class="v">"partageurs"</span>
+samba_user_test: <span class="v">"test"</span>
+samba_admin_user: <span class="v">"user"</span></pre>
+        </div>
+      </div>
+      <div>
+        <p class="sublabel">roles/samba/handlers/main.yml</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">handlers/main.yml</span>
+          </div>
+          <pre>---
+- <span class="k">name:</span> Restart Samba
+  <span class="k">ansible.builtin.service:</span>
+    <span class="k">name:</span> smbd
+    <span class="k">state:</span> restarted</pre>
+        </div>
+      </div>
+    </div>
+
+    <p class="sublabel">roles/samba/tasks/main.yml</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">tasks/main.yml</span>
+      </div>
+      <pre>---
+- <span class="k">name:</span> Installer Samba
+  <span class="k">ansible.builtin.apt:</span>
+    <span class="k">name:</span> samba
+    <span class="k">state:</span> present
+    <span class="k">update_cache:</span> yes
+
+- <span class="k">name:</span> Créer le groupe de partage <span class="v">"{{ samba_group_name }}"</span>
+  <span class="k">ansible.builtin.group:</span>
+    <span class="k">name:</span> <span class="v">"{{ samba_group_name }}"</span>
+    <span class="k">state:</span> present
+
+- <span class="k">name:</span> Créer l'utilisateur test (sans login)
+  <span class="k">ansible.builtin.user:</span>
+    <span class="k">name:</span> <span class="v">"{{ samba_user_test }}"</span>
+    <span class="k">shell:</span> /usr/sbin/nologin
+    <span class="k">create_home:</span> no
+    <span class="k">groups:</span> <span class="v">"{{ samba_group_name }}"</span>
+    <span class="k">append:</span> yes
+    <span class="k">state:</span> present
+
+- <span class="k">name:</span> Ajouter l'admin <span class="v">"{{ samba_admin_user }}"</span> au groupe
+  <span class="k">ansible.builtin.user:</span>
+    <span class="k">name:</span> <span class="v">"{{ samba_admin_user }}"</span>
+    <span class="k">groups:</span> <span class="v">"{{ samba_group_name }}"</span>
+    <span class="k">append:</span> yes
+
+- <span class="k">name:</span> Configurer le dossier partagé (Permissions 2770)
+  <span class="k">ansible.builtin.file:</span>
+    <span class="k">path:</span> <span class="v">"{{ samba_share_path }}"</span>
+    <span class="k">state:</span> directory
+    <span class="k">owner:</span> root
+    <span class="k">group:</span> <span class="v">"{{ samba_group_name }}"</span>
+    <span class="k">mode:</span> <span class="v">'2770'</span>
+
+- <span class="k">name:</span> Définir le mot de passe Samba pour test
+  <span class="k">ansible.builtin.shell:</span> >
+    (echo '{{ vault_samba_pass_test }}'; echo '{{ vault_samba_pass_test }}') | smbpasswd -s -a {{ samba_user_test }}
+  <span class="k">register:</span> smb_test_result
+  <span class="k">changed_when:</span> <span class="v">"'Added user' in smb_test_result.stdout"</span>
+  <span class="k">no_log:</span> true
+
+- <span class="k">name:</span> Définir le mot de passe Samba pour l'Admin
+  <span class="k">ansible.builtin.shell:</span> >
+    (echo '{{ vault_samba_pass_admin }}'; echo '{{ vault_samba_pass_admin }}') | smbpasswd -s -a {{ samba_admin_user }}
+  <span class="k">register:</span> smb_admin_result
+  <span class="k">changed_when:</span> <span class="v">"'Added user' in smb_admin_result.stdout"</span>
+  <span class="k">no_log:</span> true
+
+- <span class="k">name:</span> Configurer le partage dans /etc/samba/smb.conf
+  <span class="k">ansible.builtin.blockinfile:</span>
+    <span class="k">path:</span> /etc/samba/smb.conf
+    <span class="k">marker:</span> <span class="v">"# {mark} ANSIBLE MANAGED BLOCK - PARTAGE COMMUN"</span>
+    <span class="k">block:</span> |
+      [DossierCommun]
+          comment = Partage pour test et moi
+          path = {{ samba_share_path }}
+          browsable = yes
+          read only = no
+          guest ok = no
+          valid users = @{{ samba_group_name }}
+          create mask = 0660
+          directory mask = 0770
+          force group = {{ samba_group_name }}
+  <span class="k">notify:</span> Restart Samba
+
+- <span class="k">name:</span> Afficher les informations de connexion
+  <span class="k">ansible.builtin.debug:</span>
+    <span class="k">msg:</span>
+      - <span class="v">"✅ Installation terminée avec succès !"</span>
+      - <span class="v">"🖥️ Windows : \\\\{{ ansible_host }}\\DossierCommun"</span>
+      - <span class="v">"🐧 Linux   : smb://{{ ansible_host }}/DossierCommun"</span></pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- COMPÉTENCES -->
+  <section class="section">
+    <div class="card" style="background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.3);padding:2.5rem;">
+      <div class="section-tag" style="margin-bottom:1.5rem;"><i class="fas fa-graduation-cap"></i> Compétences Acquises</div>
+      <div class="grid-3">
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Structuration d'un projet Ansible avec rôle dédié.</li>
+          <li><i class="fas fa-check"></i> Chiffrement des secrets avec Ansible Vault.</li>
+          <li><i class="fas fa-check"></i> Sécurisation des fichiers sensibles (chmod 700/600).</li>
+          <li><i class="fas fa-check"></i> Installation automatisée du service Samba.</li>
+        </ul>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Création de groupes et utilisateurs Linux sans shell.</li>
+          <li><i class="fas fa-check"></i> Application des permissions SetGID (2770).</li>
+          <li><i class="fas fa-check"></i> Configuration de smb.conf via blockinfile.</li>
+          <li><i class="fas fa-check"></i> Gestion de smbpasswd avec idempotence (changed_when).</li>
+        </ul>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Masquage des secrets dans les logs (no_log: true).</li>
+          <li><i class="fas fa-check"></i> Handler de redémarrage conditionnel du service.</li>
+          <li><i class="fas fa-check"></i> Accès multi-OS : Windows (\\srv\DossierCommun) et Linux (smb://).</li>
+          <li><i class="fas fa-check"></i> Debug Ansible pour afficher les infos de connexion post-déploiement.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVIGATION -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Vue d'ensemble</a>
+      <a href="laravel.html" class="btn btn-cyan"><i class="fas fa-code-branch"></i> Déploiement Laravel</a>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">Expert Architecture SI — Cloud, Infrastructure & Sécurité.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="../parcours.html">Parcours</a></li>
+        <li><a href="../projets.html">Projets</a></li>
+        <li><a href="index.html">Mastère</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin — Expert Architecture SI</p>
+    <span class="mono" style="font-size:0.72rem;">M1 Cloud · Ansible · Samba</span>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

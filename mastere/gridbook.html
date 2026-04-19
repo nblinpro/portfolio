@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GridBook — Architecture Souveraine — Nicolas Blin</title>
+  <meta name="description" content="GridBook — plateforme de pari full-stack auto-hébergée sur Proxmox. FastAPI, React, PostgreSQL, Cloudflare Tunnel. Mastère M1.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<div class="ambient-bg"></div>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="../parcours.html">Parcours</a></li>
+      <li><a href="../projets.html">Projets</a></li>
+      <li><a href="../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="index.html">Mastère</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>GridBook</span>
+</nav>
+
+<div class="page-hero">
+  <span class="hero-tag"><i class="fas fa-server"></i> Mastère M1 · Lab Innovation</span>
+  <h1>GridBook <span class="gradient-text">Architecture Souveraine</span></h1>
+  <p>Plateforme de pari full-stack auto-hébergée sur Proxmox — architecture microservices, sécurisation Cloudflare, backend FastAPI et frontend React.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- HERO PROJECT -->
+  <section class="section" style="padding-top:0;">
+    <div class="featured-card" style="margin-bottom:3rem;">
+      <div class="grid-2" style="gap:3rem;align-items:start;">
+        <div>
+          <div class="badge badge-projet" style="margin-bottom:1rem;"><i class="fas fa-flask"></i> Projet Lab</div>
+          <h2 style="margin-bottom:1rem;">Présentation du projet</h2>
+          <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">GridBook est une plateforme de pari sportif full-stack développée et auto-hébergée sur mon serveur Proxmox personnel. Le projet couvre l'ensemble de la chaîne technique : virtualisation, containerisation, développement backend/frontend, sécurisation et monitoring.</p>
+          <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">L'objectif principal est d'explorer l'architecture microservices dans un environnement souverain — sans dépendance à des services cloud tiers. Sécurisé via Cloudflare Tunnel pour exposer les services sans ouvrir de ports directs.</p>
+          <div class="tags">
+            <span class="tag tag-cyan">Proxmox VE</span>
+            <span class="tag tag-cyan">FastAPI</span>
+            <span class="tag tag-cyan">React</span>
+            <span class="tag tag-cyan">PostgreSQL</span>
+            <span class="tag tag-cyan">Cloudflare</span>
+            <span class="tag tag-cyan">Docker</span>
+            <span class="tag tag-cyan">Nginx</span>
+          </div>
+          <div style="display:flex;gap:0.75rem;margin-top:1.5rem;flex-wrap:wrap;">
+            <a href="../../M_Cloud_INFRA_SEC/gridbook/gridbook.html" target="_blank" class="btn btn-cyan btn-sm"><i class="fas fa-external-link-alt"></i> Documentation</a>
+            <a href="https://github.com/nblinpro" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.82rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:1rem;">Stack technique</h4>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-body);border-radius:8px;border:1px solid var(--border);">
+              <div style="width:38px;height:38px;background:var(--cyan-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--cyan);flex-shrink:0;"><i class="fas fa-cubes"></i></div>
+              <div><div style="font-weight:700;font-size:0.875rem;">Proxmox VE</div><div style="color:var(--text-muted);font-size:0.75rem;">Hyperviseur — VMs et conteneurs LXC</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-body);border-radius:8px;border:1px solid var(--border);">
+              <div style="width:38px;height:38px;background:var(--cyan-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--cyan);flex-shrink:0;"><i class="fas fa-bolt"></i></div>
+              <div><div style="font-weight:700;font-size:0.875rem;">FastAPI (Python)</div><div style="color:var(--text-muted);font-size:0.75rem;">API REST asynchrone — gestion des paris et comptes</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-body);border-radius:8px;border:1px solid var(--border);">
+              <div style="width:38px;height:38px;background:var(--cyan-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--cyan);flex-shrink:0;"><i class="fab fa-react"></i></div>
+              <div><div style="font-weight:700;font-size:0.875rem;">React + Vite</div><div style="color:var(--text-muted);font-size:0.75rem;">Frontend SPA — interface utilisateur</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-body);border-radius:8px;border:1px solid var(--border);">
+              <div style="width:38px;height:38px;background:var(--cyan-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--cyan);flex-shrink:0;"><i class="fas fa-database"></i></div>
+              <div><div style="font-weight:700;font-size:0.875rem;">PostgreSQL</div><div style="color:var(--text-muted);font-size:0.75rem;">Base de données relationnelle</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-body);border-radius:8px;border:1px solid var(--border);">
+              <div style="width:38px;height:38px;background:var(--cyan-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--cyan);flex-shrink:0;"><i class="fas fa-shield-alt"></i></div>
+              <div><div style="font-weight:700;font-size:0.875rem;">Cloudflare Tunnel</div><div style="color:var(--text-muted);font-size:0.75rem;">Exposition sécurisée — pas de port exposé</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ARCHITECTURE -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-sitemap"></i> Architecture</div>
+      <h2>Architecture <span class="accent">Technique</span></h2>
+    </div>
+
+    <div class="grid-3" style="margin-bottom:2rem;">
+      <div class="card card-cyan" style="padding:2rem;text-align:center;">
+        <div style="width:52px;height:52px;background:var(--cyan-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.3rem;margin:0 auto 1rem;"><i class="fas fa-layer-group"></i></div>
+        <h3 style="margin-bottom:0.5rem;">Virtualisation</h3>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Proxmox VE héberge des VMs Linux Ubuntu dédiées — une VM par service principal pour l'isolation.</p>
+      </div>
+      <div class="card card-cyan" style="padding:2rem;text-align:center;">
+        <div style="width:52px;height:52px;background:var(--cyan-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.3rem;margin:0 auto 1rem;"><i class="fab fa-docker"></i></div>
+        <h3 style="margin-bottom:0.5rem;">Containerisation</h3>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Docker Compose orchestre les services applicatifs — backend, frontend, BDD et reverse proxy.</p>
+      </div>
+      <div class="card card-cyan" style="padding:2rem;text-align:center;">
+        <div style="width:52px;height:52px;background:var(--cyan-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.3rem;margin:0 auto 1rem;"><i class="fas fa-shield-alt"></i></div>
+        <h3 style="margin-bottom:0.5rem;">Sécurisation</h3>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Cloudflare Tunnel assure l'exposition publique sans ouvrir de ports — WAF, DDoS protection inclus.</p>
+      </div>
+    </div>
+
+    <!-- Flux architecture -->
+    <div class="code-block" style="font-size:0.82rem;line-height:2.2;">
+      <span class="comment">## Flux de données — GridBook</span><br><br>
+      <span style="color:#818cf8;">Utilisateur</span><br>
+      &nbsp;&nbsp;↓ HTTPS<br>
+      <span style="color:var(--cyan);">Cloudflare Edge</span> <span style="color:#475569;">(WAF · DDoS · SSL termination)</span><br>
+      &nbsp;&nbsp;↓ Cloudflare Tunnel (Zero Trust)<br>
+      <span style="color:var(--cyan);">Nginx</span> <span style="color:#475569;">(reverse proxy · load balancer)</span><br>
+      &nbsp;&nbsp;↓ /api/*<span style="color:#475569;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>↓ /*<br>
+      <span style="color:#f97316;">FastAPI</span> <span style="color:#475569;">(port 8000)</span>&nbsp;&nbsp;<span style="color:#4ade80;">React</span> <span style="color:#475569;">(port 5173)</span><br>
+      &nbsp;&nbsp;↓<br>
+      <span style="color:#818cf8;">PostgreSQL</span> <span style="color:#475569;">(port 5432 — privé)</span><br>
+      &nbsp;&nbsp;↓<br>
+      <span style="color:var(--cyan);">Proxmox VE</span> <span style="color:#475569;">(hyperviseur local)</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FONCTIONNALITÉS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-list-check"></i> Fonctionnalités</div>
+      <h2>Fonctionnalités <span class="accent">développées</span></h2>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <h4 style="color:var(--cyan);margin-bottom:1rem;font-size:0.9rem;"><i class="fas fa-server" style="margin-right:6px;"></i>Backend — FastAPI</h4>
+        <ul style="display:flex;flex-direction:column;gap:0.5rem;">
+          <li style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.875rem;"><i class="fas fa-check-circle" style="color:var(--cyan);flex-shrink:0;"></i>API REST complète avec authentification JWT</li>
+          <li style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.875rem;"><i class="fas fa-check-circle" style="color:var(--cyan);flex-shrink:0;"></i>Gestion des comptes utilisateurs et soldes</li>
+          <li style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.875rem;"><i class="fas fa-check-circle" style="color:var(--cyan);flex-shrink:0;"></i>Système de paris en temps réel (WebSocket)</li>
+          <li style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.875rem;"><i class="fas fa-check-circle" style="color:var(--cyan);flex-shrink:0;"></i>Calcul automatique des cotes et résultats</li>
+          <li style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.875rem;"><i class="fas fa-check-circle" style="color:var(--cyan);flex-shrink:0;"></i>Documentation API automatique (Swagger UI)</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:var(--cyan);margin-bottom:1rem;font-size:0.9rem;"><i class="fab fa-react" style="margin-right:6px;"></i>Frontend — React</h4>
+        <ul style="display:flex;flex-direction:column;gap:0.5rem;">
+          <li style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.875rem;"><i class="fas fa-check-circle" style="color:var(--cyan);flex-shrink:0;"></i>Interface SPA avec React Router</li>
+          <li style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.875rem;"><i class="fas fa-check-circle" style="color:var(--cyan);flex-shrink:0;"></i>Gestion d'état avec React Context</li>
+          <li style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.875rem;"><i class="fas fa-check-circle" style="color:var(--cyan);flex-shrink:0;"></i>Tableau de bord utilisateur temps réel</li>
+          <li style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.875rem;"><i class="fas fa-check-circle" style="color:var(--cyan);flex-shrink:0;"></i>Design responsive et dark mode</li>
+          <li style="display:flex;align-items:center;gap:0.75rem;color:var(--text-muted);font-size:0.875rem;"><i class="fas fa-check-circle" style="color:var(--cyan);flex-shrink:0;"></i>Build optimisé avec Vite</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="ansible.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Ansible & Docker</a>
+      <a href="index.html" class="btn btn-cyan"><i class="fas fa-th"></i> Vue d'ensemble</a>
+    </div>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;">Mastère M1 · GridBook · Architecture Souveraine</p>
+    </div>
+    <div class="footer-col">
+      <h4>Mastère</h4>
+      <ul>
+        <li><a href="index.html">Vue d'ensemble</a></li>
+        <li><a href="openstack.html">OpenStack</a></li>
+        <li><a href="monitoring.html">Monitoring</a></li>
+        <li><a href="ansible.html">Ansible & Docker</a></li>
+        <li><a href="gridbook.html">GridBook</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin</p>
+    <span class="mono" style="font-size:0.72rem;">GridBook · Mastère M1</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

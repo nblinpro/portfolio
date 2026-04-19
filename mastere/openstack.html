@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenStack — Déploiement & Orchestration — Nicolas Blin</title>
+  <meta name="description" content="Déploiement OpenStack complet via DevStack — Nova, Neutron, Swift, Cinder, Keystone. Documentation technique Mastère M1.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<div class="ambient-bg"></div>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="../parcours.html">Parcours</a></li>
+      <li><a href="../projets.html">Projets</a></li>
+      <li><a href="../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="index.html">Mastère</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>OpenStack</span>
+</nav>
+
+<div class="page-hero">
+  <img src="https://cdn.simpleicons.org/openstack/22d3ee" alt="OpenStack" style="height:72px;margin-bottom:1.25rem;opacity:0.92;filter:drop-shadow(0 0 18px rgba(34,211,238,0.35));">
+  <span class="hero-tag"><i class="fas fa-cloud"></i> Mastère M1 · Cloud IaaS</span>
+  <h1>Déploiement & Orchestration <span class="gradient-text">OpenStack</span></h1>
+  <p>Déploiement complet d'un cloud privé OpenStack via DevStack sur Ubuntu 24.04 — Nova, Neutron, Swift, Cinder, Keystone.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- OVERVIEW -->
+  <section class="section" style="padding-top:0;">
+    <div class="grid-2" style="gap:3rem;align-items:start;">
+      <div>
+        <div class="section-tag" style="margin-bottom:1rem;"><i class="fas fa-info-circle"></i> Contexte</div>
+        <h2 style="margin-bottom:1rem;">Architecture <span class="accent">Cloud Privé</span></h2>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem;">OpenStack est la plateforme IaaS open-source leader pour les clouds privés et hybrides. Ce projet académique (Ynov Campus M1) consiste à déployer et maîtriser un cloud complet avec toutes ses composantes.</p>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">DevStack permet un déploiement all-in-one sur une machine Ubuntu, idéal pour l'apprentissage et le lab. Chaque service est configuré, testé et documenté dans des TPs dédiés.</p>
+        <div class="tags">
+          <span class="tag tag-cyan">OpenStack</span>
+          <span class="tag tag-cyan">DevStack</span>
+          <span class="tag tag-cyan">Ubuntu 24.04</span>
+          <span class="tag tag-cyan">Cloud IaaS</span>
+          <span class="tag tag-cyan">Python</span>
+        </div>
+      </div>
+      <div class="code-block">
+        <span class="comment"># DevStack Installation</span><br>
+        git clone https://opendev.org/openstack/devstack<br>
+        cd devstack<br><br>
+        <span class="comment"># local.conf configuration</span><br>
+        [[local|localrc]]<br>
+        HOST_IP=<span style="color:#f97316;">192.168.1.100</span><br>
+        ADMIN_PASSWORD=<span style="color:#f97316;">SecurePass123</span><br>
+        DATABASE_PASSWORD=<span style="color:#f97316;">$ADMIN_PASSWORD</span><br>
+        RABBIT_PASSWORD=<span style="color:#f97316;">$ADMIN_PASSWORD</span><br>
+        SERVICE_PASSWORD=<span style="color:#f97316;">$ADMIN_PASSWORD</span><br><br>
+        <span class="comment"># Enable services</span><br>
+        enable_service <span style="color:#818cf8;">nova neutron swift</span><br>
+        enable_service <span style="color:#818cf8;">cinder keystone glance</span><br><br>
+        <span class="comment"># Deploy</span><br>
+        ./stack.sh
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SERVICES -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-cubes"></i> Services</div>
+      <h2>Services <span class="accent">OpenStack</span></h2>
+      <p>Chaque service a été déployé, configuré et testé avec une documentation complète.</p>
+    </div>
+
+    <div class="grid-auto">
+      <!-- Keystone -->
+      <div class="card card-cyan" style="padding:2rem;">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+          <div style="width:44px;height:44px;background:var(--cyan-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.1rem;"><i class="fas fa-key"></i></div>
+          <div>
+            <h3 style="margin-bottom:2px;">Keystone</h3>
+            <div style="font-size:0.75rem;color:var(--text-muted);">Identity Service</div>
+          </div>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Service d'authentification et d'autorisation — gestion des utilisateurs, projets, rôles et tokens. Endpoint catalogue pour tous les services.</p>
+        <div class="tags" style="margin-top:0.75rem;">
+          <span class="tag">Tokens</span>
+          <span class="tag">RBAC</span>
+          <span class="tag">API</span>
+        </div>
+      </div>
+
+      <!-- Nova -->
+      <div class="card card-cyan" style="padding:2rem;">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+          <div style="width:44px;height:44px;background:var(--cyan-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.1rem;"><i class="fas fa-server"></i></div>
+          <div>
+            <h3 style="margin-bottom:2px;">Nova</h3>
+            <div style="font-size:0.75rem;color:var(--text-muted);">Compute Service</div>
+          </div>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Gestion des instances de calcul (VMs). Création, démarrage, arrêt et migration de machines virtuelles. Gestion des flavors et quotas.</p>
+        <div class="tags" style="margin-top:0.75rem;">
+          <span class="tag">Instances</span>
+          <span class="tag">Flavors</span>
+          <span class="tag">KVM</span>
+        </div>
+      </div>
+
+      <!-- Neutron -->
+      <div class="card card-cyan" style="padding:2rem;">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+          <div style="width:44px;height:44px;background:var(--cyan-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.1rem;"><i class="fas fa-network-wired"></i></div>
+          <div>
+            <h3 style="margin-bottom:2px;">Neutron</h3>
+            <div style="font-size:0.75rem;color:var(--text-muted);">Network Service</div>
+          </div>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Service réseau — création de réseaux virtuels, sous-réseaux, routeurs, security groups et floating IPs. SDN cloud.</p>
+        <div class="tags" style="margin-top:0.75rem;">
+          <span class="tag">SDN</span>
+          <span class="tag">OVS</span>
+          <span class="tag">Floating IP</span>
+        </div>
+      </div>
+
+      <!-- Glance -->
+      <div class="card card-cyan" style="padding:2rem;">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+          <div style="width:44px;height:44px;background:var(--cyan-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.1rem;"><i class="fas fa-images"></i></div>
+          <div>
+            <h3 style="margin-bottom:2px;">Glance</h3>
+            <div style="font-size:0.75rem;color:var(--text-muted);">Image Service</div>
+          </div>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Catalogue et stockage des images de systèmes d'exploitation. Import d'images Ubuntu, Debian, CentOS en format QCOW2.</p>
+        <div class="tags" style="margin-top:0.75rem;">
+          <span class="tag">Images</span>
+          <span class="tag">QCOW2</span>
+          <span class="tag">Catalogue</span>
+        </div>
+      </div>
+
+      <!-- Cinder -->
+      <div class="card card-cyan" style="padding:2rem;">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+          <div style="width:44px;height:44px;background:var(--cyan-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.1rem;"><i class="fas fa-hdd"></i></div>
+          <div>
+            <h3 style="margin-bottom:2px;">Cinder</h3>
+            <div style="font-size:0.75rem;color:var(--text-muted);">Block Storage</div>
+          </div>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Stockage bloc persistant — création de volumes, snapshots et attachement à des instances Nova. Équivalent des disques EBS.</p>
+        <div class="tags" style="margin-top:0.75rem;">
+          <span class="tag">Volumes</span>
+          <span class="tag">Snapshots</span>
+          <span class="tag">LVM</span>
+        </div>
+      </div>
+
+      <!-- Swift -->
+      <div class="card card-cyan" style="padding:2rem;">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+          <div style="width:44px;height:44px;background:var(--cyan-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.1rem;"><i class="fas fa-database"></i></div>
+          <div>
+            <h3 style="margin-bottom:2px;">Swift</h3>
+            <div style="font-size:0.75rem;color:var(--text-muted);">Object Storage</div>
+          </div>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Stockage objet distribué et résilient — containers et objets, API S3 compatible. Idéal pour les sauvegardes et médias.</p>
+        <div class="tags" style="margin-top:0.75rem;">
+          <span class="tag">S3</span>
+          <span class="tag">Containers</span>
+          <span class="tag">API REST</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TPS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-flask"></i> Travaux Pratiques</div>
+      <h2>TPs <span class="accent">Documentés</span></h2>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <div class="accordion-header">
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div style="width:36px;height:36px;background:var(--cyan-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:0.85rem;">1</div>
+          <div>
+            <div style="font-weight:700;">TP1 — Installation DevStack & Keystone</div>
+            <div style="color:var(--text-muted);font-size:0.78rem;">Ubuntu 24.04 · DevStack · Authentification · Tokens</div>
+          </div>
+        </div>
+        <i class="fas fa-chevron-down chevron"></i>
+      </div>
+      <div class="accordion-body">
+        <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.75;margin-bottom:1rem;">Installation complète de DevStack sur Ubuntu 24.04 Server. Configuration du fichier local.conf, activation des services nécessaires, déploiement et vérification. Configuration Keystone : création d'utilisateurs, projets, rôles et manipulation des tokens d'authentification via l'API OpenStack.</p>
+        <div class="tags" style="margin-bottom:1rem;">
+          <span class="tag tag-cyan">DevStack</span>
+          <span class="tag tag-cyan">Keystone</span>
+          <span class="tag tag-cyan">Ubuntu 24.04</span>
+          <span class="tag tag-cyan">OpenStack CLI</span>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="openstack/tps/tp1.html" target="_blank" class="btn btn-cyan btn-sm"><i class="fas fa-external-link-alt"></i> Documentation TP1</a>
+          <a href="openstack/documents/TP1 _ Installation dOpenStack-2.pdf" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-file-pdf"></i> Sujet PDF</a>
+        </div>
+      </div>
+
+      <div class="accordion-header">
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div style="width:36px;height:36px;background:var(--cyan-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:0.85rem;">2</div>
+          <div>
+            <div style="font-weight:700;">TP2 — Nova Compute & Gestion des Instances</div>
+            <div style="color:var(--text-muted);font-size:0.78rem;">Nova · Flavors · Instances · Keypairs</div>
+          </div>
+        </div>
+        <i class="fas fa-chevron-down chevron"></i>
+      </div>
+      <div class="accordion-body">
+        <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.75;margin-bottom:1rem;">Découverte complète du service Nova. Création et gestion de flavors (profils de ressources), import d'images cloud, création de keypairs SSH, lancement d'instances et connexion. Gestion du cycle de vie des VMs (pause, resize, snapshot).</p>
+        <div class="tags" style="margin-bottom:1rem;">
+          <span class="tag tag-cyan">Nova</span>
+          <span class="tag tag-cyan">Instances</span>
+          <span class="tag tag-cyan">Flavors</span>
+          <span class="tag tag-cyan">Keypairs</span>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="openstack/tps/tp2.html" target="_blank" class="btn btn-cyan btn-sm"><i class="fas fa-external-link-alt"></i> Documentation TP2</a>
+          <a href="openstack/documents/TP2 _ Découverte complète de Nova (Compute) – OpenStack.pdf" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-file-pdf"></i> Sujet PDF</a>
+        </div>
+      </div>
+
+      <div class="accordion-header">
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div style="width:36px;height:36px;background:var(--cyan-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:0.85rem;">3</div>
+          <div>
+            <div style="font-weight:700;">TP3 — Swift Object Storage</div>
+            <div style="color:var(--text-muted);font-size:0.78rem;">Swift · Containers · Objets · ACL</div>
+          </div>
+        </div>
+        <i class="fas fa-chevron-down chevron"></i>
+      </div>
+      <div class="accordion-body">
+        <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.75;margin-bottom:1rem;">Configuration avancée de Swift pour le stockage objet. Création de containers, upload/download d'objets, gestion des ACL d'accès, configuration des métadonnées et usage de l'API REST compatible S3.</p>
+        <div class="tags" style="margin-bottom:1rem;">
+          <span class="tag tag-cyan">Swift</span>
+          <span class="tag tag-cyan">Object Storage</span>
+          <span class="tag tag-cyan">API S3</span>
+          <span class="tag tag-cyan">ACL</span>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="openstack/tps/tp3.html" target="_blank" class="btn btn-cyan btn-sm"><i class="fas fa-external-link-alt"></i> Documentation TP3</a>
+          <a href="openstack/documents/TP3 _ OpenStack Swift – Stockage Objet et Configuration Avancée.pdf" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-file-pdf"></i> Sujet PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Vue d'ensemble</a>
+      <a href="monitoring.html" class="btn btn-cyan">Monitoring <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;">Mastère M1 · OpenStack · Cloud IaaS</p>
+    </div>
+    <div class="footer-col">
+      <h4>Mastère</h4>
+      <ul>
+        <li><a href="index.html">Vue d'ensemble</a></li>
+        <li><a href="openstack.html">OpenStack</a></li>
+        <li><a href="monitoring.html">Monitoring</a></li>
+        <li><a href="ansible.html">Ansible & Docker</a></li>
+        <li><a href="gridbook.html">GridBook</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin</p>
+    <span class="mono" style="font-size:0.72rem;">OpenStack · Mastère M1</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

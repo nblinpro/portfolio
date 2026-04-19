@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastère Expert Cloud, Infrastructure & Sécurité — Nicolas Blin</title>
+  <meta name="description" content="Section Mastère de Nicolas Blin — OpenStack, Docker, Ansible, Prometheus/Grafana, GridBook. Alternance Innosys, Ynov Campus 2025-2027.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .tech-chip {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.5rem 0.875rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .tech-chip:hover { background: rgba(34,211,238,0.06); border-color: rgba(34,211,238,0.3); }
+    .tech-chip img { height: 18px; width: 18px; object-fit: contain; flex-shrink: 0; }
+    .tech-chip i { color: var(--cyan); font-size: 0.9rem; width: 18px; text-align: center; flex-shrink: 0; }
+    .tech-chip span { font-size: 0.82rem; color: var(--text); font-weight: 500; white-space: nowrap; }
+    .tech-cat {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--text-muted);
+      margin: 0 0 0.75rem; display: flex; align-items: center; gap: 6px;
+    }
+    .tech-cat i { color: var(--cyan); }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.75rem; }
+  </style>
+</head>
+<body>
+<div class="ambient-bg"></div>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="../parcours.html">Parcours</a></li>
+      <li><a href="../projets.html">Projets</a></li>
+      <li><a href="../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../projets.html">Projets</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>Mastère Expert Cloud, Infrastructure et sécurité</span>
+</nav>
+
+<!-- HERO MASTÈRE -->
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag"><i class="fas fa-cloud"></i> Mastère · Ynov Campus · M1</span>
+    <h1>Expert <span class="gradient-text">Cloud</span>,<br>Infrastructure <span class="gradient-text">&amp; Sécurité</span></h1>
+    <p class="hero-sub">Formation Mastère M1 en alternance chez Innosys — conception d'architectures Cloud privées et hybrides, automatisation, DevSecOps et monitoring avancé.</p>
+
+    <div class="hero-badges">
+      <span class="hero-badge"><i class="fas fa-cloud"></i> Cloud IaaS</span>
+      <span class="hero-badge"><i class="fab fa-docker"></i> Docker</span>
+      <span class="hero-badge"><i class="fas fa-robot"></i> Ansible</span>
+      <span class="hero-badge"><i class="fas fa-chart-line"></i> Prometheus/Grafana</span>
+      <span class="hero-badge"><i class="fas fa-shield-halved"></i> DevSecOps</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div style="background:rgba(34,211,238,0.03);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.75rem 2rem;">
+  <div style="max-width:900px;margin:0 auto;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;">
+    <div style="text-align:center;padding:0.5rem 2.5rem;border-right:1px solid var(--border);">
+      <div style="font-size:2rem;font-weight:800;color:var(--cyan);line-height:1;">6</div>
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-top:0.35rem;">Projets</div>
+    </div>
+    <div style="text-align:center;padding:0.5rem 2.5rem;border-right:1px solid var(--border);">
+      <div style="font-size:2rem;font-weight:800;color:var(--cyan);line-height:1;">20+</div>
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-top:0.35rem;">Technologies</div>
+    </div>
+    <div style="text-align:center;padding:0.5rem 2.5rem;border-right:1px solid var(--border);">
+      <div style="font-size:2rem;font-weight:800;color:var(--cyan);line-height:1;">2 ans</div>
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-top:0.35rem;">Formation</div>
+    </div>
+    <div style="text-align:center;padding:0.5rem 2.5rem;">
+      <div style="font-size:2rem;font-weight:800;color:var(--cyan);line-height:1;">BAC+5</div>
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-top:0.35rem;">Mastère M1</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- OVERVIEW -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-info-circle"></i> Formation</div>
+      <h2>Le programme <span class="accent">Mastère</span></h2>
+      <p>Mastère Expert Cloud, Infrastructure & Sécurité — formation BAC+5 en alternance chez Innosys.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card card-cyan" style="text-align:center;padding:2.25rem;">
+        <div style="width:52px;height:52px;background:var(--cyan-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.3rem;margin:0 auto 1rem;"><i class="fas fa-graduation-cap"></i></div>
+        <h3 style="margin-bottom:0.35rem;">Formation en cours</h3>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Mastère M1 Expert Cloud, Infrastructure & Sécurité — Ynov Campus Paris-Nanterre. BAC+5.</p>
+        <span class="badge badge-encours" style="margin-top:0.75rem;">2025 – 2027</span>
+      </div>
+      <div class="card card-cyan" style="text-align:center;padding:2.25rem;">
+        <div style="width:52px;height:52px;background:var(--cyan-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.3rem;margin:0 auto 1rem;"><i class="fas fa-building"></i></div>
+        <h3 style="margin-bottom:0.35rem;">Alternance Innosys</h3>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Expert Architecture SI chez Innosys — infrastructure Cloud, Docker, Ansible, monitoring et ToIP.</p>
+        <span class="badge badge-projet" style="margin-top:0.75rem;">2025 – Présent</span>
+      </div>
+      <div class="card card-cyan" style="text-align:center;padding:2.25rem;">
+        <div style="width:52px;height:52px;background:var(--cyan-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.3rem;margin:0 auto 1rem;"><i class="fas fa-flask"></i></div>
+        <h3 style="margin-bottom:0.35rem;">Lab & Innovation</h3>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Projets lab personnels — GridBook sur Proxmox, architectures souveraines et expérimentations Cloud.</p>
+        <span class="badge badge-projet" style="margin-top:0.75rem;">Projets Lab</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STACK TECHNIQUE -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-layer-group"></i> Technologies</div>
+      <h2>Stack Technique <span class="accent">Maîtrisée</span></h2>
+      <p>Outils et technologies utilisés en entreprise et en formation, organisés par contexte.</p>
+    </div>
+
+    <!-- ── ENTREPRISE ── -->
+    <div class="program-banner banner-cyan" style="margin-bottom:2rem;">
+      <div class="banner-icon"><i class="fas fa-building"></i></div>
+      <div>
+        <div class="badge badge-projet" style="margin-bottom:0.35rem;">Alternance Innosys</div>
+        <h3>Stack Entreprise</h3>
+        <p>Technologies déployées en production chez Innosys</p>
+      </div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-robot"></i> Automatisation &amp; IaC</p>
+    <div class="tech-row">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/ansible/EE0000" alt="Ansible"><span>Ansible</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker"><span>Docker</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker Compose"><span>Docker Compose</span></div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-chart-line"></i> Observabilité</p>
+    <div class="tech-row">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/prometheus/E6522C" alt="Prometheus"><span>Prometheus</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/grafana/F46800" alt="Grafana"><span>Grafana</span></div>
+      <div class="tech-chip"><i class="fas fa-bell"></i><span>Alertmanager</span></div>
+      <div class="tech-chip"><i class="fas fa-server"></i><span>node_exporter</span></div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-globe"></i> Services Web &amp; Applicatifs</p>
+    <div class="tech-row">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/laravel/FF2D20" alt="Laravel"><span>Laravel</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/php/777BB4" alt="PHP"><span>PHP</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/apache/D22128" alt="Apache"><span>Apache</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/nginx/009639" alt="Nginx"><span>Nginx</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/composer/885630" alt="Composer"><span>Composer</span></div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-share-alt"></i> Partage &amp; Stockage</p>
+    <div class="tech-row" style="margin-bottom:0;">
+      <div class="tech-chip"><i class="fas fa-share-alt"></i><span>Samba CIFS/SMB</span></div>
+      <div class="tech-chip"><i class="fas fa-id-badge"></i><span>Active Directory</span></div>
+    </div>
+
+    <!-- ── ÉCOLE ── -->
+    <div class="program-banner banner-cyan" style="margin-top:3rem;margin-bottom:2rem;">
+      <div class="banner-icon"><i class="fas fa-university"></i></div>
+      <div>
+        <div class="badge badge-projet" style="margin-bottom:0.35rem;">Ynov Campus</div>
+        <h3>Stack Académique</h3>
+        <p>Technologies étudiées et déployées en formation Ynov</p>
+      </div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-cloud"></i> Cloud IaaS</p>
+    <div class="tech-row">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/openstack/ED1944" alt="OpenStack"><span>OpenStack</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/ubuntu/E95420" alt="Ubuntu"><span>Ubuntu</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/linux/FCC624" alt="Linux"><span>Linux</span></div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-server"></i> Lab &amp; Infrastructure</p>
+    <div class="tech-row">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/proxmox/E57000" alt="Proxmox"><span>Proxmox</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/cloudflare/F38020" alt="Cloudflare"><span>Cloudflare</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/wireguard/22d3ee" alt="WireGuard"><span>WireGuard</span></div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-code"></i> Développement</p>
+    <div class="tech-row" style="margin-bottom:0;">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/fastapi/009688" alt="FastAPI"><span>FastAPI</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React"><span>React</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL"><span>MySQL</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL"><span>PostgreSQL</span></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  
+  <!-- INNOSYS MISSIONS -->
+  <section class="section">
+    <div class="program-banner banner-cyan">
+      <div class="banner-icon"><i class="fas fa-building"></i></div>
+      <div>
+        <div class="badge badge-projet" style="margin-bottom:0.35rem;">Alternance Innosys</div>
+        <h3>Missions Entreprise — Innosys</h3>
+        <p>Expert Architecture SI · 2025 – Présent · Paris</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Monitoring -->
+      <div class="project-card card-cyan">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">Observabilité</div>
+            <h3>Stack Monitoring Prometheus/Grafana</h3>
+          </div>
+          <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+        </div>
+        <p>Déploiement d'une stack de monitoring complète pour superviser l'infrastructure Innosys. Métriques système, réseau et applicatives avec dashboards et alerting.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Prometheus avec node_exporter</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Grafana — dashboards système et réseau</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Alertmanager avec règles d'alerte</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Déploiement via Docker Compose</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-cyan">Prometheus</span>
+          <span class="tag tag-cyan">Grafana</span>
+          <span class="tag tag-cyan">Alertmanager</span>
+          <span class="tag tag-cyan">node_exporter</span>
+        </div>
+        <div class="card-footer">
+          <span style="font-size:0.75rem;color:var(--text-muted);">2025</span>
+          <a href="monitoring.html" class="btn btn-ghost btn-sm">Voir détails <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Samba Ansible -->
+      <div class="project-card card-cyan">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">Ansible</div>
+            <h3>Serveur Samba — Déploiement Ansible</h3>
+          </div>
+          <div class="card-icon"><i class="fas fa-share-alt"></i></div>
+        </div>
+        <p>Déploiement automatisé d'un serveur Samba via Ansible pour le partage de fichiers multi-utilisateurs. Playbooks idempotents, gestion des droits ACL et intégration AD.</p>
+        <div class="tags">
+          <span class="tag tag-cyan">Ansible</span>
+          <span class="tag tag-cyan">Samba</span>
+          <span class="tag tag-cyan">CIFS</span>
+          <span class="tag tag-cyan">Active Directory</span>
+        </div>
+        <div class="card-footer">
+          <span style="font-size:0.75rem;color:var(--text-muted);">2025</span>
+          <a href="samba.html" class="btn btn-ghost btn-sm">Voir détails <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Laravel Ansible -->
+      <div class="project-card card-cyan">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">Ansible</div>
+            <h3>Déploiement Automatisé Laravel via Ansible</h3>
+          </div>
+          <div class="card-icon"><i class="fas fa-share-alt"></i></div>
+        </div>
+        <p>Procédures complètes de mise en production : configuration Nginx, optimisation PHP-FPM et gestion des permissions.</p>
+        <div class="tags">
+          <span class="tag tag-cyan">Ansible</span>
+          <span class="tag tag-cyan">Laravel</span>
+          <span class="tag tag-cyan">Composer</span>
+          <span class="tag tag-cyan">PHP</span>
+          <span class="tag tag-cyan">Apache2</span>
+          <span class="tag tag-cyan">Selinux</span>
+          <span class="tag tag-cyan">Firewall</span>
+        </div>
+        <div class="card-footer">
+          <span style="font-size:0.75rem;color:var(--text-muted);">2025</span>
+          <a href="laravel.html" class="btn btn-ghost btn-sm">Voir détails <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Conteneurisation -->
+      <div class="project-card card-cyan">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">Production</div>
+            <h3>Conteneurisation Multi-sites Docker</h3>
+          </div>
+          <div class="card-icon"><i class="fab fa-docker"></i></div>
+        </div>
+        <p>Migration et industrialisation des sites clients Innosys vers Docker. Architecture multi-stack avec isolation applicative complète, optimisation de la densité serveur.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Analyse du parc existant et stratégie de migration</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Création d'images Docker optimisées (Alpine)</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Docker Compose pour stacks Laravel/Apache2</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Réseau Docker et reverse proxy Nginx</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-cyan">Docker</span>
+          <span class="tag tag-cyan">Docker Compose</span>
+          <span class="tag tag-cyan">Laravel</span>
+          <span class="tag tag-cyan">Apache2</span>
+          <span class="tag tag-cyan">Nginx</span>
+        </div>
+        <div class="card-footer">
+          <span style="font-size:0.75rem;color:var(--text-muted);">2025</span>
+          <a href="#" class="btn btn-ghost btn-sm">Voir détails <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ACADÉMIQUE YNOV -->
+  <section class="section">
+    <div class="program-banner banner-cyan">
+      <div class="banner-icon"><i class="fas fa-university"></i></div>
+      <div>
+        <div class="badge badge-projet" style="margin-bottom:0.35rem;">Ynov Campus</div>
+        <h3>Projets Académiques — Ynov Campus</h3>
+        <p>Cloud IaaS · OpenStack · Architecture SI · DevSecOps</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- OpenStack -->
+      <div class="project-card card-cyan">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">Cloud IaaS</div>
+            <h3>Déploiement OpenStack — DevStack</h3>
+          </div>
+          <div class="card-icon"><i class="fas fa-cloud"></i></div>
+        </div>
+        <p>Déploiement complet d'un cloud privé OpenStack via DevStack sur Ubuntu 24.04. Configuration et documentation de tous les services principaux — Nova, Neutron, Swift, Cinder, Keystone.</p>
+        <div class="tags">
+          <span class="tag tag-cyan">OpenStack</span>
+          <span class="tag tag-cyan">DevStack</span>
+          <span class="tag tag-cyan">Nova</span>
+          <span class="tag tag-cyan">Neutron</span>
+          <span class="tag tag-cyan">Swift</span>
+          <span class="tag tag-cyan">Cinder</span>
+        </div>
+        <div class="card-footer">
+          <span style="font-size:0.75rem;color:var(--text-muted);">2025</span>
+          <a href="openstack.html" class="btn btn-ghost btn-sm">Documentation <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- GridBook -->
+      <div class="project-card card-cyan">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">Lab Innovation</div>
+            <h3>GridBook — Architecture Souveraine</h3>
+          </div>
+          <div class="card-icon"><i class="fas fa-server"></i></div>
+        </div>
+        <p>Plateforme de pari full-stack auto-hébergée sur Proxmox. Architecture microservices sécurisée via Cloudflare Tunnel. FastAPI, React et PostgreSQL en production.</p>
+        <div class="tags">
+          <span class="tag tag-cyan">Proxmox</span>
+          <span class="tag tag-cyan">FastAPI</span>
+          <span class="tag tag-cyan">React</span>
+          <span class="tag tag-cyan">Mysql</span>
+          <span class="tag tag-cyan">Cloudflare</span>
+          <span class="tag tag-cyan">Ubuntu</span>
+          <span class="tag tag-cyan">Opnsense</span>
+          <span class="tag tag-cyan">Wireguard</span>
+        </div>
+        <div class="card-footer">
+          <span style="font-size:0.75rem;color:var(--text-muted);">2025</span>
+          <a href="gridbook.html" class="btn btn-ghost btn-sm">Voir le projet <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div class="cta-block">
+      <h2>Explorer aussi le <span style="color:var(--indigo)">BUT R&T</span></h2>
+      <p>3 ans de réseaux, téléphonie IP, IoT et certifications CCNA.</p>
+      <div class="btn-group">
+        <a href="../but/index.html" class="btn btn-indigo"><i class="fas fa-network-wired"></i> Section BUT R&T</a>
+        <a href="../contact.html" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Me contacter</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">Mastère Expert Cloud, Infrastructure & Sécurité · Ynov Campus.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Mastère</h4>
+      <ul>
+        <li><a href="index.html">Vue d'ensemble</a></li>
+        <li><a href="monitoring.html">Prometheus/Grafana</a></li>
+        <li><a href="laravel.html">Laravel via Ansible</a></li>
+        <li><a href="samba.html">Samba</a></li>
+        <li><a href="#">Conteneurisation Multi-sites</a></li>
+        <li><a href="openstack.html">OpenStack</a></li>
+        <li><a href="gridbook.html">GridBook</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin — Expert Architecture SI</p>
+    <span class="mono" style="font-size:0.72rem;">Mastère M1 · Ynov Campus</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

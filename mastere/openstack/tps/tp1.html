@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TP1 — Installation DevStack | Nicolas Blin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../../css/main.css">
+  <style>
+    p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.75; }
+
+    .step-title {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 700; color: var(--text);
+      margin: 0 0 1.5rem; padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-title i { color: var(--cyan); }
+
+    .sublabel {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--text-muted); margin: 1.5rem 0 0.75rem;
+    }
+
+    .terminal-window {
+      background: #010409; border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin-bottom: 1.5rem;
+    }
+    .terminal-header {
+      background: #161b22; padding: 10px 15px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tdot { width: 10px; height: 10px; border-radius: 50%; }
+    .tdot-red    { background: #ff5f56; }
+    .tdot-yellow { background: #ffbd2e; }
+    .tdot-green  { background: #27c93f; }
+    .terminal-title { color: var(--text-muted); font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; margin-left: 10px; }
+    .terminal-window pre {
+      padding: 1.5rem; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; color: #e6edf3; overflow-x: auto;
+      white-space: pre; line-height: 1.65; margin: 0;
+    }
+    .comment { color: #8b949e; font-style: italic; }
+
+    .doc-img { width: 100%; display: block; border-radius: var(--radius); border: 1px solid var(--border); margin: 1rem 0 1.5rem; }
+
+    .check-list { list-style: none; }
+    .check-list li { display: flex; align-items: center; gap: 10px; padding: 5px 0; color: var(--text-muted); font-size: 0.875rem; }
+    .check-list li i { color: var(--cyan); font-size: 0.75rem; flex-shrink: 0; }
+
+    code { color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+<div class="ambient-bg"></div>
+
+<header class="site-header">
+  <a href="../../../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../../../index.html">Accueil</a></li>
+      <li><a href="../../../parcours.html">Parcours</a></li>
+      <li><a href="../../../projets.html">Projets</a></li>
+      <li><a href="../../../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../../../index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="../../index.html">Mastère</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="../../openstack.html">OpenStack</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>TP1 — Installation DevStack</span>
+</nav>
+
+<div class="page-hero">
+  <span class="hero-tag"><i class="fas fa-cloud"></i> OpenStack · TP1 · DevStack</span>
+  <h1>Installation <span class="gradient-text">OpenStack via DevStack</span></h1>
+  <p>Guide complet pour déployer une infrastructure IaaS sur Ubuntu 24.04. Maîtrisez les services essentiels : Keystone, Nova, Neutron, Glance, Cinder et Swift.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.75rem;">
+    <a href="../documents/TP1 _ Installation dOpenStack-2.pdf" target="_blank" class="btn btn-cyan"><i class="fas fa-file-pdf"></i> Télécharger le sujet</a>
+    <a href="../../openstack.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Retour OpenStack</a>
+  </div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- OBJECTIFS -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-bullseye"></i> Objectifs</div>
+      <h2 style="color:var(--text);">Objectifs <span style="color:var(--cyan);">& Architecture</span></h2>
+    </div>
+    <div class="grid-2">
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1rem;display:flex;align-items:center;gap:8px;"><i class="fas fa-crosshairs" style="color:var(--cyan);"></i> Objectif Principal</h3>
+        <p>Installer une plateforme OpenStack complète (IaaS) sur Ubuntu 24.04 via l'outil officiel <strong style="color:var(--text);">DevStack</strong>.</p>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1rem;display:flex;align-items:center;gap:8px;"><i class="fas fa-cubes" style="color:var(--cyan);"></i> Services Déployés</h3>
+        <ul class="check-list">
+          <li><i class="fas fa-key"></i> <strong style="color:var(--text);">Keystone</strong> — Identité</li>
+          <li><i class="fas fa-server"></i> <strong style="color:var(--text);">Nova</strong> — Compute</li>
+          <li><i class="fas fa-network-wired"></i> <strong style="color:var(--text);">Neutron</strong> — Réseau</li>
+          <li><i class="fas fa-compact-disc"></i> <strong style="color:var(--text);">Glance</strong> — Images</li>
+          <li><i class="fas fa-hdd"></i> <strong style="color:var(--text);">Cinder</strong> — Stockage Bloc</li>
+          <li><i class="fas fa-box"></i> <strong style="color:var(--text);">Swift</strong> — Stockage Objet</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PRÉ-REQUIS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-tools"></i> Infrastructure</div>
+      <h2 style="color:var(--text);">Pré-requis <span style="color:var(--cyan);">Matériels</span></h2>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="border-top:3px solid #facc15;">
+        <h3 style="color:#facc15;margin-bottom:1rem;display:flex;align-items:center;gap:8px;"><i class="fas fa-exclamation-triangle"></i> Configuration Minimale</h3>
+        <ul class="check-list" style="font-family:'JetBrains Mono',monospace;">
+          <li><i class="fas fa-memory"></i> RAM : 8 Go</li>
+          <li><i class="fas fa-microchip"></i> CPU : 2 vCPU</li>
+          <li><i class="fas fa-hdd"></i> Disk : 60 Go</li>
+        </ul>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1rem;display:flex;align-items:center;gap:8px;"><i class="fas fa-star" style="color:var(--cyan);"></i> Configuration Recommandée</h3>
+        <ul class="check-list" style="font-family:'JetBrains Mono',monospace;">
+          <li><i class="fas fa-memory"></i> RAM : 16–32 Go</li>
+          <li><i class="fas fa-microchip"></i> CPU : 4–6 vCPU</li>
+          <li><i class="fas fa-hdd"></i> Disk : 90+ Go</li>
+        </ul>
+      </div>
+      <div class="card" style="border:1px solid rgba(34,211,238,0.3);background:rgba(34,211,238,0.04);">
+        <h3 style="margin-bottom:1rem;display:flex;align-items:center;gap:8px;"><i class="fas fa-laptop-code" style="color:var(--cyan);"></i> Config du TP</h3>
+        <ul class="check-list" style="font-family:'JetBrains Mono',monospace;">
+          <li><i class="fas fa-desktop"></i> OS : Ubuntu 24.04</li>
+          <li><i class="fas fa-memory"></i> RAM : 32 Go (VMware)</li>
+          <li><i class="fas fa-microchip"></i> CPU : 6 Processeurs</li>
+          <li><i class="fas fa-hdd"></i> Disk : 95 Go</li>
+          <li><i class="fas fa-network-wired"></i> Réseau : Mode NAT</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ÉTAPE 1 -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-terminal"></i> 1. Préparation du Système</h3>
+    <p>Note de sécurité : <strong style="color:var(--text);">OpenStack ne doit jamais être exécuté en root.</strong> Nous créons un utilisateur dédié <code>stack</code>.</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Bash — System Prep</span>
+      </div>
+      <pre><span class="comment"># 1. Mise à jour du système</span>
+sudo apt update && sudo apt upgrade -y
+
+<span class="comment"># 2. Création de l'utilisateur stack</span>
+sudo useradd -s /bin/bash -d /opt/stack -m stack
+
+<span class="comment"># 3. Configuration des droits sudo sans mot de passe</span>
+echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
+
+<span class="comment"># 4. Connexion à l'utilisateur stack</span>
+sudo su - stack</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ÉTAPE 2 -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-download"></i> 2. Installation de DevStack</h3>
+
+    <p class="sublabel">A. Téléchargement</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Bash</span>
+      </div>
+      <pre>git clone https://opendev.org/openstack/devstack
+cd devstack</pre>
+    </div>
+
+    <p class="sublabel">B. Configuration — local.conf</p>
+    <p>Création du fichier <code>nano local.conf</code> :</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">local.conf</span>
+      </div>
+      <pre>[[local|localrc]]
+ADMIN_PASSWORD=secret
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+
+<span class="comment"># Activation de Swift (Object Storage)</span>
+enable_service s-account s-container s-object s-proxy</pre>
+    </div>
+
+    <p class="sublabel">C. Lancement du déploiement</p>
+    <p><em>Durée estimée : 30 minutes à 1/2 heures.</em></p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Bash</span>
+      </div>
+      <pre>./stack.sh</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ÉTAPE 3 -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-desktop"></i> 3. Accès & Dashboard Horizon</h3>
+    <div class="card card-cyan" style="padding:2rem;">
+      <h3 style="margin-bottom:1rem;display:flex;align-items:center;gap:8px;"><i class="fas fa-check-circle" style="color:var(--cyan);"></i> Installation Terminée</h3>
+      <p>Accédez à l'interface web Horizon :</p>
+      <p><strong style="color:var(--text);">URL :</strong> <code>http://IP_Vm/dashboard</code></p>
+      <p><strong style="color:var(--text);">Login :</strong> admin &nbsp;/&nbsp; <strong style="color:var(--text);">Pass :</strong> secret</p>
+      <img src="../images/openstack_dashbord.png" alt="Dashboard Horizon" class="doc-img">
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ÉTAPE 4 -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-vials"></i> 4. Configuration CLI & Vérification</h3>
+    <p>Chargement des variables d'environnement pour utiliser la CLI OpenStack :</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Bash — OpenRC</span>
+      </div>
+      <pre>source openrc admin admin/demo
+env | grep OS_</pre>
+    </div>
+
+    <p class="sublabel" style="margin-top:1.5rem;">Tests des services & Résultats</p>
+
+    <div class="grid-2">
+      <div>
+        <p style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:0.5rem;">Keystone (Identity)</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">openstack token issue</span>
+          </div>
+          <pre>openstack token issue</pre>
+        </div>
+        <img src="../images/token_openstack.png" alt="Test Keystone" class="doc-img">
+      </div>
+      <div>
+        <p style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:0.5rem;">Nova (Compute)</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">openstack compute service list</span>
+          </div>
+          <pre>openstack compute service list</pre>
+        </div>
+        <img src="../images/compute_openstack.png" alt="Test Nova" class="doc-img">
+      </div>
+      <div>
+        <p style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:0.5rem;">Neutron (Network)</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">openstack network agent list</span>
+          </div>
+          <pre>openstack network agent list</pre>
+        </div>
+        <img src="../images/network_openstack.png" alt="Test Neutron" class="doc-img">
+      </div>
+      <div>
+        <p style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:0.5rem;">Glance (Image)</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">openstack image list</span>
+          </div>
+          <pre>openstack image list</pre>
+        </div>
+        <img src="../images/image_openstack.png" alt="Test Glance" class="doc-img">
+      </div>
+      <div>
+        <p style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:0.5rem;">Cinder (Volume)</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">openstack volume service list</span>
+          </div>
+          <pre>openstack volume service list</pre>
+        </div>
+        <img src="../images/volume_openstack.png" alt="Test Cinder" class="doc-img">
+      </div>
+      <div>
+        <p style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:0.5rem;">Swift (Object Store)</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">openstack object store account show</span>
+          </div>
+          <pre>openstack object store account show</pre>
+        </div>
+        <img src="../images/object_openstack.png" alt="Test Swift" class="doc-img">
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- MAINTENANCE -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-cogs"></i> Maintenance</div>
+      <h2 style="color:var(--text);">Gestion <span style="color:var(--cyan);">&amp; Maintenance</span></h2>
+    </div>
+    <div class="grid-2">
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1.25rem;">Commandes de cycle</h3>
+        <div class="terminal-window" style="margin-bottom:0;">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">DevStack lifecycle</span>
+          </div>
+          <pre><span class="comment"># Arrêter proprement</span>
+./unstack.sh
+
+<span class="comment"># Reset total (Clean)</span>
+./clean.sh
+
+<span class="comment"># Relancer</span>
+./stack.sh</pre>
+        </div>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1.25rem;">Vérification Web (Apache)</h3>
+        <p>Horizon utilise Apache2. En cas d'erreur 500 ou d'accès impossible :</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">Bash</span>
+          </div>
+          <pre>sudo systemctl status apache2</pre>
+        </div>
+        <img src="../images/apache.png" alt="Status Apache" class="doc-img" style="margin-bottom:0;">
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- COMPÉTENCES -->
+  <section class="section">
+    <div class="card" style="background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.3);padding:2.5rem;">
+      <div class="section-tag" style="margin-bottom:1.5rem;"><i class="fas fa-graduation-cap"></i> Compétences Acquises</div>
+      <div class="grid-3" style="margin-top:0.5rem;">
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Préparation d'un système Ubuntu 24.04 pour OpenStack.</li>
+          <li><i class="fas fa-check"></i> Création d'un utilisateur dédié avec droits sudo sans mot de passe.</li>
+          <li><i class="fas fa-check"></i> Clonage et configuration de DevStack via <code>local.conf</code>.</li>
+          <li><i class="fas fa-check"></i> Activation des services Swift dans la configuration.</li>
+        </ul>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Déploiement automatisé d'un cloud IaaS complet via <code>./stack.sh</code>.</li>
+          <li><i class="fas fa-check"></i> Accès et navigation dans le Dashboard Horizon.</li>
+          <li><i class="fas fa-check"></i> Chargement des variables d'environnement OpenRC.</li>
+          <li><i class="fas fa-check"></i> Gestion du cycle de vie DevStack (unstack, clean, stack).</li>
+        </ul>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Vérification de Keystone via <code>openstack token issue</code>.</li>
+          <li><i class="fas fa-check"></i> Vérification de Nova, Neutron, Glance, Cinder et Swift en CLI.</li>
+          <li><i class="fas fa-check"></i> Diagnostic du service Apache2 pour Horizon.</li>
+          <li><i class="fas fa-check"></i> Compréhension de l'architecture modulaire OpenStack.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVIGATION -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="../../openstack.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Retour OpenStack</a>
+      <a href="tp2.html" class="btn btn-cyan">TP2 — Nova Compute <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">Expert Architecture SI — Cloud, Infrastructure & Sécurité.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="../../../index.html">Accueil</a></li>
+        <li><a href="../../../parcours.html">Parcours</a></li>
+        <li><a href="../../../projets.html">Projets</a></li>
+        <li><a href="../../index.html">Mastère</a></li>
+        <li><a href="../../openstack.html">OpenStack</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin — Expert Architecture SI</p>
+    <span class="mono" style="font-size:0.72rem;">M1 Cloud · OpenStack · TP1</span>
+  </div>
+</footer>
+<script src="../../../js/main.js"></script>
+</body>
+</html>

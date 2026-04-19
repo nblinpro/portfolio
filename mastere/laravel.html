@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Déploiement Laravel — Ansible | Nicolas Blin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.75; }
+
+    .step-title {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 700; color: var(--text);
+      margin: 0 0 1.5rem; padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-title i { color: var(--cyan); }
+
+    .sublabel {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--text-muted); margin: 1.5rem 0 0.75rem;
+    }
+
+    .terminal-window {
+      background: #010409; border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin-bottom: 1.5rem;
+    }
+    .terminal-header {
+      background: #161b22; padding: 10px 15px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tdot { width: 10px; height: 10px; border-radius: 50%; }
+    .tdot-red    { background: #ff5f56; }
+    .tdot-yellow { background: #ffbd2e; }
+    .tdot-green  { background: #27c93f; }
+    .terminal-title { color: var(--text-muted); font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; margin-left: 10px; }
+    .terminal-window pre {
+      padding: 1.5rem; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; color: #e6edf3; overflow-x: auto;
+      white-space: pre; line-height: 1.65; margin: 0;
+    }
+    .comment { color: #8b949e; font-style: italic; }
+    .k { color: #7ee787; }
+    .v { color: #a5d6ff; }
+
+    code { color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
+
+    .check-list { list-style: none; }
+    .check-list li { display: flex; align-items: center; gap: 10px; padding: 5px 0; color: var(--text-muted); font-size: 0.875rem; }
+    .check-list li i { color: var(--cyan); font-size: 0.75rem; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+<div class="ambient-bg"></div>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="../parcours.html">Parcours</a></li>
+      <li><a href="../projets.html">Projets</a></li>
+      <li><a href="../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="index.html">Mastère</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>Déploiement Laravel — Ansible</span>
+</nav>
+
+<div class="page-hero">
+  <div style="display:flex;align-items:center;justify-content:center;gap:2rem;margin-bottom:1.25rem;">
+    <img src="https://cdn.simpleicons.org/ansible/EE0000" alt="Ansible" style="height:60px;opacity:0.9;filter:drop-shadow(0 0 14px rgba(238,0,0,0.35));">
+    <img src="https://cdn.simpleicons.org/laravel/FF2D20" alt="Laravel" style="height:60px;opacity:0.9;filter:drop-shadow(0 0 14px rgba(255,45,32,0.35));">
+  </div>
+  <span class="hero-tag"><i class="fas fa-robot"></i> Mastère M1 · Alternance Innosys · IaC</span>
+  <h1>Déploiement Automatisé <span class="gradient-text">Laravel via Ansible</span></h1>
+  <p>Documentation technique du projet d'automatisation — gestion de configuration, déploiement sécurisé via Ansible Vault, rôles modulaires et optimisation serveur.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- OVERVIEW -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-info-circle"></i> Contexte</div>
+      <h2 style="color:var(--text);">Architecture <span style="color:var(--cyan);">du Projet</span></h2>
+    </div>
+    <div class="grid-2">
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-cubes" style="color:var(--cyan);margin-right:8px;"></i>Stack Technique</h3>
+        <ul class="check-list">
+          <li><i class="fab fa-php"></i> PHP 8.3 via dépôt REMI</li>
+          <li><i class="fas fa-database"></i> MySQL Server</li>
+          <li><i class="fas fa-server"></i> Apache (httpd) + VirtualHost Jinja2</li>
+          <li><i class="fas fa-box"></i> Composer (gestionnaire de dépendances)</li>
+          <li><i class="fab fa-laravel"></i> Laravel (framework PHP)</li>
+          <li><i class="fas fa-shield-alt"></i> SELinux + Firewalld</li>
+        </ul>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-lock" style="color:var(--cyan);margin-right:8px;"></i>Sécurité & Secrets</h3>
+        <ul class="check-list">
+          <li><i class="fas fa-key"></i> Ansible Vault pour les credentials DB</li>
+          <li><i class="fas fa-folder-lock"></i> Permissions <code>700/600</code> sur <code>group_vars</code></li>
+          <li><i class="fas fa-user-shield"></i> SELinux : contexte <code>httpd_sys_rw_content_t</code></li>
+          <li><i class="fas fa-fire"></i> Firewalld : ports 80, 443, 3306 uniquement</li>
+          <li><i class="fas fa-link"></i> Accès DB restreint à l'IP du serveur web</li>
+        </ul>
+        <div class="tags" style="margin-top:1rem;">
+          <span class="tag tag-cyan">Ansible</span>
+          <span class="tag tag-cyan">Vault</span>
+          <span class="tag tag-cyan">Laravel</span>
+          <span class="tag tag-cyan">Rocky Linux 9</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 1. ARBORESCENCE -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-folder-tree"></i> 1. Arborescence du Projet</h3>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Structure — mon_projet_ansible/</span>
+      </div>
+      <pre>mon_projet_ansible/
+│
+├── hosts.ini                    <span class="comment"># Inventaire</span>
+├── site.yml                     <span class="comment"># Playbook principal</span>
+│
+├── group_vars/                  <span class="comment"># Variables partagées</span>
+│   ├── db/
+│   │   └── vault.yml
+│   └── web/
+│       ├── vault.yml
+│       └── vars.yml
+│
+└── roles/
+    ├── database/
+    │   ├── defaults/main.yml
+    │   └── tasks/main.yml
+    ├── php/tasks/main.yml
+    ├── apache/
+    │   ├── tasks/main.yml
+    │   ├── handlers/main.yml
+    │   └── templates/laravel.conf.j2
+    ├── composer/tasks/main.yml
+    ├── laravel/tasks/main.yml
+    ├── selinux/tasks/main.yml
+    └── firewall/tasks/main.yml</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 2. CONFIGURATION RACINE -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-cog"></i> 2. Configuration Racine</h3>
+
+    <p class="sublabel">Fichier d'inventaire — hosts.ini</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">hosts.ini</span>
+      </div>
+      <pre>[web]
+weblaravel ansible_host=192.168.80.167 ansible_user=innosys
+
+[db]
+bddlaravel ansible_host=192.168.80.168 ansible_user=innosys</pre>
+    </div>
+
+    <p class="sublabel">Playbook Principal — site.yml</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">site.yml</span>
+      </div>
+      <pre>---
+- <span class="k">name:</span> Déploiement Base de Données
+  <span class="k">hosts:</span> db
+  <span class="k">become:</span> yes
+  <span class="k">roles:</span>
+    - database
+
+- <span class="k">name:</span> Déploiement Serveur Web
+  <span class="k">hosts:</span> web
+  <span class="k">become:</span> yes
+  <span class="k">roles:</span>
+    - php
+    - apache
+    - composer
+    - laravel
+    - selinux
+    - firewall</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 3. VARIABLES & VAULT -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-lock"></i> 3. Variables &amp; Sécurité (Vault)</h3>
+
+    <p class="sublabel">Configuration DB — group_vars/db/vault.yml</p>
+    <p>Création du coffre-fort : <code>sudo ansible-vault create group_vars/db/vault.yml</code></p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">group_vars/db/vault.yml</span>
+      </div>
+      <pre><span class="comment"># vault.yml</span>
+mysql_root_password: <span class="v">"RootPass123!"</span>
+laravel_db: <span class="v">"laravel_db"</span>
+laravel_user: <span class="v">"laravel_user"</span>
+laravel_password: <span class="v">"LaravelPass123!"</span></pre>
+    </div>
+
+    <p class="sublabel">Configuration Web — group_vars/web/</p>
+    <p>Création du coffre-fort : <code>sudo ansible-vault create group_vars/web/vault.yml</code></p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">group_vars/web/vault.yml &amp; vars.yml</span>
+      </div>
+      <pre><span class="comment"># vault.yml</span>
+db_password: <span class="v">"LaravelPass123!"</span>
+db_name: <span class="v">"laravel_db"</span>
+db_user: <span class="v">"laravel_user"</span>
+
+<span class="comment"># vars.yml</span>
+app_path: <span class="v">/var/www/laravel</span>
+db_host: <span class="v">192.168.80.168</span>
+db_port: <span class="v">3306</span></pre>
+    </div>
+
+    <p class="sublabel">Sécurisation des permissions</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Bash</span>
+      </div>
+      <pre>sudo chown -R nicolas:nicolas group_vars
+
+<span class="comment"># Sécurisation dossier DB</span>
+sudo chmod 700 group_vars/db
+sudo chmod 600 group_vars/db/vault.yml
+
+<span class="comment"># Sécurisation dossier Web</span>
+sudo chmod 700 group_vars/web
+sudo chmod 600 group_vars/web/vault.yml</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 4. ROLE DATABASE -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-database"></i> 4. Role : Database</h3>
+
+    <p class="sublabel">roles/database/defaults/main.yml</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">defaults/main.yml</span>
+      </div>
+      <pre>---
+web_server_ip: <span class="v">"192.168.80.167"</span></pre>
+    </div>
+
+    <p class="sublabel">roles/database/tasks/main.yml</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">tasks/main.yml</span>
+      </div>
+      <pre>---
+- <span class="k">name:</span> Installer MySQL server, client et PyMySQL
+  <span class="k">dnf:</span>
+    <span class="k">name:</span>
+      - mysql-server
+      - mysql
+      - python3-PyMySQL
+    <span class="k">state:</span> present
+
+- <span class="k">name:</span> Activer et démarrer MySQL
+  <span class="k">systemd:</span>
+    <span class="k">name:</span> mysqld
+    <span class="k">state:</span> started
+    <span class="k">enabled:</span> yes
+
+- <span class="k">name:</span> Définir le mot de passe root MySQL
+  <span class="k">mysql_user:</span>
+    <span class="k">login_user:</span> root
+    <span class="k">login_password:</span> <span class="v">""</span>
+    <span class="k">user:</span> root
+    <span class="k">password:</span> <span class="v">"{{ mysql_root_password }}"</span>
+    <span class="k">host_all:</span> yes
+    <span class="k">check_implicit_admin:</span> yes
+  <span class="k">ignore_errors:</span> yes
+
+- <span class="k">name:</span> Supprimer les utilisateurs anonymes
+  <span class="k">mysql_user:</span>
+    <span class="k">login_user:</span> root
+    <span class="k">login_password:</span> <span class="v">"{{ mysql_root_password }}"</span>
+    <span class="k">name:</span> <span class="v">''</span>
+    <span class="k">host_all:</span> yes
+    <span class="k">state:</span> absent
+
+- <span class="k">name:</span> Supprimer la base de test
+  <span class="k">mysql_db:</span>
+    <span class="k">login_user:</span> root
+    <span class="k">login_password:</span> <span class="v">"{{ mysql_root_password }}"</span>
+    <span class="k">name:</span> test
+    <span class="k">state:</span> absent
+
+- <span class="k">name:</span> Créer la base Laravel
+  <span class="k">mysql_db:</span>
+    <span class="k">login_user:</span> root
+    <span class="k">login_password:</span> <span class="v">"{{ mysql_root_password }}"</span>
+    <span class="k">name:</span> <span class="v">"{{ laravel_db }}"</span>
+    <span class="k">state:</span> present
+    <span class="k">encoding:</span> utf8mb4
+    <span class="k">collation:</span> utf8mb4_unicode_ci
+
+- <span class="k">name:</span> Créer l'utilisateur Laravel (Autorisé depuis le serveur Web)
+  <span class="k">mysql_user:</span>
+    <span class="k">login_user:</span> root
+    <span class="k">login_password:</span> <span class="v">"{{ mysql_root_password }}"</span>
+    <span class="k">name:</span> <span class="v">"{{ laravel_user }}"</span>
+    <span class="k">password:</span> <span class="v">"{{ laravel_password }}"</span>
+    <span class="k">host:</span> <span class="v">"{{ web_server_ip }}"</span>
+    <span class="k">priv:</span> <span class="v">"{{ laravel_db }}.*:ALL"</span>
+    <span class="k">state:</span> present
+
+- <span class="k">name:</span> Ouvrir le port MySQL (Firewall)
+  <span class="k">firewalld:</span>
+    <span class="k">port:</span> 3306/tcp
+    <span class="k">permanent:</span> yes
+    <span class="k">state:</span> enabled
+
+- <span class="k">name:</span> Recharger firewalld
+  <span class="k">systemd:</span>
+    <span class="k">name:</span> firewalld
+    <span class="k">state:</span> restarted</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 5. ROLE PHP -->
+  <section class="section">
+    <h3 class="step-title"><i class="fab fa-php"></i> 5. Role : PHP</h3>
+
+    <p class="sublabel">roles/php/tasks/main.yml</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">tasks/main.yml</span>
+      </div>
+      <pre>---
+- <span class="k">name:</span> Installer dnf-plugins-core
+  <span class="k">dnf:</span>
+    <span class="k">name:</span> dnf-plugins-core
+    <span class="k">state:</span> present
+
+- <span class="k">name:</span> Installer EPEL Release
+  <span class="k">dnf:</span>
+    <span class="k">name:</span> https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+    <span class="k">state:</span> present
+    <span class="k">disable_gpg_check:</span> yes
+
+- <span class="k">name:</span> Activer repo REMI et module PHP 8.3
+  <span class="k">shell:</span> |
+    dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+    dnf module reset php -y
+    dnf module enable php:remi-8.3 -y
+  <span class="k">args:</span>
+    <span class="k">creates:</span> /etc/yum.repos.d/remi.repo
+
+- <span class="k">name:</span> Installer PHP et extensions
+  <span class="k">dnf:</span>
+    <span class="k">name:</span>
+      - php
+      - php-cli
+      - php-common
+      - php-fpm
+      - php-mysqlnd
+      - php-xml
+      - php-json
+      - php-zip
+      - php-gd
+      - php-mbstring
+      - php-curl
+      - php-opcache
+      - git
+      - unzip
+      - curl
+    <span class="k">state:</span> present</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 6. ROLE APACHE -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-server"></i> 6. Role : Apache</h3>
+
+    <p class="sublabel">roles/apache/tasks/main.yml</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">tasks/main.yml</span>
+      </div>
+      <pre>---
+- <span class="k">name:</span> Installer Apache
+  <span class="k">dnf:</span>
+    <span class="k">name:</span> httpd
+    <span class="k">state:</span> present
+
+- <span class="k">name:</span> Démarrer Apache
+  <span class="k">systemd:</span>
+    <span class="k">name:</span> httpd
+    <span class="k">enabled:</span> yes
+    <span class="k">state:</span> started
+
+- <span class="k">name:</span> Déployer VirtualHost Laravel
+  <span class="k">template:</span>
+    <span class="k">src:</span> laravel.conf.j2
+    <span class="k">dest:</span> /etc/httpd/conf.d/laravel.conf
+  <span class="k">notify:</span> Restart Apache</pre>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <p class="sublabel">roles/apache/handlers/main.yml</p>
+        <div class="terminal-window" style="margin-bottom:0;">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">handlers/main.yml</span>
+          </div>
+          <pre>---
+- <span class="k">name:</span> Restart Apache
+  <span class="k">systemd:</span>
+    <span class="k">name:</span> httpd
+    <span class="k">state:</span> restarted</pre>
+        </div>
+      </div>
+      <div>
+        <p class="sublabel">roles/apache/templates/laravel.conf.j2</p>
+        <div class="terminal-window" style="margin-bottom:0;">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">laravel.conf.j2 — Jinja2</span>
+          </div>
+          <pre>&lt;VirtualHost *:80&gt;
+    DocumentRoot {{ app_path }}/public
+
+    &lt;Directory {{ app_path }}/public&gt;
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog /var/log/httpd/laravel_error.log
+    CustomLog /var/log/httpd/laravel_access.log combined
+&lt;/VirtualHost&gt;</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 7. ROLE COMPOSER -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-box"></i> 7. Role : Composer</h3>
+
+    <p class="sublabel">roles/composer/tasks/main.yml</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">tasks/main.yml</span>
+      </div>
+      <pre>---
+- <span class="k">name:</span> Télécharger Composer
+  <span class="k">get_url:</span>
+    <span class="k">url:</span> https://getcomposer.org/download/latest-stable/composer.phar
+    <span class="k">dest:</span> /usr/local/bin/composer
+    <span class="k">mode:</span> <span class="v">"0755"</span></pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 8. ROLE LARAVEL -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-code-branch"></i> 8. Role : Laravel</h3>
+
+    <p class="sublabel">roles/laravel/tasks/main.yml</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">tasks/main.yml</span>
+      </div>
+      <pre>---
+- <span class="k">name:</span> Créer dossier application
+  <span class="k">file:</span>
+    <span class="k">path:</span> <span class="v">"{{ app_path }}"</span>
+    <span class="k">state:</span> directory
+    <span class="k">mode:</span> <span class="v">"0755"</span>
+
+- <span class="k">name:</span> Installer Laravel
+  <span class="k">command:</span> /usr/local/bin/composer create-project laravel/laravel .
+  <span class="k">args:</span>
+    <span class="k">chdir:</span> <span class="v">"{{ app_path }}"</span>
+    <span class="k">creates:</span> <span class="v">"{{ app_path }}/artisan"</span>
+
+- <span class="k">name:</span> Permissions Apache
+  <span class="k">file:</span>
+    <span class="k">path:</span> <span class="v">"{{ app_path }}"</span>
+    <span class="k">recurse:</span> yes
+    <span class="k">owner:</span> apache
+    <span class="k">group:</span> apache
+
+- <span class="k">name:</span> Droits écriture storage/cache
+  <span class="k">file:</span>
+    <span class="k">path:</span> <span class="v">"{{ item }}"</span>
+    <span class="k">recurse:</span> yes
+    <span class="k">mode:</span> <span class="v">"0775"</span>
+  <span class="k">loop:</span>
+    - <span class="v">"{{ app_path }}/storage"</span>
+    - <span class="v">"{{ app_path }}/bootstrap/cache"</span>
+
+- <span class="k">name:</span> Générer clé Laravel
+  <span class="k">command:</span> sudo -u apache php artisan key:generate
+  <span class="k">args:</span>
+    <span class="k">chdir:</span> <span class="v">"{{ app_path }}"</span>
+
+- <span class="k">name:</span> Configurer .env
+  <span class="k">lineinfile:</span>
+    <span class="k">path:</span> <span class="v">"{{ app_path }}/.env"</span>
+    <span class="k">regexp:</span> <span class="v">"{{ item.regexp }}"</span>
+    <span class="k">line:</span> <span class="v">"{{ item.line }}"</span>
+  <span class="k">loop:</span>
+    - { <span class="k">regexp:</span> <span class="v">'^DB_CONNECTION='</span>, <span class="k">line:</span> <span class="v">'DB_CONNECTION=mysql'</span> }
+    - { <span class="k">regexp:</span> <span class="v">'^DB_HOST='</span>,       <span class="k">line:</span> <span class="v">'DB_HOST={{ db_host }}'</span> }
+    - { <span class="k">regexp:</span> <span class="v">'^DB_PORT='</span>,       <span class="k">line:</span> <span class="v">'DB_PORT={{ db_port }}'</span> }
+    - { <span class="k">regexp:</span> <span class="v">'^DB_DATABASE='</span>,   <span class="k">line:</span> <span class="v">'DB_DATABASE={{ db_name }}'</span> }
+    - { <span class="k">regexp:</span> <span class="v">'^DB_USERNAME='</span>,   <span class="k">line:</span> <span class="v">'DB_USERNAME={{ db_user }}'</span> }
+    - { <span class="k">regexp:</span> <span class="v">'^DB_PASSWORD='</span>,   <span class="k">line:</span> <span class="v">'DB_PASSWORD={{ db_password }}'</span> }
+
+- <span class="k">name:</span> Exécuter migrations
+  <span class="k">command:</span> sudo -u apache php artisan migrate --force
+  <span class="k">args:</span>
+    <span class="k">chdir:</span> <span class="v">"{{ app_path }}"</span></pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 9. RÔLES SÉCURITÉ -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-shield-alt"></i> 9. Rôles : Sécurité (SELinux &amp; Firewall)</h3>
+
+    <div class="grid-2">
+      <div>
+        <p class="sublabel">roles/selinux/tasks/main.yml</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">SELinux — tasks/main.yml</span>
+          </div>
+          <pre>---
+- <span class="k">name:</span> Autoriser connexion réseau Apache
+  <span class="k">command:</span> setsebool -P httpd_can_network_connect on
+
+- <span class="k">name:</span> Appliquer contexte SELinux
+  <span class="k">command:</span> chcon -R -t httpd_sys_rw_content_t {{ item }}
+  <span class="k">loop:</span>
+    - <span class="v">"{{ app_path }}/storage"</span>
+    - <span class="v">"{{ app_path }}/bootstrap/cache"</span>
+    - <span class="v">"{{ app_path }}/.env"</span></pre>
+        </div>
+      </div>
+      <div>
+        <p class="sublabel">roles/firewall/tasks/main.yml</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+            <span class="terminal-title">Firewall — tasks/main.yml</span>
+          </div>
+          <pre>---
+- <span class="k">name:</span> Ouvrir ports HTTP/HTTPS
+  <span class="k">firewalld:</span>
+    <span class="k">port:</span> <span class="v">"{{ item }}/tcp"</span>
+    <span class="k">permanent:</span> yes
+    <span class="k">state:</span> enabled
+  <span class="k">loop:</span> [80, 443]</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONCLUSION -->
+  <section class="section">
+    <div class="card" style="background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.3);padding:2.5rem;">
+      <div class="section-tag" style="margin-bottom:1.5rem;"><i class="fas fa-graduation-cap"></i> Compétences Acquises</div>
+      <div class="grid-3">
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Structuration d'un projet Ansible en rôles modulaires.</li>
+          <li><i class="fas fa-check"></i> Gestion des secrets avec Ansible Vault.</li>
+          <li><i class="fas fa-check"></i> Sécurisation des fichiers via "chmod 700/600".</li>
+          <li><i class="fas fa-check"></i> Déploiement automatisé MySQL avec création d'utilisateur restreint.</li>
+        </ul>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Installation PHP 8.3 via dépôt REMI sur Rocky Linux 9.</li>
+          <li><i class="fas fa-check"></i> Configuration Apache avec VirtualHost Jinja2 dynamique.</li>
+          <li><i class="fas fa-check"></i> Déploiement Laravel via Composer et configuration ".env".</li>
+          <li><i class="fas fa-check"></i> Exécution des migrations Artisan en contexte Apache.</li>
+        </ul>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Hardening SELinux pour "storage, cache et .env".</li>
+          <li><i class="fas fa-check"></i> Gestion du pare-feu Firewalld via Ansible.</li>
+          <li><i class="fas fa-check"></i> Usage des handlers Ansible pour redémarrer les services.</li>
+          <li><i class="fas fa-check"></i> Infrastructure as Code reproductible et idempotente.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVIGATION -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Vue d'ensemble</a>
+      <a href="ansible.html" class="btn btn-cyan"><i class="fas fa-robot"></i> Ansible & Docker</a>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">Expert Architecture SI — Cloud, Infrastructure & Sécurité.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="../parcours.html">Parcours</a></li>
+        <li><a href="../projets.html">Projets</a></li>
+        <li><a href="index.html">Mastère</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin — Expert Architecture SI</p>
+    <span class="mono" style="font-size:0.72rem;">M1 Cloud · Ansible · Laravel</span>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

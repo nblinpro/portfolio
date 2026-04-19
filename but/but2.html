@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUT 2 — Transmission & Développement Réseau — Nicolas Blin</title>
+  <meta name="description" content="BUT 2 Nicolas Blin : Transmission réseau, développement Python TCP/UDP, audit GestSup DGFIP, certification CCNA 2.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .filter-bar { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:2rem; }
+    .fbtn { background:rgba(255,255,255,0.03); color:var(--text-muted); border:1px solid var(--border); border-radius:8px; padding:0.45rem 1.1rem; font-size:0.78rem; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; cursor:pointer; transition:background 0.2s,border-color 0.2s,color 0.2s; font-family:inherit; }
+    .fbtn:hover { border-color:rgba(129,140,248,0.4); color:var(--indigo); }
+    .fbtn.active { background:var(--indigo); color:#020617; border-color:var(--indigo); }
+    .filterable.hidden { display:none; }
+  </style>
+</head>
+<body>
+<div class="ambient-bg" style="background:radial-gradient(ellipse 60% 40% at 10% 10%,rgba(129,140,248,0.06) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 90% 90%,rgba(129,140,248,0.04) 0%,transparent 60%);"></div>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="../parcours.html">Parcours</a></li>
+      <li><a href="../projets.html">Projets</a></li>
+      <li><a href="../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="index.html">BUT R&T</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>BUT 2</span>
+</nav>
+
+<div class="page-hero">
+  <span class="hero-tag" style="color:var(--indigo);background:var(--indigo-dim);border-color:rgba(129,140,248,0.2);">
+    <i class="fas fa-wave-square"></i> BUT 2 · 2023/2024
+  </span>
+  <h1>Transmission & <span style="color:var(--indigo)">Développement Réseau</span></h1>
+  <p>Systèmes de transmission, développement d'applications réseau, support N2 et audits à la DGFIP. Obtention CCNA 2.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- ENTREPRISE DGFIP -->
+  <section class="section" style="padding-top:0;">
+    <div class="program-banner banner-indigo">
+      <div class="banner-icon"><i class="fas fa-landmark"></i></div>
+      <div>
+        <div class="badge badge-entreprise" style="margin-bottom:0.35rem;">DGFIP · Alternance BUT 2</div>
+        <h3>Missions Entreprise — DGFIP</h3>
+        <p>Assistant de Proximité · 2023/2024</p>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="fbtn active" onclick="filterGrid('grid-dgfip','all',this)">Tous</button>
+      <button class="fbtn" onclick="filterGrid('grid-dgfip','support',this)">Support & Ticketing</button>
+      <button class="fbtn" onclick="filterGrid('grid-dgfip','infra',this)">Audit & Infra</button>
+    </div>
+
+    <div class="grid-auto" id="grid-dgfip">
+      <!-- GestSup -->
+      <div class="project-card card-indigo filterable" data-cat="support">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-entreprise" style="margin-bottom:0.5rem;">Helpdesk & Support</div>
+            <h3>Gestion Parc & Support N2 — GestSup</h3>
+          </div>
+          <div class="card-icon" style="background:var(--indigo-dim);color:var(--indigo);"><i class="fas fa-headset"></i></div>
+        </div>
+        <p>Administration du système de ticketing GestSup pour la gestion du parc informatique DGFIP. Support technique niveau 2 — diagnostic, résolution et escalade des incidents.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Gestion des tickets et suivi incidents</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Inventaire et maintenance parc</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Support Windows et applications métier</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Formation utilisateurs</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-indigo">GestSup</span>
+          <span class="tag tag-indigo">Support N2</span>
+          <span class="tag tag-indigo">Windows</span>
+          <span class="tag tag-indigo">ITSM</span>
+        </div>
+      </div>
+
+      <!-- Audit Switchs -->
+      <div class="project-card card-indigo filterable" data-cat="infra">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-entreprise" style="margin-bottom:0.5rem;">Audit Réseau</div>
+            <h3>Audit Switchs & Documentation Réseau</h3>
+          </div>
+          <div class="card-icon" style="background:var(--indigo-dim);color:var(--indigo);"><i class="fas fa-search"></i></div>
+        </div>
+        <p>Participation à l'audit annuel du réseau DGFIP. Inventaire des équipements réseau non-PoE (switchs, points d'accès), vérification des configurations et mise à jour de la documentation technique.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Inventaire complet des équipements réseau</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Vérification des configurations Cisco</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Mise à jour schémas réseau</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Rapport de conformité</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-indigo">Audit</span>
+          <span class="tag tag-indigo">Cisco</span>
+          <span class="tag tag-indigo">Documentation</span>
+          <span class="tag tag-indigo">Schémas réseau</span>
+        </div>
+      </div>
+
+      <!-- Action sociale -->
+      <div class="project-card card-indigo filterable" data-cat="infra">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-entreprise" style="margin-bottom:0.5rem;">Évolution SI</div>
+            <h3>Intégration Service Action Sociale</h3>
+          </div>
+          <div class="card-icon" style="background:var(--indigo-dim);color:var(--indigo);"><i class="fas fa-users-gear"></i></div>
+        </div>
+        <p>Étude et mise en œuvre d'une solution technique pour l'intégration du service Action Sociale dans l'architecture informatique existante de la DGFIP — déploiement postes, configuration réseau et raccordement SI.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Déploiement et configuration postes</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Intégration au SI existant</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Raccordement réseau et VLAN</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Documentation technique</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-indigo">Déploiement</span>
+          <span class="tag tag-indigo">Intégration SI</span>
+          <span class="tag tag-indigo">VLAN</span>
+          <span class="tag tag-indigo">Configuration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ACADÉMIQUE -->
+  <section class="section">
+    <div class="program-banner banner-indigo">
+      <div class="banner-icon"><i class="fas fa-university"></i></div>
+      <div>
+        <div class="badge badge-projet" style="margin-bottom:0.35rem;">IUT de Blois · Académique</div>
+        <h3>Projets Académiques — BUT 2</h3>
+        <p>Systèmes de transmission · Développement réseau Python · CCNA 2</p>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="fbtn active" onclick="filterGrid('grid-iut','all',this)">Tous</button>
+      <button class="fbtn" onclick="filterGrid('grid-iut','transmission',this)">Transmission</button>
+      <button class="fbtn" onclick="filterGrid('grid-iut','dev',this)">Développement</button>
+    </div>
+
+    <div class="grid-auto" id="grid-iut">
+      <!-- Transmission -->
+      <div class="project-card card-indigo filterable" data-cat="transmission">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">SAÉ Transmission</div>
+            <h3>Systèmes de Transmission Point-à-Point</h3>
+          </div>
+          <div class="card-icon" style="background:var(--indigo-dim);color:var(--indigo);"><i class="fas fa-wave-square"></i></div>
+        </div>
+        <p>Étude d'un lien fibre optique : mesures de puissance et réflectométrie pour déterminer les pertes (épissures, connecteurs) et l'atténuation du signal. Modélisation des systèmes analogiques et numériques, théorème de Shannon, modulations (AM, FM, ASK, FSK, PSK).</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Mesures réflectométrie fibre optique</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Analyse spectrale des signaux</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Simulation de modulations numériques</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Calcul de bande passante et débit</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-indigo">Fibre Optique</span>
+          <span class="tag tag-indigo">Réflectométrie</span>
+          <span class="tag tag-indigo">Modulation</span>
+          <span class="tag tag-indigo">Shannon</span>
+        </div>
+      </div>
+
+      <!-- Développement réseau Python -->
+      <div class="project-card card-indigo filterable" data-cat="dev">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">SAÉ Développement</div>
+            <h3>Applications Réseau TCP/UDP — Python</h3>
+          </div>
+          <div class="card-icon" style="background:var(--indigo-dim);color:var(--indigo);"><i class="fab fa-python"></i></div>
+        </div>
+        <p>Conception et réalisation d'un système de chat en ligne client-serveur. Implémentation des protocoles TCP (fiabilité, contrôle de flux) et UDP (datagrammes, multicast) avec analyse Wireshark des échanges réseau.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Client-serveur TCP avec threads</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Datagrammes UDP et multicast</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Analyse de captures Wireshark</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Benchmarks et métriques réseau</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-indigo">Python</span>
+          <span class="tag tag-indigo">TCP</span>
+          <span class="tag tag-indigo">UDP</span>
+          <span class="tag tag-indigo">Wireshark</span>
+          <span class="tag tag-indigo">Sockets</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CCNA -->
+    <div class="card card-indigo" style="margin-top:2rem;padding:2rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
+        <div>
+          <div class="badge badge-obtenu" style="margin-bottom:0.75rem;">Certification obtenue</div>
+          <h3 style="margin-bottom:0.5rem;">CCNA 2</h3>
+          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">Obtention de la certification Cisco CCNA 2 — Switching, Routing & Wireless Essentials — pendant le BUT 2, couvrant OSPF, VLAN, STP, RSTP et EtherChannel.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;background:var(--bg-body);border-radius:8px;border:1px solid var(--border);">
+            <i class="fas fa-certificate" style="color:var(--indigo);font-size:1.1rem;width:24px;text-align:center;"></i>
+            <div><div style="font-weight:700;font-size:0.875rem;">Switching & Routing</div><div style="color:var(--text-muted);font-size:0.75rem;">OSPF, VLAN, STP, RSTP</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;background:var(--bg-body);border-radius:8px;border:1px solid var(--border);">
+            <i class="fas fa-certificate" style="color:var(--indigo);font-size:1.1rem;width:24px;text-align:center;"></i>
+            <div><div style="font-weight:700;font-size:0.875rem;">Wireless Essentials</div><div style="color:var(--text-muted);font-size:0.75rem;">EtherChannel, redondance LAN</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="but1.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> BUT 1</a>
+      <a href="index.html" class="btn btn-indigo"><i class="fas fa-th"></i> Vue d'ensemble</a>
+      <a href="but3.html" class="btn btn-outline">BUT 3 <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;">BUT R&T · BUT 2 — Transmission & Développement</p>
+    </div>
+    <div class="footer-col">
+      <h4>BUT R&T</h4>
+      <ul>
+        <li><a href="index.html">Vue d'ensemble</a></li>
+        <li><a href="but1.html">BUT 1</a></li>
+        <li><a href="but2.html">BUT 2</a></li>
+        <li><a href="but3.html">BUT 3</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin</p>
+    <span class="mono" style="font-size:0.72rem;">BUT 2 · IUT de Blois</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+function filterGrid(gridId, cat, btn) {
+  const grid = document.getElementById(gridId);
+  const items = grid.querySelectorAll('.filterable');
+  const btns = btn.closest('.filter-bar').querySelectorAll('.fbtn');
+  btns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  items.forEach(el => {
+    if (cat === 'all' || el.dataset.cat === cat) el.classList.remove('hidden');
+    else el.classList.add('hidden');
+  });
+}
+</script>
+</body>
+</html>

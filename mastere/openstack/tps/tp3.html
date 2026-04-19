@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TP3 — Swift Object Storage | Nicolas Blin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../../css/main.css">
+  <style>
+    p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.75; }
+
+    .step-title {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 700; color: var(--text);
+      margin: 0 0 1.5rem; padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-title i { color: var(--cyan); }
+
+    .terminal-window {
+      background: #010409; border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin-bottom: 1.5rem;
+    }
+    .terminal-header {
+      background: #161b22; padding: 10px 15px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tdot { width: 10px; height: 10px; border-radius: 50%; }
+    .tdot-red    { background: #ff5f56; }
+    .tdot-yellow { background: #ffbd2e; }
+    .tdot-green  { background: #27c93f; }
+    .terminal-title { color: var(--text-muted); font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; margin-left: 10px; }
+    .terminal-window pre {
+      padding: 1.5rem; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; color: #e6edf3; overflow-x: auto;
+      white-space: pre; line-height: 1.65; margin: 0;
+    }
+    .comment { color: #8b949e; font-style: italic; }
+
+    .check-list { list-style: none; }
+    .check-list li { display: flex; align-items: center; gap: 10px; padding: 5px 0; color: var(--text-muted); font-size: 0.875rem; }
+    .check-list li i { color: var(--cyan); font-size: 0.75rem; flex-shrink: 0; }
+
+    code { color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+<div class="ambient-bg"></div>
+
+<header class="site-header">
+  <a href="../../../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../../../index.html">Accueil</a></li>
+      <li><a href="../../../parcours.html">Parcours</a></li>
+      <li><a href="../../../projets.html">Projets</a></li>
+      <li><a href="../../../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../../../index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="../../index.html">Mastère</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="../../openstack.html">OpenStack</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>TP3 — Swift (Stockage Objet)</span>
+</nav>
+
+<div class="page-hero">
+  <span class="hero-tag"><i class="fas fa-database"></i> OpenStack · TP3 · Object Storage</span>
+  <h1>Swift <span class="gradient-text">&amp; Configuration Avancée</span></h1>
+  <p>Maîtrisez le service de stockage objet d'OpenStack. Gestion des containers, manipulation d'objets, contrôle d'accès (ACLs) et fonctionnalités avancées comme les URLs temporaires.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.75rem;">
+    <a href="../documents/TP3 _ OpenStack Swift – Stockage Objet et Configuration Avancée.pdf" target="_blank" class="btn btn-cyan"><i class="fas fa-file-pdf"></i> Voir le sujet (PDF)</a>
+    <a href="../../openstack.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Retour OpenStack</a>
+  </div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- OBJECTIFS -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-bullseye"></i> Objectifs</div>
+      <h2 style="color:var(--text);">Objectifs <span style="color:var(--cyan);">Pédagogiques</span></h2>
+    </div>
+    <div class="grid-auto">
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.5rem;"><i class="fas fa-layer-group" style="color:var(--cyan);margin-right:8px;"></i>Service Swift</h3>
+        <p>Comprendre l'architecture du stockage objet distribué.</p>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.5rem;"><i class="fas fa-box" style="color:var(--cyan);margin-right:8px;"></i>Containers</h3>
+        <p>Création et gestion des containers de stockage.</p>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.5rem;"><i class="fas fa-file" style="color:var(--cyan);margin-right:8px;"></i>Objets</h3>
+        <p>Upload, download et listing d'objets.</p>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.5rem;"><i class="fas fa-lock" style="color:var(--cyan);margin-right:8px;"></i>ACLs</h3>
+        <p>Contrôle des accès par utilisateur et projet.</p>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.5rem;"><i class="fas fa-link" style="color:var(--cyan);margin-right:8px;"></i>TempURL</h3>
+        <p>Génération d'URLs temporaires sécurisées.</p>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.5rem;"><i class="fas fa-tachometer-alt" style="color:var(--cyan);margin-right:8px;"></i>Quotas</h3>
+        <p>Configuration des limites par projet.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ÉTAPE 1 -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-box"></i> 1. Gestion des Containers</h3>
+    <p>Un container Swift est l'unité de regroupement des objets, similaire à un bucket S3.</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">CLI — Opérations sur les containers</span>
+      </div>
+      <pre><span class="comment"># Créer un container</span>
+openstack container create mon-container
+
+<span class="comment"># Lister tous les containers</span>
+openstack container list
+
+<span class="comment"># Afficher les détails d'un container</span>
+openstack container show mon-container
+
+<span class="comment"># Supprimer un container (vide)</span>
+openstack container delete mon-container</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ÉTAPE 2 -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-file-upload"></i> 2. Manipulation des Objets</h3>
+    <p>Les objets sont les fichiers stockés à l'intérieur des containers, accessibles via une clé unique.</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">CLI — Upload &amp; Download</span>
+      </div>
+      <pre><span class="comment"># Uploader un fichier</span>
+openstack object create mon-container fichier.txt
+
+<span class="comment"># Lister les objets d'un container</span>
+openstack object list mon-container
+
+<span class="comment"># Afficher les métadonnées d'un objet</span>
+openstack object show mon-container fichier.txt
+
+<span class="comment"># Télécharger un objet</span>
+openstack object save mon-container fichier.txt
+
+<span class="comment"># Supprimer un objet</span>
+openstack object delete mon-container fichier.txt</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ÉTAPE 3 -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-lock"></i> 3. Contrôle d'Accès (ACLs)</h3>
+    <p>Swift permet de contrôler précisément qui peut lire ou écrire dans un container.</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">CLI — Gestion des ACLs</span>
+      </div>
+      <pre><span class="comment"># Rendre un container public (lecture)</span>
+openstack container set --property "X-Container-Read=.r:*" mon-container
+
+<span class="comment"># Autoriser un utilisateur spécifique en lecture</span>
+openstack container set --property "X-Container-Read=projet:utilisateur" mon-container
+
+<span class="comment"># Autoriser un utilisateur en écriture</span>
+openstack container set --property "X-Container-Write=projet:utilisateur" mon-container
+
+<span class="comment"># Supprimer les ACLs publiques</span>
+openstack container unset --property "X-Container-Read" mon-container</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ÉTAPE 4 -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-link"></i> 4. Configuration Avancée — TempURL</h3>
+    <p>Les TempURLs permettent de partager un objet de manière sécurisée et temporaire, sans exposer les credentials.</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">CLI — Génération de TempURL</span>
+      </div>
+      <pre><span class="comment"># Définir une clé TempURL sur le compte</span>
+openstack object store account set --property "Temp-URL-Key=ma-cle-secrete"
+
+<span class="comment"># Récupérer l'endpoint Swift</span>
+openstack catalog show object-store
+
+<span class="comment"># Générer une URL temporaire (valide 3600 secondes)</span>
+swift tempurl GET 3600 /v1/AUTH_&lt;project-id&gt;/mon-container/fichier.txt "ma-cle-secrete"</pre>
+    </div>
+    <div class="card" style="border-left:4px solid var(--cyan);background:rgba(34,211,238,0.04);padding:1.5rem;">
+      <p style="margin:0;"><i class="fas fa-info-circle" style="color:var(--cyan);margin-right:8px;"></i> L'URL générée est valide uniquement pendant la durée spécifiée (ici 3600 secondes = 1h) et ne nécessite aucune authentification.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ÉTAPE 5 -->
+  <section class="section">
+    <h3 class="step-title"><i class="fas fa-tachometer-alt"></i> 5. Gestion des Quotas</h3>
+    <p>Administration des limites de stockage par projet pour contrôler la consommation des ressources.</p>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">CLI — Quotas</span>
+      </div>
+      <pre><span class="comment"># Afficher les statistiques du compte</span>
+openstack object store account show
+
+<span class="comment"># Définir un quota en octets (ex: 1 Go)</span>
+openstack object store account set --property "X-Account-Meta-Quota-Bytes=1073741824"
+
+<span class="comment"># Définir un quota en nombre d'objets</span>
+openstack object store account set --property "X-Container-Meta-Quota-Count=1000"</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RÉCAPITULATIF -->
+  <section class="section">
+    <div class="card" style="background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.3);padding:2.5rem;">
+      <div class="section-tag" style="margin-bottom:1.5rem;"><i class="fas fa-graduation-cap"></i> Compétences Acquises</div>
+      <div class="grid-3" style="margin-top:0.5rem;">
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Création, listing et suppression de containers Swift.</li>
+          <li><i class="fas fa-check"></i> Upload, download et gestion des métadonnées d'objets.</li>
+          <li><i class="fas fa-check"></i> Ouverture d'un container en lecture publique (<code>.r:*</code>).</li>
+          <li><i class="fas fa-check"></i> Contrôle d'accès en lecture/écriture par utilisateur et projet.</li>
+        </ul>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Configuration d'une clé <code>Temp-URL-Key</code> sur le compte.</li>
+          <li><i class="fas fa-check"></i> Génération d'URLs temporaires avec durée d'expiration.</li>
+          <li><i class="fas fa-check"></i> Consultation des statistiques de stockage du compte.</li>
+          <li><i class="fas fa-check"></i> Définition de quotas en octets par compte.</li>
+        </ul>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Limitation du nombre d'objets via quota par container.</li>
+          <li><i class="fas fa-check"></i> Maîtrise de l'API REST Swift compatible S3.</li>
+          <li><i class="fas fa-check"></i> Compréhension de l'architecture du stockage objet distribué.</li>
+          <li><i class="fas fa-check"></i> Partage sécurisé d'objets sans exposition des credentials.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVIGATION -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="tp2.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> TP2 — Nova Compute</a>
+      <a href="../../openstack.html" class="btn btn-cyan"><i class="fas fa-th"></i> Tous les TPs</a>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">Expert Architecture SI — Cloud, Infrastructure & Sécurité.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="../../../index.html">Accueil</a></li>
+        <li><a href="../../../parcours.html">Parcours</a></li>
+        <li><a href="../../../projets.html">Projets</a></li>
+        <li><a href="../../index.html">Mastère</a></li>
+        <li><a href="../../openstack.html">OpenStack</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin — Expert Architecture SI</p>
+    <span class="mono" style="font-size:0.72rem;">M1 Cloud · OpenStack · TP3</span>
+  </div>
+</footer>
+<script src="../../../js/main.js"></script>
+</body>
+</html>

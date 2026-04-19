@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUT Réseaux & Télécommunications — Nicolas Blin</title>
+  <meta name="description" content="Section BUT R&T de Nicolas Blin — 3 ans de projets réseaux, téléphonie IP, IoT et développement. IUT de Blois, alternance DGFIP.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .tech-chip {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.5rem 0.875rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .tech-chip:hover { background: rgba(129,140,248,0.06); border-color: rgba(129,140,248,0.3); }
+    .tech-chip img { height: 18px; width: 18px; object-fit: contain; flex-shrink: 0; }
+    .tech-chip i { color: var(--indigo); font-size: 0.9rem; width: 18px; text-align: center; flex-shrink: 0; }
+    .tech-chip span { font-size: 0.82rem; color: var(--text); font-weight: 500; white-space: nowrap; }
+    .tech-cat {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--text-muted);
+      margin: 0 0 0.75rem; display: flex; align-items: center; gap: 6px;
+    }
+    .tech-cat i { color: var(--indigo); }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.75rem; }
+
+    /* Accordéon années */
+    .acc-item { border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 0.75rem; overflow: hidden; }
+    .acc-header { width: 100%; background: rgba(255,255,255,0.02); padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: none; font-family: inherit; transition: background 0.2s; }
+    .acc-header:hover { background: rgba(129,140,248,0.05); }
+    .acc-chevron { color: var(--indigo); transition: transform 0.3s; flex-shrink: 0; font-size: 0.85rem; }
+    .acc-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .acc-item.open .acc-body { max-height: 1200px; }
+    .acc-item.open .acc-chevron { transform: rotate(180deg); }
+    .acc-item.open .acc-header { background: rgba(129,140,248,0.06); border-bottom: 1px solid var(--border); }
+    .acc-inner { padding: 1.75rem; }
+    .acc-col-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--indigo); margin: 0 0 0.85rem; display: flex; align-items: center; gap: 6px; }
+    .proj-list { list-style: none; margin: 0; padding: 0; }
+    .proj-list li { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; color: var(--text-muted); font-size: 0.84rem; line-height: 1.55; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .proj-list li:last-child { border-bottom: none; }
+    .proj-list li i { color: var(--indigo); font-size: 0.72rem; margin-top: 4px; flex-shrink: 0; }
+    .proj-list strong { color: var(--text); }
+  </style>
+</head>
+<body>
+<div class="ambient-bg" style="background:radial-gradient(ellipse 60% 40% at 10% 10%,rgba(129,140,248,0.06) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 90% 90%,rgba(129,140,248,0.04) 0%,transparent 60%);"></div>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="../parcours.html">Parcours</a></li>
+      <li><a href="../projets.html">Projets</a></li>
+      <li><a href="../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>BUT Réseaux & Télécoms</span>
+</nav>
+
+<!-- HERO BUT -->
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag" style="color:var(--indigo);background:var(--indigo-dim);border-color:rgba(129,140,248,0.2);">
+      <i class="fas fa-network-wired"></i> BUT R&T · IUT de Blois
+    </span>
+    <h1>Bachelor <span style="color:var(--indigo);">Réseaux &</span><br><span style="color:var(--indigo)">Télécommunications</span></h1>
+    <p class="hero-sub">3 ans de formation en alternance à l'IUT de Blois — du câblage réseau à l'architecture IoT. Alternance à la DGFIP, certifications CCNA 1·2·3, spécialité Internet des Objets.</p>
+    <div class="hero-badges">
+      <span class="hero-badge" style="border-color:rgba(129,140,248,0.2);"><i class="fas fa-network-wired" style="color:var(--indigo);"></i> Réseaux Cisco</span>
+      <span class="hero-badge" style="border-color:rgba(129,140,248,0.2);"><i class="fas fa-microchip" style="color:var(--indigo);"></i> IoT & LoRa</span>
+      <span class="hero-badge" style="border-color:rgba(129,140,248,0.2);"><i class="fas fa-phone-volume" style="color:var(--indigo);"></i> ToIP</span>
+      <span class="hero-badge" style="border-color:rgba(129,140,248,0.2);"><i class="fas fa-certificate" style="color:var(--indigo);"></i> CCNA 1·2·3</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div style="background:rgba(129,140,248,0.03);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.75rem 2rem;">
+  <div style="max-width:900px;margin:0 auto;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;">
+    <div style="text-align:center;padding:0.5rem 2.5rem;border-right:1px solid var(--border);">
+      <div style="font-size:2rem;font-weight:800;color:var(--indigo);line-height:1;">3 ans</div>
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-top:0.35rem;">Formation</div>
+    </div>
+    <div style="text-align:center;padding:0.5rem 2.5rem;border-right:1px solid var(--border);">
+      <div style="font-size:2rem;font-weight:800;color:var(--indigo);line-height:1;">3</div>
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-top:0.35rem;">CCNA</div>
+    </div>
+    <div style="text-align:center;padding:0.5rem 2.5rem;border-right:1px solid var(--border);">
+      <div style="font-size:2rem;font-weight:800;color:var(--indigo);line-height:1;">10+</div>
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-top:0.35rem;">Technologies</div>
+    </div>
+    <div style="text-align:center;padding:0.5rem 2.5rem;">
+      <div style="font-size:2rem;font-weight:800;color:var(--indigo);line-height:1;">BAC+3</div>
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-top:0.35rem;">BUT R&T</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrapper">
+  <!-- PROGRAMME OVERVIEW -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag indigo"><i class="fas fa-info-circle"></i> Formation</div>
+      <h2>Le programme <span style="color:var(--indigo)">BUT R&T</span></h2>
+      <p>3 ans de Bachelor Universitaire de Technologie — Réseaux & Télécommunications à l'IUT de Blois, en alternance à la DGFIP.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card card-indigo" style="text-align:center;padding:2.25rem;">
+        <div style="width:52px;height:52px;background:var(--indigo-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--indigo);font-size:1.3rem;margin:0 auto 1rem;"><i class="fas fa-graduation-cap"></i></div>
+        <h3 style="margin-bottom:0.35rem;">Diplôme obtenu</h3>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">BUT Réseaux & Télécommunications — obtenu en 2025 avec mention. Diplôme national BAC+3.</p>
+        <span class="badge badge-obtenu" style="margin-top:0.75rem;">Obtenu 2025</span>
+      </div>
+      <div class="card card-indigo" style="text-align:center;padding:2.25rem;">
+        <div style="width:52px;height:52px;background:var(--indigo-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--indigo);font-size:1.3rem;margin:0 auto 1rem;"><i class="fas fa-briefcase"></i></div>
+        <h3 style="margin-bottom:0.35rem;">Alternance DGFIP</h3>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">3 ans en tant qu'Assistant de Proximité à la DGFIP. Support N2, réseau, ToIP et audits systèmes.</p>
+        <span class="badge badge-entreprise" style="margin-top:0.75rem;">2022 – 2025</span>
+      </div>
+      <div class="card card-indigo" style="text-align:center;padding:2.25rem;">
+        <div style="width:52px;height:52px;background:var(--indigo-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--indigo);font-size:1.3rem;margin:0 auto 1rem;"><i class="fas fa-microchip"></i></div>
+        <h3 style="margin-bottom:0.35rem;">Spécialité IoT</h3>
+        <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.65;">Spécialisation Internet des Objets en BUT3 — ESP32, LoRa, MQTT, Bluetooth, architecture IoT complète.</p>
+        <span class="badge badge-projet" style="margin-top:0.75rem;">Spécialité BUT3</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STACK TECHNIQUE -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag indigo"><i class="fas fa-layer-group"></i> Technologies</div>
+      <h2>Stack Technique <span style="color:var(--indigo)">Maîtrisée</span></h2>
+      <p>Outils et technologies utilisés en entreprise et en formation, organisés par contexte.</p>
+    </div>
+
+    <!-- ── DGFIP (ENTREPRISE) ── -->
+    <div class="program-banner" style="background:rgba(129,140,248,0.04);border:1px solid rgba(129,140,248,0.15);border-radius:var(--radius-lg);padding:1.5rem 2rem;display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;">
+      <div style="width:48px;height:48px;background:var(--indigo-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--indigo);font-size:1.25rem;flex-shrink:0;"><i class="fas fa-landmark"></i></div>
+      <div>
+        <div class="badge badge-entreprise" style="margin-bottom:0.35rem;">Alternance DGFIP</div>
+        <h3 style="margin:0 0 0.2rem;">Stack Entreprise</h3>
+        <p style="margin:0;color:var(--text-muted);font-size:0.82rem;">Technologies utilisées en production à la DGFIP · 2022 – 2025</p>
+      </div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-headset"></i> Support &amp; Administration</p>
+    <div class="tech-row">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/windows/0078D4" alt="Windows"><span>Windows</span></div>
+      <div class="tech-chip"><i class="fas fa-id-badge"></i><span>Active Directory</span></div>
+      <div class="tech-chip"><i class="fas fa-ticket-alt"></i><span>GestSup / ITSM</span></div>
+      <div class="tech-chip"><i class="fas fa-tools"></i><span>Support N2</span></div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-network-wired"></i> Infrastructure &amp; Réseau</p>
+    <div class="tech-row" style="margin-bottom:0;">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/cisco/1BA0D7" alt="Cisco"><span>Cisco IOS</span></div>
+      <div class="tech-chip"><i class="fas fa-phone-volume"></i><span>ToIP</span></div>
+      <div class="tech-chip"><i class="fas fa-sitemap"></i><span>VLAN / STP</span></div>
+      <div class="tech-chip"><i class="fas fa-plug"></i><span>Câblage RJ45</span></div>
+    </div>
+
+    <!-- ── IUT DE BLOIS (ÉCOLE) ── -->
+    <div class="program-banner" style="background:rgba(129,140,248,0.04);border:1px solid rgba(129,140,248,0.15);border-radius:var(--radius-lg);padding:1.5rem 2rem;display:flex;align-items:center;gap:1.5rem;margin-top:3rem;margin-bottom:2rem;">
+      <div style="width:48px;height:48px;background:var(--indigo-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--indigo);font-size:1.25rem;flex-shrink:0;"><i class="fas fa-university"></i></div>
+      <div>
+        <div class="badge badge-projet" style="margin-bottom:0.35rem;">IUT de Blois</div>
+        <h3 style="margin:0 0 0.2rem;">Stack Académique</h3>
+        <p style="margin:0;color:var(--text-muted);font-size:0.82rem;">Technologies étudiées et déployées en formation BUT R&T</p>
+      </div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-route"></i> Réseaux &amp; Protocoles</p>
+    <div class="tech-row">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/cisco/1BA0D7" alt="Cisco"><span>Cisco IOS</span></div>
+      <div class="tech-chip"><i class="fas fa-desktop"></i><span>Packet Tracer</span></div>
+      <div class="tech-chip"><i class="fas fa-project-diagram"></i><span>OSPF</span></div>
+      <div class="tech-chip"><i class="fas fa-sitemap"></i><span>VLAN / STP / RSTP</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/wireshark/1679A7" alt="Wireshark"><span>Wireshark</span></div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-microchip"></i> IoT &amp; Embarqué</p>
+    <div class="tech-row">
+      <div class="tech-chip"><i class="fas fa-microchip"></i><span>ESP32</span></div>
+      <div class="tech-chip"><i class="fas fa-broadcast-tower"></i><span>LoRa / LoRaWAN</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/bluetooth/0082FC" alt="Bluetooth"><span>Bluetooth</span></div>
+      <div class="tech-chip"><i class="fas fa-exchange-alt"></i><span>MQTT</span></div>
+      <div class="tech-chip"><i class="fas fa-thermometer-half"></i><span>Capteurs</span></div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-code"></i> Systèmes &amp; Développement</p>
+    <div class="tech-row" style="margin-bottom:0;">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/linux/FCC624" alt="Linux"><span>Linux</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python"><span>Python</span></div>
+      <div class="tech-chip"><i class="fas fa-network-wired"></i><span>TCP / UDP</span></div>
+      <div class="tech-chip"><i class="fas fa-terminal"></i><span>Bash</span></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  
+  <!-- YEARS NAVIGATION -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag indigo"><i class="fas fa-calendar-alt"></i> Par année</div>
+      <h2>3 années de <span style="color:var(--indigo)">formation</span></h2>
+      <p>Projets et missions par année — de la 3ème à la 1ère, entre entreprise et école.</p>
+    </div>
+
+    <div class="accordion">
+
+      <!-- ── BUT 3 ── ouvert par défaut -->
+      <div class="acc-item open">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="width:42px;height:42px;background:var(--indigo-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--indigo);font-size:1rem;flex-shrink:0;"><i class="fas fa-star"></i></div>
+            <div style="text-align:left;">
+              <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem;flex-wrap:wrap;">
+                <span class="badge badge-projet">BUT 3 — 2024/2025</span>
+                <span style="font-size:0.65rem;color:var(--indigo);font-weight:700;text-transform:uppercase;letter-spacing:1px;">Spécialité IoT</span>
+              </div>
+              <div style="font-weight:700;color:var(--text);font-size:0.95rem;">IoT &amp; Architecture Hybride</div>
+            </div>
+          </div>
+          <i class="fas fa-chevron-down acc-chevron"></i>
+        </button>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <div class="grid-2">
+              <div>
+                <p class="acc-col-label"><i class="fas fa-landmark"></i> DGFIP — Entreprise</p>
+                <ul class="proj-list">
+                  <li><i class="fas fa-check-circle"></i><span><strong>Migration ToIP</strong> — Reconfiguration VLAN voix/données sur switchs L3 Cisco Catalyst. Architecture téléphonie IP.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Audit réseau</strong> — Analyse de l'infrastructure existante, recommandations et documentation technique.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Support N2 avancé</strong> — Résolution d'incidents réseau complexes, câblage et configuration switchs.</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="acc-col-label"><i class="fas fa-university"></i> IUT de Blois — École</p>
+                <ul class="proj-list">
+                  <li><i class="fas fa-check-circle"></i><span><strong>Monitoring IoT ESP32</strong> — Relevé environnemental (température, humidité, CO2) avec dashboard temps réel.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Réseau LoRaWAN</strong> — Déploiement LPWAN pour capteurs longue portée en milieu ouvert.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Architecture MQTT</strong> — Broker publish/subscribe pour communication IoT entre capteurs et serveur.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Bluetooth BLE</strong> — Communication sans fil courte portée entre appareils embarqués.</span></li>
+                </ul>
+              </div>
+            </div>
+            <div style="margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+              <div class="tags"><span class="tag">ESP32</span><span class="tag">LoRa</span><span class="tag">MQTT</span><span class="tag">Bluetooth</span><span class="tag">ToIP</span><span class="tag">Cisco L3</span></div>
+              <a href="but3.html" class="btn btn-indigo btn-sm" style="margin-left:auto;white-space:nowrap;">Voir BUT 3 <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BUT 2 ── -->
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="width:42px;height:42px;background:var(--indigo-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--indigo);font-size:1rem;flex-shrink:0;"><i class="fas fa-code"></i></div>
+            <div style="text-align:left;">
+              <div style="margin-bottom:0.25rem;"><span class="badge badge-projet">BUT 2 — 2023/2024</span></div>
+              <div style="font-weight:700;color:var(--text);font-size:0.95rem;">Transmission &amp; Développement</div>
+            </div>
+          </div>
+          <i class="fas fa-chevron-down acc-chevron"></i>
+        </button>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <div class="grid-2">
+              <div>
+                <p class="acc-col-label"><i class="fas fa-landmark"></i> DGFIP — Entreprise</p>
+                <ul class="proj-list">
+                  <li><i class="fas fa-check-circle"></i><span><strong>Audit GestSup</strong> — Analyse et optimisation de l'outil ITSM de la DGFIP, rapport de recommandations.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Gestion des tickets</strong> — Suivi et résolution d'incidents N2 réseau, système et téléphonie.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Configuration réseau</strong> — Administration switchs et VLAN sur le parc DGFIP.</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="acc-col-label"><i class="fas fa-university"></i> IUT de Blois — École</p>
+                <ul class="proj-list">
+                  <li><i class="fas fa-check-circle"></i><span><strong>Dev réseau Python</strong> — Applications TCP/UDP client/serveur, protocoles transport.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Systèmes de transmission</strong> — Protocoles WAN, modulation et codage des signaux.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>CCNA 2</strong> — Switching, Routing, OSPF, STP, RSTP, EtherChannel.</span></li>
+                </ul>
+              </div>
+            </div>
+            <div style="margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+              <div class="tags"><span class="tag">Python</span><span class="tag">TCP/UDP</span><span class="tag">GestSup</span><span class="tag">OSPF</span><span class="tag">CCNA 2</span></div>
+              <a href="but2.html" class="btn btn-indigo btn-sm" style="margin-left:auto;white-space:nowrap;">Voir BUT 2 <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BUT 1 ── -->
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="width:42px;height:42px;background:var(--indigo-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--indigo);font-size:1rem;flex-shrink:0;"><i class="fas fa-network-wired"></i></div>
+            <div style="text-align:left;">
+              <div style="margin-bottom:0.25rem;"><span class="badge badge-projet">BUT 1 — 2022/2023</span></div>
+              <div style="font-weight:700;color:var(--text);font-size:0.95rem;">Fondamentaux Réseaux</div>
+            </div>
+          </div>
+          <i class="fas fa-chevron-down acc-chevron"></i>
+        </button>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <div class="grid-2">
+              <div>
+                <p class="acc-col-label"><i class="fas fa-landmark"></i> DGFIP — Entreprise</p>
+                <ul class="proj-list">
+                  <li><i class="fas fa-check-circle"></i><span><strong>Intégration poste DGFIP</strong> — Configuration et déploiement des postes utilisateurs Windows en environnement AD.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Support N1/N2</strong> — Helpdesk, prise en main à distance, résolution tickets bureautique et réseau.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Câblage réseau</strong> — Installation et organisation de baies réseau, pose de prises RJ45.</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="acc-col-label"><i class="fas fa-university"></i> IUT de Blois — École</p>
+                <ul class="proj-list">
+                  <li><i class="fas fa-check-circle"></i><span><strong>Modèle OSI &amp; IP</strong> — Fondamentaux des réseaux, adressage, subnetting, protocoles couche par couche.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Configuration Cisco</strong> — Routeurs et switchs en Packet Tracer, routage statique et dynamique.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>Administration Linux</strong> — Shell, gestion des services réseau, SSH, scripting Bash de base.</span></li>
+                  <li><i class="fas fa-check-circle"></i><span><strong>CCNA 1</strong> — Introduction to Networks, obtenu en fin d'année.</span></li>
+                </ul>
+              </div>
+            </div>
+            <div style="margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+              <div class="tags"><span class="tag">Cisco</span><span class="tag">Linux</span><span class="tag">Packet Tracer</span><span class="tag">OSI</span><span class="tag">CCNA 1</span></div>
+              <a href="but1.html" class="btn btn-indigo btn-sm" style="margin-left:auto;white-space:nowrap;">Voir BUT 1 <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /accordion -->
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CERTIFICATIONS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag indigo"><i class="fas fa-certificate"></i> Certifications Cisco</div>
+      <h2>Certifications <span style="color:var(--indigo)">CCNA</span></h2>
+    </div>
+    <div class="grid-3">
+      <div class="stat-card" style="border-color:rgba(129,140,248,0.2);">
+        <div class="stat-value" style="color:var(--indigo);">CCNA 1</div>
+        <div class="stat-label">Introduction to Networks</div>
+        <p style="color:var(--text-muted);font-size:0.78rem;margin-top:0.5rem;">OSI, IP, Ethernet, routage statique, subnetting</p>
+      </div>
+      <div class="stat-card" style="border-color:rgba(129,140,248,0.2);">
+        <div class="stat-value" style="color:var(--indigo);">CCNA 2</div>
+        <div class="stat-label">Switching, Routing & WAN</div>
+        <p style="color:var(--text-muted);font-size:0.78rem;margin-top:0.5rem;">OSPF, VLAN, STP, RSTP, EtherChannel</p>
+      </div>
+      <div class="stat-card" style="border-color:rgba(129,140,248,0.2);">
+        <div class="stat-value" style="color:var(--indigo);">CCNA 3</div>
+        <div class="stat-label">Enterprise Networking</div>
+        <p style="color:var(--text-muted);font-size:0.78rem;margin-top:0.5rem;">WAN, BGP, QoS, sécurité avancée</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div class="cta-block" style="background:rgba(129,140,248,0.02);border-color:rgba(129,140,248,0.15);">
+      <h2>Explorer le <span style="color:var(--indigo)">Mastère</span></h2>
+      <p>Découvrez mes projets Cloud et DevOps du Mastère Expert Cloud, Infrastructure & Sécurité.</p>
+      <div class="btn-group">
+        <a href="../mastere/index.html" class="btn btn-indigo"><i class="fas fa-cloud"></i> Section Mastère</a>
+        <a href="../contact.html" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Me contacter</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">BUT R&T — IUT de Blois · Expert Architecture SI.</p>
+    </div>
+    <div class="footer-col">
+      <h4>BUT R&T</h4>
+      <ul>
+        <li><a href="index.html">Vue d'ensemble</a></li>
+        <li><a href="but1.html">BUT 1 — Fondamentaux</a></li>
+        <li><a href="but2.html">BUT 2 — Transmission</a></li>
+        <li><a href="but3.html">BUT 3 — IoT</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin — Expert Architecture SI</p>
+    <span class="mono" style="font-size:0.72rem;">BUT R&T · IUT de Blois</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+  function toggleAcc(btn) {
+    const item = btn.closest('.acc-item');
+    item.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

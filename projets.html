@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projets & Réalisations — Nicolas Blin</title>
+  <meta name="description" content="Tous les projets de Nicolas Blin : Mastère Expert Cloud (OpenStack, Docker, Monitoring) et BUT Réseaux & Télécommunications (IoT, ToIP, Cisco).">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* ── ACCORDÉON FORMATION ── */
+    .formation-accordion {
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .formation-trigger {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background var(--transition);
+      width: 100%;
+      background: var(--bg-card);
+      border: none;
+      text-align: left;
+      font-family: inherit;
+      color: var(--text);
+    }
+
+    .formation-trigger:hover { background: var(--bg-card-hover); }
+
+    .formation-trigger.open-cyan  { background: linear-gradient(135deg, rgba(34,211,238,0.08), var(--bg-card)); border-bottom: 1px solid rgba(34,211,238,0.2); }
+    .formation-trigger.open-indigo { background: linear-gradient(135deg, rgba(129,140,248,0.08), var(--bg-card)); border-bottom: 1px solid rgba(129,140,248,0.2); }
+
+    .formation-trigger .trigger-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .trigger-cyan .trigger-icon  { background: var(--cyan-dim);   color: var(--cyan); }
+    .trigger-indigo .trigger-icon { background: var(--indigo-dim); color: var(--indigo); }
+
+    .formation-trigger .trigger-meta { flex: 1; min-width: 0; }
+    .formation-trigger .trigger-meta h3 { font-size: 1rem; font-weight: 800; margin-bottom: 3px; }
+    .formation-trigger .trigger-meta p  { font-size: 0.78rem; color: var(--text-muted); }
+
+    .trigger-right {
+      display: flex; align-items: center; gap: 1rem;
+      flex-shrink: 0;
+    }
+
+    .trigger-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .trigger-cyan  .trigger-count  { background: var(--cyan-dim);   color: var(--cyan);   border: 1px solid rgba(34,211,238,0.2); }
+    .trigger-indigo .trigger-count { background: var(--indigo-dim); color: var(--indigo); border: 1px solid rgba(129,140,248,0.2); }
+
+    .trigger-chevron {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: transform 0.35s ease;
+    }
+    .formation-trigger.open-cyan   .trigger-chevron,
+    .formation-trigger.open-indigo .trigger-chevron { transform: rotate(180deg); }
+
+    /* ── CORPS DE L'ACCORDÉON ── */
+    .formation-body {
+      display: none;
+      padding: 2rem;
+      background: rgba(255,255,255,0.015);
+    }
+    .formation-body.open { display: block; }
+
+    /* ── SOUS-ACCORDÉON ANNÉE (BUT) ── */
+    .year-accordion { margin-bottom: 1rem; }
+
+    .year-trigger {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      user-select: none;
+      font-family: inherit;
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--text-muted);
+      transition: var(--transition);
+      width: 100%;
+      text-align: left;
+    }
+
+    .year-trigger:hover        { border-color: var(--border-hover); color: var(--text); }
+    .year-trigger.open         { border-color: var(--indigo); color: var(--indigo); background: rgba(129,140,248,0.05); border-radius: var(--radius) var(--radius) 0 0; }
+    .year-trigger .year-label-left { display: flex; align-items: center; gap: 0.75rem; }
+    .year-trigger .ydot { width: 8px; height: 8px; border-radius: 50%; background: var(--indigo); flex-shrink: 0; }
+    .year-trigger .ychevron { font-size: 0.72rem; transition: transform 0.3s; }
+    .year-trigger.open .ychevron { transform: rotate(180deg); }
+
+    .year-body {
+      display: none;
+      padding: 1.25rem;
+      border: 1px solid var(--indigo);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      background: rgba(129,140,248,0.03);
+      margin-bottom: 0;
+    }
+    .year-body.open { display: block; }
+
+    /* ── LIEN SECTION COMPLÈTE ── */
+    .section-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .section-link:hover { border-color: var(--cyan); color: var(--cyan); }
+    .section-link.indigo:hover { border-color: var(--indigo); color: var(--indigo); }
+
+    /* ── RÉSUMÉ PROJETS ── */
+    .proj-summary { display: flex; flex-direction: column; gap: 1.75rem; }
+
+    .proj-period-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .proj-period-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .proj-period-dot.cyan   { background: var(--cyan);   box-shadow: 0 0 6px rgba(34,211,238,0.5); }
+    .proj-period-dot.indigo { background: var(--indigo); box-shadow: 0 0 6px rgba(129,140,248,0.5); }
+    .proj-period-label {
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; flex: 1;
+    }
+    .proj-period-link {
+      font-size: 0.72rem; color: var(--text-muted);
+      text-decoration: none; transition: color var(--transition);
+    }
+    .proj-period-link:hover { color: var(--cyan); }
+    .proj-period-link.indigo:hover { color: var(--indigo); }
+
+    .proj-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+    .proj-list li {
+      display: flex; flex-direction: column; gap: 0.25rem;
+      padding: 0.85rem 1rem 0.85rem 1.1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid rgba(34,211,238,0.35);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      transition: border-color var(--transition);
+    }
+    .proj-list li:hover { border-left-color: var(--cyan); }
+    .proj-list.indigo li { border-left-color: rgba(129,140,248,0.35); }
+    .proj-list.indigo li:hover { border-left-color: var(--indigo); }
+
+    .proj-name { font-size: 0.875rem; font-weight: 700; color: var(--text); }
+    .proj-ctx  { font-weight: 500; color: var(--text-muted); font-size: 0.82rem; }
+    .proj-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.35rem; }
+    .proj-tags span {
+      font-size: 0.67rem; font-family: 'JetBrains Mono', monospace;
+      padding: 2px 7px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 4px; color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+<div class="ambient-bg"></div>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="parcours.html">Parcours</a></li>
+      <li><a href="projets.html" class="active">Projets</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>Projets</span>
+</nav>
+
+<div class="page-hero">
+  <span class="hero-tag"><i class="fas fa-folder-open"></i> Portfolio Complet</span>
+  <h1>Projets & <span style="color:var(--cyan)">Réalisations</span></h1>
+  <p>L'ensemble de mes projets académiques et professionnels — classés par formation. Cliquez sur une formation pour la déplier.</p>
+</div>
+
+<div class="page-wrapper">
+  <section class="section" style="padding-top:0;">
+
+    <!-- ════════════════════════════════════
+         ACCORDÉON 1 — MASTÈRE
+    ════════════════════════════════════ -->
+    <div class="formation-accordion">
+      <button class="formation-trigger trigger-cyan" data-target="mastere-body">
+        <div class="trigger-icon"><i class="fas fa-cloud"></i></div>
+        <div class="trigger-meta">
+          <h3>Mastère Expert Cloud, Infrastructure & Sécurité</h3>
+          <p>Ynov Campus (Paris-Nanterre) · 2025–2027 · Alternance Innosys</p>
+        </div>
+        <div class="trigger-right">
+          <span class="badge badge-encours" style="white-space:nowrap;"><i class="fas fa-circle" style="font-size:0.4rem;"></i> En cours</span>
+          <span class="trigger-count">6 projets</span>
+          <a href="mastere/index.html" class="section-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> Section</a>
+          <i class="fas fa-chevron-down trigger-chevron"></i>
+        </div>
+      </button>
+
+      <div class="formation-body" id="mastere-body">
+        <div class="proj-summary">
+
+          <!-- Alternance Innosys -->
+          <div class="proj-period">
+            <div class="proj-period-header">
+              <span class="proj-period-dot cyan"></span>
+              <span class="proj-period-label">Alternance Innosys · 2025–Présent</span>
+              <a href="mastere/index.html" class="proj-period-link" onclick="event.stopPropagation()">Voir la section →</a>
+            </div>
+            <ul class="proj-list">
+              <li>
+                <span class="proj-name">Conteneurisation Multisites Web</span>
+                <span class="proj-desc">Migration des sites clients vers Docker — stacks Laravel/Apache2 isolées, déploiement automatisé Ansible, optimisation densité serveur</span>
+                <div class="proj-tags"><span>Docker</span><span>Ansible</span><span>Laravel</span><span>Apache2</span></div>
+              </li>
+              <li>
+                <span class="proj-name">Stack Monitoring Prometheus / Grafana</span>
+                <span class="proj-desc">Prometheus + node_exporter + Grafana + Alertmanager déployés via Docker Compose — dashboards métriques et règles d'alerting</span>
+                <div class="proj-tags"><span>Prometheus</span><span>Grafana</span><span>Alertmanager</span><span>Docker</span></div>
+              </li>
+              <li>
+                <span class="proj-name">Migration ToIP Keyyo</span>
+                <span class="proj-desc">Migration téléphonique vers Keyyo, segmentation VLAN voix/données, configuration trunk et SIP</span>
+                <div class="proj-tags"><span>ToIP</span><span>VLAN</span><span>Keyyo</span><span>SIP</span></div>
+              </li>
+              <li>
+                <span class="proj-name">Serveur Samba — Partage Réseau</span>
+                <span class="proj-desc">Déploiement automatisé via rôle Ansible, partage de fichiers multi-utilisateurs, intégration Active Directory et ACL</span>
+                <div class="proj-tags"><span>Ansible</span><span>Samba</span><span>Linux</span><span>Active Directory</span></div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Académique Ynov -->
+          <div class="proj-period">
+            <div class="proj-period-header">
+              <span class="proj-period-dot cyan"></span>
+              <span class="proj-period-label">Académique — Ynov Campus · 2025</span>
+              <a href="mastere/index.html" class="proj-period-link" onclick="event.stopPropagation()">Voir la section →</a>
+            </div>
+            <ul class="proj-list">
+              <li>
+                <span class="proj-name">Déploiement OpenStack (DevStack)</span>
+                <span class="proj-desc">Installation complète sur Ubuntu 24.04 — Nova, Neutron, Swift, Cinder, Glance, Keystone configurés et documentés avec TPs</span>
+                <div class="proj-tags"><span>OpenStack</span><span>DevStack</span><span>Nova</span><span>Neutron</span><span>Swift</span></div>
+              </li>
+              <li>
+                <span class="proj-name">GridBook — Architecture Souveraine</span>
+                <span class="proj-desc">Plateforme full-stack auto-hébergée sur Proxmox — FastAPI, React, PostgreSQL, exposée via Cloudflare Tunnel</span>
+                <div class="proj-tags"><span>Proxmox</span><span>FastAPI</span><span>React</span><span>PostgreSQL</span><span>Cloudflare</span></div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div><!-- /mastere-body -->
+    </div><!-- /formation-accordion -->
+
+
+    <!-- ════════════════════════════════════
+         ACCORDÉON 2 — BUT R&T
+    ════════════════════════════════════ -->
+    <div class="formation-accordion">
+      <button class="formation-trigger trigger-indigo" data-target="but-body">
+        <div class="trigger-icon"><i class="fas fa-network-wired"></i></div>
+        <div class="trigger-meta">
+          <h3>BUT Réseaux & Télécommunications</h3>
+          <p>IUT de Blois — Université de Tours · 2022–2025 · Alternance DGFIP</p>
+        </div>
+        <div class="trigger-right">
+          <span class="badge badge-obtenu" style="white-space:nowrap;"><i class="fas fa-check" style="font-size:0.5rem;"></i> Obtenu 2025</span>
+          <span class="trigger-count" style="background:var(--indigo-dim);color:var(--indigo);border:1px solid rgba(129,140,248,0.2);">5 projets</span>
+          <a href="but/index.html" class="section-link indigo" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> Section</a>
+          <i class="fas fa-chevron-down trigger-chevron"></i>
+        </div>
+      </button>
+
+      <div class="formation-body" id="but-body">
+
+        <!-- ─── BUT 3 ─── -->
+        <div class="year-accordion">
+          <button class="year-trigger open" data-target="but3-body">
+            <span class="year-label-left">
+              <span class="ydot"></span>
+              <span>BUT 3 — 2024/2025 · Spécialité IoT & Architecture réseau</span>
+            </span>
+            <i class="fas fa-chevron-down ychevron"></i>
+          </button>
+          <div class="year-body open" id="but3-body">
+            <div class="proj-summary">
+              <div class="proj-period">
+                <div class="proj-period-header">
+                  <span class="proj-period-dot indigo"></span>
+                  <span class="proj-period-label">Alternance DGFIP · 2024–2025</span>
+                  <a href="but/but3.html" class="proj-period-link indigo" onclick="event.stopPropagation()">Voir la section →</a>
+                </div>
+                <ul class="proj-list indigo">
+                  <li>
+                    <span class="proj-name">Migration ToIP & Switchs L3 Cisco</span>
+                    <span class="proj-desc">Pilotage de la migration téléphonique DGFIP vers Keyyo, déploiement switchs L3, segmentation VLAN voix/données, configuration trunk et SIP</span>
+                    <div class="proj-tags"><span>ToIP</span><span>Cisco L3</span><span>VLAN</span><span>Keyyo</span><span>SIP</span></div>
+                  </li>
+                </ul>
+              </div>
+              <div class="proj-period">
+                <div class="proj-period-header">
+                  <span class="proj-period-dot indigo"></span>
+                  <span class="proj-period-label">Académique — IUT de Blois · 2024–2025</span>
+                </div>
+                <ul class="proj-list indigo">
+                  <li>
+                    <span class="proj-name">Architecture IoT & LoRa</span>
+                    <span class="proj-desc">Déploiement complet avec ESP32, capteurs KY-012/KY-013, protocoles LoRaWAN et BLE, broker MQTT Mosquitto, visualisation Node-RED</span>
+                    <div class="proj-tags"><span>ESP32</span><span>LoRa</span><span>MQTT</span><span>BLE</span><span>Node-RED</span></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div><!-- /but3 -->
+
+        <!-- ─── BUT 2 ─── -->
+        <div class="year-accordion">
+          <button class="year-trigger" data-target="but2-body">
+            <span class="year-label-left">
+              <span class="ydot" style="opacity:0.7;"></span>
+              <span>BUT 2 — 2023/2024 · Transmission & Développement réseau</span>
+            </span>
+            <i class="fas fa-chevron-down ychevron"></i>
+          </button>
+          <div class="year-body" id="but2-body">
+            <div class="proj-summary">
+              <div class="proj-period">
+                <div class="proj-period-header">
+                  <span class="proj-period-dot indigo"></span>
+                  <span class="proj-period-label">Alternance DGFIP · 2023–2024</span>
+                  <a href="but/but2.html" class="proj-period-link indigo" onclick="event.stopPropagation()">Voir la section →</a>
+                </div>
+                <ul class="proj-list indigo">
+                  <li>
+                    <span class="proj-name">Audit Réseau & Support N2</span>
+                    <span class="proj-desc">Gestion du helpdesk GestSup, support technique niveau 2, participation aux audits réseau annuels, inventaire et maintenance du parc informatique</span>
+                    <div class="proj-tags"><span>GestSup</span><span>Audit réseau</span><span>Support N2</span><span>Inventaire</span></div>
+                  </li>
+                </ul>
+              </div>
+              <div class="proj-period">
+                <div class="proj-period-header">
+                  <span class="proj-period-dot indigo"></span>
+                  <span class="proj-period-label">Académique — IUT de Blois · 2023–2024</span>
+                </div>
+                <ul class="proj-list indigo">
+                  <li>
+                    <span class="proj-name">Transmission & Développement Réseau</span>
+                    <span class="proj-desc">Systèmes de transmission point-à-point, développement d'applications réseau TCP/UDP en Python, analyse de signal et implémentation de protocoles</span>
+                    <div class="proj-tags"><span>Python</span><span>TCP/UDP</span><span>Analyse signal</span><span>Protocoles</span></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div><!-- /but2 -->
+
+        <!-- ─── BUT 1 ─── -->
+        <div class="year-accordion">
+          <button class="year-trigger" data-target="but1-body">
+            <span class="year-label-left">
+              <span class="ydot" style="opacity:0.45;"></span>
+              <span>BUT 1 — 2022/2023 · Fondamentaux Réseaux & système</span>
+            </span>
+            <i class="fas fa-chevron-down ychevron"></i>
+          </button>
+          <div class="year-body" id="but1-body">
+            <div class="proj-summary">
+              <div class="proj-period">
+                <div class="proj-period-header">
+                  <span class="proj-period-dot indigo"></span>
+                  <span class="proj-period-label">Académique — IUT de Blois · 2022–2023</span>
+                  <a href="but/but1.html" class="proj-period-link indigo" onclick="event.stopPropagation()">Voir la section →</a>
+                </div>
+                <ul class="proj-list indigo">
+                  <li>
+                    <span class="proj-name">Fondamentaux Réseaux & Système — Cisco</span>
+                    <span class="proj-desc">Conception et simulation de réseaux LAN sur Packet Tracer, configuration routeurs/switchs Cisco, administration Linux de base, initiation HTML/CSS, CCNA 1</span>
+                    <div class="proj-tags"><span>Cisco</span><span>Packet Tracer</span><span>Linux</span><span>CCNA 1</span><span>HTML/CSS</span></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div><!-- /but1 -->
+
+      </div><!-- /but-body -->
+    </div><!-- /formation-accordion -->
+
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div class="cta-block">
+      <h2>Approfondir un <span style="color:var(--cyan)">programme</span></h2>
+      <p>Chaque section contient la documentation complète de mes projets et missions.</p>
+      <div class="btn-group">
+        <a href="mastere/index.html" class="btn btn-cyan"><i class="fas fa-cloud"></i> Section Mastère</a>
+        <a href="but/index.html" class="btn btn-indigo"><i class="fas fa-network-wired"></i> Section BUT R&T</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">Expert Architecture SI — Cloud, Infrastructure & Sécurité.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="parcours.html">Parcours</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin — Expert Architecture SI</p>
+    <span class="mono" style="font-size:0.72rem;">M1 Cloud · BUT R&T</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  /* ── ACCORDÉONS FORMATION (niveau 1) ── */
+  document.querySelectorAll('.formation-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const target = document.getElementById(trigger.dataset.target);
+      const isOpen = target.classList.contains('open');
+
+      if (isOpen) {
+        target.classList.remove('open');
+        trigger.classList.remove('open-cyan', 'open-indigo');
+      } else {
+        target.classList.add('open');
+        if (trigger.classList.contains('trigger-cyan'))   trigger.classList.add('open-cyan');
+        if (trigger.classList.contains('trigger-indigo')) trigger.classList.add('open-indigo');
+      }
+    });
+  });
+
+  /* ── ACCORDÉONS ANNÉE (niveau 2 — BUT) ── */
+  document.querySelectorAll('.year-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const target = document.getElementById(trigger.dataset.target);
+      trigger.classList.toggle('open');
+      target.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>

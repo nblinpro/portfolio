@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUT 1 — Fondamentaux Réseaux — Nicolas Blin</title>
+  <meta name="description" content="BUT 1 Nicolas Blin : Fondamentaux réseaux Cisco, Linux, Packet Tracer, HTML/CSS. Certification CCNA 1.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .filter-bar { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:2rem; }
+    .fbtn { background:rgba(255,255,255,0.03); color:var(--text-muted); border:1px solid var(--border); border-radius:8px; padding:0.45rem 1.1rem; font-size:0.78rem; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; cursor:pointer; transition:background 0.2s,border-color 0.2s,color 0.2s; font-family:inherit; }
+    .fbtn:hover { border-color:rgba(129,140,248,0.4); color:var(--indigo); }
+    .fbtn.active { background:var(--indigo); color:#020617; border-color:var(--indigo); }
+    .filterable.hidden { display:none; }
+  </style>
+</head>
+<body>
+<div class="ambient-bg" style="background:radial-gradient(ellipse 60% 40% at 10% 10%,rgba(129,140,248,0.06) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 90% 90%,rgba(129,140,248,0.04) 0%,transparent 60%);"></div>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="../parcours.html">Parcours</a></li>
+      <li><a href="../projets.html">Projets</a></li>
+      <li><a href="../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="index.html">BUT R&T</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>BUT 1</span>
+</nav>
+
+<div class="page-hero">
+  <span class="hero-tag" style="color:var(--indigo);background:var(--indigo-dim);border-color:rgba(129,140,248,0.2);">
+    <i class="fas fa-network-wired"></i> BUT 1 · 2022/2023
+  </span>
+  <h1>Fondamentaux <span style="color:var(--indigo)">Réseaux</span></h1>
+  <p>Première année du BUT R&T — initiation aux réseaux, administration Linux, simulation Cisco Packet Tracer. Obtention de la certification CCNA 1.</p>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- ACADÉMIQUE -->
+  <section class="section" style="padding-top:0;">
+    <div class="program-banner banner-indigo">
+      <div class="banner-icon"><i class="fas fa-university"></i></div>
+      <div>
+        <div class="badge badge-projet" style="margin-bottom:0.35rem;">IUT de Blois · 2022/2023</div>
+        <h3>Projets Académiques — BUT 1</h3>
+        <p>Fondamentaux réseaux · Simulation Cisco · Signal · HTML/CSS</p>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="fbtn active" onclick="filterGrid('grid-iut','all',this)">Tous</button>
+      <button class="fbtn" onclick="filterGrid('grid-iut','reseau',this)">Réseaux</button>
+      <button class="fbtn" onclick="filterGrid('grid-iut','signal',this)">Signal</button>
+      <button class="fbtn" onclick="filterGrid('grid-iut','web',this)">Web</button>
+    </div>
+
+    <div class="grid-auto" id="grid-iut" style="margin-bottom:2rem;">
+      <!-- Conception LAN -->
+      <div class="project-card card-indigo filterable" data-cat="reseau">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">SAÉ Réseau</div>
+            <h3>Conception LAN — Packet Tracer</h3>
+          </div>
+          <div class="card-icon" style="background:var(--indigo-dim);color:var(--indigo);"><i class="fas fa-project-diagram"></i></div>
+        </div>
+        <p>Étude et modélisation complète d'une infrastructure réseau locale sur Cisco Packet Tracer. Plan d'adressage IPv4 avec sous-réseaux, routage statique, services DHCP et DNS, sécurisation de base.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Plan d'adressage IPv4 avec sous-réseaux</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Configuration routeurs et switchs Cisco</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Services DHCP et DNS configurés</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Tests de connectivité et dépannage</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-indigo">Cisco</span>
+          <span class="tag tag-indigo">Packet Tracer</span>
+          <span class="tag tag-indigo">VLAN & Routage</span>
+          <span class="tag tag-indigo">IP/DHCP</span>
+          <span class="tag tag-indigo">DNS</span>
+        </div>
+      </div>
+
+      <!-- Signal -->
+      <div class="project-card card-indigo filterable" data-cat="signal">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">SAÉ Signal</div>
+            <h3>Mesurer et Caractériser un Signal</h3>
+          </div>
+          <div class="card-icon" style="background:var(--indigo-dim);color:var(--indigo);"><i class="fas fa-wave-square"></i></div>
+        </div>
+        <p>Étude expérimentale de signaux analogiques à l'oscilloscope. Analyse temporelle et fréquentielle — représentation spectrale, transformées, calcul de bande passante et caractérisation de systèmes.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Mesures à l'oscilloscope numérique</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Analyse temporelle des formes d'onde</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Représentation fréquentielle (spectres, FFT)</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Rapport de mesures et interprétation</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-indigo">Oscilloscope</span>
+          <span class="tag tag-indigo">Temporel</span>
+          <span class="tag tag-indigo">Fréquentiel</span>
+          <span class="tag tag-indigo">FFT</span>
+        </div>
+      </div>
+
+      <!-- Site HTML/CSS -->
+      <div class="project-card card-indigo filterable" data-cat="web">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">SAÉ Web</div>
+            <h3>Présence Web & Identité Numérique</h3>
+          </div>
+          <div class="card-icon" style="background:var(--indigo-dim);color:var(--indigo);"><i class="fas fa-code"></i></div>
+        </div>
+        <p>Construction d'une identité professionnelle cohérente en HTML5/CSS3. Mise en page responsive, typographie, formulaires et structuration d'une présence numérique personnelle.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Structure HTML5 sémantique</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Mise en page CSS3 responsive</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Identité visuelle et typographie</li>
+          <li><i class="fas fa-check" style="color:var(--indigo);margin-right:8px;"></i>Déploiement et hébergement web</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-indigo">HTML5</span>
+          <span class="tag tag-indigo">CSS3</span>
+          <span class="tag tag-indigo">Responsive</span>
+          <span class="tag tag-indigo">Web design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CCNA 1 -->
+    <div class="card card-indigo" style="padding:2rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
+        <div>
+          <div class="badge badge-obtenu" style="margin-bottom:0.75rem;">Certification obtenue</div>
+          <h3 style="margin-bottom:0.5rem;">CCNA 1</h3>
+          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">Obtention de la certification Cisco CCNA 1 — Introduction to Networks — en BUT 1, couvrant le modèle OSI, l'adressage IPv4/IPv6, les protocoles Ethernet et le routage statique.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;background:var(--bg-body);border-radius:8px;border:1px solid var(--border);">
+            <i class="fas fa-certificate" style="color:var(--indigo);font-size:1.1rem;width:24px;text-align:center;"></i>
+            <div><div style="font-weight:700;font-size:0.875rem;">Modèle OSI & TCP/IP</div><div style="color:var(--text-muted);font-size:0.75rem;">IPv4, IPv6, sous-réseaux</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;background:var(--bg-body);border-radius:8px;border:1px solid var(--border);">
+            <i class="fas fa-certificate" style="color:var(--indigo);font-size:1.1rem;width:24px;text-align:center;"></i>
+            <div><div style="font-weight:700;font-size:0.875rem;">Introduction aux Réseaux</div><div style="color:var(--text-muted);font-size:0.75rem;">Ethernet, routage statique</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES ACQUISES -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-header">
+      <div class="section-tag indigo"><i class="fas fa-chart-bar"></i> Bilan BUT 1</div>
+      <h2>Compétences <span style="color:var(--indigo)">acquises</span></h2>
+    </div>
+    <div class="grid-4">
+      <div class="stat-card" style="border-color:rgba(129,140,248,0.2);">
+        <div class="stat-value" style="color:var(--indigo);font-size:1.5rem;">OSI</div>
+        <div class="stat-label">Modèle réseau</div>
+      </div>
+      <div class="stat-card" style="border-color:rgba(129,140,248,0.2);">
+        <div class="stat-value" style="color:var(--indigo);font-size:1.5rem;">IPv4</div>
+        <div class="stat-label">Subnetting</div>
+      </div>
+      <div class="stat-card" style="border-color:rgba(129,140,248,0.2);">
+        <div class="stat-value" style="color:var(--indigo);font-size:1.5rem;">CLI</div>
+        <div class="stat-label">Linux & Cisco</div>
+      </div>
+      <div class="stat-card" style="border-color:rgba(129,140,248,0.2);">
+        <div class="stat-value" style="color:var(--indigo);font-size:1.5rem;">Web</div>
+        <div class="stat-label">HTML/CSS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html" class="btn btn-indigo"><i class="fas fa-th"></i> Vue d'ensemble</a>
+      <a href="but2.html" class="btn btn-outline">BUT 2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;">BUT R&T · BUT 1 — Fondamentaux Réseaux</p>
+    </div>
+    <div class="footer-col">
+      <h4>BUT R&T</h4>
+      <ul>
+        <li><a href="index.html">Vue d'ensemble</a></li>
+        <li><a href="but1.html">BUT 1</a></li>
+        <li><a href="but2.html">BUT 2</a></li>
+        <li><a href="but3.html">BUT 3</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin</p>
+    <span class="mono" style="font-size:0.72rem;">BUT 1 · IUT de Blois</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+function filterGrid(gridId, cat, btn) {
+  const grid = document.getElementById(gridId);
+  const items = grid.querySelectorAll('.filterable');
+  const btns = btn.closest('.filter-bar').querySelectorAll('.fbtn');
+  btns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  items.forEach(el => {
+    if (cat === 'all' || el.dataset.cat === cat) el.classList.remove('hidden');
+    else el.classList.add('hidden');
+  });
+}
+</script>
+</body>
+</html>
