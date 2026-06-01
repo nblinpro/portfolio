@@ -70,7 +70,7 @@
 <div style="background:rgba(34,211,238,0.03);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.75rem 2rem;">
   <div style="max-width:900px;margin:0 auto;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;">
     <div style="text-align:center;padding:0.5rem 2.5rem;border-right:1px solid var(--border);">
-      <div style="font-size:2rem;font-weight:800;color:var(--cyan);line-height:1;">6</div>
+      <div style="font-size:2rem;font-weight:800;color:var(--cyan);line-height:1;">7</div>
       <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-top:0.35rem;">Projets</div>
     </div>
     <div style="text-align:center;padding:0.5rem 2.5rem;border-right:1px solid var(--border);">
@@ -192,6 +192,15 @@
       <div class="tech-chip"><img src="https://cdn.simpleicons.org/proxmox/E57000" alt="Proxmox"><span>Proxmox</span></div>
       <div class="tech-chip"><img src="https://cdn.simpleicons.org/cloudflare/F38020" alt="Cloudflare"><span>Cloudflare</span></div>
       <div class="tech-chip"><img src="https://cdn.simpleicons.org/wireguard/22d3ee" alt="WireGuard"><span>WireGuard</span></div>
+    </div>
+
+    <p class="tech-cat"><i class="fas fa-shield-halved"></i> DevSecOps &amp; CI/CD</p>
+    <div class="tech-row">
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/gitlab/FC6D26" alt="GitLab"><span>GitLab CI/CD</span></div>
+      <div class="tech-chip"><img src="https://cdn.simpleicons.org/trivy/1904DA" alt="Trivy"><span>Trivy</span></div>
+      <div class="tech-chip"><i class="fas fa-rotate"></i><span>Renovate Bot</span></div>
+      <div class="tech-chip"><i class="fas fa-scale-balanced"></i><span>Plumber</span></div>
+      <div class="tech-chip"><i class="fas fa-list-check"></i><span>SBOM CycloneDX</span></div>
     </div>
 
     <p class="tech-cat"><i class="fas fa-code"></i> Développement</p>
@@ -386,6 +395,54 @@
           <a href="gridbook.html" class="btn btn-ghost btn-sm">Voir le projet <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
+
+      <!-- RapidSoft DevSecOps CI/CD — NOUVELLE CARTE -->
+      <div class="project-card card-cyan" style="grid-column: 1 / -1;">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">DevSecOps</div>
+            <h3>RapidSoft — Pipeline CI/CD Sécurisé</h3>
+          </div>
+          <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
+        </div>
+        <p>Sécurisation du SDLC d'un éditeur de logiciels bancaires via deux missions complémentaires — patch management automatisé des dépendances (Renovate + Trivy) et conformité des pipelines GitLab (Plumber). POC sur GitLab.com avec Runner self-hosted : 5 CVE HIGH détectées en 90 secondes, 6/6 règles RSSI validées.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Mission 1 — Benchmark 7 outils SCA, architecture Renovate + Trivy + Dependency-Track</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Mission 2 — Plumber officiel (88,9 %) + moteur RSSI custom 6 règles RS-001 à RS-006</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Pipeline 5 stages, 7 jobs, SBOM CycloneDX généré — exécution &lt; 2 minutes</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Guide de bonnes pratiques DevSecOps pour les 50 développeurs RapidSoft</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-cyan">GitLab CI/CD</span>
+          <span class="tag tag-cyan">Trivy</span>
+          <span class="tag tag-cyan">Renovate Bot</span>
+          <span class="tag tag-cyan">Plumber</span>
+          <span class="tag tag-cyan">SBOM CycloneDX</span>
+          <span class="tag tag-cyan">OWASP</span>
+          <span class="tag tag-cyan">DORA</span>
+          <span class="tag tag-cyan">Node.js</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:1.5rem;margin-top:1rem;flex-wrap:wrap;">
+          <div style="display:flex;gap:1rem;">
+            <div style="text-align:center;">
+              <div style="font-size:1.3rem;font-weight:800;color:#f87171;letter-spacing:-.03em;">5</div>
+              <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;">CVE HIGH</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:1.3rem;font-weight:800;color:#4ade80;letter-spacing:-.03em;">6/6</div>
+              <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;">Score RSSI</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:1.3rem;font-weight:800;color:#22d3ee;letter-spacing:-.03em;">0€</div>
+              <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;">Outillage</div>
+            </div>
+          </div>
+          <div style="margin-left:auto;" class="card-footer">
+            <span style="font-size:0.75rem;color:var(--text-muted);">Mai 2026</span>
+            <a href="rapidsoft.html" class="btn btn-ghost btn-sm">Voir le projet <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -418,6 +475,7 @@
         <li><a href="#">Conteneurisation Multi-sites</a></li>
         <li><a href="openstack.html">OpenStack</a></li>
         <li><a href="gridbook.html">GridBook</a></li>
+        <li><a href="rapidsoft.html">RapidSoft DevSecOps</a></li>
       </ul>
     </div>
     <div class="footer-col">
