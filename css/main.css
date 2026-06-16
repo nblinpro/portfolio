@@ -1105,7 +1105,7 @@ code { color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 
   transition: border-color 0.2s, background 0.2s;
 }
 .tech-chip:hover { background: rgba(34,211,238,0.06); border-color: rgba(34,211,238,0.3); }
-.tech-chip img { height: 18px; width: 18px; object-fit: contain; flex-shrink: 0; }
+.tech-chip img { height: 18px; width: 18px; max-height: 18px; max-width: 18px; object-fit: contain; flex-shrink: 0; display: block; }
 .tech-chip i { color: var(--cyan); font-size: 0.9rem; width: 18px; text-align: center; flex-shrink: 0; }
 .tech-chip span { font-size: 0.82rem; color: var(--text); font-weight: 500; white-space: nowrap; }
 
