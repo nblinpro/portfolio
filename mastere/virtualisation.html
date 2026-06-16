@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infrastructure HA — Proxmox | Nicolas Blin</title>
+  <meta name="description" content="Déploiement d'une infrastructure critique haute disponibilité sur Proxmox — cluster 3 nœuds, VLANs, Ceph, OPNsense, Ansible, Terraform.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.75; }
+    .arch-node { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
+    .arch-node-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--cyan-dim); display: flex; align-items: center; justify-content: center; color: var(--cyan); font-size: 1.1rem; flex-shrink: 0; }
+    .arch-node h4 { margin: 0 0 0.2rem; font-size: 0.9rem; color: var(--text); }
+    .arch-node p { margin: 0; font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+    .vlan-row { display: grid; grid-template-columns: 120px 1fr auto; align-items: center; gap: 1rem; padding: 0.875rem 1.25rem; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-card); }
+    .vlan-id { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: var(--cyan); }
+    .vlan-desc { font-size: 0.82rem; color: var(--text-muted); }
+    .vlan-badge { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+    .vlan-mgmt { background: rgba(34,211,238,0.1); color: #22d3ee; }
+    .vlan-dmz  { background: rgba(251,191,36,0.1);  color: #fbbf24; }
+    .vlan-lan  { background: rgba(74,222,128,0.1);  color: #4ade80; }
+    .phase-item { display: flex; gap: 1.25rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+    .phase-num { width: 40px; height: 40px; border-radius: 50%; background: var(--cyan-dim); border: 2px solid rgba(34,211,238,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 800; color: var(--cyan); flex-shrink: 0; }
+    .phase-body h4 { margin: 0 0 0.4rem; font-size: 0.95rem; color: var(--text); }
+    .phase-body p { margin: 0; font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+<div class="ambient-bg"></div>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">Nicolas<span class="dot">.SI</span></a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="../parcours.html">Parcours</a></li>
+      <li><a href="../projets.html">Projets</a></li>
+      <li><a href="../contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <a href="../index.html">Accueil</a>
+  <i class="fas fa-chevron-right"></i>
+  <a href="index.html">Mastère</a>
+  <i class="fas fa-chevron-right"></i>
+  <span>Infrastructure HA — Proxmox</span>
+</nav>
+
+<div class="page-hero">
+  <span class="hero-tag"><i class="fas fa-server"></i> Mastère M1 · Virtualisation · Haute Disponibilité</span>
+  <h1>Infrastructure Critique <span class="gradient-text">Haute Disponibilité</span></h1>
+  <p>Migration d'une PME vers une infrastructure de virtualisation open-source moderne — cluster Proxmox 3 nœuds HA, segmentation VLAN, stockage distribué Ceph, pare-feu OPNsense et automatisation complète via Ansible et Terraform.</p>
+  <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.75rem;">
+    <span class="hero-badge"><i class="fas fa-server"></i> Proxmox VE</span>
+    <span class="hero-badge"><i class="fas fa-network-wired"></i> HA Cluster</span>
+    <span class="hero-badge"><i class="fas fa-shield-halved"></i> OPNsense</span>
+    <span class="hero-badge"><i class="fas fa-robot"></i> Ansible</span>
+    <span class="hero-badge"><i class="fas fa-database"></i> Ceph</span>
+  </div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- CONTEXTE -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-info-circle"></i> Contexte</div>
+      <h2 style="color:var(--text);">Contexte <span style="color:var(--cyan);">du Projet</span></h2>
+    </div>
+    <div class="grid-2">
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-building" style="color:var(--cyan);margin-right:8px;"></i>Problématique PME</h3>
+        <ul class="check-list">
+          <li><i class="fas fa-circle-xmark" style="color:#f87171;"></i> Infrastructure legacy — serveurs physiques non virtualisés</li>
+          <li><i class="fas fa-circle-xmark" style="color:#f87171;"></i> Absence de haute disponibilité — SPOF critiques</li>
+          <li><i class="fas fa-circle-xmark" style="color:#f87171;"></i> Pas de segmentation réseau — sécurité insuffisante</li>
+          <li><i class="fas fa-circle-xmark" style="color:#f87171;"></i> Gestion manuelle des déploiements — opérations longues</li>
+          <li><i class="fas fa-circle-xmark" style="color:#f87171;"></i> Monitoring absent — incidents détectés en retard</li>
+        </ul>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-bullseye" style="color:var(--cyan);margin-right:8px;"></i>Objectifs</h3>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Cluster Proxmox 3 nœuds avec live migration automatique</li>
+          <li><i class="fas fa-check"></i> Segmentation réseau par VLANs (Management · DMZ · LAN)</li>
+          <li><i class="fas fa-check"></i> Stockage distribué Ceph + ZFS/iSCSI + NFS</li>
+          <li><i class="fas fa-check"></i> Pare-feu OPNsense — isolation et filtrage inter-VLANs</li>
+          <li><i class="fas fa-check"></i> Automatisation complète : Ansible, Terraform, Cloud-Init</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ARCHITECTURE CLUSTER -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-server"></i> Cluster</div>
+      <h2 style="color:var(--text);">Cluster Proxmox <span style="color:var(--cyan);">3 Nœuds HA</span></h2>
+    </div>
+    <p>Le cluster repose sur trois serveurs bare-metal identiques formant un quorum Proxmox VE. En cas de défaillance d'un nœud, les VMs et conteneurs LXC migrent automatiquement sur les nœuds restants via le mécanisme HA Manager.</p>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.75rem;">
+      <div class="arch-node">
+        <div class="arch-node-icon"><i class="fas fa-server"></i></div>
+        <div>
+          <h4><code>pve-01</code> — Nœud Primaire</h4>
+          <p>Héberge les VMs critiques par défaut. Quorum vote actif. iSCSI initiator + NFS mount.</p>
+        </div>
+        <span class="tag tag-cyan" style="margin-left:auto;">Master</span>
+      </div>
+      <div class="arch-node">
+        <div class="arch-node-icon"><i class="fas fa-server"></i></div>
+        <div>
+          <h4><code>pve-02</code> — Nœud Secondaire</h4>
+          <p>Cible de migration HA. Réplique Ceph active. Monitoring agent Zabbix/Prometheus.</p>
+        </div>
+        <span class="tag tag-cyan" style="margin-left:auto;">Worker</span>
+      </div>
+      <div class="arch-node">
+        <div class="arch-node-icon"><i class="fas fa-server"></i></div>
+        <div>
+          <h4><code>pve-03</code> — Nœud Tiers</h4>
+          <p>Vote quorum tiebreaker. Stockage NFS secondaire. Runner GitLab CI/CD dédié.</p>
+        </div>
+        <span class="tag tag-cyan" style="margin-left:auto;">Worker</span>
+      </div>
+    </div>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">pve-01 — État du cluster HA</span>
+      </div>
+      <pre><span class="prompt">root@pve-01:~#</span> <span class="cmd">pvecm status</span>
+
+Cluster information
+-------------------
+<span class="k">Name:</span>             <span class="v">proxmox-ha-cluster</span>
+<span class="k">Config Version:</span>   <span class="v">3</span>
+<span class="k">Transport:</span>        <span class="v">knet</span>
+<span class="k">Secure auth:</span>      <span class="v">on</span>
+
+Quorum information
+------------------
+<span class="k">Date:</span>             <span class="v">2026-06-16 14:32:07</span>
+<span class="k">Quorum provider:</span>  <span class="v">corosync_votequorum</span>
+<span class="k">Nodes:</span>            <span class="v">3</span>
+<span class="k">Node votes:</span>       <span class="v">3</span>
+<span class="k">Expected votes:</span>   <span class="v">3</span>
+<span class="k">Total votes:</span>      <span class="v">3</span>
+<span class="k">Quorum:</span>           <span class="v">2</span>
+<span class="k">Flags:</span>            <span class="v">Quorate</span>
+
+Membership information
+----------------------
+<span class="k">Nodeid</span>  <span class="k">Votes</span>  <span class="k">Name</span>
+     1      1    <span class="v">pve-01 (local)</span>
+     2      1    <span class="v">pve-02</span>
+     3      1    <span class="v">pve-03</span></pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RÉSEAU & VLANS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-network-wired"></i> Réseau</div>
+      <h2 style="color:var(--text);">Segmentation <span style="color:var(--cyan);">VLANs & OPNsense</span></h2>
+    </div>
+    <p>Le réseau est segmenté en trois VLANs distincts filtrés par un pare-feu OPNsense. Chaque VLAN possède ses propres règles de filtrage inter-zones, limitant la surface d'attaque en cas de compromission.</p>
+
+    <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.75rem;">
+      <div class="vlan-row">
+        <span class="vlan-id">VLAN 10 — MGT</span>
+        <span class="vlan-desc">Administration des hyperviseurs Proxmox, accès SSH restreint aux administrateurs uniquement</span>
+        <span class="vlan-badge vlan-mgmt">Management</span>
+      </div>
+      <div class="vlan-row">
+        <span class="vlan-id">VLAN 20 — DMZ</span>
+        <span class="vlan-desc">Services exposés vers Internet — Nginx Load Balancer, reverse proxy, certificats TLS</span>
+        <span class="vlan-badge vlan-dmz">DMZ</span>
+      </div>
+      <div class="vlan-row">
+        <span class="vlan-id">VLAN 30 — LAN</span>
+        <span class="vlan-desc">Services internes — bases de données LXC, monitoring, GitLab Runner, ressources privées</span>
+        <span class="vlan-badge vlan-lan">LAN Interne</span>
+      </div>
+    </div>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">pve-01 — Configuration bridges VLAN (/etc/network/interfaces)</span>
+      </div>
+      <pre><span class="comment"># Bridge Management — VLAN 10</span>
+auto vmbr10
+iface vmbr10 inet static
+    address  10.10.10.1/24
+    bridge-ports ens18.10
+    bridge-stp off
+    bridge-fd 0
+
+<span class="comment"># Bridge DMZ — VLAN 20</span>
+auto vmbr20
+iface vmbr20 inet static
+    address  10.20.20.1/24
+    bridge-ports ens18.20
+    bridge-stp off
+    bridge-fd 0
+
+<span class="comment"># Bridge LAN Interne — VLAN 30</span>
+auto vmbr30
+iface vmbr30 inet static
+    address  10.30.30.1/24
+    bridge-ports ens18.30
+    bridge-stp off
+    bridge-fd 0</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STOCKAGE -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-database"></i> Stockage</div>
+      <h2 style="color:var(--text);">Stockage <span style="color:var(--cyan);">Distribué & Redondant</span></h2>
+    </div>
+    <div class="grid-3">
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.75rem;"><i class="fas fa-database" style="color:var(--cyan);margin-right:8px;"></i>Ceph Distribué</h3>
+        <p style="font-size:0.82rem;">Stockage bloc distribué natif Proxmox — réplication 3 copies entre les nœuds. Lecture/écriture en cas de perte d'un nœud, zéro SPOF.</p>
+        <ul class="check-list" style="margin-top:0.75rem;">
+          <li><i class="fas fa-check"></i> Réplication x3 (1 copie/nœud)</li>
+          <li><i class="fas fa-check"></i> CRUSH map automatique</li>
+          <li><i class="fas fa-check"></i> Pools RBD pour les VMs HA</li>
+        </ul>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.75rem;"><i class="fas fa-hdd" style="color:var(--cyan);margin-right:8px;"></i>ZFS + iSCSI</h3>
+        <p style="font-size:0.82rem;">Stockage local haute performance sur pve-01 via ZFS RAIDZ1 — exposé en iSCSI aux autres nœuds pour les workloads à faible latence.</p>
+        <ul class="check-list" style="margin-top:0.75rem;">
+          <li><i class="fas fa-check"></i> ZFS RAIDZ1 — tolérance 1 disque</li>
+          <li><i class="fas fa-check"></i> Snapshots automatiques ZFS</li>
+          <li><i class="fas fa-check"></i> Compression LZ4 activée</li>
+        </ul>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.75rem;"><i class="fas fa-folder-open" style="color:var(--cyan);margin-right:8px;"></i>NFS Partagé</h3>
+        <p style="font-size:0.82rem;">Partages NFS pour les ISOs, backups Proxmox (PBS) et données persistantes partagées entre les trois nœuds du cluster.</p>
+        <ul class="check-list" style="margin-top:0.75rem;">
+          <li><i class="fas fa-check"></i> ISO store commun au cluster</li>
+          <li><i class="fas fa-check"></i> Proxmox Backup Server (PBS)</li>
+          <li><i class="fas fa-check"></i> Rétention snapshots J/S/M</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SERVICES DÉPLOYÉS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-cubes"></i> Services</div>
+      <h2 style="color:var(--text);">Services <span style="color:var(--cyan);">Déployés</span></h2>
+    </div>
+    <div class="grid-2">
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.75rem;"><i class="fas fa-globe" style="color:var(--cyan);margin-right:8px;"></i>Nginx HA Cluster + Load Balancer</h3>
+        <p style="font-size:0.82rem;">Deux instances Nginx en HA actif/passif via Keepalived (VIP). Le Load Balancer répartit le trafic HTTP/HTTPS entre les backends applicatifs en DMZ.</p>
+        <ul class="check-list" style="margin-top:0.75rem;">
+          <li><i class="fas fa-check"></i> VIP Keepalived — bascule &lt; 3 secondes</li>
+          <li><i class="fas fa-check"></i> Terminaison TLS Let's Encrypt</li>
+          <li><i class="fas fa-check"></i> Health checks actifs par backend</li>
+          <li><i class="fas fa-check"></i> Logs centralisés vers Prometheus</li>
+        </ul>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.75rem;"><i class="fas fa-table-cells" style="color:var(--cyan);margin-right:8px;"></i>LXC Bases de Données</h3>
+        <p style="font-size:0.82rem;">Conteneurs LXC non-privilegiés en VLAN LAN pour les bases de données — isolation renforcée, overhead minimal comparé aux VMs complètes.</p>
+        <ul class="check-list" style="margin-top:0.75rem;">
+          <li><i class="fas fa-check"></i> LXC unprivileged — surface réduite</li>
+          <li><i class="fas fa-check"></i> Backups PBS automatiques nuit</li>
+          <li><i class="fas fa-check"></i> VM vs LXC : -40 % RAM overhead</li>
+          <li><i class="fas fa-check"></i> Migration HA vers pve-02/03</li>
+        </ul>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.75rem;"><i class="fas fa-chart-line" style="color:var(--cyan);margin-right:8px;"></i>Monitoring — Zabbix + Prometheus/Grafana</h3>
+        <p style="font-size:0.82rem;">Stack monitoring double couche : Zabbix pour la supervision infra (SNMP, agents) et Prometheus + Grafana pour les métriques applicatives et les tableaux de bord.</p>
+        <ul class="check-list" style="margin-top:0.75rem;">
+          <li><i class="fas fa-check"></i> Agents Zabbix sur les 3 nœuds</li>
+          <li><i class="fas fa-check"></i> Node Exporter + Alertmanager</li>
+          <li><i class="fas fa-check"></i> Dashboards Grafana cluster HA</li>
+          <li><i class="fas fa-check"></i> Alertes mail/webhook configurées</li>
+        </ul>
+      </div>
+      <div class="card card-cyan">
+        <h3 style="margin-bottom:0.75rem;"><i class="fas fa-shield-halved" style="color:var(--cyan);margin-right:8px;"></i>OPNsense — Pare-feu & Routage</h3>
+        <p style="font-size:0.82rem;">VM OPNsense déployée en VLAN Management — assure le routage inter-VLANs et applique les politiques de filtrage (allowlist stricte DMZ → LAN).</p>
+        <ul class="check-list" style="margin-top:0.75rem;">
+          <li><i class="fas fa-check"></i> Règles inter-VLANs allowlist</li>
+          <li><i class="fas fa-check"></i> IDS/IPS Suricata activé en DMZ</li>
+          <li><i class="fas fa-check"></i> VPN WireGuard administration</li>
+          <li><i class="fas fa-check"></i> Logs exportés vers Zabbix</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- AUTOMATISATION -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-robot"></i> Automatisation</div>
+      <h2 style="color:var(--text);">Automatisation <span style="color:var(--cyan);">& IaC</span></h2>
+    </div>
+    <p>L'ensemble de l'infrastructure est décrite en code et déployable depuis zéro en moins d'une heure. Ansible gère la configuration des nœuds, Terraform provisionne les VMs/LXC via l'API Proxmox, Cloud-Init personnalise chaque instance au boot.</p>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Ansible — Playbook déploiement cluster</span>
+      </div>
+      <pre><span class="comment"># ansible/site.yml — Orchestration complète</span>
+<span class="k">---</span>
+<span class="k">- hosts:</span> <span class="v">proxmox_nodes</span>
+  <span class="k">roles:</span>
+    <span class="v">- role: proxmox_base       </span><span class="comment"># Dépôts, sysctl, tuning</span>
+    <span class="v">- role: proxmox_cluster    </span><span class="comment"># Corosync, quorum</span>
+    <span class="v">- role: ceph_setup         </span><span class="comment"># MON, OSD, pools RBD</span>
+    <span class="v">- role: network_vlans      </span><span class="comment"># Bridges, /etc/network</span>
+
+<span class="k">- hosts:</span> <span class="v">pve-01</span>
+  <span class="k">roles:</span>
+    <span class="v">- role: zfs_iscsi          </span><span class="comment"># RAIDZ1, export iSCSI</span>
+    <span class="v">- role: nfs_server         </span><span class="comment"># ISOs, backups PBS</span>
+
+<span class="k">- hosts:</span> <span class="v">all</span>
+  <span class="k">roles:</span>
+    <span class="v">- role: monitoring_agents  </span><span class="comment"># Zabbix agent, node_exporter</span>
+    <span class="v">- role: gitlab_runner      </span><span class="comment"># Runner pve-03</span></pre>
+    </div>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="tdot tdot-red"></div><div class="tdot tdot-yellow"></div><div class="tdot tdot-green"></div>
+        <span class="terminal-title">Terraform — Provisioning VM via API Proxmox</span>
+      </div>
+      <pre><span class="comment"># terraform/nginx-ha.tf</span>
+resource "proxmox_vm_qemu" "nginx_ha" {
+  <span class="k">count</span>       = <span class="v">2</span>
+  <span class="k">name</span>        = <span class="v">"nginx-ha-0${count.index + 1}"</span>
+  <span class="k">target_node</span> = <span class="v">count.index == 0 ? "pve-01" : "pve-02"</span>
+  <span class="k">clone</span>       = <span class="v">"ubuntu-24.04-cloudinit"</span>
+  <span class="k">memory</span>      = <span class="v">2048</span>
+  <span class="k">cores</span>       = <span class="v">2</span>
+
+  <span class="k">network</span> {
+    <span class="k">bridge</span> = <span class="v">"vmbr20"</span>  <span class="comment"># VLAN DMZ</span>
+    <span class="k">tag</span>    = <span class="v">20</span>
+  }
+
+  <span class="k">ipconfig0</span> = <span class="v">"ip=10.20.20.1${count.index + 1}/24,gw=10.20.20.1"</span>
+  <span class="k">ciuser</span>    = <span class="v">"admin"</span>
+  <span class="k">sshkeys</span>   = <span class="v">file("~/.ssh/id_ed25519.pub")</span>
+}</pre>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PHASES DU PROJET -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag"><i class="fas fa-list-check"></i> Livrables</div>
+      <h2 style="color:var(--text);">4 Phases <span style="color:var(--cyan);">du Projet</span></h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+      <div class="phase-item">
+        <div class="phase-num">1</div>
+        <div class="phase-body">
+          <h4>Audit & Design de l'Architecture</h4>
+          <p>Analyse de l'existant, identification des SPOF, dimensionnement du cluster, conception du plan d'adressage VLAN, choix de la solution de stockage (Ceph vs Shared Storage), documentation du schéma réseau et de l'architecture cible.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num">2</div>
+        <div class="phase-body">
+          <h4>Implémentation & Tests HA</h4>
+          <p>Déploiement du cluster Proxmox, configuration Ceph/ZFS/NFS, mise en place des VLANs et bridges réseau, déploiement des services (OPNsense, Nginx HA, LXC DB, monitoring). Tests de failover HA : coupure nœud, vérification live migration et continuité de service.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num">3</div>
+        <div class="phase-body">
+          <h4>Sécurisation de l'Infrastructure</h4>
+          <p>Configuration des règles OPNsense inter-VLANs, activation IDS/IPS Suricata en DMZ, VPN WireGuard pour l'administration distante, durcissement SSH (clés ED25519, fail2ban), audit des permissions LXC unprivileged et tests d'isolation VLAN.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num">4</div>
+        <div class="phase-body">
+          <h4>Rapport Final & Documentation</h4>
+          <p>Rédaction du rapport d'architecture complet — schémas réseau, procédures de déploiement, runbooks opérationnels, résultats des tests de failover HA, analyse comparative VM vs LXC, recommandations d'évolution et documentation des playbooks Ansible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RÉSULTATS -->
+  <section class="section">
+    <div class="card" style="background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.3);padding:2.5rem;">
+      <div class="section-tag" style="margin-bottom:1.5rem;"><i class="fas fa-graduation-cap"></i> Compétences Acquises</div>
+      <div class="grid-3" style="margin-top:0.5rem;">
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Déploiement et administration cluster Proxmox VE HA 3 nœuds.</li>
+          <li><i class="fas fa-check"></i> Configuration stockage distribué Ceph (MON, OSD, pools RBD).</li>
+          <li><i class="fas fa-check"></i> Segmentation réseau par VLANs avec bridges Linux et OPNsense.</li>
+          <li><i class="fas fa-check"></i> Gestion ZFS RAIDZ1 et export iSCSI multi-initiators.</li>
+        </ul>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Déploiement Nginx HA actif/passif via Keepalived (VIP).</li>
+          <li><i class="fas fa-check"></i> Automatisation IaC complète : Ansible rôles + Terraform Proxmox provider.</li>
+          <li><i class="fas fa-check"></i> Provisionnement Cloud-Init (templates Ubuntu 24.04).</li>
+          <li><i class="fas fa-check"></i> Intégration GitLab CI/CD avec Runner self-hosted sur pve-03.</li>
+        </ul>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Monitoring double couche Zabbix + Prometheus/Grafana.</li>
+          <li><i class="fas fa-check"></i> Optimisation VM vs LXC — réduction overhead mémoire 40 %.</li>
+          <li><i class="fas fa-check"></i> Tests failover HA — bascule &lt; 30 s sans interruption applicative.</li>
+          <li><i class="fas fa-check"></i> Rédaction documentation technique et runbooks opérationnels.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVIGATION -->
+  <section class="section-sm" style="padding-bottom:80px;">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Retour Mastère</a>
+      <a href="monitoring.html" class="btn btn-cyan"><i class="fas fa-chart-line"></i> Prometheus / Grafana</a>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Nicolas<span class="dot">.SI</span></div>
+      <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">Mastère Expert Cloud, Infrastructure & Sécurité · Ynov Campus.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Mastère</h4>
+      <ul>
+        <li><a href="index.html">Vue d'ensemble</a></li>
+        <li><a href="monitoring.html">Prometheus/Grafana</a></li>
+        <li><a href="laravel.html">Laravel via Ansible</a></li>
+        <li><a href="samba.html">Samba</a></li>
+        <li><a href="openstack.html">OpenStack</a></li>
+        <li><a href="gridbook.html">GridBook</a></li>
+        <li><a href="rapidsoft-cicd.html">RapidSoft DevSecOps</a></li>
+        <li><a href="virtualisation.html">Infrastructure HA</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/nblinpro" class="social-btn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn" aria-label="Email"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nicolas Blin — Expert Architecture SI</p>
+    <span class="mono" style="font-size:0.72rem;">Mastère M1 · Virtualisation · Infrastructure HA</span>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

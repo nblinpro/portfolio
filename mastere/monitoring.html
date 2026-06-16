@@ -8,42 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../css/main.css">
   <style>
-    /* ── TERMINAL ── */
-    .terminal-window {
-      background: #010409;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-      margin-bottom: 1.5rem;
-    }
-    .terminal-header {
-      background: #161b22;
-      padding: 10px 15px;
-      display: flex; align-items: center; gap: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-    .tdot { width: 10px; height: 10px; border-radius: 50%; }
-    .tdot-red    { background: #ff5f56; }
-    .tdot-yellow { background: #ffbd2e; }
-    .tdot-green  { background: #27c93f; }
-    .terminal-title { color: var(--text-muted); font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; margin-left: 10px; }
-
-    .terminal-window pre {
-      padding: 1.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: #e6edf3;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      line-height: 1.65;
-      margin: 0;
-    }
-    .prompt  { color: #7ee787; }
-    .cmd     { color: #fff; font-weight: 700; }
-    .comment { color: #8b949e; font-style: italic; }
-    .k       { color: #7ee787; }   /* yaml key */
-    .v       { color: #a5d6ff; }   /* yaml value */
+    p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.75; }
 
     /* ── DIAGRAMME MERMAID ── */
     .diagram-window {

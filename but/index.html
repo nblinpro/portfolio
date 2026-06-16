@@ -8,23 +8,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../css/main.css">
   <style>
-    .tech-chip {
-      display: flex; align-items: center; gap: 0.5rem;
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.5rem 0.875rem;
-      transition: border-color 0.2s, background 0.2s;
-    }
+    /* Indigo overrides pour tech-chip dans la section BUT */
     .tech-chip:hover { background: rgba(129,140,248,0.06); border-color: rgba(129,140,248,0.3); }
-    .tech-chip img { height: 18px; width: 18px; object-fit: contain; flex-shrink: 0; }
-    .tech-chip i { color: var(--indigo); font-size: 0.9rem; width: 18px; text-align: center; flex-shrink: 0; }
-    .tech-chip span { font-size: 0.82rem; color: var(--text); font-weight: 500; white-space: nowrap; }
-    .tech-cat {
-      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 1.5px; color: var(--text-muted);
-      margin: 0 0 0.75rem; display: flex; align-items: center; gap: 6px;
-    }
+    .tech-chip i { color: var(--indigo); }
     .tech-cat i { color: var(--indigo); }
-    .tech-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.75rem; }
 
     /* Accordéon années */
     .acc-item { border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 0.75rem; overflow: hidden; }

@@ -7,25 +7,6 @@
   <meta name="description" content="Section Mastère de Nicolas Blin — OpenStack, Docker, Ansible, Prometheus/Grafana, GridBook. Alternance Innosys, Ynov Campus 2025-2027.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../css/main.css">
-  <style>
-    .tech-chip {
-      display: flex; align-items: center; gap: 0.5rem;
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.5rem 0.875rem;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .tech-chip:hover { background: rgba(34,211,238,0.06); border-color: rgba(34,211,238,0.3); }
-    .tech-chip img { height: 18px; width: 18px; object-fit: contain; flex-shrink: 0; }
-    .tech-chip i { color: var(--cyan); font-size: 0.9rem; width: 18px; text-align: center; flex-shrink: 0; }
-    .tech-chip span { font-size: 0.82rem; color: var(--text); font-weight: 500; white-space: nowrap; }
-    .tech-cat {
-      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 1.5px; color: var(--text-muted);
-      margin: 0 0 0.75rem; display: flex; align-items: center; gap: 6px;
-    }
-    .tech-cat i { color: var(--cyan); }
-    .tech-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.75rem; }
-  </style>
 </head>
 <body>
 <div class="ambient-bg"></div>
@@ -393,6 +374,61 @@
         <div class="card-footer">
           <span style="font-size:0.75rem;color:var(--text-muted);">2025</span>
           <a href="gridbook.html" class="btn btn-ghost btn-sm">Voir le projet <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Virtualisation HA -->
+      <div class="project-card card-cyan" style="grid-column: 1 / -1;">
+        <div class="card-header">
+          <div style="flex:1;">
+            <div class="badge badge-projet" style="margin-bottom:0.5rem;">Virtualisation · HA</div>
+            <h3>Déploiement d'une Infrastructure Critique Haute Disponibilité</h3>
+          </div>
+          <div class="card-icon"><i class="fas fa-server"></i></div>
+        </div>
+        <p>Migration d'une PME vers une infrastructure de virtualisation open-source moderne basée sur Proxmox VE. Mise en place d'un cluster 3 nœuds HA avec segmentation réseau par VLANs, stockage distribué Ceph, pare-feu OPNsense, serveur web HA et monitoring centralisé — le tout automatisé via Ansible et Terraform.</p>
+        <ul style="color:var(--text-muted);font-size:0.82rem;line-height:1.9;margin:0.75rem 0;">
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Cluster Proxmox 3 nœuds HA (pve-01/02/03) — Live migration, fencing STONITH, quorum automatique</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Segmentation réseau 3 VLANs (Management · DMZ · LAN Interne) — pare-feu OPNsense/pfSense</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Stockage distribué Ceph + ZFS/iSCSI + NFS — réplication multi-nœuds, snapshot automatique</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Nginx HA Cluster + Load Balancer, LXC base de données, monitoring Zabbix + Prometheus/Grafana</li>
+          <li><i class="fas fa-check" style="color:var(--cyan);margin-right:8px;"></i>Automatisation complète : Ansible, Terraform, Cloud-Init, GitLab-Runner CI/CD</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-cyan">Proxmox VE</span>
+          <span class="tag tag-cyan">Ceph</span>
+          <span class="tag tag-cyan">Cluster HA</span>
+          <span class="tag tag-cyan">OPNsense (Firewall + DHCP)</span>
+          <span class="tag tag-cyan">Nginx Proxy Manager (Reverse Proxy & Load Balancing)</span>
+          <span class="tag tag-cyan">PostgreSQL</span>
+          <span class="tag tag-cyan">Prometheus</span>
+          <span class="tag tag-cyan">Loki/Promtail</span>
+          <span class="tag tag-cyan">Grafana</span>
+          <span class="tag tag-cyan">GLPI</span>
+          <span class="tag tag-cyan">Ansible</span>
+          <span class="tag tag-cyan">Terraform</span>
+          <span class="tag tag-cyan">NAS</span>
+          <span class="tag tag-cyan">Netbox (IPAM)</span>
+          <span class="tag tag-cyan">AdGuard Home (DNS Récursif)</span>
+          <span class="tag tag-cyan">BIND9 (DNS Autoritaire)</span>
+          <span class="tag tag-cyan">PBS (Proxmox Backup Server)</span>
+          <span class="tag tag-cyan">VLAN</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:1.5rem;margin-top:1rem;flex-wrap:wrap;">
+          <div style="display:flex;gap:1rem;">
+            <div style="text-align:center;">
+              <div style="font-size:1.3rem;font-weight:800;color:#22d3ee;letter-spacing:-.03em;">3</div>
+              <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;">Nœuds HA</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:1.3rem;font-weight:800;color:#22d3ee;letter-spacing:-.03em;">9</div>
+              <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;">VLANs</div>
+            </div>
+          </div>
+          <div style="margin-left:auto;" class="card-footer">
+            <span style="font-size:0.75rem;color:var(--text-muted);">2026</span>
+            <a href="virtualisation.html" class="btn btn-ghost btn-sm">Voir le projet <i class="fas fa-arrow-right"></i></a>
+          </div>
         </div>
       </div>
 
